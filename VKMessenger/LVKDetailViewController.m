@@ -8,35 +8,61 @@
 
 #import "LVKDetailViewController.h"
 
-@interface LVKDetailViewController ()
+@interface LVKDetailViewController () {
+    NSMutableArray *_objects;
+}
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
-- (void)configureView;
+
 @end
 
 @implementation LVKDetailViewController
 
+@synthesize tableView, textField , dialog;
+
 #pragma mark - Managing the detail item
 
-- (void)setDetailItem:(id)newDetailItem
+- (void)setDialog:(LVKDialog *)newDialog
 {
-    if (_detailItem != newDetailItem) {
-        _detailItem = newDetailItem;
-        
-        // Update the view.
-        [self configureView];
+    if (dialog != newDialog) {
+        dialog = newDialog;
     }
+    
+    [self loadData:0];
 
     if (self.masterPopoverController != nil) {
         [self.masterPopoverController dismissPopoverAnimated:YES];
     }        
 }
 
-- (void)configureView
+- (void)loadData:(int)offset
 {
-    // Update the user interface for the detail item.
+    if(dialog)
+    {
+        NSDictionary *params = nil;
+        
+        switch ([dialog type]) {
+            case Dialog:
+                params = [NSDictionary dictionaryWithObjectsAndKeys:@"20", @"count", [NSNumber numberWithInt:offset], @"offset", [dialog userId], @"user_id", nil];
+                break;
+                
+            case Room:
+                params = [NSDictionary dictionaryWithObjectsAndKeys:@"20", @"count", [NSNumber numberWithInt:offset], @"offset", [dialog chatId], @"chat_id", nil];
+                break;
+                
+            default:
+                break;
+        }
 
-    if (self.detailItem) {
-        self.detailDescriptionLabel.text = [self.detailItem description];
+        VKRequest *history = [VKApi
+                              requestWithMethod:@"messages.getHistory"
+                              andParameters:params
+                              andHttpMethod:@"GET"];
+        [history executeWithResultBlock:^(VKResponse *response) {
+            _objects = [NSMutableArray arrayWithArray:[[[LVKHistoryCollection alloc] initWithDictionary:response.json] messages]];
+            [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+        } errorBlock:^(NSError *error) {
+            NSLog(@"%@", error);
+        }];
     }
 }
 
@@ -44,13 +70,76 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    [self configureView];
+    
+    [[self navigationItem] setTitle:dialog.title];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Table View
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _objects.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    
+    LVKMessage *message = _objects[indexPath.row];
+    cell.textLabel.text = [message body];
+    return cell;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Return NO if you do not want the specified item to be editable.
+    return NO;
+}
+
+-(IBAction) textFieldDoneEditing:(id)sender
+{
+    NSString *text = [textField text];
+    [textField setText:@""];
+    [self composeAndSendMessageWithText:text];
+}
+
+- (void)composeAndSendMessageWithText:(NSString *)text
+{
+    NSDictionary *params = nil;
+    
+    switch ([dialog type]) {
+        case Dialog:
+            params = [NSDictionary dictionaryWithObjectsAndKeys:text, @"message", [dialog userId], @"user_id", nil];
+            break;
+            
+        case Room:
+            params = [NSDictionary dictionaryWithObjectsAndKeys:text, @"message", [dialog chatId], @"chat_id", nil];
+            break;
+            
+        default:
+            break;
+    }
+    
+    VKRequest *sendMessage = [VKApi
+                          requestWithMethod:@"messages.send"
+                          andParameters:params
+                          andHttpMethod:@"POST"];
+    [sendMessage executeWithResultBlock:^(VKResponse *response) {
+        [self performSelectorOnMainThread:@selector(loadData:) withObject:0 waitUntilDone:YES];
+    } errorBlock:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 #pragma mark - Split view
@@ -68,5 +157,4 @@
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
     self.masterPopoverController = nil;
 }
-
 @end

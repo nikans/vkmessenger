@@ -7,10 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <VKSdk.h>
+#import "LVKHistoryCollection.h"
+#import "LVKDialog.h"
 
-@interface LVKDetailViewController : UIViewController <UISplitViewControllerDelegate>
+@interface LVKDetailViewController : UITableViewController <UISplitViewControllerDelegate>
 
-@property (strong, nonatomic) id detailItem;
+@property (strong, nonatomic) LVKDialog *dialog;
 
-@property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UITextField *textField;
+
+-(IBAction) textFieldDoneEditing:(id)sender;
+
 @end

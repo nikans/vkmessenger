@@ -23,6 +23,13 @@
 		A4017DD8193DE8EA000EAD87 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4017DB4193DE8EA000EAD87 /* UIKit.framework */; };
 		A4017DE0193DE8EA000EAD87 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A4017DDE193DE8EA000EAD87 /* InfoPlist.strings */; };
 		A4017DE2193DE8EA000EAD87 /* VKMessengerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A4017DE1193DE8EA000EAD87 /* VKMessengerTests.m */; };
+		A4017DF0193E122E000EAD87 /* LVKDialogsCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = A4017DEF193E122E000EAD87 /* LVKDialogsCollection.m */; };
+		A4017DF3193E1B2C000EAD87 /* LVKDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = A4017DF2193E1B2C000EAD87 /* LVKDialog.m */; };
+		A4017DF6193E317B000EAD87 /* LVKHistoryCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = A4017DF5193E317B000EAD87 /* LVKHistoryCollection.m */; };
+		A4017DF9193E31C4000EAD87 /* LVKMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = A4017DF8193E31C4000EAD87 /* LVKMessage.m */; };
+		A4017DFC193E6A8C000EAD87 /* LVKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A4017DFB193E6A8C000EAD87 /* LVKUser.m */; };
+		A4017DFF193E6DC7000EAD87 /* LVKUsersCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = A4017DFE193E6DC7000EAD87 /* LVKUsersCollection.m */; };
+		B66FE78CE40F46C2BEC1B04D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5906D3D6B7B455798358AE9 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1C0C3747193C409BAB685995 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		A4017DAD193DE8EA000EAD87 /* VKMessenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKMessenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4017DB0193DE8EA000EAD87 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A4017DB2193DE8EA000EAD87 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -58,6 +66,19 @@
 		A4017DDD193DE8EA000EAD87 /* VKMessengerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VKMessengerTests-Info.plist"; sourceTree = "<group>"; };
 		A4017DDF193DE8EA000EAD87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A4017DE1193DE8EA000EAD87 /* VKMessengerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VKMessengerTests.m; sourceTree = "<group>"; };
+		A4017DEE193E122E000EAD87 /* LVKDialogsCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDialogsCollection.h; sourceTree = "<group>"; };
+		A4017DEF193E122E000EAD87 /* LVKDialogsCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDialogsCollection.m; sourceTree = "<group>"; };
+		A4017DF1193E1B2C000EAD87 /* LVKDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDialog.h; sourceTree = "<group>"; };
+		A4017DF2193E1B2C000EAD87 /* LVKDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDialog.m; sourceTree = "<group>"; };
+		A4017DF4193E317B000EAD87 /* LVKHistoryCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKHistoryCollection.h; sourceTree = "<group>"; };
+		A4017DF5193E317B000EAD87 /* LVKHistoryCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKHistoryCollection.m; sourceTree = "<group>"; };
+		A4017DF7193E31C4000EAD87 /* LVKMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LVKMessage.h; path = ../LVKMessage.h; sourceTree = "<group>"; };
+		A4017DF8193E31C4000EAD87 /* LVKMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LVKMessage.m; path = ../LVKMessage.m; sourceTree = "<group>"; };
+		A4017DFA193E6A8C000EAD87 /* LVKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKUser.h; sourceTree = "<group>"; };
+		A4017DFB193E6A8C000EAD87 /* LVKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKUser.m; sourceTree = "<group>"; };
+		A4017DFD193E6DC7000EAD87 /* LVKUsersCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKUsersCollection.h; sourceTree = "<group>"; };
+		A4017DFE193E6DC7000EAD87 /* LVKUsersCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKUsersCollection.m; sourceTree = "<group>"; };
+		B5906D3D6B7B455798358AE9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +89,7 @@
 				A4017DB3193DE8EA000EAD87 /* CoreGraphics.framework in Frameworks */,
 				A4017DB5193DE8EA000EAD87 /* UIKit.framework in Frameworks */,
 				A4017DB1193DE8EA000EAD87 /* Foundation.framework in Frameworks */,
+				B66FE78CE40F46C2BEC1B04D /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +113,7 @@
 				A4017DDB193DE8EA000EAD87 /* VKMessengerTests */,
 				A4017DAF193DE8EA000EAD87 /* Frameworks */,
 				A4017DAE193DE8EA000EAD87 /* Products */,
+				1C0C3747193C409BAB685995 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,6 +133,7 @@
 				A4017DB2193DE8EA000EAD87 /* CoreGraphics.framework */,
 				A4017DB4193DE8EA000EAD87 /* UIKit.framework */,
 				A4017DD5193DE8EA000EAD87 /* XCTest.framework */,
+				B5906D3D6B7B455798358AE9 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -127,6 +151,18 @@
 				A4017DCC193DE8EA000EAD87 /* LVKDetailViewController.m */,
 				A4017DCE193DE8EA000EAD87 /* Images.xcassets */,
 				A4017DB7193DE8EA000EAD87 /* Supporting Files */,
+				A4017DEE193E122E000EAD87 /* LVKDialogsCollection.h */,
+				A4017DEF193E122E000EAD87 /* LVKDialogsCollection.m */,
+				A4017DF1193E1B2C000EAD87 /* LVKDialog.h */,
+				A4017DF2193E1B2C000EAD87 /* LVKDialog.m */,
+				A4017DF4193E317B000EAD87 /* LVKHistoryCollection.h */,
+				A4017DF5193E317B000EAD87 /* LVKHistoryCollection.m */,
+				A4017DF7193E31C4000EAD87 /* LVKMessage.h */,
+				A4017DF8193E31C4000EAD87 /* LVKMessage.m */,
+				A4017DFA193E6A8C000EAD87 /* LVKUser.h */,
+				A4017DFB193E6A8C000EAD87 /* LVKUser.m */,
+				A4017DFD193E6DC7000EAD87 /* LVKUsersCollection.h */,
+				A4017DFE193E6DC7000EAD87 /* LVKUsersCollection.m */,
 			);
 			path = VKMessenger;
 			sourceTree = "<group>";
@@ -167,9 +203,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A4017DE5193DE8EB000EAD87 /* Build configuration list for PBXNativeTarget "VKMessenger" */;
 			buildPhases = (
+				58F0320512F24AACA192B9BB /* Check Pods Manifest.lock */,
 				A4017DA9193DE8EA000EAD87 /* Sources */,
 				A4017DAA193DE8EA000EAD87 /* Frameworks */,
 				A4017DAB193DE8EA000EAD87 /* Resources */,
+				CB145F9C9CE3435C9ECFF436 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -254,15 +292,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		58F0320512F24AACA192B9BB /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CB145F9C9CE3435C9ECFF436 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A4017DA9193DE8EA000EAD87 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4017DFC193E6A8C000EAD87 /* LVKUser.m in Sources */,
 				A4017DC1193DE8EA000EAD87 /* LVKAppDelegate.m in Sources */,
+				A4017DF9193E31C4000EAD87 /* LVKMessage.m in Sources */,
+				A4017DF0193E122E000EAD87 /* LVKDialogsCollection.m in Sources */,
 				A4017DBD193DE8EA000EAD87 /* main.m in Sources */,
 				A4017DCA193DE8EA000EAD87 /* LVKMasterViewController.m in Sources */,
+				A4017DF6193E317B000EAD87 /* LVKHistoryCollection.m in Sources */,
 				A4017DCD193DE8EA000EAD87 /* LVKDetailViewController.m in Sources */,
+				A4017DF3193E1B2C000EAD87 /* LVKDialog.m in Sources */,
+				A4017DFF193E6DC7000EAD87 /* LVKUsersCollection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -394,6 +471,7 @@
 		};
 		A4017DE6193DE8EB000EAD87 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C0C3747193C409BAB685995 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -407,6 +485,7 @@
 		};
 		A4017DE7193DE8EB000EAD87 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C0C3747193C409BAB685995 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -477,6 +556,7 @@
 				A4017DE7193DE8EB000EAD87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A4017DE8193DE8EB000EAD87 /* Build configuration list for PBXNativeTarget "VKMessengerTests" */ = {
 			isa = XCConfigurationList;
@@ -485,6 +565,7 @@
 				A4017DEA193DE8EB000EAD87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -17,6 +17,8 @@
 
 @implementation LVKMasterViewController
 
+@synthesize tableView;
+
 - (void)awakeFromNib
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -37,6 +39,50 @@
     self.detailViewController = (LVKDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [self loadData:0];
+}
+
+- (void)loadData:(int)offset
+{
+    if([VKSdk isLoggedIn])
+    {
+        VKRequest *dialogs = [VKApi
+                              requestWithMethod:@"messages.getDialogs"
+                              andParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"20", @"count", [NSNumber numberWithInt:offset], @"offset", nil]
+                              andHttpMethod:@"GET"];
+        [dialogs executeWithResultBlock:^(VKResponse *response) {
+            LVKDialogsCollection *dialogsCollection = [[LVKDialogsCollection alloc] initWithDictionary:response.json];
+            NSString *userIdsCSV = [[dialogsCollection getUserIds] componentsJoinedByString:@","];
+            
+            VKRequest *users = [[VKApi users] get:[NSDictionary dictionaryWithObjectsAndKeys:userIdsCSV, @"user_ids", @"photo_200", @"fields", nil]];
+            
+            [users executeWithResultBlock:^(VKResponse *response) {
+                LVKUsersCollection *usersCollection = [[LVKUsersCollection alloc] initWithArray:response.json];
+                
+                [dialogsCollection adoptUserCollection:usersCollection];
+                
+                _objects = [NSMutableArray arrayWithArray:[dialogsCollection dialogs]];
+                
+                [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+            } errorBlock:^(NSError *error) {
+                NSLog(@"%@", error);
+            }];
+        } errorBlock:^(NSError *error) {
+            NSLog(@"%@", error);
+            //            if (error.code != VK_API_ERROR)
+            //            {
+            //                [[(VKError *)error request] repeat];
+            //            }
+            //            else
+            //            {
+            //                NSLog(@"VK error: %@", [(VKError *)error apiError]);
+            //            }
+        }];
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -45,12 +91,12 @@
 
 - (void)insertNewObject:(id)sender
 {
-    if (!_objects) {
-        _objects = [[NSMutableArray alloc] init];
-    }
-    [_objects insertObject:[NSDate date] atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//    if (!_objects) {
+//        _objects = [[NSMutableArray alloc] init];
+//    }
+//    [_objects insertObject:[NSDate date] atIndex:0];
+//    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+//    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma mark - Table View
@@ -69,8 +115,9 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
-    NSDate *object = _objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    LVKDialog *dialog = _objects[indexPath.row];
+    cell.textLabel.text = [dialog title];
+    cell.detailTextLabel.text = [dialog body];
     return cell;
 }
 
@@ -109,8 +156,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        NSDate *object = _objects[indexPath.row];
-        self.detailViewController.detailItem = object;
+        LVKDialog *object = _objects[indexPath.row];
+        self.detailViewController.dialog = object;
     }
 }
 
@@ -118,8 +165,8 @@
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSDate *object = _objects[indexPath.row];
-        [[segue destinationViewController] setDetailItem:object];
+        LVKDialog *object = _objects[indexPath.row];
+        [[segue destinationViewController] setDialog:object];
     }
 }
 
