@@ -1,0 +1,492 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A4017DB1193DE8EA000EAD87 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4017DB0193DE8EA000EAD87 /* Foundation.framework */; };
+		A4017DB3193DE8EA000EAD87 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4017DB2193DE8EA000EAD87 /* CoreGraphics.framework */; };
+		A4017DB5193DE8EA000EAD87 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4017DB4193DE8EA000EAD87 /* UIKit.framework */; };
+		A4017DBB193DE8EA000EAD87 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A4017DB9193DE8EA000EAD87 /* InfoPlist.strings */; };
+		A4017DBD193DE8EA000EAD87 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A4017DBC193DE8EA000EAD87 /* main.m */; };
+		A4017DC1193DE8EA000EAD87 /* LVKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4017DC0193DE8EA000EAD87 /* LVKAppDelegate.m */; };
+		A4017DC4193DE8EA000EAD87 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4017DC2193DE8EA000EAD87 /* Main_iPhone.storyboard */; };
+		A4017DC7193DE8EA000EAD87 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4017DC5193DE8EA000EAD87 /* Main_iPad.storyboard */; };
+		A4017DCA193DE8EA000EAD87 /* LVKMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4017DC9193DE8EA000EAD87 /* LVKMasterViewController.m */; };
+		A4017DCD193DE8EA000EAD87 /* LVKDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4017DCC193DE8EA000EAD87 /* LVKDetailViewController.m */; };
+		A4017DCF193DE8EA000EAD87 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4017DCE193DE8EA000EAD87 /* Images.xcassets */; };
+		A4017DD6193DE8EA000EAD87 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4017DD5193DE8EA000EAD87 /* XCTest.framework */; };
+		A4017DD7193DE8EA000EAD87 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4017DB0193DE8EA000EAD87 /* Foundation.framework */; };
+		A4017DD8193DE8EA000EAD87 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4017DB4193DE8EA000EAD87 /* UIKit.framework */; };
+		A4017DE0193DE8EA000EAD87 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A4017DDE193DE8EA000EAD87 /* InfoPlist.strings */; };
+		A4017DE2193DE8EA000EAD87 /* VKMessengerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A4017DE1193DE8EA000EAD87 /* VKMessengerTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A4017DD9193DE8EA000EAD87 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A4017DA5193DE8EA000EAD87 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A4017DAC193DE8EA000EAD87;
+			remoteInfo = VKMessenger;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A4017DAD193DE8EA000EAD87 /* VKMessenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKMessenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4017DB0193DE8EA000EAD87 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A4017DB2193DE8EA000EAD87 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A4017DB4193DE8EA000EAD87 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A4017DB8193DE8EA000EAD87 /* VKMessenger-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VKMessenger-Info.plist"; sourceTree = "<group>"; };
+		A4017DBA193DE8EA000EAD87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A4017DBC193DE8EA000EAD87 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A4017DBE193DE8EA000EAD87 /* VKMessenger-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VKMessenger-Prefix.pch"; sourceTree = "<group>"; };
+		A4017DBF193DE8EA000EAD87 /* LVKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LVKAppDelegate.h; sourceTree = "<group>"; };
+		A4017DC0193DE8EA000EAD87 /* LVKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LVKAppDelegate.m; sourceTree = "<group>"; };
+		A4017DC3193DE8EA000EAD87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		A4017DC6193DE8EA000EAD87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		A4017DC8193DE8EA000EAD87 /* LVKMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LVKMasterViewController.h; sourceTree = "<group>"; };
+		A4017DC9193DE8EA000EAD87 /* LVKMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LVKMasterViewController.m; sourceTree = "<group>"; };
+		A4017DCB193DE8EA000EAD87 /* LVKDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LVKDetailViewController.h; sourceTree = "<group>"; };
+		A4017DCC193DE8EA000EAD87 /* LVKDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LVKDetailViewController.m; sourceTree = "<group>"; };
+		A4017DCE193DE8EA000EAD87 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A4017DD4193DE8EA000EAD87 /* VKMessengerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VKMessengerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A4017DD5193DE8EA000EAD87 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		A4017DDD193DE8EA000EAD87 /* VKMessengerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VKMessengerTests-Info.plist"; sourceTree = "<group>"; };
+		A4017DDF193DE8EA000EAD87 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A4017DE1193DE8EA000EAD87 /* VKMessengerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VKMessengerTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A4017DAA193DE8EA000EAD87 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4017DB3193DE8EA000EAD87 /* CoreGraphics.framework in Frameworks */,
+				A4017DB5193DE8EA000EAD87 /* UIKit.framework in Frameworks */,
+				A4017DB1193DE8EA000EAD87 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4017DD1193DE8EA000EAD87 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4017DD6193DE8EA000EAD87 /* XCTest.framework in Frameworks */,
+				A4017DD8193DE8EA000EAD87 /* UIKit.framework in Frameworks */,
+				A4017DD7193DE8EA000EAD87 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A4017DA4193DE8EA000EAD87 = {
+			isa = PBXGroup;
+			children = (
+				A4017DB6193DE8EA000EAD87 /* VKMessenger */,
+				A4017DDB193DE8EA000EAD87 /* VKMessengerTests */,
+				A4017DAF193DE8EA000EAD87 /* Frameworks */,
+				A4017DAE193DE8EA000EAD87 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A4017DAE193DE8EA000EAD87 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A4017DAD193DE8EA000EAD87 /* VKMessenger.app */,
+				A4017DD4193DE8EA000EAD87 /* VKMessengerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A4017DAF193DE8EA000EAD87 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A4017DB0193DE8EA000EAD87 /* Foundation.framework */,
+				A4017DB2193DE8EA000EAD87 /* CoreGraphics.framework */,
+				A4017DB4193DE8EA000EAD87 /* UIKit.framework */,
+				A4017DD5193DE8EA000EAD87 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A4017DB6193DE8EA000EAD87 /* VKMessenger */ = {
+			isa = PBXGroup;
+			children = (
+				A4017DBF193DE8EA000EAD87 /* LVKAppDelegate.h */,
+				A4017DC0193DE8EA000EAD87 /* LVKAppDelegate.m */,
+				A4017DC2193DE8EA000EAD87 /* Main_iPhone.storyboard */,
+				A4017DC5193DE8EA000EAD87 /* Main_iPad.storyboard */,
+				A4017DC8193DE8EA000EAD87 /* LVKMasterViewController.h */,
+				A4017DC9193DE8EA000EAD87 /* LVKMasterViewController.m */,
+				A4017DCB193DE8EA000EAD87 /* LVKDetailViewController.h */,
+				A4017DCC193DE8EA000EAD87 /* LVKDetailViewController.m */,
+				A4017DCE193DE8EA000EAD87 /* Images.xcassets */,
+				A4017DB7193DE8EA000EAD87 /* Supporting Files */,
+			);
+			path = VKMessenger;
+			sourceTree = "<group>";
+		};
+		A4017DB7193DE8EA000EAD87 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A4017DB8193DE8EA000EAD87 /* VKMessenger-Info.plist */,
+				A4017DB9193DE8EA000EAD87 /* InfoPlist.strings */,
+				A4017DBC193DE8EA000EAD87 /* main.m */,
+				A4017DBE193DE8EA000EAD87 /* VKMessenger-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A4017DDB193DE8EA000EAD87 /* VKMessengerTests */ = {
+			isa = PBXGroup;
+			children = (
+				A4017DE1193DE8EA000EAD87 /* VKMessengerTests.m */,
+				A4017DDC193DE8EA000EAD87 /* Supporting Files */,
+			);
+			path = VKMessengerTests;
+			sourceTree = "<group>";
+		};
+		A4017DDC193DE8EA000EAD87 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A4017DDD193DE8EA000EAD87 /* VKMessengerTests-Info.plist */,
+				A4017DDE193DE8EA000EAD87 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A4017DAC193DE8EA000EAD87 /* VKMessenger */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A4017DE5193DE8EB000EAD87 /* Build configuration list for PBXNativeTarget "VKMessenger" */;
+			buildPhases = (
+				A4017DA9193DE8EA000EAD87 /* Sources */,
+				A4017DAA193DE8EA000EAD87 /* Frameworks */,
+				A4017DAB193DE8EA000EAD87 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VKMessenger;
+			productName = VKMessenger;
+			productReference = A4017DAD193DE8EA000EAD87 /* VKMessenger.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A4017DD3193DE8EA000EAD87 /* VKMessengerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A4017DE8193DE8EB000EAD87 /* Build configuration list for PBXNativeTarget "VKMessengerTests" */;
+			buildPhases = (
+				A4017DD0193DE8EA000EAD87 /* Sources */,
+				A4017DD1193DE8EA000EAD87 /* Frameworks */,
+				A4017DD2193DE8EA000EAD87 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A4017DDA193DE8EA000EAD87 /* PBXTargetDependency */,
+			);
+			name = VKMessengerTests;
+			productName = VKMessengerTests;
+			productReference = A4017DD4193DE8EA000EAD87 /* VKMessengerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A4017DA5193DE8EA000EAD87 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = LVK;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = Levelab;
+				TargetAttributes = {
+					A4017DD3193DE8EA000EAD87 = {
+						TestTargetID = A4017DAC193DE8EA000EAD87;
+					};
+				};
+			};
+			buildConfigurationList = A4017DA8193DE8EA000EAD87 /* Build configuration list for PBXProject "VKMessenger" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A4017DA4193DE8EA000EAD87;
+			productRefGroup = A4017DAE193DE8EA000EAD87 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A4017DAC193DE8EA000EAD87 /* VKMessenger */,
+				A4017DD3193DE8EA000EAD87 /* VKMessengerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A4017DAB193DE8EA000EAD87 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4017DC7193DE8EA000EAD87 /* Main_iPad.storyboard in Resources */,
+				A4017DCF193DE8EA000EAD87 /* Images.xcassets in Resources */,
+				A4017DC4193DE8EA000EAD87 /* Main_iPhone.storyboard in Resources */,
+				A4017DBB193DE8EA000EAD87 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4017DD2193DE8EA000EAD87 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4017DE0193DE8EA000EAD87 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A4017DA9193DE8EA000EAD87 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4017DC1193DE8EA000EAD87 /* LVKAppDelegate.m in Sources */,
+				A4017DBD193DE8EA000EAD87 /* main.m in Sources */,
+				A4017DCA193DE8EA000EAD87 /* LVKMasterViewController.m in Sources */,
+				A4017DCD193DE8EA000EAD87 /* LVKDetailViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4017DD0193DE8EA000EAD87 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4017DE2193DE8EA000EAD87 /* VKMessengerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A4017DDA193DE8EA000EAD87 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A4017DAC193DE8EA000EAD87 /* VKMessenger */;
+			targetProxy = A4017DD9193DE8EA000EAD87 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A4017DB9193DE8EA000EAD87 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A4017DBA193DE8EA000EAD87 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A4017DC2193DE8EA000EAD87 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A4017DC3193DE8EA000EAD87 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		A4017DC5193DE8EA000EAD87 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A4017DC6193DE8EA000EAD87 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		A4017DDE193DE8EA000EAD87 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A4017DDF193DE8EA000EAD87 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A4017DE3193DE8EA000EAD87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A4017DE4193DE8EA000EAD87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A4017DE6193DE8EB000EAD87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VKMessenger/VKMessenger-Prefix.pch";
+				INFOPLIST_FILE = "VKMessenger/VKMessenger-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A4017DE7193DE8EB000EAD87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VKMessenger/VKMessenger-Prefix.pch";
+				INFOPLIST_FILE = "VKMessenger/VKMessenger-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		A4017DE9193DE8EB000EAD87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/VKMessenger.app/VKMessenger";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VKMessenger/VKMessenger-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "VKMessengerTests/VKMessengerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		A4017DEA193DE8EB000EAD87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/VKMessenger.app/VKMessenger";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VKMessenger/VKMessenger-Prefix.pch";
+				INFOPLIST_FILE = "VKMessengerTests/VKMessengerTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A4017DA8193DE8EA000EAD87 /* Build configuration list for PBXProject "VKMessenger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4017DE3193DE8EA000EAD87 /* Debug */,
+				A4017DE4193DE8EA000EAD87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A4017DE5193DE8EB000EAD87 /* Build configuration list for PBXNativeTarget "VKMessenger" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4017DE6193DE8EB000EAD87 /* Debug */,
+				A4017DE7193DE8EB000EAD87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		A4017DE8193DE8EB000EAD87 /* Build configuration list for PBXNativeTarget "VKMessengerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A4017DE9193DE8EB000EAD87 /* Debug */,
+				A4017DEA193DE8EB000EAD87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A4017DA5193DE8EA000EAD87 /* Project object */;
+}
