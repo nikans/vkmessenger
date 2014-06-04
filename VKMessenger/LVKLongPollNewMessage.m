@@ -10,7 +10,12 @@
 
 @implementation LVKLongPollNewMessage
 
-@synthesize messageId, flags, type, chatId, userId, date, text;
+@synthesize message, dialog, messageId, flags, type, chatId, userId, date, text, subject;
+
+-(NSArray *)prepareNotifications
+{
+    return [NSArray arrayWithObject:[NSNotification notificationWithName:@"newMessage" object:self]];
+}
 
 -(void)mapArrayToProperties:(NSArray *)array
 {
@@ -18,6 +23,7 @@
     flags = [array objectAtIndex:1];
     
     BOOL isOutbox = [flags intValue] & MESSAGE_OUTBOX;
+    BOOL isUnread = [flags intValue] & MESSAGE_UNREAD;
     
     userId = [(NSDictionary *)[array objectAtIndex:6] objectForKey:@"from"];
         
@@ -29,14 +35,20 @@
     }
     else
     {
-        chatId = [array objectAtIndex:2];
+        int tmpChatId = [[array objectAtIndex:2] intValue];
+        
+        if(tmpChatId > 2000000000) tmpChatId = tmpChatId - 2000000000;
+        
+        chatId = [NSNumber numberWithInt:tmpChatId];
         type = Room;
     }
     
     date = [[NSDate alloc] initWithTimeIntervalSince1970:[[array objectAtIndex:3] intValue]];
+    subject = [array objectAtIndex:4];
     text = [array objectAtIndex:5];
     
-    NSLog(@"%u %@ %@", type, userId, chatId);
+    message = [[LVKMessage alloc] initWithDictionary:[NSDictionary dictionaryWithObjectsAndKeys:messageId, @"id", userId, [NSNumber numberWithBool:isUnread], @"read_state", @"userId", chatId, @"chatId", text, @"body", nil]];
+    dialog = [[LVKDialog alloc] initWithPlainDictionary:[NSDictionary dictionaryWithObjectsAndKeys:chatId, @"chat_id", [NSNumber numberWithInt:type], @"type", subject, @"title", message, @"message", nil]];
 }
 
 @end

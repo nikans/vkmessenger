@@ -42,6 +42,11 @@
     return self;
 }
 
+-(NSArray *)prepareNotifications
+{
+    return [[NSArray alloc] init];
+}
+
 -(void)mapArrayToProperties:(NSArray *)array
 {
     

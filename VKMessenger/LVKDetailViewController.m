@@ -7,6 +7,7 @@
 //
 
 #import "LVKDetailViewController.h"
+#import "LVKMessageViewController.h"
 
 @interface LVKDetailViewController () {
     NSMutableArray *_objects;
@@ -18,6 +19,24 @@
 @implementation LVKDetailViewController
 
 @synthesize tableView, textField , dialog;
+
+- (void)receiveNewMessage:(NSNotification *)notification
+{
+    LVKLongPollNewMessage *newMessageUpdate = [notification object];
+    
+    if([dialog isEqual:[newMessageUpdate dialog]])
+    {
+        NSArray *result = [_objects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(LVKMessage *message, NSDictionary *bindings) {
+            return [message isEqual:[newMessageUpdate message]];
+        }]];
+        
+        if(result.count == 0)
+        {
+            [_objects addObject:[newMessageUpdate message]];
+            [self tableViewReloadDataWithScroll];
+        }
+    }
+}
 
 #pragma mark - Managing the detail item
 
@@ -34,32 +53,33 @@
     }        
 }
 
+- (void)tableViewReloadDataWithScroll
+{
+    [tableView reloadData];
+    int count = [_objects count]-1;
+    if(count >= 0)
+    [tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:count inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];
+}
+
+- (void)registerObservers
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveNewMessage:)
+                                                 name:@"newMessage"
+                                               object:nil];
+}
+
 - (void)loadData:(int)offset
 {
     if(dialog)
     {
-        NSDictionary *params = nil;
-        
-        switch ([dialog type]) {
-            case Dialog:
-                params = [NSDictionary dictionaryWithObjectsAndKeys:@"20", @"count", [NSNumber numberWithInt:offset], @"offset", [dialog userId], @"user_id", nil];
-                break;
-                
-            case Room:
-                params = [NSDictionary dictionaryWithObjectsAndKeys:@"20", @"count", [NSNumber numberWithInt:offset], @"offset", [dialog chatId], @"chat_id", nil];
-                break;
-                
-            default:
-                break;
-        }
-        
         VKRequest *history = [VKApi
                               requestWithMethod:@"messages.getHistory"
-                              andParameters:params
+                              andParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"60", @"count", [NSNumber numberWithInt:offset], @"offset", [dialog chatId], [dialog chatIdKey], nil]
                               andHttpMethod:@"GET"];
         [history executeWithResultBlock:^(VKResponse *response) {
             _objects = [NSMutableArray arrayWithArray:[[[LVKHistoryCollection alloc] initWithDictionary:response.json] messages]];
-            [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(tableViewReloadDataWithScroll) withObject:nil waitUntilDone:YES];
         } errorBlock:^(NSError *error) {
             NSLog(@"%@", error);
         }];
@@ -71,6 +91,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    [self registerObservers];
     [[self navigationItem] setTitle:dialog.title];
 }
 
@@ -116,27 +137,12 @@
 
 - (void)composeAndSendMessageWithText:(NSString *)text
 {
-    NSDictionary *params = nil;
-    
-    switch ([dialog type]) {
-        case Dialog:
-            params = [NSDictionary dictionaryWithObjectsAndKeys:text, @"message", [dialog userId], @"user_id", nil];
-            break;
-            
-        case Room:
-            params = [NSDictionary dictionaryWithObjectsAndKeys:text, @"message", [dialog chatId], @"chat_id", nil];
-            break;
-            
-        default:
-            break;
-    }
-    
     VKRequest *sendMessage = [VKApi
                           requestWithMethod:@"messages.send"
-                          andParameters:params
+                          andParameters:[NSDictionary dictionaryWithObjectsAndKeys:text, @"message", [dialog chatId], [dialog chatIdKey], nil]
                           andHttpMethod:@"POST"];
     [sendMessage executeWithResultBlock:^(VKResponse *response) {
-        [self performSelectorOnMainThread:@selector(loadData:) withObject:0 waitUntilDone:YES];
+//        [self performSelectorOnMainThread:@selector(loadData:) withObject:0 waitUntilDone:YES];
     } errorBlock:^(NSError *error) {
         NSLog(@"%@", error);
     }];
@@ -156,5 +162,19 @@
     // Called when the view is shown again in the split view, invalidating the button and popover controller.
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
     self.masterPopoverController = nil;
+}
+
+#pragma mark - Navigation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"showMessage"]) {
+        LVKMessage *object = nil;
+        
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        object = _objects[indexPath.row];
+        
+        [(LVKMessageViewController *)[segue destinationViewController] setMessage:object];
+    }
 }
 @end

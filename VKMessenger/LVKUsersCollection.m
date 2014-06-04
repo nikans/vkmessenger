@@ -10,7 +10,7 @@
 
 @implementation LVKUsersCollection
 
-@synthesize users, usersIdx;
+@synthesize count, users, usersIdx;
 
 -(id)init
 {
@@ -31,6 +31,33 @@
         LVKUser *currentUserObject = nil;
         
         for (NSDictionary *userDictionary in array)
+        {
+            currentUserObject = [[LVKUser alloc] initWithDictionary:userDictionary];
+            [_tmpUsers addObject:currentUserObject];
+            [_tmpUsersIdx setObject:currentUserObject forKey:[currentUserObject _id]];
+        }
+        
+        users = [NSArray arrayWithArray:_tmpUsers];
+        usersIdx = [NSDictionary dictionaryWithDictionary:_tmpUsersIdx];
+    }
+    
+    return self;
+}
+
+-(id)initWithDictionary:(NSDictionary *)dictionary
+{
+    self = [self init];
+    
+    if(self)
+    {
+        count = [dictionary objectForKey:@"count"];
+        
+        NSMutableArray *_tmpUsers = [[NSMutableArray alloc] init];
+        NSMutableDictionary *_tmpUsersIdx = [[NSMutableDictionary alloc] init];
+        
+        LVKUser *currentUserObject = nil;
+        
+        for (NSDictionary *userDictionary in [dictionary objectForKey:@"items"])
         {
             currentUserObject = [[LVKUser alloc] initWithDictionary:userDictionary];
             [_tmpUsers addObject:currentUserObject];

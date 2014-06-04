@@ -11,9 +11,11 @@
 
 @interface LVKUsersCollection : NSObject
 
+@property (nonatomic) NSNumber *count;
 @property (nonatomic) NSArray *users;
 @property (nonatomic) NSDictionary *usersIdx;
 
 -(id)initWithArray:(NSArray *)array;
+-(id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end

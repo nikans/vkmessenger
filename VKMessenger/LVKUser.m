@@ -7,10 +7,11 @@
 //
 
 #import "LVKUser.h"
+#import "LVKDialog.h"
 
 @implementation LVKUser
 
-@synthesize _id, firstName, lastName, photo_200;
+@synthesize _id, firstName, lastName, fullName, photo_200;
 
 -(id)init
 {
@@ -28,10 +29,16 @@
         _id = [dictionary valueForKey:@"id"];
         firstName = [dictionary valueForKey:@"first_name"];
         lastName = [dictionary valueForKey:@"last_name"];
+        fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
         photo_200 = [dictionary valueForKey:@"photo_200"];
     }
     
     return self;
+}
+
+-(id)createDialog
+{
+    return [[LVKDialog alloc] initWithPlainDictionary:[NSDictionary dictionaryWithObjectsAndKeys:_id, @"chat_id", [NSNumber numberWithInt:Dialog], @"type", fullName, @"title", nil]];
 }
 
 @end

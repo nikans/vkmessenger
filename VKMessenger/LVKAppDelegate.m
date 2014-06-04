@@ -13,11 +13,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
-        UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
-        splitViewController.delegate = (id)navigationController.topViewController;
-    }
+#pragma mark - iPad
+//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+//        UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
+//        UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
+//        splitViewController.delegate = (id)navigationController.topViewController;
+//    }
     
     [VKSdk initializeWithDelegate:self andAppId:@"4395508"];
     if ([VKSdk wakeUpSession])
@@ -29,13 +30,17 @@
     else
     {
         NSLog(@"Show auth");
-        
-        NSArray *scope = [NSArray arrayWithObjects:@"friends", @"messages", @"notify", nil];
-        
-        [VKSdk authorize:scope];
+        [self authorize];
     }
     
     return YES;
+}
+
+- (void)authorize
+{
+    NSArray *scope = [NSArray arrayWithObjects:@"friends", @"messages", @"notify", nil];
+    
+    [VKSdk authorize:scope];
 }
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
@@ -83,6 +88,8 @@
 
 - (void)setup
 {
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert)];
+    
     [self setupLongPolling];
 }
 
@@ -112,6 +119,7 @@
     if([jsonResponse objectForKey:@"updates"] != nil)
     {
         LVKLongPollUpdatesCollection *updates = [[LVKLongPollUpdatesCollection alloc] initWithArray:[jsonResponse objectForKey:@"updates"]];
+        [updates performSelectorOnMainThread:@selector(postNotifications) withObject:nil waitUntilDone:YES];
     }
     
     [options setObject:[jsonResponse objectForKey:@"ts"] forKey:@"ts"];
@@ -170,8 +178,15 @@
 {
     [[self window] addSubview:controller.view];
     [[self window] makeKeyAndVisible];
-    [[[self window] rootViewController] presentViewController:controller animated:true completion:NULL];
+    [[[self window] rootViewController] presentViewController:controller animated:YES completion:NULL];
     
+}
+
+- (void)presentViewController:(UIViewController *)controller
+{
+    [[self window] addSubview:controller.view];
+    [[self window] makeKeyAndVisible];
+    [self window].rootViewController = controller;
 }
 
 /**
@@ -182,7 +197,7 @@
 {
     NSLog(@"Recieved new token");
     
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert)];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"authSucceeded" object:nil];
     
     [self setup];
 }

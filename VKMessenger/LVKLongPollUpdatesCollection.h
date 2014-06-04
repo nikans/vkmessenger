@@ -15,4 +15,6 @@
 
 -(id)initWithArray:(NSArray *)array;
 
+-(void)postNotifications;
+
 @end

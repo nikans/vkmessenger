@@ -8,12 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+#define MESSAGE_UNREAD (1)
 #define MESSAGE_OUTBOX (2)
 #define MESSAGE_CHAT (16)
 
 @interface LVKLongPollUpdate : NSObject
 
 -(id)initWithArray:(NSArray *)array;
+
+-(NSArray *)prepareNotifications;
 
 -(void)mapArrayToProperties:(NSArray *)array;
 

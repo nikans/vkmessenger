@@ -13,8 +13,11 @@
 @property (nonatomic) NSNumber *_id;
 @property (nonatomic) NSString *firstName;
 @property (nonatomic) NSString *lastName;
+@property (nonatomic) NSString *fullName;
 @property (nonatomic) NSString *photo_200;
 
 -(id)initWithDictionary:(NSDictionary *)dictionary;
+
+-(id)createDialog;
 
 @end

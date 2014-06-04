@@ -10,6 +10,7 @@
 #import <VKSdk.h>
 #import "LVKHistoryCollection.h"
 #import "LVKDialog.h"
+#import "LVKLongPollNewMessage.h"
 
 @interface LVKDetailViewController : UITableViewController <UISplitViewControllerDelegate>
 

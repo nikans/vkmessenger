@@ -14,4 +14,8 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+- (void)authorize;
+
+- (void)presentViewController:(UIViewController *)controller;
+
 @end

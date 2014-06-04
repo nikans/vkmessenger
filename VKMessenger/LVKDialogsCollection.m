@@ -43,12 +43,18 @@
 -(NSArray *)getUserIds
 {
     NSMutableArray *userIds = [[NSMutableArray alloc] init];
-    [[dialogs filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(LVKDialog *dialog, NSDictionary *bindings) {
+    [dialogs enumerateObjectsUsingBlock:^(LVKDialog *dialog, NSUInteger idx, BOOL *stop) {
         if(dialog.type == Room)
-            return NO;
-        return YES;
-    }]] enumerateObjectsUsingBlock:^(LVKDialog *dialog, NSUInteger idx, BOOL *stop) {
-        [userIds addObject:[dialog userId]];
+        {
+            for (NSNumber *userId in [dialog chatUserIds])
+            {
+                [userIds addObject:userId];
+            }
+        }
+        else if(dialog.type == Dialog)
+        {
+            [userIds addObject:[dialog chatId]];
+        }
     }];
     
     return [NSArray arrayWithArray:userIds];
@@ -56,13 +62,21 @@
 
 -(void)adoptUserCollection:(LVKUsersCollection *)collection
 {
-    [[dialogs filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(LVKDialog *dialog, NSDictionary *bindings) {
+    [dialogs enumerateObjectsUsingBlock:^(LVKDialog *dialog, NSUInteger idx, BOOL *stop) {
         if(dialog.type == Room)
-            return NO;
-        return YES;
-    }]] enumerateObjectsUsingBlock:^(LVKDialog *dialog, NSUInteger idx, BOOL *stop) {
-        LVKUser *currentUser = [[collection usersIdx] objectForKey:dialog.userId];
-        [dialog setTitle:[NSString stringWithFormat:@"%@ %@", currentUser.firstName, currentUser.lastName]];
+        {
+            NSMutableArray *currentUsers = [[NSMutableArray alloc] init];
+            for (NSNumber *userId in [dialog chatUserIds])
+            {
+                [currentUsers addObject:[[collection usersIdx] objectForKey:userId]];
+            }
+            [dialog adoptUsers:currentUsers];
+        }
+        else if(dialog.type == Dialog)
+        {
+            LVKUser *currentUser = [[collection usersIdx] objectForKey:dialog.chatId];
+            [dialog adoptUser:currentUser];
+        }
     }];
 }
 @end

@@ -37,4 +37,13 @@
     
     return self;
 }
+
+-(void)postNotifications
+{
+    for (LVKLongPollUpdate *update in updates) {
+        for (NSNotification *notification in [update prepareNotifications]) {
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+        }
+    }
+}
 @end

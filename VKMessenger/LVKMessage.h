@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LVKMessageAttachment.h"
 
 @interface LVKMessage : NSObject
 
@@ -17,6 +18,8 @@
 @property (nonatomic) NSDate *date;
 @property (nonatomic) BOOL readState;
 @property (nonatomic) BOOL out;
+@property (nonatomic) NSArray *attachments;
+@property (nonatomic) NSArray *forwarded;
 
 -(id)initWithDictionary:(NSDictionary *)dictionary;
 

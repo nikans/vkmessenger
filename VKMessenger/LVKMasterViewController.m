@@ -7,8 +7,8 @@
 //
 
 #import "LVKMasterViewController.h"
-
 #import "LVKDetailViewController.h"
+#import "LVKUserPickerViewController.h"
 
 @interface LVKMasterViewController () {
     NSMutableArray *_objects;
@@ -21,10 +21,11 @@
 
 - (void)awakeFromNib
 {
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        self.clearsSelectionOnViewWillAppear = NO;
-        self.preferredContentSize = CGSizeMake(320.0, 600.0);
-    }
+#pragma mark - iPad
+//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+//        self.clearsSelectionOnViewWillAppear = NO;
+//        self.preferredContentSize = CGSizeMake(320.0, 600.0);
+//    }
     [super awakeFromNib];
 }
 
@@ -34,14 +35,61 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
-    self.detailViewController = (LVKDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+#pragma mark - iPad
+//    self.detailViewController = (LVKDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+    
+    [self registerObservers];
+    
+    [self loadData:0];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)receiveNewMessage:(NSNotification *)notification
 {
-    [self loadData:0];
+    LVKLongPollNewMessage *newMessageUpdate = [notification object];
+    
+    NSArray *result = [_objects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(LVKDialog *dialog, NSDictionary *bindings) {
+        return [dialog isEqual:[newMessageUpdate dialog]];
+    }]];
+    
+    if(result.count == 0)
+    {
+        if([newMessageUpdate dialog].type == Dialog)
+        {
+            VKRequest *users = [[VKApi users] get:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@", [[newMessageUpdate dialog] chatId]], @"user_ids", @"photo_200", @"fields", nil]];
+            
+            [users executeWithResultBlock:^(VKResponse *response) {
+                LVKUsersCollection *usersCollection = [[LVKUsersCollection alloc] initWithArray:response.json];
+                
+                [[newMessageUpdate dialog] adoptUser:[[usersCollection users] firstObject]];
+                
+                [_objects insertObject:[newMessageUpdate dialog] atIndex:0];
+                
+                [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+            } errorBlock:^(NSError *error) {
+                NSLog(@"%@", error);
+            }];
+        }
+        else
+        {
+            [_objects insertObject:[newMessageUpdate dialog] atIndex:0];
+            [tableView reloadData];
+        }
+    }
+    else
+    {
+        [_objects removeObject:[result firstObject]];
+        [_objects insertObject:[result firstObject] atIndex:0];
+        [[result firstObject] setLastMessage:[newMessageUpdate message]];
+        [tableView reloadData];
+    }
+}
+
+- (void)registerObservers
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receiveNewMessage:)
+                                                 name:@"newMessage"
+                                               object:nil];
 }
 
 - (void)loadData:(int)offset
@@ -50,35 +98,36 @@
     {
         VKRequest *dialogs = [VKApi
                               requestWithMethod:@"messages.getDialogs"
-                              andParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"20", @"count", [NSNumber numberWithInt:offset], @"offset", nil]
+                              andParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"60", @"count", [NSNumber numberWithInt:offset], @"offset", nil]
                               andHttpMethod:@"GET"];
         [dialogs executeWithResultBlock:^(VKResponse *response) {
             LVKDialogsCollection *dialogsCollection = [[LVKDialogsCollection alloc] initWithDictionary:response.json];
             NSString *userIdsCSV = [[dialogsCollection getUserIds] componentsJoinedByString:@","];
             
-            VKRequest *users = [[VKApi users] get:[NSDictionary dictionaryWithObjectsAndKeys:userIdsCSV, @"user_ids", @"photo_200", @"fields", nil]];
-            
-            [users executeWithResultBlock:^(VKResponse *response) {
-                LVKUsersCollection *usersCollection = [[LVKUsersCollection alloc] initWithArray:response.json];
+            if([userIdsCSV length] > 0)
+            {
+                VKRequest *users = [[VKApi users] get:[NSDictionary dictionaryWithObjectsAndKeys:userIdsCSV, @"user_ids", @"photo_200", @"fields", nil]];
                 
-                [dialogsCollection adoptUserCollection:usersCollection];
-                
+                [users executeWithResultBlock:^(VKResponse *response) {
+                    LVKUsersCollection *usersCollection = [[LVKUsersCollection alloc] initWithArray:response.json];
+                    
+                    [dialogsCollection adoptUserCollection:usersCollection];
+                    
+                    _objects = [NSMutableArray arrayWithArray:[dialogsCollection dialogs]];
+                    
+                    [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+                } errorBlock:^(NSError *error) {
+                    NSLog(@"%@", error);
+                }];
+            }
+            else
+            {
                 _objects = [NSMutableArray arrayWithArray:[dialogsCollection dialogs]];
                 
                 [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
-            } errorBlock:^(NSError *error) {
-                NSLog(@"%@", error);
-            }];
+            }
         } errorBlock:^(NSError *error) {
             NSLog(@"%@", error);
-            //            if (error.code != VK_API_ERROR)
-            //            {
-            //                [[(VKError *)error request] repeat];
-            //            }
-            //            else
-            //            {
-            //                NSLog(@"VK error: %@", [(VKError *)error apiError]);
-            //            }
         }];
     }
 }
@@ -155,18 +204,26 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        LVKDialog *object = _objects[indexPath.row];
-        self.detailViewController.dialog = object;
-    }
+#pragma mark - iPad
+//    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+//        LVKDialog *object = _objects[indexPath.row];
+//        self.detailViewController.dialog = object;
+//    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([[segue identifier] isEqualToString:@"showDetail"]) {
+        LVKDialog *object = nil;
+    
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        LVKDialog *object = _objects[indexPath.row];
+        object = _objects[indexPath.row];
+        
         [[segue destinationViewController] setDialog:object];
+    }
+    else if ([[segue identifier] isEqualToString:@"pickUsers"]) {
+        NSLog(@"%@ %@", [segue destinationViewController], [[segue destinationViewController] topViewController]);
+        [(LVKUserPickerViewController *)[[segue destinationViewController] topViewController] setCallerViewController:self];
     }
 }
 

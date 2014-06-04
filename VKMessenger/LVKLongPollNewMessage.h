@@ -18,5 +18,8 @@
 @property (nonatomic) NSNumber *userId;
 @property (nonatomic) NSDate *date;
 @property (nonatomic) NSString *text;
+@property (nonatomic) NSString *subject;
+@property (nonatomic) LVKMessage *message;
+@property (nonatomic) LVKDialog *dialog;
 
 @end
