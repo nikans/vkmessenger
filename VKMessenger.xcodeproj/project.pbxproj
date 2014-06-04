@@ -29,6 +29,9 @@
 		A4017DF9193E31C4000EAD87 /* LVKMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = A4017DF8193E31C4000EAD87 /* LVKMessage.m */; };
 		A4017DFC193E6A8C000EAD87 /* LVKUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A4017DFB193E6A8C000EAD87 /* LVKUser.m */; };
 		A4017DFF193E6DC7000EAD87 /* LVKUsersCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = A4017DFE193E6DC7000EAD87 /* LVKUsersCollection.m */; };
+		A4017E02193E90A9000EAD87 /* LVKLongPollUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4017E01193E90A9000EAD87 /* LVKLongPollUpdate.m */; };
+		A4017E05193E9239000EAD87 /* LVKLongPollNewMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = A4017E04193E9239000EAD87 /* LVKLongPollNewMessage.m */; };
+		A45AEA9A193E94D5007F418E /* LVKLongPollUpdatesCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = A45AEA99193E94D5007F418E /* LVKLongPollUpdatesCollection.m */; };
 		B66FE78CE40F46C2BEC1B04D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5906D3D6B7B455798358AE9 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +81,12 @@
 		A4017DFB193E6A8C000EAD87 /* LVKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKUser.m; sourceTree = "<group>"; };
 		A4017DFD193E6DC7000EAD87 /* LVKUsersCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKUsersCollection.h; sourceTree = "<group>"; };
 		A4017DFE193E6DC7000EAD87 /* LVKUsersCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKUsersCollection.m; sourceTree = "<group>"; };
+		A4017E00193E90A9000EAD87 /* LVKLongPollUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKLongPollUpdate.h; sourceTree = "<group>"; };
+		A4017E01193E90A9000EAD87 /* LVKLongPollUpdate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKLongPollUpdate.m; sourceTree = "<group>"; };
+		A4017E03193E9239000EAD87 /* LVKLongPollNewMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKLongPollNewMessage.h; sourceTree = "<group>"; };
+		A4017E04193E9239000EAD87 /* LVKLongPollNewMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKLongPollNewMessage.m; sourceTree = "<group>"; };
+		A45AEA98193E94D5007F418E /* LVKLongPollUpdatesCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKLongPollUpdatesCollection.h; sourceTree = "<group>"; };
+		A45AEA99193E94D5007F418E /* LVKLongPollUpdatesCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKLongPollUpdatesCollection.m; sourceTree = "<group>"; };
 		B5906D3D6B7B455798358AE9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -163,6 +172,12 @@
 				A4017DFB193E6A8C000EAD87 /* LVKUser.m */,
 				A4017DFD193E6DC7000EAD87 /* LVKUsersCollection.h */,
 				A4017DFE193E6DC7000EAD87 /* LVKUsersCollection.m */,
+				A4017E00193E90A9000EAD87 /* LVKLongPollUpdate.h */,
+				A4017E01193E90A9000EAD87 /* LVKLongPollUpdate.m */,
+				A4017E03193E9239000EAD87 /* LVKLongPollNewMessage.h */,
+				A4017E04193E9239000EAD87 /* LVKLongPollNewMessage.m */,
+				A45AEA98193E94D5007F418E /* LVKLongPollUpdatesCollection.h */,
+				A45AEA99193E94D5007F418E /* LVKLongPollUpdatesCollection.m */,
 			);
 			path = VKMessenger;
 			sourceTree = "<group>";
@@ -331,12 +346,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4017DFC193E6A8C000EAD87 /* LVKUser.m in Sources */,
+				A4017E05193E9239000EAD87 /* LVKLongPollNewMessage.m in Sources */,
 				A4017DC1193DE8EA000EAD87 /* LVKAppDelegate.m in Sources */,
 				A4017DF9193E31C4000EAD87 /* LVKMessage.m in Sources */,
 				A4017DF0193E122E000EAD87 /* LVKDialogsCollection.m in Sources */,
 				A4017DBD193DE8EA000EAD87 /* main.m in Sources */,
 				A4017DCA193DE8EA000EAD87 /* LVKMasterViewController.m in Sources */,
+				A4017E02193E90A9000EAD87 /* LVKLongPollUpdate.m in Sources */,
 				A4017DF6193E317B000EAD87 /* LVKHistoryCollection.m in Sources */,
+				A45AEA9A193E94D5007F418E /* LVKLongPollUpdatesCollection.m in Sources */,
 				A4017DCD193DE8EA000EAD87 /* LVKDetailViewController.m in Sources */,
 				A4017DF3193E1B2C000EAD87 /* LVKDialog.m in Sources */,
 				A4017DFF193E6DC7000EAD87 /* LVKUsersCollection.m in Sources */,

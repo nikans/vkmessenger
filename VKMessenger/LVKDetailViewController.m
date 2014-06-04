@@ -52,7 +52,7 @@
             default:
                 break;
         }
-
+        
         VKRequest *history = [VKApi
                               requestWithMethod:@"messages.getHistory"
                               andParameters:params

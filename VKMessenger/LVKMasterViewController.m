@@ -117,7 +117,7 @@
 
     LVKDialog *dialog = _objects[indexPath.row];
     cell.textLabel.text = [dialog title];
-    cell.detailTextLabel.text = [dialog body];
+    cell.detailTextLabel.text = [[dialog lastMessage] body];
     return cell;
 }
 

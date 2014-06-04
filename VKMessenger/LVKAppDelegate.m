@@ -23,6 +23,8 @@
     if ([VKSdk wakeUpSession])
     {
         NSLog(@"Start working");
+        
+        [self setup];
     }
     else
     {
@@ -79,6 +81,64 @@
     return YES;
 }
 
+- (void)setup
+{
+    [self setupLongPolling];
+}
+
+- (void)pollServerWithOptions:(NSMutableDictionary *)options//:(NSString *)server withKey:(NSString *)key fromTs:(NSNumber *)ts
+{
+    NSError* error = nil;
+    NSURLResponse* response = nil;
+    NSURL* requestUrl = [NSURL URLWithString:[NSString stringWithFormat:
+                                              @"http://%@?act=a_check&key=%@&ts=%@&wait=25&mode=2",
+                                              [options objectForKey:@"server"],
+                                              [options objectForKey:@"key"],
+                                              [options objectForKey:@"ts"]
+                                              ]];
+    NSURLRequest* request = [NSURLRequest requestWithURL:requestUrl];
+    
+    NSData* responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseData options:nil error:nil];
+    
+    
+    if([jsonResponse objectForKey:@"failed"] != nil)
+    {
+        [self performSelectorOnMainThread:@selector(setupLongPolling) withObject:nil waitUntilDone:NO];
+        return;
+    }
+    
+    if([jsonResponse objectForKey:@"updates"] != nil)
+    {
+        LVKLongPollUpdatesCollection *updates = [[LVKLongPollUpdatesCollection alloc] initWithArray:[jsonResponse objectForKey:@"updates"]];
+    }
+    
+    [options setObject:[jsonResponse objectForKey:@"ts"] forKey:@"ts"];
+    
+    [self pollServerWithOptions:options];
+}
+
+- (void)setupLongPolling
+{
+    if([VKSdk isLoggedIn])
+    {
+        VKRequest *longPollServerRequest = [VKApi requestWithMethod:@"messages.getLongPollServer" andParameters:nil andHttpMethod:@"GET"];
+        
+        [longPollServerRequest executeWithResultBlock:^(VKResponse *response) {
+            NSString *key = [response.json objectForKey:@"key"];
+            NSString *server = [response.json objectForKey:@"server"];
+            NSNumber *ts = [response.json objectForKey:@"ts"];
+            
+            NSMutableDictionary *options = [NSMutableDictionary dictionaryWithObjectsAndKeys:key, @"key", server, @"server", ts, @"ts", nil];
+            
+            [self performSelectorInBackground:@selector(pollServerWithOptions:) withObject:options];
+        } errorBlock:^(NSError *error) {
+            NSLog(@"%@", error);
+        }];
+    }
+}
+
 - (void)vkSdkNeedCaptchaEnter:(VKError *)captchaError
 {
     
@@ -121,7 +181,10 @@
 - (void)vkSdkReceivedNewToken:(VKAccessToken *)newToken
 {
     NSLog(@"Recieved new token");
+    
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert)];
+    
+    [self setup];
 }
 
 @end

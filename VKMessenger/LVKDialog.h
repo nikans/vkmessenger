@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LVKMessage.h"
 
 typedef enum DialogTypes {
     Room,
@@ -15,15 +16,11 @@ typedef enum DialogTypes {
 
 @interface LVKDialog : NSObject
 
-@property (nonatomic) NSNumber *_id;
-@property (nonatomic) NSString *body;
 @property (nonatomic) NSString *title;
 @property (nonatomic) NSNumber *chatId;
 @property (nonatomic) NSNumber *userId;
-@property (nonatomic) NSDate *date;
 @property (nonatomic) dialogType type;
-@property (nonatomic) BOOL readState;
-@property (nonatomic) BOOL out;
+@property (nonatomic) LVKMessage *lastMessage;
 
 -(id)initWithDictionary:(NSDictionary *)dictionary;
 

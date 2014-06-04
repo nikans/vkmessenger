@@ -10,7 +10,7 @@
 
 @implementation LVKDialog
 
-@synthesize _id, body, title, chatId, userId, type, date, readState, out;
+@synthesize title, chatId, userId, type, lastMessage;
 
 -(id)init
 {
@@ -25,14 +25,11 @@
     
     if(self)
     {
-        _id = [dictionary valueForKeyPath:@"message.id"];
         chatId = [dictionary valueForKeyPath:@"message.chat_id"];
         type = chatId == nil ? Dialog : Room;
-        readState = [[dictionary valueForKeyPath:@"message.readState"] isEqualToNumber:[[NSNumber alloc] initWithInt:1]];
-        out = [[dictionary valueForKeyPath:@"message.out"] isEqualToNumber:[[NSNumber alloc] initWithInt:1]];
-        body = [dictionary valueForKeyPath:@"message.body"];
         userId = [dictionary valueForKeyPath:@"message.user_id"];
         title = [dictionary valueForKeyPath:@"message.title"];
+        lastMessage = [[LVKMessage alloc] initWithDictionary:[dictionary valueForKey:@"message"]];
     }
     
     return self;

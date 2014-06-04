@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <VKSdk.h>
+#import "LVKLongPollUpdatesCollection.h"
 
 @interface LVKAppDelegate : UIResponder <UIApplicationDelegate, VKSdkDelegate>
 
