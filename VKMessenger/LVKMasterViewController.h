@@ -15,11 +15,11 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "LVKLongPoll.h"
 
-@class LVKDetailViewController;
+@class LVKDialogViewController;
 
 @interface LVKMasterViewController : UITableViewController
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) LVKDetailViewController *detailViewController;
+@property (strong, nonatomic) LVKDialogViewController *detailViewController;
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "LVKMasterViewController.h"
-#import "LVKDetailViewController.h"
+#import "LVKDialogViewController.h"
 #import "LVKUserPickerViewController.h"
 #import "UIScrollView+BottomRefreshControl.h"
 

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <VKSdk.h>
 #import <UIImageView+WebCache.h>
-#import "LVKDetailViewController.h"
+#import "LVKDialogViewController.h"
 #import "LVKUsersCollection.h"
 
 @interface LVKUserPickerViewController : UITableViewController <UISearchBarDelegate>

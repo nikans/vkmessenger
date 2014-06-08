@@ -6,21 +6,28 @@
 //  Copyright (c) 2014 Levelab. All rights reserved.
 //
 
-#import "LVKDetailViewController.h"
+#import "LVKDialogViewController.h"
 #import "LVKMessageViewController.h"
 #import "LVKAppDelegate.h"
 
-@interface LVKDetailViewController () {
+#import "LVKDefaultMessageTableViewCell.h"
+
+@interface LVKDialogViewController () {
     NSMutableArray *_objects;
     BOOL isLoading;
     BOOL hasDataToLoad;
     UIRefreshControl *refreshControl;
 }
+
+// TODO: interface 4 cell
+@property (nonatomic, strong) LVKDefaultMessageTableViewCell *prototypeCellIncoming;
+@property (nonatomic, strong) LVKDefaultMessageTableViewCell *prototypeCellOutgoing;
+
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
 
 @end
 
-@implementation LVKDetailViewController
+@implementation LVKDialogViewController
 
 @synthesize tableView, textView , dialog;
 
@@ -222,6 +229,22 @@
 
 #pragma mark - Table View
 
+
+// TODO some shit w/ interface 4 cell
+- (LVKDefaultMessageTableViewCell *)prototypeCellIncoming
+{
+    if (!_prototypeCellIncoming)
+        _prototypeCellIncoming = [self.tableView dequeueReusableCellWithIdentifier:@"DefaultIncomingMessageCell"];
+    return _prototypeCellIncoming;
+}
+- (LVKDefaultMessageTableViewCell *)prototypeCellOutgoing
+{
+    if (!_prototypeCellOutgoing)
+        _prototypeCellOutgoing = [self.tableView dequeueReusableCellWithIdentifier:@"DefaultOutgoingMessageCell"];
+    return _prototypeCellOutgoing;
+}
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -232,70 +255,166 @@
     return _objects.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    LVKDefaultMessageTableViewCell *prototypeCell;
+    
+    // TODO
+    LVKMessage *message = _objects[indexPath.row];
+    if([message isOutgoing])
+        prototypeCell = self.prototypeCellOutgoing;
+    else
+        prototypeCell = self.prototypeCellIncoming;
+    
+    [self tableView:tableView configureCell:prototypeCell forRowAtIndexPath:indexPath];
+    
+    // Need to set the width of the prototype cell to the width of the table view
+    // as this will change when the device is rotated.
+    
+    prototypeCell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(tableView.bounds), CGRectGetHeight(prototypeCell.bounds));
+    
+    [prototypeCell layoutIfNeeded];
+    
+    CGSize size = [prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+    return size.height+1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewAutomaticDimension;
+}
+
+- (void)tableView:(UITableView *)tableView configureCell:(LVKDefaultMessageTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [cell setCollectionViewDelegates:self forMessageWithIndexPath:indexPath];
+}
+
+// TODO
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = nil;
+    LVKDefaultMessageTableViewCell *cell = nil;
     LVKMessage *message = _objects[indexPath.row];
     
     if([message isOutgoing])
-        cell = [tableView dequeueReusableCellWithIdentifier:@"OutgoingMessageCell" forIndexPath:indexPath];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultOutgoingMessageCell" forIndexPath:indexPath];
     else
-        cell = [tableView dequeueReusableCellWithIdentifier:@"IncomingMessageCell" forIndexPath:indexPath];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultIncomingMessageCell" forIndexPath:indexPath];
     
-    [(UILabel *)[cell viewWithTag:1] setText:[NSString stringWithFormat:@"%@%@", [message getReadState] == UnreadIncoming ? @"(!) " : [message getReadState] == UnreadOutgoing ? @"(?) " : @"", [message body]]];
-    [(UILabel *)[cell viewWithTag:2] setText:[NSDateFormatter localizedStringFromDate:[message date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle]];
-    [(UIImageView *)[cell viewWithTag:3] setImageWithURL:[[message user] getPhoto:100]];
+//    [(UILabel *)[cell viewWithTag:1] setText:[NSString stringWithFormat:@"%@%@", [message getReadState] == UnreadIncoming ? @"(!) " : [message getReadState] == UnreadOutgoing ? @"(?) " : @"", [message body]]];
+//    [(UILabel *)[cell viewWithTag:2] setText:[NSDateFormatter localizedStringFromDate:[message date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle]];
+//    [(UIImageView *)[cell viewWithTag:3] setImageWithURL:[[message user] getPhoto:100]];
+    
+    [cell.avatarImage setImageWithURL:[[message user] getPhoto:100]];
+    [self tableView:tableView configureCell:cell forRowAtIndexPath:indexPath];
+    
     return cell;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
+    return NO;
+}
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
     return NO;
 }
 
-#pragma mark - Text View
 
-//- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
-//{
-//    
+#pragma mark - UICollectionView Datasource
+
+// TODO
+- (NSInteger)collectionView:(LVKDefaultMessagesCollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 1;
+}
+
+- (UICollectionViewCell *)collectionView:(LVKDefaultMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+//    MessageItemType itemType = [self collectionView:collectionView typeOfItemAtIndexPath:indexPath];
+    
+    
+    NSDictionary *cellData = [self collectionView:collectionView dataForItemAtIndexPath:indexPath];
+    
+    UICollectionViewCell *cell;
+    
+    cell = (LVKDefaultMessageBodyItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultBodyItem" forIndexPath:indexPath];
+    [cell setValue:cellData[@"body"] forKeyPath:@"body.text"];
+    
+//    switch (itemType) {
+//        case bodyItem:
+//            cell = (LVKMessageBodyItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"BodyItem" forIndexPath:indexPath];
+//            [cell setValue:cellData[@"body"] forKeyPath:@"body.text"];
+//            break;
+//            
+//        case photoItem:
+//            cell = (LVKMessagePhotoItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoItem" forIndexPath:indexPath];
+//            [cell setValue:[UIImage imageNamed:@"camera"] forKeyPath:@"photo.image"];
+//            break;
+//            
+//        case repostBodyItem:
+//            cell = (LVKMessageRepostBodyItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"RepostBodyItem" forIndexPath:indexPath];
+//            [cell setValue:[UIImage imageNamed:@"camera"] forKeyPath:@"avatar.image"];
+//            [cell setValue:cellData[@"body"] forKeyPath:@"body.text"];
+//            [cell setValue:cellData[@"date"] forKeyPath:@"date.text"];
+//            [cell setValue:cellData[@"userName"] forKeyPath:@"userName.text"];
+//            break;
+//            
+//            
+//        default:
+//            break;
+//    }
+    
+    return cell;
+}
+
+//- (DefaultMessageItemType)collectionView:(LVKDefaultMessagesCollectionView *)collectionView typeOfItemAtIndexPath:(NSIndexPath *)indexPath {
+//    return [[[self collectionView:collectionView dataForItemAtIndexPath:indexPath] objectForKey:@"type"] intValue];
 //}
-//- (BOOL)textViewShouldEndEditing:(UITextView *)textView
-//{
-//    
-//}
-//
-//- (void)textViewDidBeginEditing:(UITextView *)textView
-//{
-//    
-//}
-//- (void)textViewDidEndEditing:(UITextView *)textView
-//{
-//    
-//}
-//
-//- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-//{
-//    
-//}
-//- (void)textViewDidChange:(UITextView *)textView
-//{
-//    
-//}
-//
-//- (void)textViewDidChangeSelection:(UITextView *)textView
-//{
-//    
-//}
-//
-//- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange
-//{
-//    
-//}
-//- (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange
-//{
-//    
-//}
+
+// TODO
+- (NSDictionary *)collectionView:(LVKDefaultMessagesCollectionView *)collectionView dataForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return [NSDictionary dictionaryWithObject:[[_objects objectAtIndex:collectionView.messageIndexPath.row] body] forKey:@"body"];
+}
+
+
+#pragma mark - UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    // TODO: Select Item
+}
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
+    // TODO: Deselect item
+}
+
+
+#pragma mark – UICollectionViewDelegateFlowLayout
+
+- (CGSize)collectionView:(LVKDefaultMessagesCollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+//    MessageItemType itemType = [self collectionView:collectionView typeOfItemAtIndexPath:indexPath];
+    NSDictionary *cellData = [self collectionView:collectionView dataForItemAtIndexPath:indexPath];
+    
+    CGSize cellSize;
+    cellSize = [LVKDefaultMessageBodyItem calculateContentSizeWithData:cellData];
+    
+//    switch (itemType) {
+//        case bodyItem:
+//            cellSize = [LVKMessageBodyItem calculateContentSizeWithData:cellData];
+//            break;
+//            
+//        case photoItem:
+//            cellSize = [LVKMessagePhotoItem calculateContentSizeWithData:cellData];
+//            break;
+//            
+//        case repostBodyItem:
+//            cellSize = [LVKMessageRepostBodyItem calculateContentSizeWithData:cellData];
+//            break;
+//            
+//        default:
+//            break;
+//    }
+    return cellSize;
+}
+
+
 
 // Called when the UIKeyboardWillShowNotification is received
 - (void)keyboardWillBeShown:(NSNotification *)aNotification

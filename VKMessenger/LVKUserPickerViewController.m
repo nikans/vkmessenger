@@ -195,7 +195,7 @@
         storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
     }
     
-    LVKDetailViewController *detailViewController = [storyboard instantiateViewControllerWithIdentifier:@"chatViewController"];
+    LVKDialogViewController *detailViewController = [storyboard instantiateViewControllerWithIdentifier:@"chatViewController"];
     [detailViewController setDialog:[user createDialog]];
     
     [[callerViewController navigationController] pushViewController:detailViewController animated:NO];
