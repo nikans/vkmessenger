@@ -22,7 +22,9 @@
 }
 
 + (CGSize)calculateContentSizeWithData:(id<LVKMessagePartProtocol>)_data {
-    CGSize textSize = [(NSString *)[(LVKMessage *)_data body] integralSizeWithFont:[UIFont systemFontOfSize:13] maxWidth:200 numberOfLines:INFINITY];
+    CGSize textSize = [(NSString *)[(LVKMessage *)_data body] integralSizeWithFont:[UIFont systemFontOfSize:16] maxWidth:200 numberOfLines:INFINITY];
+    
+    NSLog(@"%@ - %f %f", [(LVKMessage *)_data body], textSize.width, textSize.height);
     return textSize;
 }
 

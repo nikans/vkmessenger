@@ -411,6 +411,22 @@
 
 #pragma mark – UICollectionViewDelegateFlowLayout
 
+//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+//{
+//    
+//    NSInteger numberOfCells = self.view.frame.size.width / 202;
+//    NSInteger edgeInsets = (self.view.frame.size.width - (numberOfCells * 202)) / (numberOfCells + 1);
+//    
+//    return UIEdgeInsetsMake(0, edgeInsets, 0, edgeInsets);
+//}
+
+//- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+//{
+//    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+//    [self.collectionView.collectionViewLayout invalidateLayout];
+//}
+
+
 - (CGSize)collectionView:(LVKDefaultMessagesCollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     id<LVKMessagePartProtocol> cellData = [self collectionView:collectionView dataForItemAtIndexPath:indexPath];
