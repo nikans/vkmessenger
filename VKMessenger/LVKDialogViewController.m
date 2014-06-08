@@ -304,6 +304,7 @@
 //    [(UIImageView *)[cell viewWithTag:3] setImageWithURL:[[message user] getPhoto:100]];
     
     [cell.avatarImage setImageWithURL:[[message user] getPhoto:100]];
+    [cell.timeLabel setText:[NSDateFormatter localizedStringFromDate:[message date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle]];
     [self tableView:tableView configureCell:cell forRowAtIndexPath:indexPath];
     
     return cell;
