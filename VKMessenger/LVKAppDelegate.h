@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <VKSdk.h>
 #import "LVKLongPollUpdatesCollection.h"
+#import "LVKUser.h"
 
 @interface LVKAppDelegate : UIResponder <UIApplicationDelegate, VKSdkDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) LVKUser *currentUser;
 
 - (void)authorize;
 

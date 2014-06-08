@@ -25,9 +25,9 @@
     BOOL isOutbox = [flags intValue] & MESSAGE_OUTBOX;
     BOOL isUnread = [flags intValue] & MESSAGE_UNREAD;
     
-    userId = [(NSDictionary *)[array objectAtIndex:6] objectForKey:@"from"];
+    userId = [NSNumber numberWithInt:[[(NSDictionary *)[array objectAtIndex:6] objectForKey:@"from"] intValue]];
         
-    if(userId == nil)
+    if([userId intValue] == 0)
     {
         userId = isOutbox ? [[NSNumber alloc] initWithInt:0] : [array objectAtIndex:2];
         chatId = [array objectAtIndex:2];
@@ -47,7 +47,7 @@
     subject = [array objectAtIndex:4];
     text = [array objectAtIndex:5];
     
-    message = [[LVKMessage alloc] initWithDictionary:[NSDictionary dictionaryWithObjectsAndKeys:messageId, @"id", userId, [NSNumber numberWithBool:isUnread], @"read_state", @"userId", chatId, @"chatId", text, @"body", nil]];
+    message = [[LVKMessage alloc] initWithDictionary:[NSDictionary dictionaryWithObjectsAndKeys:messageId, @"id", userId, @"user_id", [NSNumber numberWithBool:!isUnread], @"read_state", [NSNumber numberWithBool:isOutbox], @"out", chatId, @"chat_id", text, @"body", nil]];
     dialog = [[LVKDialog alloc] initWithPlainDictionary:[NSDictionary dictionaryWithObjectsAndKeys:chatId, @"chat_id", [NSNumber numberWithInt:type], @"type", subject, @"title", message, @"message", nil]];
 }
 

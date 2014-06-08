@@ -32,6 +32,9 @@
 		A4017E05193E9239000EAD87 /* LVKLongPollNewMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = A4017E04193E9239000EAD87 /* LVKLongPollNewMessage.m */; };
 		A410F674193F4DD70030D7CC /* LVKUserPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A410F673193F4DD70030D7CC /* LVKUserPickerViewController.m */; };
 		A410F677193F57B00030D7CC /* LVKMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = A410F676193F57B00030D7CC /* LVKMessage.m */; };
+		A4140DE519420A950023DFAA /* LVKLongPollSetMessageFlags.m in Sources */ = {isa = PBXBuildFile; fileRef = A4140DE419420A950023DFAA /* LVKLongPollSetMessageFlags.m */; };
+		A4140DE81942155E0023DFAA /* LVKLongPollResetMessageFlags.m in Sources */ = {isa = PBXBuildFile; fileRef = A4140DE71942155E0023DFAA /* LVKLongPollResetMessageFlags.m */; };
+		A4140DF01944D2220023DFAA /* LVKUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4140DEF1944D2220023DFAA /* LVKUserViewController.m */; };
 		A45AEA9A193E94D5007F418E /* LVKLongPollUpdatesCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = A45AEA99193E94D5007F418E /* LVKLongPollUpdatesCollection.m */; };
 		A474AF7E193FB41B009EB0D2 /* LVKMessageAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = A474AF7D193FB41B009EB0D2 /* LVKMessageAttachment.m */; };
 		A474AF81193FB56B009EB0D2 /* LVKAudioAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = A474AF80193FB56B009EB0D2 /* LVKAudioAttachment.m */; };
@@ -62,11 +65,11 @@
 		A4017DBC193DE8EA000EAD87 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A4017DBE193DE8EA000EAD87 /* VKMessenger-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VKMessenger-Prefix.pch"; sourceTree = "<group>"; };
 		A4017DBF193DE8EA000EAD87 /* LVKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LVKAppDelegate.h; sourceTree = "<group>"; };
-		A4017DC0193DE8EA000EAD87 /* LVKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LVKAppDelegate.m; sourceTree = "<group>"; };
+		A4017DC0193DE8EA000EAD87 /* LVKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LVKAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A4017DC3193DE8EA000EAD87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		A4017DC6193DE8EA000EAD87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		A4017DC8193DE8EA000EAD87 /* LVKMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LVKMasterViewController.h; sourceTree = "<group>"; };
-		A4017DC9193DE8EA000EAD87 /* LVKMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LVKMasterViewController.m; sourceTree = "<group>"; };
+		A4017DC9193DE8EA000EAD87 /* LVKMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LVKMasterViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A4017DCB193DE8EA000EAD87 /* LVKDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LVKDetailViewController.h; sourceTree = "<group>"; };
 		A4017DCC193DE8EA000EAD87 /* LVKDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LVKDetailViewController.m; sourceTree = "<group>"; };
 		A4017DCE193DE8EA000EAD87 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -78,11 +81,11 @@
 		A4017DEE193E122E000EAD87 /* LVKDialogsCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDialogsCollection.h; sourceTree = "<group>"; };
 		A4017DEF193E122E000EAD87 /* LVKDialogsCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDialogsCollection.m; sourceTree = "<group>"; };
 		A4017DF1193E1B2C000EAD87 /* LVKDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDialog.h; sourceTree = "<group>"; };
-		A4017DF2193E1B2C000EAD87 /* LVKDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDialog.m; sourceTree = "<group>"; };
+		A4017DF2193E1B2C000EAD87 /* LVKDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LVKDialog.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A4017DF4193E317B000EAD87 /* LVKHistoryCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKHistoryCollection.h; sourceTree = "<group>"; };
 		A4017DF5193E317B000EAD87 /* LVKHistoryCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKHistoryCollection.m; sourceTree = "<group>"; };
-		A4017DFA193E6A8C000EAD87 /* LVKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKUser.h; sourceTree = "<group>"; };
-		A4017DFB193E6A8C000EAD87 /* LVKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKUser.m; sourceTree = "<group>"; };
+		A4017DFA193E6A8C000EAD87 /* LVKUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LVKUser.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		A4017DFB193E6A8C000EAD87 /* LVKUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LVKUser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A4017DFD193E6DC7000EAD87 /* LVKUsersCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKUsersCollection.h; sourceTree = "<group>"; };
 		A4017DFE193E6DC7000EAD87 /* LVKUsersCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKUsersCollection.m; sourceTree = "<group>"; };
 		A4017E00193E90A9000EAD87 /* LVKLongPollUpdate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKLongPollUpdate.h; sourceTree = "<group>"; };
@@ -90,9 +93,17 @@
 		A4017E03193E9239000EAD87 /* LVKLongPollNewMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKLongPollNewMessage.h; sourceTree = "<group>"; };
 		A4017E04193E9239000EAD87 /* LVKLongPollNewMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKLongPollNewMessage.m; sourceTree = "<group>"; };
 		A410F672193F4DD70030D7CC /* LVKUserPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKUserPickerViewController.h; sourceTree = "<group>"; };
-		A410F673193F4DD70030D7CC /* LVKUserPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKUserPickerViewController.m; sourceTree = "<group>"; };
+		A410F673193F4DD70030D7CC /* LVKUserPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LVKUserPickerViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A410F675193F57B00030D7CC /* LVKMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKMessage.h; sourceTree = "<group>"; };
 		A410F676193F57B00030D7CC /* LVKMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKMessage.m; sourceTree = "<group>"; };
+		A4140DE319420A950023DFAA /* LVKLongPollSetMessageFlags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKLongPollSetMessageFlags.h; sourceTree = "<group>"; };
+		A4140DE419420A950023DFAA /* LVKLongPollSetMessageFlags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKLongPollSetMessageFlags.m; sourceTree = "<group>"; };
+		A4140DE61942155E0023DFAA /* LVKLongPollResetMessageFlags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKLongPollResetMessageFlags.h; sourceTree = "<group>"; };
+		A4140DE71942155E0023DFAA /* LVKLongPollResetMessageFlags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKLongPollResetMessageFlags.m; sourceTree = "<group>"; };
+		A4140DEA1942182C0023DFAA /* LVKLongPoll.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LVKLongPoll.h; sourceTree = "<group>"; };
+		A4140DEB19422ED50023DFAA /* LVKModelEnums.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LVKModelEnums.h; sourceTree = "<group>"; };
+		A4140DEE1944D2220023DFAA /* LVKUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKUserViewController.h; sourceTree = "<group>"; };
+		A4140DEF1944D2220023DFAA /* LVKUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKUserViewController.m; sourceTree = "<group>"; };
 		A45AEA98193E94D5007F418E /* LVKLongPollUpdatesCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKLongPollUpdatesCollection.h; sourceTree = "<group>"; };
 		A45AEA99193E94D5007F418E /* LVKLongPollUpdatesCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKLongPollUpdatesCollection.m; sourceTree = "<group>"; };
 		A474AF7C193FB41B009EB0D2 /* LVKMessageAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKMessageAttachment.h; sourceTree = "<group>"; };
@@ -172,16 +183,7 @@
 				A4017DC0193DE8EA000EAD87 /* LVKAppDelegate.m */,
 				A4017DC2193DE8EA000EAD87 /* Main_iPhone.storyboard */,
 				A4017DC5193DE8EA000EAD87 /* Main_iPad.storyboard */,
-				A474AF85193FC77D009EB0D2 /* LVKWelcomeViewController.h */,
-				A474AF86193FC77D009EB0D2 /* LVKWelcomeViewController.m */,
-				A4017DC8193DE8EA000EAD87 /* LVKMasterViewController.h */,
-				A4017DC9193DE8EA000EAD87 /* LVKMasterViewController.m */,
-				A4017DCB193DE8EA000EAD87 /* LVKDetailViewController.h */,
-				A4017DCC193DE8EA000EAD87 /* LVKDetailViewController.m */,
-				A410F672193F4DD70030D7CC /* LVKUserPickerViewController.h */,
-				A410F673193F4DD70030D7CC /* LVKUserPickerViewController.m */,
-				A474AF88193FD6B8009EB0D2 /* LVKMessageViewController.h */,
-				A474AF89193FD6B8009EB0D2 /* LVKMessageViewController.m */,
+				A4140DEC1944D1E30023DFAA /* ViewControllers */,
 				A4017DCE193DE8EA000EAD87 /* Images.xcassets */,
 				A474AF78193FB3B2009EB0D2 /* DataStructures */,
 				A4017DB7193DE8EA000EAD87 /* Supporting Files */,
@@ -218,10 +220,37 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		A474AF78193FB3B2009EB0D2 /* DataStructures */ = {
+		A4140DE9194217BA0023DFAA /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				A474AF7B193FB3FE009EB0D2 /* MessageAttachments */,
+				A4140DED1944D2030023DFAA /* Core */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		A4140DEC1944D1E30023DFAA /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A474AF85193FC77D009EB0D2 /* LVKWelcomeViewController.h */,
+				A474AF86193FC77D009EB0D2 /* LVKWelcomeViewController.m */,
+				A4017DC8193DE8EA000EAD87 /* LVKMasterViewController.h */,
+				A4017DC9193DE8EA000EAD87 /* LVKMasterViewController.m */,
+				A4017DCB193DE8EA000EAD87 /* LVKDetailViewController.h */,
+				A4017DCC193DE8EA000EAD87 /* LVKDetailViewController.m */,
+				A410F672193F4DD70030D7CC /* LVKUserPickerViewController.h */,
+				A410F673193F4DD70030D7CC /* LVKUserPickerViewController.m */,
+				A474AF88193FD6B8009EB0D2 /* LVKMessageViewController.h */,
+				A474AF89193FD6B8009EB0D2 /* LVKMessageViewController.m */,
+				A4140DEE1944D2220023DFAA /* LVKUserViewController.h */,
+				A4140DEF1944D2220023DFAA /* LVKUserViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A4140DED1944D2030023DFAA /* Core */ = {
+			isa = PBXGroup;
+			children = (
 				A4017DEE193E122E000EAD87 /* LVKDialogsCollection.h */,
 				A4017DEF193E122E000EAD87 /* LVKDialogsCollection.m */,
 				A4017DF1193E1B2C000EAD87 /* LVKDialog.h */,
@@ -234,6 +263,15 @@
 				A4017DFB193E6A8C000EAD87 /* LVKUser.m */,
 				A4017DFD193E6DC7000EAD87 /* LVKUsersCollection.h */,
 				A4017DFE193E6DC7000EAD87 /* LVKUsersCollection.m */,
+				A4140DEB19422ED50023DFAA /* LVKModelEnums.h */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		A474AF78193FB3B2009EB0D2 /* DataStructures */ = {
+			isa = PBXGroup;
+			children = (
+				A4140DE9194217BA0023DFAA /* Models */,
 				A474AF79193FB3D0009EB0D2 /* LongPollUpdates */,
 			);
 			name = DataStructures;
@@ -248,6 +286,11 @@
 				A4017E04193E9239000EAD87 /* LVKLongPollNewMessage.m */,
 				A45AEA98193E94D5007F418E /* LVKLongPollUpdatesCollection.h */,
 				A45AEA99193E94D5007F418E /* LVKLongPollUpdatesCollection.m */,
+				A4140DE319420A950023DFAA /* LVKLongPollSetMessageFlags.h */,
+				A4140DE419420A950023DFAA /* LVKLongPollSetMessageFlags.m */,
+				A4140DE61942155E0023DFAA /* LVKLongPollResetMessageFlags.h */,
+				A4140DE71942155E0023DFAA /* LVKLongPollResetMessageFlags.m */,
+				A4140DEA1942182C0023DFAA /* LVKLongPoll.h */,
 			);
 			name = LongPollUpdates;
 			sourceTree = "<group>";
@@ -402,8 +445,10 @@
 				A4017DFC193E6A8C000EAD87 /* LVKUser.m in Sources */,
 				A474AF84193FB73D009EB0D2 /* LVKPhotoAttachment.m in Sources */,
 				A4017E05193E9239000EAD87 /* LVKLongPollNewMessage.m in Sources */,
+				A4140DF01944D2220023DFAA /* LVKUserViewController.m in Sources */,
 				A474AF7E193FB41B009EB0D2 /* LVKMessageAttachment.m in Sources */,
 				A4017DC1193DE8EA000EAD87 /* LVKAppDelegate.m in Sources */,
+				A4140DE519420A950023DFAA /* LVKLongPollSetMessageFlags.m in Sources */,
 				A4017DF0193E122E000EAD87 /* LVKDialogsCollection.m in Sources */,
 				A4017DBD193DE8EA000EAD87 /* main.m in Sources */,
 				A4017DCA193DE8EA000EAD87 /* LVKMasterViewController.m in Sources */,
@@ -411,6 +456,7 @@
 				A4017E02193E90A9000EAD87 /* LVKLongPollUpdate.m in Sources */,
 				A4017DF6193E317B000EAD87 /* LVKHistoryCollection.m in Sources */,
 				A474AF8A193FD6B8009EB0D2 /* LVKMessageViewController.m in Sources */,
+				A4140DE81942155E0023DFAA /* LVKLongPollResetMessageFlags.m in Sources */,
 				A45AEA9A193E94D5007F418E /* LVKLongPollUpdatesCollection.m in Sources */,
 				A410F677193F57B00030D7CC /* LVKMessage.m in Sources */,
 				A4017DCD193DE8EA000EAD87 /* LVKDetailViewController.m in Sources */,
@@ -557,6 +603,7 @@
 				GCC_PREFIX_HEADER = "VKMessenger/VKMessenger-Prefix.pch";
 				INFOPLIST_FILE = "VKMessenger/VKMessenger-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -571,6 +618,7 @@
 				GCC_PREFIX_HEADER = "VKMessenger/VKMessenger-Prefix.pch";
 				INFOPLIST_FILE = "VKMessenger/VKMessenger-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

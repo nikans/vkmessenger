@@ -86,4 +86,30 @@
     }
 }
 
+-(readState)getReadState
+{
+    return [lastMessage getReadState];
+}
+
+-(id)getChatPicture
+{
+    if(type == Dialog)
+        return [user getPhoto:50];
+    else if(type == Room)
+    {
+        NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, users.count > 4 ? 4 : users.count)];
+        NSMutableArray *picturesArray = [[NSMutableArray alloc] init];
+        
+        [[[users filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(LVKUser *chatUser, NSDictionary *bindings) {
+            return [chatUser getPhoto:50] != nil;
+        }]] objectsAtIndexes:indexes] enumerateObjectsUsingBlock:^(LVKUser *chatUser, NSUInteger idx, BOOL *stop) {
+            [picturesArray addObject:[chatUser getPhoto:50]];
+        }];
+        
+        return picturesArray;
+    }
+    else
+        return @"";
+}
+
 @end

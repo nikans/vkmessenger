@@ -10,7 +10,7 @@
 
 @implementation LVKMessage
 
-@synthesize _id, body, chatId, userId, date, readState, out, attachments, forwarded;
+@synthesize _id, body, chatId, userId, type, user, date, isUnread, isOutgoing, attachments, forwarded;
 
 -(id)init
 {
@@ -26,12 +26,19 @@
     if(self)
     {
         _id = [dictionary valueForKey:@"id"];
+        isUnread = [[dictionary valueForKey:@"read_state"] isEqualToNumber:[[NSNumber alloc] initWithInt:0]];
+        isOutgoing = [[dictionary valueForKey:@"out"] isEqualToNumber:[[NSNumber alloc] initWithInt:1]];
+        
         chatId = [dictionary valueForKey:@"chat_id"];
-        readState = [[dictionary valueForKey:@"read_state"] isEqualToNumber:[[NSNumber alloc] initWithInt:1]];
-        out = [[dictionary valueForKey:@"out"] isEqualToNumber:[[NSNumber alloc] initWithInt:1]];
+        
+        type = chatId == nil ? Dialog : Room;
+        
+        if(type == Dialog)
+            chatId = [dictionary valueForKeyPath:@"user_id"];
+        
+        userId = isOutgoing ? [[NSNumber alloc] initWithInt:0] : [dictionary valueForKey:@"user_id"];
         date = [NSDate dateWithTimeIntervalSince1970:[[dictionary valueForKey:@"date"] intValue]];
         body = [dictionary valueForKey:@"body"];
-        userId = [dictionary valueForKey:@"user_id"];
         
         NSMutableArray *tmpAttachments = [[NSMutableArray alloc] init];
         [[dictionary valueForKey:@"attachments"] enumerateObjectsUsingBlock:^(NSDictionary *attachment, NSUInteger idx, BOOL *stop) {
@@ -52,6 +59,21 @@
     }
     
     return self;
+}
+
+-(void)adoptUser:(LVKUser *)adoptedUser
+{
+    [self setUser:adoptedUser];
+}
+
+-(readState)getReadState
+{
+    if(!isUnread)
+        return Read;
+    else if(isOutgoing)
+        return UnreadOutgoing;
+    else
+        return UnreadIncoming;
 }
 
 -(BOOL)isEqual:(id)object

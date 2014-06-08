@@ -11,7 +11,7 @@
 
 @implementation LVKUser
 
-@synthesize _id, firstName, lastName, fullName, photo_200;
+@synthesize _id, firstName, lastName, fullName, photo_100, isCurrent;
 
 -(id)init
 {
@@ -30,15 +30,24 @@
         firstName = [dictionary valueForKey:@"first_name"];
         lastName = [dictionary valueForKey:@"last_name"];
         fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
-        photo_200 = [dictionary valueForKey:@"photo_200"];
+        photo_100 = [dictionary valueForKey:@"photo_100"];
     }
     
     return self;
 }
 
+-(NSString *)getPhoto:(NSUInteger) size
+{
+    return photo_100;
+}
+
 -(id)createDialog
 {
-    return [[LVKDialog alloc] initWithPlainDictionary:[NSDictionary dictionaryWithObjectsAndKeys:_id, @"chat_id", [NSNumber numberWithInt:Dialog], @"type", fullName, @"title", nil]];
+    LVKDialog *dialog = [[LVKDialog alloc] initWithPlainDictionary:[NSDictionary dictionaryWithObjectsAndKeys:_id, @"chat_id", [NSNumber numberWithInt:Dialog], @"type", fullName, @"title", nil]];
+    
+    [dialog adoptUser:self];
+    
+    return dialog;
 }
 
 @end

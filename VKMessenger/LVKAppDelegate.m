@@ -7,8 +7,11 @@
 //
 
 #import "LVKAppDelegate.h"
+#import "LVKUsersCollection.h"
 
 @implementation LVKAppDelegate
+
+@synthesize currentUser;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -42,6 +45,7 @@
     
     [VKSdk authorize:scope];
 }
+
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
@@ -88,12 +92,34 @@
 
 - (void)setup
 {
+    [self createCurrentUserObjectWithUserId:[NSNumber numberWithInt:[[[VKSdk getAccessToken] userId] intValue]]];
+    
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert)];
     
     [self setupLongPolling];
+    
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 }
 
-- (void)pollServerWithOptions:(NSMutableDictionary *)options//:(NSString *)server withKey:(NSString *)key fromTs:(NSNumber *)ts
+- (void)createCurrentUserObjectWithUserId:(NSNumber *)userId
+{
+    VKRequest *userRequest = [[VKApi users] get:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@", userId], @"user_ids", @"photo_100", @"fields", nil]];
+    
+    [userRequest executeWithResultBlock:^(VKResponse *response) {
+        LVKUsersCollection *usersCollection = [[LVKUsersCollection alloc] initWithArray:response.json];
+        
+        LVKUser *responseUser = [[usersCollection users] firstObject];
+        
+        currentUser = [[LVKUser alloc] initWithDictionary:[NSDictionary dictionaryWithObjectsAndKeys:[responseUser firstName], @"first_name",[responseUser lastName], @"last_name",[responseUser photo_100], @"photo_100", nil]];
+        
+        [currentUser setIsCurrent:YES];
+    } errorBlock:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
+    
+}
+
+- (void)pollServerWithOptions:(NSMutableDictionary *)options
 {
     NSError* error = nil;
     NSURLResponse* response = nil;
@@ -107,24 +133,27 @@
     
     NSData* responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
-    NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseData options:nil error:nil];
-    
-    
-    if([jsonResponse objectForKey:@"failed"] != nil)
+    if(responseData != nil)
     {
-        [self performSelectorOnMainThread:@selector(setupLongPolling) withObject:nil waitUntilDone:NO];
-        return;
+        NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:responseData options:nil error:nil];
+        
+        
+        if([jsonResponse objectForKey:@"failed"] != nil)
+        {
+            [self performSelectorOnMainThread:@selector(setupLongPolling) withObject:nil waitUntilDone:NO];
+            return;
+        }
+        
+        if([jsonResponse objectForKey:@"updates"] != nil)
+        {
+            LVKLongPollUpdatesCollection *updates = [[LVKLongPollUpdatesCollection alloc] initWithArray:[jsonResponse objectForKey:@"updates"]];
+            [updates performSelectorOnMainThread:@selector(postNotifications) withObject:nil waitUntilDone:YES];
+        }
+        
+        [options setObject:[jsonResponse objectForKey:@"ts"] forKey:@"ts"];
     }
     
-    if([jsonResponse objectForKey:@"updates"] != nil)
-    {
-        LVKLongPollUpdatesCollection *updates = [[LVKLongPollUpdatesCollection alloc] initWithArray:[jsonResponse objectForKey:@"updates"]];
-        [updates performSelectorOnMainThread:@selector(postNotifications) withObject:nil waitUntilDone:YES];
-    }
-    
-    [options setObject:[jsonResponse objectForKey:@"ts"] forKey:@"ts"];
-    
-    [self pollServerWithOptions:options];
+    [self performSelectorInBackground:@selector(pollServerWithOptions:) withObject:options];
 }
 
 - (void)setupLongPolling

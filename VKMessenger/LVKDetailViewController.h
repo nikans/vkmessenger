@@ -8,17 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import <VKSdk.h>
+#import <UIImageView+WebCache.h>
 #import "LVKHistoryCollection.h"
 #import "LVKDialog.h"
-#import "LVKLongPollNewMessage.h"
+#import "LVKLongPoll.h"
 
-@interface LVKDetailViewController : UITableViewController <UISplitViewControllerDelegate>
+@interface LVKDetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,UISplitViewControllerDelegate, UITextViewDelegate>
 
 @property (strong, nonatomic) LVKDialog *dialog;
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UITextField *textField;
+@property (strong, nonatomic) IBOutlet UITextView *textView;
 
--(IBAction) textFieldDoneEditing:(id)sender;
+-(IBAction) sendMessage:(id)sender;
 
 @end

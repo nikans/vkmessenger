@@ -9,11 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "LVKMessage.h"
 #import "LVKUser.h"
-
-typedef enum DialogTypes {
-    Room,
-    Dialog
-} dialogType;
+#import "LVKModelEnums.h"
 
 @interface LVKDialog : NSObject
 
@@ -30,5 +26,7 @@ typedef enum DialogTypes {
 -(void)adoptUser:(LVKUser *)adoptedUser;
 -(void)adoptUsers:(NSArray *)adoptedUsers;
 -(NSString *)chatIdKey;
+-(readState)getReadState;
+-(id)getChatPicture;
 
 @end

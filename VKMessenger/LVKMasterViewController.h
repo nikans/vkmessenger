@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <VKSdk.h>
+#import <CCBottomRefreshControl/UIScrollView+BottomRefreshControl.h>
+#import <UIImageView+WebCache.h>
 #import "LVKDialogsCollection.h"
 #import "LVKUsersCollection.h"
+#import <AudioToolbox/AudioToolbox.h>
+#import "LVKLongPoll.h"
 
 @class LVKDetailViewController;
 

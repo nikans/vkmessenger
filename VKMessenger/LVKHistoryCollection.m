@@ -19,6 +19,18 @@
     return self;
 }
 
+-(id)initWithMessage:(LVKMessage *)message
+{
+    self = [self init];
+    
+    if(self)
+    {
+        messages = [NSArray arrayWithObject:message];
+    }
+    
+    return self;
+}
+
 -(id)initWithDictionary:(NSDictionary *)dictionary
 {
     self = [self init];
@@ -37,5 +49,18 @@
     }
     
     return self;
+}
+
+-(void)adoptUserArray:(NSArray *)array
+{
+    [messages enumerateObjectsUsingBlock:^(LVKMessage *message, NSUInteger idx, BOOL *stop) {
+        for (LVKUser *user in array)
+        {
+            if(([user isCurrent] && [[message userId] intValue] == 0) || (![user isCurrent] && [[message userId] isEqualToNumber:[user _id]]))
+            {
+                [message adoptUser:user];
+            }
+        }
+    }];
 }
 @end

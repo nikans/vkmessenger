@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <VKSdk.h>
+#import <UIImageView+WebCache.h>
 #import "LVKDetailViewController.h"
 #import "LVKUsersCollection.h"
 
 @interface LVKUserPickerViewController : UITableViewController <UISearchBarDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) UIViewController *callerViewController;
 
 - (IBAction)closeModal:(id)sender;

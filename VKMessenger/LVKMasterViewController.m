@@ -9,9 +9,13 @@
 #import "LVKMasterViewController.h"
 #import "LVKDetailViewController.h"
 #import "LVKUserPickerViewController.h"
+#import "UIScrollView+BottomRefreshControl.h"
 
 @interface LVKMasterViewController () {
     NSMutableArray *_objects;
+    BOOL isLoading;
+    BOOL hasDataToLoad;
+    UIRefreshControl *refreshControl;
 }
 @end
 
@@ -33,7 +37,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+//    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    hasDataToLoad = YES;
+
+    refreshControl = [[UIRefreshControl alloc]init];
+    [refreshControl addTarget:self action:@selector(onRefreshControl) forControlEvents:UIControlEventValueChanged];
+    [self.tableView setBottomRefreshControl:refreshControl];
 
 #pragma mark - iPad
 //    self.detailViewController = (LVKDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
@@ -41,6 +51,25 @@
     [self registerObservers];
     
     [self loadData:0];
+}
+
+- (void)resetMessageFlags:(NSNotification *)notification
+{
+    LVKLongPollResetMessageFlags *resetMessageFlagsUpdate = [notification object];
+    
+    NSArray *result = [_objects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(LVKDialog *dialog, NSDictionary *bindings) {
+        return [[dialog lastMessage] _id] == [resetMessageFlagsUpdate messageId];
+    }]];
+    
+    if(result.count == 1)
+    {
+        LVKDialog *dialog = [result firstObject];
+        if([resetMessageFlagsUpdate isUnread])
+        {
+            [[dialog lastMessage] setIsUnread:NO];
+            [tableView reloadData];
+        }
+    }
 }
 
 - (void)receiveNewMessage:(NSNotification *)notification
@@ -55,7 +84,8 @@
     {
         if([newMessageUpdate dialog].type == Dialog)
         {
-            VKRequest *users = [[VKApi users] get:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@", [[newMessageUpdate dialog] chatId]], @"user_ids", @"photo_200", @"fields", nil]];
+            isLoading = YES;
+            VKRequest *users = [[VKApi users] get:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@", [[newMessageUpdate dialog] chatId]], @"user_ids", @"photo_100", @"fields", nil]];
             
             [users executeWithResultBlock:^(VKResponse *response) {
                 LVKUsersCollection *usersCollection = [[LVKUsersCollection alloc] initWithArray:response.json];
@@ -65,8 +95,10 @@
                 [_objects insertObject:[newMessageUpdate dialog] atIndex:0];
                 
                 [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+                isLoading = NO;
             } errorBlock:^(NSError *error) {
                 NSLog(@"%@", error);
+                isLoading = NO;
             }];
         }
         else
@@ -90,12 +122,22 @@
                                              selector:@selector(receiveNewMessage:)
                                                  name:@"newMessage"
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(resetMessageFlags:)
+                                                 name:@"resetMessageFlags"
+                                               object:nil];
 }
 
 - (void)loadData:(int)offset
 {
+    if(!hasDataToLoad)
+    {
+        [refreshControl endRefreshing];
+        return;
+    }
     if([VKSdk isLoggedIn])
     {
+        isLoading = YES;
         VKRequest *dialogs = [VKApi
                               requestWithMethod:@"messages.getDialogs"
                               andParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"60", @"count", [NSNumber numberWithInt:offset], @"offset", nil]
@@ -106,29 +148,50 @@
             
             if([userIdsCSV length] > 0)
             {
-                VKRequest *users = [[VKApi users] get:[NSDictionary dictionaryWithObjectsAndKeys:userIdsCSV, @"user_ids", @"photo_200", @"fields", nil]];
+                VKRequest *users = [[VKApi users] get:[NSDictionary dictionaryWithObjectsAndKeys:userIdsCSV, @"user_ids", @"photo_100", @"fields", nil]];
                 
                 [users executeWithResultBlock:^(VKResponse *response) {
                     LVKUsersCollection *usersCollection = [[LVKUsersCollection alloc] initWithArray:response.json];
                     
                     [dialogsCollection adoptUserCollection:usersCollection];
                     
-                    _objects = [NSMutableArray arrayWithArray:[dialogsCollection dialogs]];
+                    if(_objects.count == 0)
+                    {
+                        _objects = [NSMutableArray arrayWithArray:[dialogsCollection dialogs]];
+                    }
+                    else if(offset == _objects.count)
+                    {
+                        [_objects addObjectsFromArray:[dialogsCollection dialogs]];
+                    }
                     
                     [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+                    isLoading = NO;
+                    [refreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
+                    
+                    if(_objects.count >= [[dialogsCollection count] intValue])
+                    {
+                        hasDataToLoad = NO;
+                        [refreshControl performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:YES];
+                    }
                 } errorBlock:^(NSError *error) {
                     NSLog(@"%@", error);
+                    isLoading = NO;
+                    [refreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
                 }];
-            }
-            else
-            {
-                _objects = [NSMutableArray arrayWithArray:[dialogsCollection dialogs]];
-                
-                [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
             }
         } errorBlock:^(NSError *error) {
             NSLog(@"%@", error);
+            isLoading = NO;
+            [refreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
         }];
+    }
+}
+
+- (void)onRefreshControl
+{
+    if(!isLoading)
+    {
+        [self loadData:_objects.count];
     }
 }
 
@@ -162,11 +225,30 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-
     LVKDialog *dialog = _objects[indexPath.row];
-    cell.textLabel.text = [dialog title];
-    cell.detailTextLabel.text = [[dialog lastMessage] body];
+    UITableViewCell *cell = nil;
+    
+    if(dialog.type == Dialog)
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"DialogCell" forIndexPath:indexPath];
+        
+        [(UIImageView *)[cell viewWithTag:4] setImageWithURL:[dialog getChatPicture]];
+    }
+    else if(dialog.type == Room)
+    {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"RoomCell" forIndexPath:indexPath];
+        NSArray *pictures = [dialog getChatPicture];
+        
+        [pictures enumerateObjectsUsingBlock:^(NSString *picture, NSUInteger idx, BOOL *stop) {
+            UIView *subview = [cell viewWithTag:idx+4];
+            [(UIImageView *)subview setImageWithURL:picture];
+        }];
+    }
+    
+    [(UILabel *)[cell viewWithTag:1] setText:[NSString stringWithFormat:@"%@%@", [dialog getReadState] == UnreadIncoming ? @"(!) " : [dialog getReadState] == UnreadOutgoing ? @"(?) " : @"", [dialog title]]];
+    [(UILabel *)[cell viewWithTag:2] setText:[[dialog lastMessage] body]];
+    [(UILabel *)[cell viewWithTag:3] setText:[NSDateFormatter localizedStringFromDate:[[dialog lastMessage] date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle]];
+    
     return cell;
 }
 
@@ -210,6 +292,8 @@
 //        self.detailViewController.dialog = object;
 //    }
 }
+
+#pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

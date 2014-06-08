@@ -7,16 +7,19 @@
 //
 
 #import "LVKUserPickerViewController.h"
+#import "LVKUserViewController.h"
 
 @interface LVKUserPickerViewController ()
 {
     NSMutableArray *_objects, *_filteredObjects;
+    NSString *searchString;
+    BOOL isLoading;
 }
 @end
 
 @implementation LVKUserPickerViewController
 
-@synthesize tableView, callerViewController;
+@synthesize tableView, searchBar, callerViewController;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -40,16 +43,56 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self loadData:0];
+    [self loadData];
 }
 
-- (void)loadData:(int)offset
+- (void)loadSearchData:(int)offset
+{
+    NSString *currentSearchString = [NSString stringWithString:searchString];
+    
+    if(currentSearchString.length > 0)
+    {
+        if([VKSdk isLoggedIn] && !isLoading)
+        {
+            isLoading = YES;
+            VKRequest *users = [VKApi
+                                  requestWithMethod:@"users.search"
+                                  andParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:0], @"sort", @"photo_100", @"fields", currentSearchString, @"q", [NSNumber numberWithInt:offset], @"offset", nil]
+                                  andHttpMethod:@"GET"];
+            [users executeWithResultBlock:^(VKResponse *response) {
+                LVKUsersCollection *usersCollection = [[LVKUsersCollection alloc] initWithDictionary:response.json];
+                
+                _filteredObjects = [NSMutableArray arrayWithArray:[usersCollection users]];
+                
+                if(![searchString isEqual:currentSearchString])
+                {
+                    [self performSelector:@selector(loadSearchData:) withObject:0 afterDelay:1];
+                }
+                
+                [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+                isLoading = NO;
+            } errorBlock:^(NSError *error) {
+                NSLog(@"%@", error);
+                [self performSelector:@selector(loadSearchData:) withObject:0 afterDelay:2];
+                isLoading = NO;
+            }];
+        }
+    }
+    else
+    {
+        _filteredObjects = [NSMutableArray arrayWithArray:_objects];
+        [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+    }
+}
+
+- (void)loadData
 {
     if([VKSdk isLoggedIn])
     {
+        isLoading = YES;
         VKRequest *friends = [VKApi
                               requestWithMethod:@"friends.get"
-                              andParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"hints", @"order", @"photo_200", @"fields", nil]
+                              andParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"hints", @"order", @"photo_100", @"fields", nil]
                               andHttpMethod:@"GET"];
         [friends executeWithResultBlock:^(VKResponse *response) {
             LVKUsersCollection *usersCollection = [[LVKUsersCollection alloc] initWithDictionary:response.json];
@@ -58,8 +101,10 @@
             _filteredObjects = [NSMutableArray arrayWithArray:_objects];
             
             [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+            isLoading = NO;
         } errorBlock:^(NSError *error) {
             NSLog(@"%@", error);
+            isLoading = NO;
         }];
     }
 }
@@ -87,10 +132,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserCell" forIndexPath:indexPath];
     
     LVKUser *user = _filteredObjects[indexPath.row];
-    cell.textLabel.text = [user fullName];
+    [(UILabel *)[cell viewWithTag:1] setText:[user fullName]];
+    [(UIImageView *)[cell viewWithTag:2] setImageWithURL:[user photo_100]];
     
     return cell;
 }
@@ -153,16 +199,14 @@
     [detailViewController setDialog:[user createDialog]];
     
     [[callerViewController navigationController] pushViewController:detailViewController animated:NO];
-    [self dismissViewControllerAnimated:true completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Search
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    _filteredObjects = [NSMutableArray arrayWithArray:[_objects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(LVKUser *user, NSDictionary *bindings) {
-        return [[user fullName] rangeOfString:searchText options:NSCaseInsensitiveSearch].location != NSNotFound;
-    }]]];
-    [tableView reloadData];
+    searchString = searchText;
+    [self loadSearchData:0];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
@@ -175,15 +219,26 @@
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
-/*
+#pragma mark - Scroll view
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [[self searchBar] endEditing:YES];
+}
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"showUserInfo"]) {
+        LVKUser *object = nil;
+        
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        object = _objects[indexPath.row];
+        
+        [(LVKUserViewController *)[segue destinationViewController] setUser:object];
+    }
 }
-*/
 
 @end

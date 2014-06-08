@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "LVKMessageAttachment.h"
+#import "LVKModelEnums.h"
+#import "LVKUser.h"
 
 @interface LVKMessage : NSObject
 
@@ -15,12 +17,16 @@
 @property (nonatomic) NSString *body;
 @property (nonatomic) NSNumber *chatId;
 @property (nonatomic) NSNumber *userId;
+@property (nonatomic) dialogType type;
+@property (nonatomic) LVKUser *user;
 @property (nonatomic) NSDate *date;
-@property (nonatomic) BOOL readState;
-@property (nonatomic) BOOL out;
+@property (nonatomic) BOOL isUnread;
+@property (nonatomic) BOOL isOutgoing;
 @property (nonatomic) NSArray *attachments;
 @property (nonatomic) NSArray *forwarded;
 
 -(id)initWithDictionary:(NSDictionary *)dictionary;
+-(void)adoptUser:(LVKUser *)adoptedUser;
+-(readState)getReadState;
 
 @end

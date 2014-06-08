@@ -6,8 +6,7 @@
 //  Copyright (c) 2014 Levelab. All rights reserved.
 //
 
-#import "LVKLongPollUpdate.h"
-#import "LVKLongPollNewMessage.h"
+#import "LVKLongPoll.h"
 
 @implementation LVKLongPollUpdate
 
@@ -21,10 +20,19 @@
 -(id)initWithArray:(NSArray *)array
 {
     int eventCode = [[array firstObject] intValue];
+    NSLog(@"%@ %d", array, eventCode);
     NSMutableArray *tmpArray = [NSMutableArray arrayWithArray:array];
     [tmpArray removeObjectsInRange:NSMakeRange(0, 1)];
     
     switch (eventCode) {
+        case 1:
+            self = [[LVKLongPollSetMessageFlags alloc] init];
+            break;
+            
+        case 3:
+            self = [[LVKLongPollResetMessageFlags alloc] init];
+            break;
+            
         case 4:
             self = [[LVKLongPollNewMessage alloc] init];
             break;

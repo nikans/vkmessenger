@@ -14,6 +14,10 @@
 @property (nonatomic) NSNumber *count;
 @property (nonatomic) NSArray *messages;
 
+-(id)initWithMessage:(LVKMessage *)message;
+
 -(id)initWithDictionary:(NSDictionary *)dictionary;
+
+-(void)adoptUserArray:(NSArray *)array;
 
 @end

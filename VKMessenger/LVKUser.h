@@ -14,9 +14,12 @@
 @property (nonatomic) NSString *firstName;
 @property (nonatomic) NSString *lastName;
 @property (nonatomic) NSString *fullName;
-@property (nonatomic) NSString *photo_200;
+@property (nonatomic) NSString *photo_100;
+@property (nonatomic) BOOL isCurrent;
 
 -(id)initWithDictionary:(NSDictionary *)dictionary;
+
+-(NSString *)getPhoto:(NSUInteger) size;
 
 -(id)createDialog;
 
