@@ -8,6 +8,7 @@
 
 #import "LVKDefaultMessageBodyItem.h"
 #import "NSString+StringSize.h"
+#import "LVKMessage.h"
 
 @implementation LVKDefaultMessageBodyItem
 
@@ -20,8 +21,8 @@
     return self;
 }
 
-+ (CGSize)calculateContentSizeWithData:(NSDictionary *)_data {
-    CGSize textSize = [(NSString *)_data[@"body"] integralSizeWithFont:[UIFont systemFontOfSize:13] maxWidth:200 numberOfLines:INFINITY];
++ (CGSize)calculateContentSizeWithData:(id<LVKMessagePartProtocol>)_data {
+    CGSize textSize = [(NSString *)[(LVKMessage *)_data body] integralSizeWithFont:[UIFont systemFontOfSize:13] maxWidth:200 numberOfLines:INFINITY];
     return textSize;
 }
 

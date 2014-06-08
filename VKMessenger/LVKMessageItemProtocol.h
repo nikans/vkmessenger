@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LVKMessagePartProtocol.h"
 
 @protocol LVKMessageItemProtocol <NSObject>
 
@@ -14,6 +15,6 @@
 
 //- (int)contentWidth;
 //- (CGSize)calculateContentSize;
-+ (CGSize)calculateContentSizeWithData:(NSDictionary *)_data;
++ (CGSize)calculateContentSizeWithData:(id<LVKMessagePartProtocol>)_data;
 
 @end

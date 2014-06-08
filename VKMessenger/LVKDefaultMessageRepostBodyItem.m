@@ -8,6 +8,8 @@
 
 #import "LVKDefaultMessageRepostBodyItem.h"
 #import "NSString+StringSize.h"
+#import "LVKRepostedMessage.h"
+
 
 @implementation LVKDefaultMessageRepostBodyItem
 
@@ -20,8 +22,8 @@
     return self;
 }
 
-+ (CGSize)calculateContentSizeWithData:(NSDictionary *)_data {
-    CGSize textSize = [(NSString *)_data[@"body"] integralSizeWithFont:[UIFont systemFontOfSize:18] maxWidth:180 numberOfLines:INFINITY];
++ (CGSize)calculateContentSizeWithData:(id<LVKMessagePartProtocol>)_data {
+    CGSize textSize = [(NSString *)[(LVKRepostedMessage *)_data body] integralSizeWithFont:[UIFont systemFontOfSize:18] maxWidth:180 numberOfLines:INFINITY];
     CGSize contentSize = CGSizeMake(200, textSize.height + 40); // avatar height
     return contentSize;
 }

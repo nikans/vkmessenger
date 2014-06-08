@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D2A465997B77066592F6D3C /* LVKRepostedMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D2A457C9CBE414A7B9C6503 /* LVKRepostedMessage.m */; };
 		A4017DB1193DE8EA000EAD87 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4017DB0193DE8EA000EAD87 /* Foundation.framework */; };
 		A4017DB3193DE8EA000EAD87 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4017DB2193DE8EA000EAD87 /* CoreGraphics.framework */; };
 		A4017DB5193DE8EA000EAD87 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4017DB4193DE8EA000EAD87 /* UIKit.framework */; };
@@ -83,6 +84,9 @@
 
 /* Begin PBXFileReference section */
 		1C0C3747193C409BAB685995 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		9D2A401F55555B5F84F36BA6 /* LVKMessagePartProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKMessagePartProtocol.h; sourceTree = "<group>"; };
+		9D2A457C9CBE414A7B9C6503 /* LVKRepostedMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKRepostedMessage.m; sourceTree = "<group>"; };
+		9D2A45BA46A997A579B9701C /* LVKRepostedMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKRepostedMessage.h; sourceTree = "<group>"; };
 		A4017DAD193DE8EA000EAD87 /* VKMessenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKMessenger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4017DB0193DE8EA000EAD87 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A4017DB2193DE8EA000EAD87 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -328,6 +332,9 @@
 				A4017DFD193E6DC7000EAD87 /* LVKUsersCollection.h */,
 				A4017DFE193E6DC7000EAD87 /* LVKUsersCollection.m */,
 				A4140DEB19422ED50023DFAA /* LVKModelEnums.h */,
+				9D2A457C9CBE414A7B9C6503 /* LVKRepostedMessage.m */,
+				9D2A45BA46A997A579B9701C /* LVKRepostedMessage.h */,
+				9D2A401F55555B5F84F36BA6 /* LVKMessagePartProtocol.h */,
 			);
 			name = Core;
 			sourceTree = "<group>";
@@ -634,6 +641,7 @@
 				A4017DFF193E6DC7000EAD87 /* LVKUsersCollection.m in Sources */,
 				A410F674193F4DD70030D7CC /* LVKUserPickerViewController.m in Sources */,
 				A474AF87193FC77D009EB0D2 /* LVKWelcomeViewController.m in Sources */,
+				9D2A465997B77066592F6D3C /* LVKRepostedMessage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

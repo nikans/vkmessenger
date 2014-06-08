@@ -19,7 +19,7 @@
     return self;
 }
 
-+ (CGSize)calculateContentSizeWithData:(NSDictionary *)_data {
++ (CGSize)calculateContentSizeWithData:(id<LVKMessagePartProtocol>)_data {
     return CGSizeMake(100, 100);
 }
 

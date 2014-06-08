@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LVKMessagePartProtocol.h"
 #import "LVKMessageAttachment.h"
 #import "LVKModelEnums.h"
 #import "LVKUser.h"
 
-@interface LVKMessage : NSObject
+@interface LVKMessage : NSObject <LVKMessagePartProtocol>
 
 @property (nonatomic) NSNumber *_id;
 @property (nonatomic) NSString *body;
@@ -28,5 +29,6 @@
 -(id)initWithDictionary:(NSDictionary *)dictionary;
 -(void)adoptUser:(LVKUser *)adoptedUser;
 -(readState)getReadState;
+-(NSArray *)getMessageParts;
 
 @end

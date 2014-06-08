@@ -11,6 +11,8 @@
 #import "LVKAppDelegate.h"
 
 #import "LVKDefaultMessageTableViewCell.h"
+#import "LVKMessagePartProtocol.h"
+#import "LVKRepostedMessage.h"
 
 @interface LVKDialogViewController () {
     NSMutableArray *_objects;
@@ -324,20 +326,34 @@
 
 // TODO
 - (NSInteger)collectionView:(LVKDefaultMessagesCollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 1;
+    return [_objects[collectionView.messageIndexPath.row] getMessageParts].count;
 }
 
 - (UICollectionViewCell *)collectionView:(LVKDefaultMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-//    MessageItemType itemType = [self collectionView:collectionView typeOfItemAtIndexPath:indexPath];
-    
-    
-    NSDictionary *cellData = [self collectionView:collectionView dataForItemAtIndexPath:indexPath];
+    id<LVKMessagePartProtocol> cellData = [self collectionView:collectionView dataForItemAtIndexPath:indexPath];
     
     UICollectionViewCell *cell;
-    
-    cell = (LVKDefaultMessageBodyItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultBodyItem" forIndexPath:indexPath];
-    [cell setValue:cellData[@"body"] forKeyPath:@"body.text"];
+
+    if([cellData isKindOfClass:[LVKMessage class]])
+    {
+        cell = (LVKDefaultMessageBodyItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultBodyItem" forIndexPath:indexPath];
+        [cell setValue:[(LVKMessage *)cellData body] forKeyPath:@"body.text"];
+    }
+    else if([cellData isKindOfClass:[LVKRepostedMessage class]])
+    {
+        cell = (LVKDefaultMessageRepostBodyItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultRepostBodyItem" forIndexPath:indexPath];
+        [cell setValue:[(LVKRepostedMessage *)cellData body] forKeyPath:@"body.text"];
+        [cell setValue:[NSDateFormatter localizedStringFromDate:
+                [(LVKRepostedMessage *)cellData date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle] forKeyPath:@"date.text"];
+        [cell setValue:[[(LVKRepostedMessage *)cellData user] fullName] forKeyPath:@"userName.text"];
+    }
+    else
+    {
+        cell = (LVKDefaultMessageBodyItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultBodyItem" forIndexPath:indexPath];
+        [cell setValue:@"" forKeyPath:@"body.text"];
+    }
+
     
 //    switch (itemType) {
 //        case bodyItem:
@@ -371,8 +387,8 @@
 //}
 
 // TODO
-- (NSDictionary *)collectionView:(LVKDefaultMessagesCollectionView *)collectionView dataForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return [NSDictionary dictionaryWithObject:[[_objects objectAtIndex:collectionView.messageIndexPath.row] body] forKey:@"body"];
+- (id<LVKMessagePartProtocol>)collectionView:(LVKDefaultMessagesCollectionView *)collectionView dataForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return [[_objects[collectionView.messageIndexPath.row] getMessageParts] objectAtIndex:indexPath.row];
 }
 
 
@@ -390,11 +406,24 @@
 
 - (CGSize)collectionView:(LVKDefaultMessagesCollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    MessageItemType itemType = [self collectionView:collectionView typeOfItemAtIndexPath:indexPath];
-    NSDictionary *cellData = [self collectionView:collectionView dataForItemAtIndexPath:indexPath];
-    
+    id<LVKMessagePartProtocol> cellData = [self collectionView:collectionView dataForItemAtIndexPath:indexPath];
+
     CGSize cellSize;
-    cellSize = [LVKDefaultMessageBodyItem calculateContentSizeWithData:cellData];
+
+    if([cellData isKindOfClass:[LVKMessage class]])
+    {
+        cellSize = [LVKDefaultMessageBodyItem calculateContentSizeWithData:cellData];
+    }
+    else if([cellData isKindOfClass:[LVKRepostedMessage class]])
+    {
+        cellSize = [LVKDefaultMessageRepostBodyItem calculateContentSizeWithData:cellData];
+    }
+    else
+    {
+        cellSize = [LVKDefaultMessageBodyItem calculateContentSizeWithData:[[LVKMessage alloc] init]];
+    }
+
+//    cellSize = [LVKDefaultMessageBodyItem calculateContentSizeWithData:cellData];
     
 //    switch (itemType) {
 //        case bodyItem:

@@ -7,6 +7,7 @@
 //
 
 #import "LVKMessage.h"
+#import "LVKRepostedMessage.h"
 
 @implementation LVKMessage
 
@@ -48,13 +49,13 @@
         
         NSMutableArray *tmpForwarded = [[NSMutableArray alloc] init];
         [[dictionary valueForKey:@"fwd_messages"] enumerateObjectsUsingBlock:^(NSDictionary *fwdMessage, NSUInteger idx, BOOL *stop) {
-            [tmpForwarded addObject:[[LVKMessage alloc] initWithDictionary:fwdMessage]];
+            [tmpForwarded addObject:[[LVKRepostedMessage alloc] initWithDictionary:fwdMessage]];
         }];
         forwarded = [NSArray arrayWithArray:tmpForwarded];
         
         if(forwarded.count > 0 && body.length == 0)
         {
-            body = @"Пересланное сообщение";
+            body = @"";
         }
     }
     
@@ -74,6 +75,16 @@
         return UnreadOutgoing;
     else
         return UnreadIncoming;
+}
+
+-(NSArray *)getMessageParts
+{
+    NSMutableArray *parts = [NSMutableArray arrayWithObject:self];
+
+    [parts addObjectsFromArray:attachments];
+    [parts addObjectsFromArray:forwarded];
+
+    return [NSArray arrayWithArray:parts];
 }
 
 -(BOOL)isEqual:(id)object

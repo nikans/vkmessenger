@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LVKMessagePartProtocol.h"
 
-@interface LVKMessageAttachment : NSObject
+@interface LVKMessageAttachment : NSObject <LVKMessagePartProtocol>
 
 @property (nonatomic) NSString *type;
 
