@@ -25,9 +25,23 @@
     
     self.collectionViewHeightConstraint.constant = height;
 
-    UIImage *bubble = [UIImage imageNamed:@"bubble_stroked"];
+    UIImage *bubble;
+    UIEdgeInsets capInsets;
+    
+    if (self.isOutgoing) {
+        bubble = [UIImage imageNamed:@"default-bubbleOutgoing"];
+//        capInsets = UIEdgeInsetsMake(15, 15.5, 15, 21.5);
+
+    }
+    else {
+        bubble = [UIImage imageNamed:@"default-bubbleIncoming"];
+//        capInsets = UIEdgeInsetsMake(15, 21.5, 15, 15.5);
+    }
+    
     CGPoint center = CGPointMake(bubble.size.width / 2.0f, bubble.size.height / 2.0f);
-    UIEdgeInsets capInsets = UIEdgeInsetsMake(center.y, center.x, center.y, center.x);
+    capInsets = UIEdgeInsetsMake(center.y, center.x, center.y, center.x);
+
+    
     self.messageContainerBackgroundImage.image = [bubble resizableImageWithCapInsets:capInsets];
 
 //    UIImage *bubble = [UIImage imageNamed:@"bubble_stroked"];

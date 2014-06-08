@@ -70,6 +70,8 @@
 		D038C3531944E64E00E7895D /* LVKDefaultMessageRepostBodyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D038C34D1944E64E00E7895D /* LVKDefaultMessageRepostBodyItem.m */; };
 		D038C3541944E64E00E7895D /* LVKDefaultMessageRepostBodyItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = D038C34E1944E64E00E7895D /* LVKDefaultMessageRepostBodyItem.xib */; };
 		D038C3571944E78200E7895D /* NSString+StringSize.m in Sources */ = {isa = PBXBuildFile; fileRef = D038C3561944E78200E7895D /* NSString+StringSize.m */; };
+		D038C3631945098600E7895D /* default-bubbleIncoming@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D038C3611945098600E7895D /* default-bubbleIncoming@2x.png */; };
+		D038C3641945098600E7895D /* default-bubbleOutgoing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D038C3621945098600E7895D /* default-bubbleOutgoing@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,6 +184,8 @@
 		D038C34E1944E64E00E7895D /* LVKDefaultMessageRepostBodyItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LVKDefaultMessageRepostBodyItem.xib; sourceTree = "<group>"; };
 		D038C3551944E78200E7895D /* NSString+StringSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StringSize.h"; sourceTree = "<group>"; };
 		D038C3561944E78200E7895D /* NSString+StringSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringSize.m"; sourceTree = "<group>"; };
+		D038C3611945098600E7895D /* default-bubbleIncoming@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default-bubbleIncoming@2x.png"; sourceTree = "<group>"; };
+		D038C3621945098600E7895D /* default-bubbleOutgoing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default-bubbleOutgoing@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -392,6 +396,8 @@
 		D038C3081944E25900E7895D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				D038C3611945098600E7895D /* default-bubbleIncoming@2x.png */,
+				D038C3621945098600E7895D /* default-bubbleOutgoing@2x.png */,
 				D038C3091944E25900E7895D /* Images */,
 				D038C31A1944E25900E7895D /* Sounds */,
 			);
@@ -550,6 +556,7 @@
 				D038C3241944E25900E7895D /* bubble_stroked@2x.png in Resources */,
 				D038C32E1944E25900E7895D /* message_sent.aiff in Resources */,
 				D038C32C1944E25900E7895D /* typing@2x.png in Resources */,
+				D038C3631945098600E7895D /* default-bubbleIncoming@2x.png in Resources */,
 				A4017DCF193DE8EA000EAD87 /* Images.xcassets in Resources */,
 				D038C31D1944E25900E7895D /* bubble.png in Resources */,
 				D038C3201944E25900E7895D /* bubble_min@2x.png in Resources */,
@@ -561,6 +568,7 @@
 				A4017DBB193DE8EA000EAD87 /* InfoPlist.strings in Resources */,
 				D038C3281944E25900E7895D /* bubble_tailless@2x.png in Resources */,
 				D038C32D1944E25900E7895D /* message_received.aiff in Resources */,
+				D038C3641945098600E7895D /* default-bubbleOutgoing@2x.png in Resources */,
 				D038C3541944E64E00E7895D /* LVKDefaultMessageRepostBodyItem.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

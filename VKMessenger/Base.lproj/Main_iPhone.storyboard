@@ -333,7 +333,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <segue destination="AxX-8Y-Tck" kind="push" identifier="showMessage" id="QVF-O4-wnD"/>
                                         </connections>
@@ -364,7 +364,7 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <segue destination="AxX-8Y-Tck" kind="push" identifier="showMessage" id="9g9-5c-4Fh"/>
                                         </connections>
@@ -396,6 +396,11 @@
                                                     <rect key="frame" x="42" y="0.0" width="213" height="74"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Eid-4T-heM">
+                                                            <rect key="frame" x="0.0" y="0.0" width="213" height="74"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        </imageView>
                                                         <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="E3z-g0-LTu" customClass="LVKDefaultMessagesCollectionView">
                                                             <rect key="frame" x="0.0" y="0.0" width="213" height="74"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -412,10 +417,6 @@
                                                             </collectionViewFlowLayout>
                                                             <cells/>
                                                         </collectionView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Eid-4T-heM">
-                                                            <rect key="frame" x="0.0" y="0.0" width="213" height="74"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -433,21 +434,24 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="p2h-LI-mWF">
                                                     <rect key="frame" x="4" y="42" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="q61-IE-hVL"/>
                                                         <constraint firstAttribute="width" constant="30" id="zpK-90-LxW"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:48" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1g5-ic-OYO">
-                                                    <rect key="frame" x="258" y="49" width="43" height="21"/>
+                                                    <rect key="frame" x="258" y="55" width="50" height="15"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="43" id="lG5-aN-XKg"/>
+                                                        <constraint firstAttribute="width" constant="50" id="lG5-aN-XKg"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="p2h-LI-mWF" firstAttribute="leading" secondItem="v8s-xQ-D3e" secondAttribute="leading" constant="4" id="D41-ab-aMc"/>
                                                 <constraint firstItem="ZRI-g8-WgA" firstAttribute="leading" secondItem="v8s-xQ-D3e" secondAttribute="leading" constant="42" id="Fut-vp-2Qp"/>
@@ -458,6 +462,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="1g5-ic-OYO" secondAttribute="bottom" constant="4" id="qTh-4y-WWE"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="avatarImage" destination="p2h-LI-mWF" id="gPu-2V-dZe"/>
@@ -479,6 +484,10 @@
                                                     <rect key="frame" x="65" y="0.0" width="213" height="74"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TsR-wQ-JAD">
+                                                            <rect key="frame" x="0.0" y="0.0" width="213" height="74"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </imageView>
                                                         <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aIT-W1-odb" customClass="LVKDefaultMessagesCollectionView">
                                                             <rect key="frame" x="0.0" y="0.0" width="213" height="74"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -495,10 +504,6 @@
                                                             </collectionViewFlowLayout>
                                                             <cells/>
                                                         </collectionView>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TsR-wQ-JAD">
-                                                            <rect key="frame" x="0.0" y="0.0" width="213" height="74"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
@@ -516,21 +521,24 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0MV-GF-FYs">
                                                     <rect key="frame" x="286" y="42" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="9VQ-Uc-BnR"/>
                                                         <constraint firstAttribute="height" constant="30" id="OXC-ZA-ODW"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:48" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8OF-at-jZX">
-                                                    <rect key="frame" x="19" y="49" width="43" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:48" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8OF-at-jZX">
+                                                    <rect key="frame" x="12" y="55" width="50" height="15"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="43" id="qjL-Ie-Sm8"/>
+                                                        <constraint firstAttribute="width" constant="50" id="qjL-Ie-Sm8"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="OI6-S6-e0s" firstAttribute="leading" secondItem="8OF-at-jZX" secondAttribute="trailing" constant="3" id="VXc-QR-Ys1"/>
                                                 <constraint firstAttribute="bottom" secondItem="0MV-GF-FYs" secondAttribute="bottom" constant="2" id="cz0-FO-9lh"/>
@@ -541,6 +549,7 @@
                                                 <constraint firstItem="0MV-GF-FYs" firstAttribute="leading" secondItem="OI6-S6-e0s" secondAttribute="trailing" constant="8" id="q8b-DP-xCp"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="avatarImage" destination="0MV-GF-FYs" id="sxt-19-XJB"/>

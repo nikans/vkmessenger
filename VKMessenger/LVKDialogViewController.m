@@ -9,6 +9,7 @@
 #import "LVKDialogViewController.h"
 #import "LVKMessageViewController.h"
 #import "LVKAppDelegate.h"
+#import "AVHexColor.h"
 
 #import "LVKDefaultMessageTableViewCell.h"
 #import "LVKMessagePartProtocol.h"
@@ -200,6 +201,9 @@
     [self.tableView addSubview:refreshControl];
     [refreshControl addTarget:self action:@selector(onRefreshControl) forControlEvents:UIControlEventValueChanged];
     
+    // TODO: style
+    self.tableView.backgroundColor = [AVHexColor colorWithHexString:@"#edf3fa"];
+    
     [self loadData:0];
 }
 
@@ -287,6 +291,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView configureCell:(LVKDefaultMessageTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    LVKMessage *message = _objects[indexPath.row];
+    cell.isOutgoing = [message isOutgoing];
+    
     [cell setCollectionViewDelegates:self forMessageWithIndexPath:indexPath];
 }
 
