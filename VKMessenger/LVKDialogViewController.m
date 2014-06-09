@@ -316,9 +316,10 @@
     [cell.timeLabel setText:[NSDateFormatter localizedStringFromDate:[message date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle]];
     [self tableView:tableView configureCell:cell forRowAtIndexPath:indexPath];
     
-    [cell setMinimumWidthForMessageContainer];
-    
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(LVKDefaultMessageTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -415,22 +416,22 @@
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-     return UIEdgeInsetsMake(0,0, 0, 0);
+     return UIEdgeInsetsMake(0,0,0,0);
 }
-
-//- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-//{
-//    [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
-//    [self.collectionView.collectionViewLayout invalidateLayout];
-//}
-
 
 - (CGSize)collectionView:(LVKDefaultMessagesCollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     id<LVKMessagePartProtocol> cellData = [self collectionView:collectionView dataForItemAtIndexPath:indexPath];
 
     CGSize cellSize;
-    int maxWidth = collectionView.frame.size.width;
+    int maxWidth;
+    
+    // TODO smth
+    LVKMessage *message = _objects[collectionView.messageIndexPath.row];
+    if([message isOutgoing])
+        maxWidth = 234;
+    else
+        maxWidth = 196;
 
     if([cellData isKindOfClass:[LVKMessage class]])
     {
@@ -444,6 +445,11 @@
     {
         cellSize = [LVKDefaultMessageBodyItem calculateContentSizeWithData:[[LVKMessage alloc] init] maxWidth:maxWidth];
     }
+    
+    if (cellSize.width > maxWidth) {
+        cellSize = CGSizeMake(maxWidth, cellSize.height);
+    }
+
     
 //    if (collectionView.maximumItemWidth < cellSize.width) {
 //        collectionView.maximumItemWidth = cellSize.width;

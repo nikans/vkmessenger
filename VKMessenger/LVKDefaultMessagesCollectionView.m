@@ -28,13 +28,4 @@
     [self registerNib:[UINib nibWithNibName:@"LVKDefaultMessageRepostBodyItem"  bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"DefaultRepostBodyItem"];
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
-
 @end

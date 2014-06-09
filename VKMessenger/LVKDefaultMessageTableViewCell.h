@@ -27,6 +27,4 @@ static NSString *CollectionViewCellIdentifier = @"BodyItem";
 
 - (void)setCollectionViewDelegates:(id<UICollectionViewDataSource, UICollectionViewDelegate>)dataSourceDelegate forMessageWithIndexPath:(NSIndexPath *)indexPath;
 
-- (void)setMinimumWidthForMessageContainer;
-
 @end

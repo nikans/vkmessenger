@@ -359,15 +359,19 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" id="6YL-xh-12R"/>
+                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" id="6YL-xh-12R"/>
                                                             </constraints>
                                                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uxN-k5-jZM">
-                                                                <size key="itemSize" width="0.0" height="1000"/>
+                                                                <size key="itemSize" width="0.0" height="0.0"/>
                                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             </collectionViewFlowLayout>
                                                             <cells/>
+                                                            <connections>
+                                                                <outlet property="dataSource" destination="Ah7-4n-0Wa" id="8om-nL-Uiy"/>
+                                                                <outlet property="delegate" destination="Ah7-4n-0Wa" id="4Dt-R8-YP5"/>
+                                                            </connections>
                                                         </collectionView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -447,16 +451,20 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" id="lV7-Ji-S5I"/>
+                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" id="lV7-Ji-S5I"/>
                                                             </constraints>
                                                             <inset key="scrollIndicatorInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="10" id="hvg-VF-9x7">
-                                                                <size key="itemSize" width="200" height="1000"/>
+                                                                <size key="itemSize" width="0.0" height="0.0"/>
                                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             </collectionViewFlowLayout>
                                                             <cells/>
+                                                            <connections>
+                                                                <outlet property="dataSource" destination="Ah7-4n-0Wa" id="b83-uk-CBF"/>
+                                                                <outlet property="delegate" destination="Ah7-4n-0Wa" id="1Z4-uj-Vef"/>
+                                                            </connections>
                                                         </collectionView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -645,7 +653,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="nWb-OS-La0"/>
+        <segue reference="1jP-Sb-eNu"/>
         <segue reference="gPN-Qz-Vpe"/>
-        <segue reference="Spc-A0-PR9"/>
     </inferredMetricsTieBreakers>
 </document>
