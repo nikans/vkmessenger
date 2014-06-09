@@ -276,8 +276,10 @@
 		A4017DB6193DE8EA000EAD87 /* VKMessenger */ = {
 			isa = PBXGroup;
 			children = (
+				D038C3081944E25900E7895D /* Assets */,
 				A483A280194644FD00BC553C /* Network */,
-				D038C3011944DDBA00E7895D /* Eliah's */,
+				D038C3361944E37E00E7895D /* Dialogs */,
+				D038C3351944E36C00E7895D /* Message CollectionView */,
 				A4017DBF193DE8EA000EAD87 /* LVKAppDelegate.h */,
 				A4017DC0193DE8EA000EAD87 /* LVKAppDelegate.m */,
 				A4017DC2193DE8EA000EAD87 /* Main_iPhone.storyboard */,
@@ -339,12 +341,8 @@
 				A474AF86193FC77D009EB0D2 /* LVKWelcomeViewController.m */,
 				A4017DC8193DE8EA000EAD87 /* LVKMasterViewController.h */,
 				A4017DC9193DE8EA000EAD87 /* LVKMasterViewController.m */,
-				A4017DCB193DE8EA000EAD87 /* LVKDialogViewController.h */,
-				A4017DCC193DE8EA000EAD87 /* LVKDialogViewController.m */,
 				A410F672193F4DD70030D7CC /* LVKUserPickerViewController.h */,
 				A410F673193F4DD70030D7CC /* LVKUserPickerViewController.m */,
-				A474AF88193FD6B8009EB0D2 /* LVKMessageViewController.h */,
-				A474AF89193FD6B8009EB0D2 /* LVKMessageViewController.m */,
 				A4140DEE1944D2220023DFAA /* LVKUserViewController.h */,
 				A4140DEF1944D2220023DFAA /* LVKUserViewController.m */,
 			);
@@ -431,16 +429,6 @@
 			name = Network;
 			sourceTree = "<group>";
 		};
-		D038C3011944DDBA00E7895D /* Eliah's */ = {
-			isa = PBXGroup;
-			children = (
-				D038C3081944E25900E7895D /* Assets */,
-				D038C3361944E37E00E7895D /* Message Table */,
-				D038C3351944E36C00E7895D /* Message Collection */,
-			);
-			name = "Eliah's";
-			sourceTree = "<group>";
-		};
 		D038C3081944E25900E7895D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -484,7 +472,7 @@
 			path = Sounds;
 			sourceTree = "<group>";
 		};
-		D038C3351944E36C00E7895D /* Message Collection */ = {
+		D038C3351944E36C00E7895D /* Message CollectionView */ = {
 			isa = PBXGroup;
 			children = (
 				D038C3051944E13F00E7895D /* LVKDefaultMessagesCollectionView.h */,
@@ -506,16 +494,20 @@
 				D038C34D1944E64E00E7895D /* LVKDefaultMessageRepostBodyItem.m */,
 				D038C34E1944E64E00E7895D /* LVKDefaultMessageRepostBodyItem.xib */,
 			);
-			name = "Message Collection";
+			name = "Message CollectionView";
 			sourceTree = "<group>";
 		};
-		D038C3361944E37E00E7895D /* Message Table */ = {
+		D038C3361944E37E00E7895D /* Dialogs */ = {
 			isa = PBXGroup;
 			children = (
+				A4017DCB193DE8EA000EAD87 /* LVKDialogViewController.h */,
+				A4017DCC193DE8EA000EAD87 /* LVKDialogViewController.m */,
+				A474AF88193FD6B8009EB0D2 /* LVKMessageViewController.h */,
+				A474AF89193FD6B8009EB0D2 /* LVKMessageViewController.m */,
 				D038C3021944DE3000E7895D /* LVKDefaultMessageTableViewCell.h */,
 				D038C3031944DE3000E7895D /* LVKDefaultMessageTableViewCell.m */,
 			);
-			name = "Message Table";
+			name = Dialogs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
