@@ -77,7 +77,7 @@
             } errorBlock:^(NSError *error) {
                 if (error.code != VK_API_ERROR)
                 {
-                    [self networkFailed];
+                    [self networkFailedRequest:error.vkError.request];
                 }
                 else
                 {
@@ -118,7 +118,7 @@
         } errorBlock:^(NSError *error) {
             if (error.code != VK_API_ERROR)
             {
-                [self networkFailed];
+                [self networkFailedRequest:error.vkError.request];
             }
             else
             {

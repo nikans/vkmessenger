@@ -47,6 +47,7 @@
 		A474AF87193FC77D009EB0D2 /* LVKWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A474AF86193FC77D009EB0D2 /* LVKWelcomeViewController.m */; };
 		A474AF8A193FD6B8009EB0D2 /* LVKMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A474AF89193FD6B8009EB0D2 /* LVKMessageViewController.m */; };
 		A483A27F1946385D00BC553C /* UIViewController+NetworkNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = A483A27E1946385D00BC553C /* UIViewController+NetworkNotifications.m */; };
+		A483A2831946454100BC553C /* LVKNetworkRetryAlertDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A483A2821946454100BC553C /* LVKNetworkRetryAlertDelegate.m */; };
 		B66FE78CE40F46C2BEC1B04D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5906D3D6B7B455798358AE9 /* libPods.a */; };
 		D038C3041944DE3000E7895D /* LVKDefaultMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D038C3031944DE3000E7895D /* LVKDefaultMessageTableViewCell.m */; };
 		D038C3071944E13F00E7895D /* LVKDefaultMessagesCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D038C3061944E13F00E7895D /* LVKDefaultMessagesCollectionView.m */; };
@@ -164,6 +165,8 @@
 		A474AF89193FD6B8009EB0D2 /* LVKMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKMessageViewController.m; sourceTree = "<group>"; };
 		A483A27D1946385D00BC553C /* UIViewController+NetworkNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NetworkNotifications.h"; sourceTree = "<group>"; };
 		A483A27E1946385D00BC553C /* UIViewController+NetworkNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NetworkNotifications.m"; sourceTree = "<group>"; };
+		A483A2811946454100BC553C /* LVKNetworkRetryAlertDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKNetworkRetryAlertDelegate.h; sourceTree = "<group>"; };
+		A483A2821946454100BC553C /* LVKNetworkRetryAlertDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKNetworkRetryAlertDelegate.m; sourceTree = "<group>"; };
 		B5906D3D6B7B455798358AE9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D038C3021944DE3000E7895D /* LVKDefaultMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultMessageTableViewCell.h; sourceTree = "<group>"; };
 		D038C3031944DE3000E7895D /* LVKDefaultMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDefaultMessageTableViewCell.m; sourceTree = "<group>"; };
@@ -263,6 +266,7 @@
 		A4017DB6193DE8EA000EAD87 /* VKMessenger */ = {
 			isa = PBXGroup;
 			children = (
+				A483A280194644FD00BC553C /* Network */,
 				D038C3011944DDBA00E7895D /* Eliah's */,
 				A4017DBF193DE8EA000EAD87 /* LVKAppDelegate.h */,
 				A4017DC0193DE8EA000EAD87 /* LVKAppDelegate.m */,
@@ -406,6 +410,15 @@
 				9D2A4A8E3775841137DC65D7 /* LVKStickerAttachment.h */,
 			);
 			name = MessageAttachments;
+			sourceTree = "<group>";
+		};
+		A483A280194644FD00BC553C /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				A483A2811946454100BC553C /* LVKNetworkRetryAlertDelegate.h */,
+				A483A2821946454100BC553C /* LVKNetworkRetryAlertDelegate.m */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 		D038C3011944DDBA00E7895D /* Eliah's */ = {
@@ -676,6 +689,7 @@
 				D038C3571944E78200E7895D /* NSString+StringSize.m in Sources */,
 				A4017DF3193E1B2C000EAD87 /* LVKDialog.m in Sources */,
 				A4017DFF193E6DC7000EAD87 /* LVKUsersCollection.m in Sources */,
+				A483A2831946454100BC553C /* LVKNetworkRetryAlertDelegate.m in Sources */,
 				A410F674193F4DD70030D7CC /* LVKUserPickerViewController.m in Sources */,
 				A474AF87193FC77D009EB0D2 /* LVKWelcomeViewController.m in Sources */,
 				9D2A465997B77066592F6D3C /* LVKRepostedMessage.m in Sources */,

@@ -41,17 +41,9 @@
         date = [NSDate dateWithTimeIntervalSince1970:[[dictionary valueForKey:@"date"] intValue]];
         body = [dictionary valueForKey:@"body"];
         
-        NSMutableArray *tmpAttachments = [[NSMutableArray alloc] init];
-        [[dictionary valueForKey:@"attachments"] enumerateObjectsUsingBlock:^(NSDictionary *attachment, NSUInteger idx, BOOL *stop) {
-            [tmpAttachments addObject:[[LVKMessageAttachment alloc] initWithDictionary:attachment]];
-        }];
-        attachments = [NSArray arrayWithArray:tmpAttachments];
+        [self adoptAttachments:[dictionary valueForKey:@"attachments"]];
         
-        NSMutableArray *tmpForwarded = [[NSMutableArray alloc] init];
-        [[dictionary valueForKey:@"fwd_messages"] enumerateObjectsUsingBlock:^(NSDictionary *fwdMessage, NSUInteger idx, BOOL *stop) {
-            [tmpForwarded addObject:[[LVKRepostedMessage alloc] initWithDictionary:fwdMessage]];
-        }];
-        forwarded = [NSArray arrayWithArray:tmpForwarded];
+        [self adoptForwarded:[dictionary valueForKey:@"fwd_messages"]];
         
         if(forwarded.count > 0 && body.length == 0)
         {
@@ -60,6 +52,24 @@
     }
     
     return self;
+}
+
+-(void)adoptAttachments:(NSArray *)_attachments
+{
+    NSMutableArray *tmpAttachments = [[NSMutableArray alloc] init];
+    [_attachments enumerateObjectsUsingBlock:^(NSDictionary *attachment, NSUInteger idx, BOOL *stop) {
+        [tmpAttachments addObject:[[LVKMessageAttachment alloc] initWithDictionary:attachment]];
+    }];
+    attachments = [NSArray arrayWithArray:tmpAttachments];
+}
+
+-(void)adoptForwarded:(NSArray *)_forwarded
+{
+    NSMutableArray *tmpForwarded = [[NSMutableArray alloc] init];
+    [_forwarded enumerateObjectsUsingBlock:^(NSDictionary *fwdMessage, NSUInteger idx, BOOL *stop) {
+        [tmpForwarded addObject:[[LVKRepostedMessage alloc] initWithDictionary:fwdMessage]];
+    }];
+    forwarded = [NSArray arrayWithArray:tmpForwarded];
 }
 
 -(void)adoptUser:(LVKUser *)adoptedUser

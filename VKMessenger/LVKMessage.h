@@ -27,6 +27,8 @@
 @property (nonatomic) NSArray *forwarded;
 
 -(id)initWithDictionary:(NSDictionary *)dictionary;
+-(void)adoptAttachments:(NSArray *)_attachments;
+-(void)adoptForwarded:(NSArray *)_forwarded;
 -(void)adoptUser:(LVKUser *)adoptedUser;
 -(readState)getReadState;
 -(NSArray *)getMessageParts;

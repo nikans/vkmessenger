@@ -15,7 +15,8 @@
     NSMutableArray *_objects;
     BOOL isLoading;
     BOOL hasDataToLoad;
-    UIRefreshControl *refreshControl;
+    UIRefreshControl *topRefreshControl;
+    UIRefreshControl *bottomRefreshControl;
 }
 @end
 
@@ -41,9 +42,13 @@
     
     hasDataToLoad = YES;
 
-    refreshControl = [[UIRefreshControl alloc]init];
-    [refreshControl addTarget:self action:@selector(onRefreshControl) forControlEvents:UIControlEventValueChanged];
-    [self.tableView setBottomRefreshControl:refreshControl];
+    bottomRefreshControl = [[UIRefreshControl alloc]init];
+    [bottomRefreshControl addTarget:self action:@selector(onBottomRefreshControl) forControlEvents:UIControlEventValueChanged];
+    [self.tableView setBottomRefreshControl:bottomRefreshControl];
+    
+    topRefreshControl = [[UIRefreshControl alloc]init];
+    [self.tableView addSubview:topRefreshControl];
+    [topRefreshControl addTarget:self action:@selector(onTopRefreshControl) forControlEvents:UIControlEventValueChanged];
 
 #pragma mark - iPad
 //    self.detailViewController = (LVKDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
@@ -102,7 +107,7 @@
             } errorBlock:^(NSError *error) {
                 if (error.code != VK_API_ERROR)
                 {
-                    [self networkFailed];
+                    [self networkFailedRequest:error.vkError.request];
                 }
                 else
                 {
@@ -142,7 +147,7 @@
 {
     if(!hasDataToLoad)
     {
-        [refreshControl endRefreshing];
+        [bottomRefreshControl endRefreshing];
         return;
     }
     if([VKSdk isLoggedIn])
@@ -181,46 +186,57 @@
                     [self networkRestored];
                     [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
                     isLoading = NO;
-                    [refreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
+                    [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
+                    [topRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
                     
                     if(_objects.count >= [[dialogsCollection count] intValue])
                     {
                         hasDataToLoad = NO;
-                        [refreshControl performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:YES];
+                        [bottomRefreshControl performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:YES];
                     }
                 } errorBlock:^(NSError *error) {
                     if (error.code != VK_API_ERROR)
                     {
-                        [self networkFailed];
+                        [self networkFailedRequest:error.vkError.request];
                     }
                     else
                     {
                         NSLog(@"%@", error);
                     }
                     isLoading = NO;
-                    [refreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
+                    [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
+                    [topRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
                 }];
             }
         } errorBlock:^(NSError *error) {
             if (error.code != VK_API_ERROR)
             {
-                [self networkFailed];
+                [self networkFailedRequest:error.vkError.request];
             }
             else
             {
                 NSLog(@"%@", error);
             }
             isLoading = NO;
-            [refreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
+            [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
+            [topRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
         }];
     }
 }
 
-- (void)onRefreshControl
+- (void)onBottomRefreshControl
 {
     if(!isLoading)
     {
         [self loadData:_objects.count];
+    }
+}
+
+- (void)onTopRefreshControl
+{
+    if(!isLoading)
+    {
+        [self loadData:0];
     }
 }
 

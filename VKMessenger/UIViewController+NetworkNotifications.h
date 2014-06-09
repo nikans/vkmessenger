@@ -10,7 +10,9 @@
 
 @interface UIViewController (NetworkNotifications)
 
-- (void)networkFailed;
+@property (strong, nonatomic) id<UIAlertViewDelegate> alertViewDelegate;
+
+- (void)networkFailedRequest:(id)request;
 - (void)networkRestored;
 
 @end

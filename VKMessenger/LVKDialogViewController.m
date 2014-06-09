@@ -68,24 +68,42 @@
         
         if(result.count == 0)
         {
-            LVKHistoryCollection *historyCollection = [[LVKHistoryCollection alloc] initWithMessage:[newMessageUpdate message]];
+            LVKMessage *message = [newMessageUpdate message];
+            VKRequest *messageRequest = [VKApi requestWithMethod:@"messages.getById" andParameters:[NSDictionary dictionaryWithObject:[message _id] forKey:@"message_id"] andHttpMethod:@"GET"];
             
-            NSMutableArray *userArray = [[NSMutableArray alloc] init];
-            
-            if([dialog type] == Room)
-            {
-                [userArray addObjectsFromArray:[dialog users]];
-            }
-            else if([dialog type] == Dialog)
-            {
-                [userArray addObject:[dialog user]];
-            }
-            [userArray addObject:[(LVKAppDelegate *)[[UIApplication sharedApplication] delegate] currentUser]];
-            
-            [historyCollection adoptUserArray:userArray];
-            
-            [_objects addObject:[[historyCollection messages] firstObject]];
-            [self tableViewReloadDataWithScrollToIndexPath:[NSIndexPath indexPathForRow:_objects.count-1 inSection:0]];
+            messageRequest.attempts = 2;
+            messageRequest.requestTimeout = 5;
+            [messageRequest executeWithResultBlock:^(VKResponse *response) {
+                [message adoptAttachments:[[[response.json objectForKey:@"items"] firstObject] objectForKey:@"attachments"]];
+                [message adoptForwarded:[[[response.json objectForKey:@"items"] firstObject] objectForKey:@"fwd_messages"]];
+                LVKHistoryCollection *historyCollection = [[LVKHistoryCollection alloc] initWithMessage:message];
+                
+                NSMutableArray *userArray = [[NSMutableArray alloc] init];
+                
+                if([dialog type] == Room)
+                {
+                    [userArray addObjectsFromArray:[dialog users]];
+                }
+                else if([dialog type] == Dialog)
+                {
+                    [userArray addObject:[dialog user]];
+                }
+                [userArray addObject:[(LVKAppDelegate *)[[UIApplication sharedApplication] delegate] currentUser]];
+                
+                [historyCollection adoptUserArray:userArray];
+                
+                [_objects addObject:[[historyCollection messages] firstObject]];
+                [self tableViewReloadDataWithScrollToIndexPath:[NSIndexPath indexPathForRow:_objects.count-1 inSection:0]];
+            } errorBlock:^(NSError *error) {
+                if (error.code != VK_API_ERROR)
+                {
+                    [self networkFailedRequest:error.vkError.request];
+                }
+                else
+                {
+                    NSLog(@"%@", error);
+                }
+            }];
         }
     }
 }
@@ -178,7 +196,7 @@
         } errorBlock:^(NSError *error) {
             if (error.code != VK_API_ERROR)
             {
-                [self networkFailed];
+                [self networkFailedRequest:error.vkError.request];
             }
             else
             {
@@ -558,7 +576,7 @@
     [self composeAndSendMessageWithText:text];
 }
 
--(IBAction) textFieldReceivedFocus:(id)sender
+-(void) markAllAsRead
 {
     NSString *messageIds = nil;
     
@@ -589,7 +607,7 @@
     } errorBlock:^(NSError *error) {
         if (error.code != VK_API_ERROR)
         {
-            [self networkFailed];
+            [self networkFailedRequest:error.vkError.request];
         }
         else
         {
@@ -612,13 +630,19 @@
     } errorBlock:^(NSError *error) {
         if (error.code != VK_API_ERROR)
         {
-            [self networkFailed];
+            [self networkFailedRequest:error.vkError.request];
         }
         else
         {
             NSLog(@"%@", error);
         }
     }];
+}
+
+#pragma mark - Text view
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    [self markAllAsRead];
 }
 
 #pragma mark - Scroll view
