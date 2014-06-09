@@ -18,6 +18,7 @@
     [super layoutSubviews];
     
     self.messageContainerViewWidthConstraint.constant = 234;
+    self.collectionViewHeightConstraint.constant = 0;
     
     // Making avatar cute and round
     self.avatarImage.layer.cornerRadius = 14;
@@ -36,18 +37,21 @@
     capInsets = UIEdgeInsetsMake(center.y, center.x, center.y, center.x);
     self.messageContainerBackgroundImage.image = [bubble resizableImageWithCapInsets:capInsets];
     
-    // Setting height
     [self.contentView layoutIfNeeded];
-    CGFloat height = self.collectionView.collectionViewLayout.collectionViewContentSize.height;
-    self.collectionViewHeightConstraint.constant = height;
     
-    // Width
+    
+    // Width & height
+
+    self.collectionViewHeightConstraint.constant = self.collectionView.collectionViewLayout.collectionViewContentSize.height;
+    
     NSInteger numberOfCells = [self.collectionView numberOfItemsInSection:0];
     UICollectionViewLayout *layout = self.collectionView.collectionViewLayout;
     CGFloat maxWidth = 0.0f;
+    CGFloat height = 0.0f;
     for (NSInteger i = 0; i < numberOfCells; i++) {
         UICollectionViewLayoutAttributes *layoutAttributes = [layout layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
         CGRect cellFrame = layoutAttributes.frame;
+        height += cellFrame.size.height;
         if (cellFrame.size.width > maxWidth) {
             maxWidth = cellFrame.size.width;
         }
@@ -61,6 +65,7 @@
         }
     }
     
+    self.collectionViewHeightConstraint.constant = height + ([self.collectionView numberOfItemsInSection:0]-1)*5; // TODO
     self.messageContainerViewWidthConstraint.constant = maxWidth+0.5;
 }
 
