@@ -105,7 +105,7 @@
     [tableView reloadData];
     int count = [_objects count]-1;
     if(count >= 0)
-    [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+        [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
 }
 
 - (void)registerObservers
@@ -285,11 +285,6 @@
     return size.height+1;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return UITableViewAutomaticDimension;
-}
-
 - (void)tableView:(UITableView *)tableView configureCell:(LVKDefaultMessageTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     LVKMessage *message = _objects[indexPath.row];
     cell.isOutgoing = [message isOutgoing];
@@ -317,9 +312,6 @@
     [self tableView:tableView configureCell:cell forRowAtIndexPath:indexPath];
     
     return cell;
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(LVKDefaultMessageTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
