@@ -22,8 +22,8 @@
     return self;
 }
 
-+ (CGSize)calculateContentSizeWithData:(id<LVKMessagePartProtocol>)_data {
-    CGSize textSize = [(NSString *)[(LVKRepostedMessage *)_data body] integralSizeWithFont:[UIFont systemFontOfSize:16] maxWidth:180 numberOfLines:INFINITY];
++ (CGSize)calculateContentSizeWithData:(id<LVKMessagePartProtocol>)_data maxWidth:(int)_maxWidth {
+    CGSize textSize = [(NSString *)[(LVKRepostedMessage *)_data body] integralSizeWithFont:[UIFont systemFontOfSize:16] maxWidth:_maxWidth numberOfLines:INFINITY];
     CGSize contentSize = CGSizeMake(200, textSize.height + 58); // avatar height
     return contentSize;
 }

@@ -19,7 +19,7 @@
     return self;
 }
 
-+ (CGSize)calculateContentSizeWithData:(id<LVKMessagePartProtocol>)_data {
++ (CGSize)calculateContentSizeWithData:(id<LVKMessagePartProtocol>)_data maxWidth:(int)_maxWidth {
     return CGSizeMake(100, 100);
 }
 

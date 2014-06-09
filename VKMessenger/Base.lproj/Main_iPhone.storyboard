@@ -10,8 +10,12 @@
                 <navigationController storyboardIdentifier="mainNavigationViewController" id="rS3-R9-Ivy" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="aJ5-8s-bZr"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="yXu-0R-QUA">
-                        <rect key="frame" x="0" y="0" width="0" height="0"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.35686274509999999" green="0.52156862749999999" blue="0.71372549019999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="pGg-6v-bdr" kind="relationship" relationship="rootViewController" id="RxB-wf-QIq"/>
@@ -143,8 +147,12 @@
             <objects>
                 <navigationController definesPresentationContext="YES" id="Vjk-5l-pYO" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="lFs-I8-aYy">
-                        <rect key="frame" x="0" y="0" width="0" height="0"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.35686274509999999" green="0.52156862749999999" blue="0.71372549019999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="5yM-Ku-V5Y" kind="relationship" relationship="rootViewController" id="XQh-Y2-jDV"/>
@@ -184,8 +192,12 @@
             <objects>
                 <navigationController definesPresentationContext="YES" id="JXW-Gf-fXJ" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="nI9-z9-u7g">
-                        <rect key="frame" x="0" y="0" width="0" height="0"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.35686274509999999" green="0.52156862749999999" blue="0.71372549019999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="29n-2a-gtL" kind="relationship" relationship="rootViewController" id="Ot8-RQ-u5s"/>
@@ -311,7 +323,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DateCell" rowHeight="31" id="tvW-B8-Vid">
-                                        <rect key="frame" x="0.0" y="174" width="320" height="31"/>
+                                        <rect key="frame" x="0.0" y="86" width="320" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tvW-B8-Vid" id="Ljh-tk-WOu">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="31"/>
@@ -327,7 +339,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DefaultIncomingMessageCell" rowHeight="82" id="tZw-SS-6Ol" customClass="LVKDefaultMessageTableViewCell">
-                                        <rect key="frame" x="0.0" y="205" width="320" height="82"/>
+                                        <rect key="frame" x="0.0" y="117" width="320" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tZw-SS-6Ol" id="v8s-xQ-D3e">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="82"/>
@@ -338,7 +350,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Eid-4T-heM">
-                                                            <rect key="frame" x="5" y="0.0" width="207" height="74"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="212" height="74"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         </imageView>
@@ -350,7 +362,7 @@
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" id="6YL-xh-12R"/>
                                                             </constraints>
                                                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uxN-k5-jZM">
-                                                                <size key="itemSize" width="196" height="1000"/>
+                                                                <size key="itemSize" width="0.0" height="1000"/>
                                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -367,7 +379,7 @@
                                                         <constraint firstItem="Eid-4T-heM" firstAttribute="top" secondItem="ZRI-g8-WgA" secondAttribute="top" id="V8C-dm-AUv"/>
                                                         <constraint firstAttribute="trailing" secondItem="Eid-4T-heM" secondAttribute="trailing" id="kgf-F1-bko"/>
                                                         <constraint firstItem="E3z-g0-LTu" firstAttribute="leading" secondItem="ZRI-g8-WgA" secondAttribute="leading" constant="11" id="lQw-qI-kJU"/>
-                                                        <constraint firstItem="Eid-4T-heM" firstAttribute="leading" secondItem="ZRI-g8-WgA" secondAttribute="leading" constant="5" id="lwK-wk-5US"/>
+                                                        <constraint firstItem="Eid-4T-heM" firstAttribute="leading" secondItem="ZRI-g8-WgA" secondAttribute="leading" id="lwK-wk-5US"/>
                                                         <constraint firstAttribute="trailing" secondItem="E3z-g0-LTu" secondAttribute="trailing" constant="5" id="ngb-jC-wgS"/>
                                                     </constraints>
                                                 </view>
@@ -410,12 +422,13 @@
                                             <outlet property="collectionViewHeightConstraint" destination="6YL-xh-12R" id="jEC-d3-JXh"/>
                                             <outlet property="messageContainerBackgroundImage" destination="Eid-4T-heM" id="zmC-R8-kmD"/>
                                             <outlet property="messageContainerView" destination="ZRI-g8-WgA" id="NHW-oo-ISq"/>
+                                            <outlet property="messageContainerViewWidthConstraint" destination="Fl6-6R-ENR" id="kkC-gK-dcd"/>
                                             <outlet property="timeLabel" destination="1g5-ic-OYO" id="kpl-dr-oKa"/>
-                                            <segue destination="AxX-8Y-Tck" kind="push" id="1jP-Sb-eNu" identifier="showMessage"/>
+                                            <segue destination="AxX-8Y-Tck" kind="push" identifier="showMessage" id="1jP-Sb-eNu"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DefaultOutgoingMessageCell" rowHeight="82" id="bxd-qi-SQS" customClass="LVKDefaultMessageTableViewCell">
-                                        <rect key="frame" x="0.0" y="287" width="320" height="82"/>
+                                        <rect key="frame" x="0.0" y="199" width="320" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bxd-qi-SQS" id="wul-WN-ePi">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="82"/>
@@ -486,8 +499,9 @@
                                             <outlet property="collectionViewHeightConstraint" destination="lV7-Ji-S5I" id="P0B-B9-ofv"/>
                                             <outlet property="messageContainerBackgroundImage" destination="TsR-wQ-JAD" id="lnk-qU-akS"/>
                                             <outlet property="messageContainerView" destination="OI6-S6-e0s" id="pme-jE-de1"/>
+                                            <outlet property="messageContainerViewWidthConstraint" destination="hHb-8a-7Ls" id="vUR-AY-SOq"/>
                                             <outlet property="timeLabel" destination="8OF-at-jZX" id="UN5-Xu-ODv"/>
-                                            <segue destination="AxX-8Y-Tck" kind="push" id="Spc-A0-PR9" identifier="showMessage"/>
+                                            <segue destination="AxX-8Y-Tck" kind="push" identifier="showMessage" id="Spc-A0-PR9"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

@@ -15,6 +15,6 @@
 
 //- (int)contentWidth;
 //- (CGSize)calculateContentSize;
-+ (CGSize)calculateContentSizeWithData:(id<LVKMessagePartProtocol>)_data;
++ (CGSize)calculateContentSizeWithData:(id<LVKMessagePartProtocol>)_data maxWidth:(int)_maxWidth;
 
 @end

@@ -21,11 +21,11 @@
     return self;
 }
 
-+ (CGSize)calculateContentSizeWithData:(id<LVKMessagePartProtocol>)_data {
-    CGSize textSize = [(NSString *)[(LVKMessage *)_data body] integralSizeWithFont:[UIFont systemFontOfSize:16] maxWidth:200 numberOfLines:INFINITY];
-    
-    NSLog(@"%@ - %f %f", [(LVKMessage *)_data body], textSize.width, textSize.height);
-    return textSize;
++ (CGSize)calculateContentSizeWithData:(id<LVKMessagePartProtocol>)_data maxWidth:(int)_maxWidth {
+    CGSize textSize = [(NSString *)[(LVKMessage *)_data body] integralSizeWithFont:[UIFont systemFontOfSize:16] maxWidth:_maxWidth-10 numberOfLines:INFINITY];
+    CGSize cellSize = CGSizeMake(textSize.width+10, textSize.height);
+//    NSLog(@"%@ - %f %f", [(LVKMessage *)_data body], textSize.width, textSize.height);
+    return cellSize;
 }
 
 @end

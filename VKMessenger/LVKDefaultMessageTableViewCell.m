@@ -11,6 +11,8 @@
 
 @implementation LVKDefaultMessageTableViewCell
 
+@synthesize minCollectionItemWidth;
+
 -(void)layoutSubviews
 {
     [super layoutSubviews];
@@ -57,7 +59,21 @@
 }
 
 
+- (void)setMinimumWidthForMessageContainer {
+//    self.messageContainerViewWidthConstraint.constant = self.collectionView.maximumItemWidth+10;
+//    NSLog(@"%f", self.collectionView.contentSize.width);
+//    self.collectionView.contentSize = CGSizeMake(100, self.collectionView.contentSize.height);
+//    [self.collectionView layoutSubviews];
+    //    LVKDefaultMessageTableViewCell *messageCell = (LVKDefaultMessageTableViewCell *)[self.tableView cellForRowAtIndexPath:collectionView.messageIndexPath];
+    //    if (messageCell.minCollectionItemWidth > cellSize.width + 10) {
+    //        messageCell.minCollectionItemWidth = cellSize.width + 10;
+    //    }
+    
+    //    if (messageCell.messageContainerViewWidthConstraint.constant > cellSize.width + 10) {
+    //        messageCell.messageContainerViewWidthConstraint.constant = cellSize.width + 10;
+    //    }
 
+}
 
 
 - (void)awakeFromNib

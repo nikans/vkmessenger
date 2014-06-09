@@ -72,6 +72,7 @@
 		D038C3571944E78200E7895D /* NSString+StringSize.m in Sources */ = {isa = PBXBuildFile; fileRef = D038C3561944E78200E7895D /* NSString+StringSize.m */; };
 		D038C3631945098600E7895D /* default-bubbleIncoming@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D038C3611945098600E7895D /* default-bubbleIncoming@2x.png */; };
 		D038C3681945135900E7895D /* default-bubbleOutgoing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D038C3671945135900E7895D /* default-bubbleOutgoing@2x.png */; };
+		D038C36B194534F900E7895D /* LVKDefaultMessagesCollectionViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D038C36A194534F900E7895D /* LVKDefaultMessagesCollectionViewFlowLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -186,6 +187,8 @@
 		D038C3561944E78200E7895D /* NSString+StringSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringSize.m"; sourceTree = "<group>"; };
 		D038C3611945098600E7895D /* default-bubbleIncoming@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default-bubbleIncoming@2x.png"; sourceTree = "<group>"; };
 		D038C3671945135900E7895D /* default-bubbleOutgoing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default-bubbleOutgoing@2x.png"; sourceTree = "<group>"; };
+		D038C369194534F900E7895D /* LVKDefaultMessagesCollectionViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultMessagesCollectionViewFlowLayout.h; sourceTree = "<group>"; };
+		D038C36A194534F900E7895D /* LVKDefaultMessagesCollectionViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDefaultMessagesCollectionViewFlowLayout.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -441,6 +444,8 @@
 			children = (
 				D038C3051944E13F00E7895D /* LVKDefaultMessagesCollectionView.h */,
 				D038C3061944E13F00E7895D /* LVKDefaultMessagesCollectionView.m */,
+				D038C369194534F900E7895D /* LVKDefaultMessagesCollectionViewFlowLayout.h */,
+				D038C36A194534F900E7895D /* LVKDefaultMessagesCollectionViewFlowLayout.m */,
 				D038C3341944E31E00E7895D /* LVKMessageItemProtocol.h */,
 				D038C32F1944E28200E7895D /* LVKDefaultMessageBodyItem.h */,
 				D038C3301944E28200E7895D /* LVKDefaultMessageBodyItem.m */,
@@ -641,6 +646,7 @@
 				A4140DE81942155E0023DFAA /* LVKLongPollResetMessageFlags.m in Sources */,
 				A45AEA9A193E94D5007F418E /* LVKLongPollUpdatesCollection.m in Sources */,
 				A410F677193F57B00030D7CC /* LVKMessage.m in Sources */,
+				D038C36B194534F900E7895D /* LVKDefaultMessagesCollectionViewFlowLayout.m in Sources */,
 				D038C3531944E64E00E7895D /* LVKDefaultMessageRepostBodyItem.m in Sources */,
 				D038C3321944E28200E7895D /* LVKDefaultMessageBodyItem.m in Sources */,
 				A4017DCD193DE8EA000EAD87 /* LVKDialogViewController.m in Sources */,

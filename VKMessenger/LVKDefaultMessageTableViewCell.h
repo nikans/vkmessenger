@@ -19,9 +19,14 @@ static NSString *CollectionViewCellIdentifier = @"BodyItem";
 @property (nonatomic, weak) IBOutlet LVKDefaultMessagesCollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageContainerViewWidthConstraint;
+@property (nonatomic) int minCollectionItemWidth;
+
 
 @property (nonatomic) BOOL isOutgoing;
 
--(void)setCollectionViewDelegates:(id<UICollectionViewDataSource, UICollectionViewDelegate>)dataSourceDelegate forMessageWithIndexPath:(NSIndexPath *)indexPath;
+- (void)setCollectionViewDelegates:(id<UICollectionViewDataSource, UICollectionViewDelegate>)dataSourceDelegate forMessageWithIndexPath:(NSIndexPath *)indexPath;
+
+- (void)setMinimumWidthForMessageContainer;
 
 @end

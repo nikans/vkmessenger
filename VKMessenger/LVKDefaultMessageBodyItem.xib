@@ -7,22 +7,35 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="LVKDefaultMessageBodyItem">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="21"/>
+            <rect key="frame" x="0.0" y="0.0" width="232" height="21"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="320" translatesAutoresizingMaskIntoConstraints="NO" id="f0C-MU-TIP">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="21"/>
+                <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6zk-U7-4bA">
+                    <rect key="frame" x="5" y="0.0" width="222" height="21"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="222" translatesAutoresizingMaskIntoConstraints="NO" id="f0C-MU-TIP">
+                            <rect key="frame" x="0.0" y="0.0" width="222" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                    <constraints>
+                        <constraint firstItem="f0C-MU-TIP" firstAttribute="top" secondItem="6zk-U7-4bA" secondAttribute="top" id="eOo-Zv-PZ5"/>
+                        <constraint firstItem="f0C-MU-TIP" firstAttribute="leading" secondItem="6zk-U7-4bA" secondAttribute="leading" id="hgv-5E-mO1"/>
+                        <constraint firstAttribute="bottom" secondItem="f0C-MU-TIP" secondAttribute="bottom" id="hw5-vA-nHj"/>
+                        <constraint firstAttribute="trailing" secondItem="f0C-MU-TIP" secondAttribute="trailing" id="jGg-tP-JAe"/>
+                    </constraints>
+                </view>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="f0C-MU-TIP" secondAttribute="bottom" id="2Cv-8R-HbD"/>
-                <constraint firstItem="f0C-MU-TIP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Fdl-W0-pqd"/>
-                <constraint firstItem="f0C-MU-TIP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="i9o-Bt-cmD"/>
-                <constraint firstAttribute="trailing" secondItem="f0C-MU-TIP" secondAttribute="trailing" id="vCk-N5-ccL"/>
+                <constraint firstAttribute="bottom" secondItem="6zk-U7-4bA" secondAttribute="bottom" id="8Iv-6s-aij"/>
+                <constraint firstItem="6zk-U7-4bA" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="DwQ-qk-mjW"/>
+                <constraint firstAttribute="trailing" secondItem="6zk-U7-4bA" secondAttribute="trailing" constant="5" id="L0j-Pb-NHG"/>
+                <constraint firstItem="6zk-U7-4bA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ptu-wZ-G78"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

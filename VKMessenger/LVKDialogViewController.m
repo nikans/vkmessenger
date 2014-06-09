@@ -316,6 +316,8 @@
     [cell.timeLabel setText:[NSDateFormatter localizedStringFromDate:[message date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle]];
     [self tableView:tableView configureCell:cell forRowAtIndexPath:indexPath];
     
+    [cell setMinimumWidthForMessageContainer];
+    
     return cell;
 }
 
@@ -411,14 +413,10 @@
 
 #pragma mark – UICollectionViewDelegateFlowLayout
 
-//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-//{
-//    
-//    NSInteger numberOfCells = self.view.frame.size.width / 202;
-//    NSInteger edgeInsets = (self.view.frame.size.width - (numberOfCells * 202)) / (numberOfCells + 1);
-//    
-//    return UIEdgeInsetsMake(0, edgeInsets, 0, edgeInsets);
-//}
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+     return UIEdgeInsetsMake(0,0, 0, 0);
+}
 
 //- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 //{
@@ -432,20 +430,26 @@
     id<LVKMessagePartProtocol> cellData = [self collectionView:collectionView dataForItemAtIndexPath:indexPath];
 
     CGSize cellSize;
+    int maxWidth = collectionView.frame.size.width;
 
     if([cellData isKindOfClass:[LVKMessage class]])
     {
-        cellSize = [LVKDefaultMessageBodyItem calculateContentSizeWithData:cellData];
+        cellSize = [LVKDefaultMessageBodyItem calculateContentSizeWithData:cellData maxWidth:maxWidth];
     }
     else if([cellData isKindOfClass:[LVKRepostedMessage class]])
     {
-        cellSize = [LVKDefaultMessageRepostBodyItem calculateContentSizeWithData:cellData];
+        cellSize = [LVKDefaultMessageRepostBodyItem calculateContentSizeWithData:cellData maxWidth:maxWidth];
     }
     else
     {
-        cellSize = [LVKDefaultMessageBodyItem calculateContentSizeWithData:[[LVKMessage alloc] init]];
+        cellSize = [LVKDefaultMessageBodyItem calculateContentSizeWithData:[[LVKMessage alloc] init] maxWidth:maxWidth];
     }
-
+    
+//    if (collectionView.maximumItemWidth < cellSize.width) {
+//        collectionView.maximumItemWidth = cellSize.width;
+//    }
+//    
+//    NSLog(@"act %f", cellSize.width);
 //    cellSize = [LVKDefaultMessageBodyItem calculateContentSizeWithData:cellData];
     
 //    switch (itemType) {

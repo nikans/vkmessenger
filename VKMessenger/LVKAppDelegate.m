@@ -23,6 +23,9 @@
 //        splitViewController.delegate = (id)navigationController.topViewController;
 //    }
     
+    // Status bar
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
     [VKSdk initializeWithDelegate:self andAppId:@"4395508"];
     if ([VKSdk wakeUpSession])
     {
