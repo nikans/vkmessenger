@@ -337,18 +337,18 @@
     
     UICollectionViewCell *cell;
 
-    if([cellData isKindOfClass:[LVKMessage class]])
-    {
-        cell = (LVKDefaultMessageBodyItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultBodyItem" forIndexPath:indexPath];
-        [cell setValue:[(LVKMessage *)cellData body] forKeyPath:@"body.text"];
-    }
-    else if([cellData isKindOfClass:[LVKRepostedMessage class]])
+    if([cellData isKindOfClass:[LVKRepostedMessage class]])
     {
         cell = (LVKDefaultMessageRepostBodyItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultRepostBodyItem" forIndexPath:indexPath];
         [cell setValue:[(LVKRepostedMessage *)cellData body] forKeyPath:@"body.text"];
         [cell setValue:[NSDateFormatter localizedStringFromDate:
                 [(LVKRepostedMessage *)cellData date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle] forKeyPath:@"date.text"];
         [cell setValue:[[(LVKRepostedMessage *)cellData user] fullName] forKeyPath:@"userName.text"];
+    }
+    else if([cellData isKindOfClass:[LVKMessage class]])
+    {
+        cell = (LVKDefaultMessageBodyItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultBodyItem" forIndexPath:indexPath];
+        [cell setValue:[(LVKMessage *)cellData body] forKeyPath:@"body.text"];
     }
     else
     {
