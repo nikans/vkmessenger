@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Levelab. All rights reserved.
 //
 
-#import "LVKMasterViewController.h"
+#import "LVKDialogListViewController.h"
 #import "LVKDialogViewController.h"
 #import "LVKUserPickerViewController.h"
 #import "UIScrollView+BottomRefreshControl.h"
 
-@interface LVKMasterViewController () {
+@interface LVKDialogListViewController () {
     NSMutableArray *_objects;
     BOOL isLoading;
     BOOL hasDataToLoad;
@@ -20,7 +20,7 @@
 }
 @end
 
-@implementation LVKMasterViewController
+@implementation LVKDialogListViewController
 
 @synthesize tableView;
 
