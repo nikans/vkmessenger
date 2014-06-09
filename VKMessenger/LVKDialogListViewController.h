@@ -18,7 +18,7 @@
 
 @class LVKDialogViewController;
 
-@interface LVKMasterViewController : UITableViewController
+@interface LVKDialogListViewController : UITableViewController
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) LVKDialogViewController *detailViewController;

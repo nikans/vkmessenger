@@ -20,7 +20,7 @@
 		A4017DC1193DE8EA000EAD87 /* LVKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4017DC0193DE8EA000EAD87 /* LVKAppDelegate.m */; };
 		A4017DC4193DE8EA000EAD87 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4017DC2193DE8EA000EAD87 /* Main_iPhone.storyboard */; };
 		A4017DC7193DE8EA000EAD87 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4017DC5193DE8EA000EAD87 /* Main_iPad.storyboard */; };
-		A4017DCA193DE8EA000EAD87 /* LVKMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4017DC9193DE8EA000EAD87 /* LVKMasterViewController.m */; };
+		A4017DCA193DE8EA000EAD87 /* LVKDialogListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4017DC9193DE8EA000EAD87 /* LVKDialogListViewController.m */; };
 		A4017DCD193DE8EA000EAD87 /* LVKDialogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4017DCC193DE8EA000EAD87 /* LVKDialogViewController.m */; };
 		A4017DCF193DE8EA000EAD87 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4017DCE193DE8EA000EAD87 /* Images.xcassets */; };
 		A4017DD6193DE8EA000EAD87 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4017DD5193DE8EA000EAD87 /* XCTest.framework */; };
@@ -119,8 +119,8 @@
 		A4017DC0193DE8EA000EAD87 /* LVKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LVKAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A4017DC3193DE8EA000EAD87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		A4017DC6193DE8EA000EAD87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		A4017DC8193DE8EA000EAD87 /* LVKMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LVKMasterViewController.h; sourceTree = "<group>"; };
-		A4017DC9193DE8EA000EAD87 /* LVKMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LVKMasterViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		A4017DC8193DE8EA000EAD87 /* LVKDialogListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LVKDialogListViewController.h; sourceTree = "<group>"; };
+		A4017DC9193DE8EA000EAD87 /* LVKDialogListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LVKDialogListViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A4017DCB193DE8EA000EAD87 /* LVKDialogViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LVKDialogViewController.h; sourceTree = "<group>"; };
 		A4017DCC193DE8EA000EAD87 /* LVKDialogViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LVKDialogViewController.m; sourceTree = "<group>"; };
 		A4017DCE193DE8EA000EAD87 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -339,8 +339,8 @@
 			children = (
 				A474AF85193FC77D009EB0D2 /* LVKWelcomeViewController.h */,
 				A474AF86193FC77D009EB0D2 /* LVKWelcomeViewController.m */,
-				A4017DC8193DE8EA000EAD87 /* LVKMasterViewController.h */,
-				A4017DC9193DE8EA000EAD87 /* LVKMasterViewController.m */,
+				A4017DC8193DE8EA000EAD87 /* LVKDialogListViewController.h */,
+				A4017DC9193DE8EA000EAD87 /* LVKDialogListViewController.m */,
 				A410F672193F4DD70030D7CC /* LVKUserPickerViewController.h */,
 				A410F673193F4DD70030D7CC /* LVKUserPickerViewController.m */,
 				A4140DEE1944D2220023DFAA /* LVKUserViewController.h */,
@@ -685,7 +685,7 @@
 				A4017DF0193E122E000EAD87 /* LVKDialogsCollection.m in Sources */,
 				D0A210BF194646CF008508BF /* LVKDefaultMessagePhotoItem.m in Sources */,
 				A4017DBD193DE8EA000EAD87 /* main.m in Sources */,
-				A4017DCA193DE8EA000EAD87 /* LVKMasterViewController.m in Sources */,
+				A4017DCA193DE8EA000EAD87 /* LVKDialogListViewController.m in Sources */,
 				A474AF81193FB56B009EB0D2 /* LVKAudioAttachment.m in Sources */,
 				A4017E02193E90A9000EAD87 /* LVKLongPollUpdate.m in Sources */,
 				A4017DF6193E317B000EAD87 /* LVKHistoryCollection.m in Sources */,
