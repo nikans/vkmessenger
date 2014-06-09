@@ -20,7 +20,6 @@
 -(id)initWithArray:(NSArray *)array
 {
     int eventCode = [[array firstObject] intValue];
-    NSLog(@"%@ %d", array, eventCode);
     NSMutableArray *tmpArray = [NSMutableArray arrayWithArray:array];
     [tmpArray removeObjectsInRange:NSMakeRange(0, 1)];
     

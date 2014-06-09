@@ -134,6 +134,8 @@
                               requestWithMethod:@"messages.getHistory"
                               andParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"30", @"count", [NSNumber numberWithInt:offset], @"offset", [dialog chatId], [dialog chatIdKey], nil]
                               andHttpMethod:@"GET"];
+        history.attempts = 3;
+        history.requestTimeout = 3;
         [history executeWithResultBlock:^(VKResponse *response) {
             LVKHistoryCollection *historyCollection = [[LVKHistoryCollection alloc] initWithDictionary:response.json];
             
@@ -171,7 +173,14 @@
                 [refreshControl performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:YES];
             }
         } errorBlock:^(NSError *error) {
-            NSLog(@"%@", error);
+            if (error.code != VK_API_ERROR)
+            {
+                [self networkFailed];
+            }
+            else
+            {
+                NSLog(@"%@", error);
+            }
             isLoading = NO;
             [refreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
         }];
@@ -555,10 +564,20 @@
                               requestWithMethod:@"messages.markAsRead"
                               andParameters:[NSDictionary dictionaryWithObjectsAndKeys:messageIds, @"message_ids", nil]
                               andHttpMethod:@"POST"];
+    
+    markAsRead.attempts = 3;
+    markAsRead.requestTimeout = 3;
     [markAsRead executeWithResultBlock:^(VKResponse *response) {
-        
+        [self networkRestored];
     } errorBlock:^(NSError *error) {
-        NSLog(@"%@", error);
+        if (error.code != VK_API_ERROR)
+        {
+            [self networkFailed];
+        }
+        else
+        {
+            NSLog(@"%@", error);
+        }
     }];
 }
 
@@ -568,10 +587,20 @@
                           requestWithMethod:@"messages.send"
                           andParameters:[NSDictionary dictionaryWithObjectsAndKeys:text, @"message", [dialog chatId], [dialog chatIdKey], nil]
                           andHttpMethod:@"POST"];
+    
+    sendMessage.attempts = 2;
+    sendMessage.requestTimeout = 10;
     [sendMessage executeWithResultBlock:^(VKResponse *response) {
-
+        [self networkRestored];
     } errorBlock:^(NSError *error) {
-        NSLog(@"%@", error);
+        if (error.code != VK_API_ERROR)
+        {
+            [self networkFailed];
+        }
+        else
+        {
+            NSLog(@"%@", error);
+        }
     }];
 }
 

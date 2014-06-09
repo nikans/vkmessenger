@@ -10,6 +10,7 @@
 #import <VKSdk.h>
 #import <CCBottomRefreshControl/UIScrollView+BottomRefreshControl.h>
 #import <UIImageView+WebCache.h>
+#import "UIViewController+NetworkNotifications.h"
 #import "LVKDialogsCollection.h"
 #import "LVKUsersCollection.h"
 #import <AudioToolbox/AudioToolbox.h>

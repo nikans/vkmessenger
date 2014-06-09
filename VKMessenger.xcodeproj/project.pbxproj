@@ -46,6 +46,7 @@
 		A474AF84193FB73D009EB0D2 /* LVKPhotoAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = A474AF83193FB73D009EB0D2 /* LVKPhotoAttachment.m */; };
 		A474AF87193FC77D009EB0D2 /* LVKWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A474AF86193FC77D009EB0D2 /* LVKWelcomeViewController.m */; };
 		A474AF8A193FD6B8009EB0D2 /* LVKMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A474AF89193FD6B8009EB0D2 /* LVKMessageViewController.m */; };
+		A483A27F1946385D00BC553C /* UIViewController+NetworkNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = A483A27E1946385D00BC553C /* UIViewController+NetworkNotifications.m */; };
 		B66FE78CE40F46C2BEC1B04D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5906D3D6B7B455798358AE9 /* libPods.a */; };
 		D038C3041944DE3000E7895D /* LVKDefaultMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D038C3031944DE3000E7895D /* LVKDefaultMessageTableViewCell.m */; };
 		D038C3071944E13F00E7895D /* LVKDefaultMessagesCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D038C3061944E13F00E7895D /* LVKDefaultMessagesCollectionView.m */; };
@@ -161,6 +162,8 @@
 		A474AF86193FC77D009EB0D2 /* LVKWelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKWelcomeViewController.m; sourceTree = "<group>"; };
 		A474AF88193FD6B8009EB0D2 /* LVKMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKMessageViewController.h; sourceTree = "<group>"; };
 		A474AF89193FD6B8009EB0D2 /* LVKMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKMessageViewController.m; sourceTree = "<group>"; };
+		A483A27D1946385D00BC553C /* UIViewController+NetworkNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NetworkNotifications.h"; sourceTree = "<group>"; };
+		A483A27E1946385D00BC553C /* UIViewController+NetworkNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NetworkNotifications.m"; sourceTree = "<group>"; };
 		B5906D3D6B7B455798358AE9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D038C3021944DE3000E7895D /* LVKDefaultMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultMessageTableViewCell.h; sourceTree = "<group>"; };
 		D038C3031944DE3000E7895D /* LVKDefaultMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDefaultMessageTableViewCell.m; sourceTree = "<group>"; };
@@ -282,6 +285,8 @@
 				A4017DB9193DE8EA000EAD87 /* InfoPlist.strings */,
 				A4017DBC193DE8EA000EAD87 /* main.m */,
 				A4017DBE193DE8EA000EAD87 /* VKMessenger-Prefix.pch */,
+				A483A27D1946385D00BC553C /* UIViewController+NetworkNotifications.h */,
+				A483A27E1946385D00BC553C /* UIViewController+NetworkNotifications.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -534,6 +539,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Levelab;
 				TargetAttributes = {
+					A4017DAC193DE8EA000EAD87 = {
+						DevelopmentTeam = 6VXW8XMBDL;
+					};
 					A4017DD3193DE8EA000EAD87 = {
 						TestTargetID = A4017DAC193DE8EA000EAD87;
 					};
@@ -645,6 +653,7 @@
 				A474AF84193FB73D009EB0D2 /* LVKPhotoAttachment.m in Sources */,
 				D038C3071944E13F00E7895D /* LVKDefaultMessagesCollectionView.m in Sources */,
 				A4017E05193E9239000EAD87 /* LVKLongPollNewMessage.m in Sources */,
+				A483A27F1946385D00BC553C /* UIViewController+NetworkNotifications.m in Sources */,
 				A4140DF01944D2220023DFAA /* LVKUserViewController.m in Sources */,
 				A474AF7E193FB41B009EB0D2 /* LVKMessageAttachment.m in Sources */,
 				D038C3511944E64E00E7895D /* LVKDefaultMessagePhotoItem.m in Sources */,
@@ -809,10 +818,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VKMessenger/VKMessenger-Prefix.pch";
 				INFOPLIST_FILE = "VKMessenger/VKMessenger-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -824,10 +836,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VKMessenger/VKMessenger-Prefix.pch";
 				INFOPLIST_FILE = "VKMessenger/VKMessenger-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
 			};

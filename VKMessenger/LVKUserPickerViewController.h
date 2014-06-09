@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <VKSdk.h>
 #import <UIImageView+WebCache.h>
+#import "UIViewController+NetworkNotifications.h"
 #import "LVKDialogViewController.h"
 #import "LVKUsersCollection.h"
 

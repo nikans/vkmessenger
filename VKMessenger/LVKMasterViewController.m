@@ -87,6 +87,8 @@
             isLoading = YES;
             VKRequest *users = [[VKApi users] get:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@", [[newMessageUpdate dialog] chatId]], @"user_ids", @"photo_100", @"fields", nil]];
             
+            users.attempts = 2;
+            users.requestTimeout = 3;
             [users executeWithResultBlock:^(VKResponse *response) {
                 LVKUsersCollection *usersCollection = [[LVKUsersCollection alloc] initWithArray:response.json];
                 
@@ -94,10 +96,18 @@
                 
                 [_objects insertObject:[newMessageUpdate dialog] atIndex:0];
                 
+                [self networkRestored];
                 [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
                 isLoading = NO;
             } errorBlock:^(NSError *error) {
-                NSLog(@"%@", error);
+                if (error.code != VK_API_ERROR)
+                {
+                    [self networkFailed];
+                }
+                else
+                {
+                    NSLog(@"%@", error);
+                }
                 isLoading = NO;
             }];
         }
@@ -142,6 +152,8 @@
                               requestWithMethod:@"messages.getDialogs"
                               andParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"30", @"count", [NSNumber numberWithInt:offset], @"offset", nil]
                               andHttpMethod:@"GET"];
+        dialogs.attempts = 3;
+        dialogs.requestTimeout = 3;
         [dialogs executeWithResultBlock:^(VKResponse *response) {
             LVKDialogsCollection *dialogsCollection = [[LVKDialogsCollection alloc] initWithDictionary:response.json];
             NSString *userIdsCSV = [[dialogsCollection getUserIds] componentsJoinedByString:@","];
@@ -150,6 +162,8 @@
             {
                 VKRequest *users = [[VKApi users] get:[NSDictionary dictionaryWithObjectsAndKeys:userIdsCSV, @"user_ids", @"photo_100", @"fields", nil]];
                 
+                users.attempts = 3;
+                users.requestTimeout = 3;
                 [users executeWithResultBlock:^(VKResponse *response) {
                     LVKUsersCollection *usersCollection = [[LVKUsersCollection alloc] initWithArray:response.json];
                     
@@ -164,6 +178,7 @@
                         [_objects addObjectsFromArray:[dialogsCollection dialogs]];
                     }
                     
+                    [self networkRestored];
                     [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
                     isLoading = NO;
                     [refreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
@@ -174,13 +189,27 @@
                         [refreshControl performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:YES];
                     }
                 } errorBlock:^(NSError *error) {
-                    NSLog(@"%@", error);
+                    if (error.code != VK_API_ERROR)
+                    {
+                        [self networkFailed];
+                    }
+                    else
+                    {
+                        NSLog(@"%@", error);
+                    }
                     isLoading = NO;
                     [refreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
                 }];
             }
         } errorBlock:^(NSError *error) {
-            NSLog(@"%@", error);
+            if (error.code != VK_API_ERROR)
+            {
+                [self networkFailed];
+            }
+            else
+            {
+                NSLog(@"%@", error);
+            }
             isLoading = NO;
             [refreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
         }];
@@ -306,7 +335,6 @@
         [[segue destinationViewController] setDialog:object];
     }
     else if ([[segue identifier] isEqualToString:@"pickUsers"]) {
-        NSLog(@"%@ %@", [segue destinationViewController], [[segue destinationViewController] topViewController]);
         [(LVKUserPickerViewController *)[[segue destinationViewController] topViewController] setCallerViewController:self];
     }
 }

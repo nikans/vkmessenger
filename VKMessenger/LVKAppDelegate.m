@@ -29,13 +29,10 @@
     [VKSdk initializeWithDelegate:self andAppId:@"4395508"];
     if ([VKSdk wakeUpSession])
     {
-        NSLog(@"Start working");
-        
         [self setup];
     }
     else
     {
-        NSLog(@"Show auth");
         [self authorize];
     }
     
@@ -99,9 +96,29 @@
     
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert)];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(networkFailed:)
+                                                 name:@"networkFailed"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(networkRestored:)
+                                                 name:@"networkRestored"
+                                               object:nil];
+    
     [self setupLongPolling];
     
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+}
+
+- (void)networkFailed:(NSNotification *)notification
+{
+    NSLog(@"Network failed");
+}
+
+- (void)networkRestored:(NSNotification *)notification
+{
+    NSLog(@"Network restored");
 }
 
 - (void)createCurrentUserObjectWithUserId:(NSNumber *)userId
@@ -117,7 +134,7 @@
         
         [currentUser setIsCurrent:YES];
     } errorBlock:^(NSError *error) {
-        NSLog(@"%@", error);
+        [error.vkError.request repeat];
     }];
     
 }
@@ -153,7 +170,10 @@
             [updates performSelectorOnMainThread:@selector(postNotifications) withObject:nil waitUntilDone:YES];
         }
         
-        [options setObject:[jsonResponse objectForKey:@"ts"] forKey:@"ts"];
+        if([jsonResponse objectForKey:@"ts"] != nil)
+        {
+            [options setObject:[jsonResponse objectForKey:@"ts"] forKey:@"ts"];
+        }
     }
     
     [self performSelectorInBackground:@selector(pollServerWithOptions:) withObject:options];
@@ -165,6 +185,7 @@
     {
         VKRequest *longPollServerRequest = [VKApi requestWithMethod:@"messages.getLongPollServer" andParameters:nil andHttpMethod:@"GET"];
         
+        longPollServerRequest.requestTimeout = 2;
         [longPollServerRequest executeWithResultBlock:^(VKResponse *response) {
             NSString *key = [response.json objectForKey:@"key"];
             NSString *server = [response.json objectForKey:@"server"];
@@ -174,7 +195,7 @@
             
             [self performSelectorInBackground:@selector(pollServerWithOptions:) withObject:options];
         } errorBlock:^(NSError *error) {
-            NSLog(@"%@", error);
+            [error.vkError.request repeat];
         }];
     }
 }
@@ -226,9 +247,7 @@
  @param newToken new token for API requests
  */
 - (void)vkSdkReceivedNewToken:(VKAccessToken *)newToken
-{
-    NSLog(@"Recieved new token");
-    
+{    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"authSucceeded" object:nil];
     
     [self setup];

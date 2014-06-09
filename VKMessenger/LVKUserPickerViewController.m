@@ -59,6 +59,8 @@
                                   requestWithMethod:@"users.search"
                                   andParameters:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:0], @"sort", @"photo_100", @"fields", currentSearchString, @"q", [NSNumber numberWithInt:offset], @"offset", nil]
                                   andHttpMethod:@"GET"];
+            users.attempts = 2;
+            users.requestTimeout = 5;
             [users executeWithResultBlock:^(VKResponse *response) {
                 LVKUsersCollection *usersCollection = [[LVKUsersCollection alloc] initWithDictionary:response.json];
                 
@@ -68,11 +70,19 @@
                 {
                     [self performSelector:@selector(loadSearchData:) withObject:0 afterDelay:1];
                 }
-                
+
+                [self networkRestored];
                 [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
                 isLoading = NO;
             } errorBlock:^(NSError *error) {
-                NSLog(@"%@", error);
+                if (error.code != VK_API_ERROR)
+                {
+                    [self networkFailed];
+                }
+                else
+                {
+                    NSLog(@"%@", error);
+                }
                 [self performSelector:@selector(loadSearchData:) withObject:0 afterDelay:2];
                 isLoading = NO;
             }];
@@ -94,16 +104,26 @@
                               requestWithMethod:@"friends.get"
                               andParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"hints", @"order", @"photo_100", @"fields", nil]
                               andHttpMethod:@"GET"];
+        friends.attempts = 2;
+        friends.requestTimeout = 5;
         [friends executeWithResultBlock:^(VKResponse *response) {
             LVKUsersCollection *usersCollection = [[LVKUsersCollection alloc] initWithDictionary:response.json];
 
             _objects = [NSMutableArray arrayWithArray:[usersCollection users]];
             _filteredObjects = [NSMutableArray arrayWithArray:_objects];
             
+            [self networkRestored];
             [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
             isLoading = NO;
         } errorBlock:^(NSError *error) {
-            NSLog(@"%@", error);
+            if (error.code != VK_API_ERROR)
+            {
+                [self networkFailed];
+            }
+            else
+            {
+                NSLog(@"%@", error);
+            }
             isLoading = NO;
         }];
     }
