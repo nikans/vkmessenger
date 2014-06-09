@@ -132,7 +132,7 @@
         isLoading = YES;
         VKRequest *history = [VKApi
                               requestWithMethod:@"messages.getHistory"
-                              andParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"60", @"count", [NSNumber numberWithInt:offset], @"offset", [dialog chatId], [dialog chatIdKey], nil]
+                              andParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"30", @"count", [NSNumber numberWithInt:offset], @"offset", [dialog chatId], [dialog chatIdKey], nil]
                               andHttpMethod:@"GET"];
         [history executeWithResultBlock:^(VKResponse *response) {
             LVKHistoryCollection *historyCollection = [[LVKHistoryCollection alloc] initWithDictionary:response.json];

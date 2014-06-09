@@ -140,7 +140,7 @@
         isLoading = YES;
         VKRequest *dialogs = [VKApi
                               requestWithMethod:@"messages.getDialogs"
-                              andParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"60", @"count", [NSNumber numberWithInt:offset], @"offset", nil]
+                              andParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"30", @"count", [NSNumber numberWithInt:offset], @"offset", nil]
                               andHttpMethod:@"GET"];
         [dialogs executeWithResultBlock:^(VKResponse *response) {
             LVKDialogsCollection *dialogsCollection = [[LVKDialogsCollection alloc] initWithDictionary:response.json];
