@@ -7,6 +7,7 @@
 //
 
 #import "LVKDefaultMessageStickerItem.h"
+#import "LVKStickerAttachment.h"
 
 @implementation LVKDefaultMessageStickerItem
 
@@ -19,13 +20,15 @@
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+- (void)awakeFromNib {
+    self.layer.cornerRadius = 10;
+    self.layer.masksToBounds = YES;
+    self.imageWidthConstraint.constant = self.frame.size.width;
 }
-*/
+
++ (CGSize)calculateContentSizeWithData:(LVKStickerAttachment *)_data maxWidth:(CGFloat)_maxWidth {
+    return CGSizeMake(128, 128);
+}
+
 
 @end
