@@ -79,7 +79,7 @@
 
 -(NSArray *)getMessageParts
 {
-    NSMutableArray *parts = [NSMutableArray arrayWithObject:self];
+    NSMutableArray *parts = body.length > 0 ? [NSMutableArray arrayWithObject:self] : [[NSMutableArray alloc] init];
 
     [parts addObjectsFromArray:attachments];
     [parts addObjectsFromArray:forwarded];
