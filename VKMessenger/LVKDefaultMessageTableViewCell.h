@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "LVKDefaultMessagesCollectionView.h"
 
+#import "LVKDefaultMessageBodyItem.h"
+#import "LVKDefaultMessagePhotoItem.h"
+#import "LVKDefaultMessageRepostBodyItem.h"
+
 static NSString *CollectionViewCellIdentifier = @"BodyItem";
 
 @interface LVKDefaultMessageTableViewCell : UITableViewCell

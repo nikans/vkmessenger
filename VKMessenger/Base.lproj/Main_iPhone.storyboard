@@ -360,6 +360,7 @@
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" id="6YL-xh-12R"/>
+                                                                <constraint firstAttribute="width" constant="196" id="hDd-gA-8Qr"/>
                                                             </constraints>
                                                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uxN-k5-jZM">
                                                                 <size key="itemSize" width="0.0" height="0.0"/>
@@ -377,7 +378,6 @@
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="Eid-4T-heM" secondAttribute="bottom" id="1ik-lk-WsZ"/>
-                                                        <constraint firstAttribute="width" constant="212" id="Fl6-6R-ENR"/>
                                                         <constraint firstAttribute="bottom" secondItem="E3z-g0-LTu" secondAttribute="bottom" constant="5" id="Qis-Mq-pvB"/>
                                                         <constraint firstItem="E3z-g0-LTu" firstAttribute="top" secondItem="ZRI-g8-WgA" secondAttribute="top" constant="5" id="RbW-vT-J8E"/>
                                                         <constraint firstItem="Eid-4T-heM" firstAttribute="top" secondItem="ZRI-g8-WgA" secondAttribute="top" id="V8C-dm-AUv"/>
@@ -426,7 +426,7 @@
                                             <outlet property="collectionViewHeightConstraint" destination="6YL-xh-12R" id="jEC-d3-JXh"/>
                                             <outlet property="messageContainerBackgroundImage" destination="Eid-4T-heM" id="zmC-R8-kmD"/>
                                             <outlet property="messageContainerView" destination="ZRI-g8-WgA" id="NHW-oo-ISq"/>
-                                            <outlet property="messageContainerViewWidthConstraint" destination="Fl6-6R-ENR" id="kkC-gK-dcd"/>
+                                            <outlet property="messageContainerViewWidthConstraint" destination="hDd-gA-8Qr" id="5Sq-Ed-4Yy"/>
                                             <outlet property="timeLabel" destination="1g5-ic-OYO" id="kpl-dr-oKa"/>
                                             <segue destination="AxX-8Y-Tck" kind="push" identifier="showMessage" id="1jP-Sb-eNu"/>
                                         </connections>
@@ -451,6 +451,7 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
+                                                                <constraint firstAttribute="width" constant="234" id="AZb-vm-IHa"/>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" id="lV7-Ji-S5I"/>
                                                             </constraints>
                                                             <inset key="scrollIndicatorInsets" minX="5" minY="5" maxX="5" maxY="5"/>
@@ -472,7 +473,6 @@
                                                         <constraint firstAttribute="bottom" secondItem="TsR-wQ-JAD" secondAttribute="bottom" id="4nd-X2-7gz"/>
                                                         <constraint firstItem="aIT-W1-odb" firstAttribute="leading" secondItem="OI6-S6-e0s" secondAttribute="leading" constant="5" id="7uH-7J-Bmq"/>
                                                         <constraint firstAttribute="bottom" secondItem="aIT-W1-odb" secondAttribute="bottom" constant="5" id="KaU-tm-TJG"/>
-                                                        <constraint firstAttribute="width" constant="250" id="hHb-8a-7Ls"/>
                                                         <constraint firstItem="aIT-W1-odb" firstAttribute="top" secondItem="OI6-S6-e0s" secondAttribute="top" constant="5" id="lcU-MC-nWa"/>
                                                         <constraint firstAttribute="trailing" secondItem="aIT-W1-odb" secondAttribute="trailing" constant="11" id="mio-Lb-nSX"/>
                                                         <constraint firstItem="TsR-wQ-JAD" firstAttribute="leading" secondItem="OI6-S6-e0s" secondAttribute="leading" id="og3-uU-nZb"/>
@@ -507,7 +507,7 @@
                                             <outlet property="collectionViewHeightConstraint" destination="lV7-Ji-S5I" id="P0B-B9-ofv"/>
                                             <outlet property="messageContainerBackgroundImage" destination="TsR-wQ-JAD" id="lnk-qU-akS"/>
                                             <outlet property="messageContainerView" destination="OI6-S6-e0s" id="pme-jE-de1"/>
-                                            <outlet property="messageContainerViewWidthConstraint" destination="hHb-8a-7Ls" id="vUR-AY-SOq"/>
+                                            <outlet property="messageContainerViewWidthConstraint" destination="AZb-vm-IHa" id="FmI-wD-8Bf"/>
                                             <outlet property="timeLabel" destination="8OF-at-jZX" id="UN5-Xu-ODv"/>
                                             <segue destination="AxX-8Y-Tck" kind="push" identifier="showMessage" id="Spc-A0-PR9"/>
                                         </connections>
@@ -534,35 +534,35 @@
                                 </connections>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nyX-wv-HJn">
-                                <rect key="frame" x="274" y="535" width="33" height="22"/>
+                                <rect key="frame" x="274" y="535" width="34" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="sendMessage:" destination="Ah7-4n-0Wa" eventType="touchDown" id="cKK-Nl-Q2F"/>
-                                </connections>
-                                <state key="normal" title="Send">
-                                    <color key="titleColor" colorSpace="calibratedRGB" red="0.502" green="0.502" blue="0.502" alpha="1"/>
-                                </state>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="yI7-OZ-Vem"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <state key="normal" title="Send">
+                                    <color key="titleColor" red="0.502" green="0.502" blue="0.502" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendMessage:" destination="Ah7-4n-0Wa" eventType="touchDown" id="cKK-Nl-Q2F"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="5MT-5d-gQd" firstAttribute="top" secondItem="jqM-jc-iYI" secondAttribute="top" id="HjN-0U-kxR"/>
-                            <constraint firstAttribute="trailing" secondItem="5MT-5d-gQd" secondAttribute="trailing" id="dvv-tj-BrR"/>
-                            <constraint firstItem="jqM-jc-iYI" firstAttribute="bottom" secondItem="5MT-5d-gQd" secondAttribute="bottom" constant="44" id="GrH-9G-hSB"/>
-                            <constraint firstItem="jqM-jc-iYI" firstAttribute="bottom" secondItem="5MT-5d-gQd" secondAttribute="bottom" constant="44" id="4c4-Nn-YL6"/>
-                            <constraint firstItem="5MT-5d-gQd" firstAttribute="leading" secondItem="jqM-jc-iYI" secondAttribute="leading" constant="0" id="747-bb-geG"/>
+                            <constraint firstAttribute="bottom" secondItem="5MT-5d-gQd" secondAttribute="bottom" constant="44" id="4c4-Nn-YL6"/>
+                            <constraint firstItem="nyX-wv-HJn" firstAttribute="bottom" secondItem="Rr9-QY-7Zw" secondAttribute="bottom" id="6QU-cM-pL5"/>
+                            <constraint firstItem="5MT-5d-gQd" firstAttribute="leading" secondItem="jqM-jc-iYI" secondAttribute="leading" id="747-bb-geG"/>
                             <constraint firstItem="Rr9-QY-7Zw" firstAttribute="leading" secondItem="jqM-jc-iYI" secondAttribute="leading" constant="20" id="ElA-cp-PI0"/>
-                            <constraint firstItem="jqM-jc-iYI" firstAttribute="trailing" secondItem="Rr9-QY-7Zw" secondAttribute="trailing" constant="54" id="xC1-a4-NGI"/>
-                            <constraint firstItem="jqM-jc-iYI" firstAttribute="bottom" secondItem="5MT-5d-gQd" secondAttribute="bottom" constant="44" id="bcA-Ne-V6P"/>
-                            <constraint firstItem="Rr9-QY-7Zw" firstAttribute="top" secondItem="jqM-jc-iYI" secondAttribute="top" constant="535" id="nld-J7-rFD"/>
-                            <constraint firstItem="jqM-jc-iYI" firstAttribute="bottom" secondItem="Rr9-QY-7Zw" secondAttribute="bottom" constant="11" id="Nwq-BK-hCg"/>
+                            <constraint firstAttribute="bottom" secondItem="5MT-5d-gQd" secondAttribute="bottom" constant="44" id="GrH-9G-hSB"/>
                             <constraint firstItem="nyX-wv-HJn" firstAttribute="leading" secondItem="Rr9-QY-7Zw" secondAttribute="trailing" constant="8" id="He5-Xi-riO"/>
-                            <constraint firstItem="nyX-wv-HJn" firstAttribute="top" secondItem="Rr9-QY-7Zw" secondAttribute="top" constant="0" id="Zoy-D0-jTi"/>
-                            <constraint firstItem="nyX-wv-HJn" firstAttribute="bottom" secondItem="Rr9-QY-7Zw" secondAttribute="bottom" constant="0" id="6QU-cM-pL5"/>
+                            <constraint firstItem="5MT-5d-gQd" firstAttribute="top" secondItem="jqM-jc-iYI" secondAttribute="top" id="HjN-0U-kxR"/>
+                            <constraint firstAttribute="bottom" secondItem="Rr9-QY-7Zw" secondAttribute="bottom" constant="11" id="Nwq-BK-hCg"/>
+                            <constraint firstItem="nyX-wv-HJn" firstAttribute="top" secondItem="Rr9-QY-7Zw" secondAttribute="top" id="Zoy-D0-jTi"/>
+                            <constraint firstAttribute="bottom" secondItem="5MT-5d-gQd" secondAttribute="bottom" constant="44" id="bcA-Ne-V6P"/>
+                            <constraint firstAttribute="trailing" secondItem="5MT-5d-gQd" secondAttribute="trailing" id="dvv-tj-BrR"/>
+                            <constraint firstItem="Rr9-QY-7Zw" firstAttribute="top" secondItem="jqM-jc-iYI" secondAttribute="top" constant="535" id="nld-J7-rFD"/>
+                            <constraint firstAttribute="trailing" secondItem="Rr9-QY-7Zw" secondAttribute="trailing" constant="54" id="xC1-a4-NGI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cra-N8-TIN"/>

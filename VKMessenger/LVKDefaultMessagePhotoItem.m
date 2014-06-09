@@ -7,6 +7,7 @@
 //
 
 #import "LVKDefaultMessagePhotoItem.h"
+#import "LVKPhotoAttachment.h"
 
 @implementation LVKDefaultMessagePhotoItem
 
@@ -19,8 +20,21 @@
     return self;
 }
 
-+ (CGSize)calculateContentSizeWithData:(id<LVKMessagePartProtocol>)_data maxWidth:(int)_maxWidth {
-    return CGSizeMake(100, 100);
+- (void)awakeFromNib {
+    self.photo.image = [UIImage imageNamed:@"camera"];
+    self.photo.layer.cornerRadius = 10;
+    self.photo.layer.masksToBounds = YES;
+}
+
++ (CGSize)calculateContentSizeWithData:(LVKPhotoAttachment *)_data maxWidth:(int)_maxWidth {
+    CGFloat scaleFactor = [_data.width floatValue] / [_data.height floatValue];
+    CGFloat _maxHeight = 150.0f;
+    CGFloat maxScaleFactor = (CGFloat)_maxWidth / _maxHeight;
+    
+    // TODO don't stretch
+    if (scaleFactor > maxScaleFactor)
+        return CGSizeMake(_maxWidth, [_data.height floatValue] * (_maxWidth / [_data.width floatValue]));
+    return CGSizeMake([_data.width floatValue] * (_maxHeight / [_data.height floatValue]), _maxHeight);
 }
 
 @end

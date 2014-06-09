@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import <VKSdk.h>
-#import <UIImageView+WebCache.h>
 #import "LVKHistoryCollection.h"
 #import "LVKDialog.h"
 #import "LVKLongPoll.h"
