@@ -15,6 +15,8 @@
 #import "LVKDefaultMessageStickerItem.h"
 #import "LVKDefaultMessageVideoItem.h"
 
+#import "LVKDialogCollectionViewDelegate.h"
+
 static NSString *CollectionViewCellIdentifier = @"BodyItem";
 
 @interface LVKDefaultMessageTableViewCell : UITableViewCell
@@ -27,6 +29,8 @@ static NSString *CollectionViewCellIdentifier = @"BodyItem";
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageContainerViewWidthConstraint;
 @property (nonatomic) int minCollectionItemWidth;
+
+@property (strong, nonatomic) LVKDialogCollectionViewDelegate *collectionViewDelegate;
 
 
 @property (nonatomic) BOOL isOutgoing;

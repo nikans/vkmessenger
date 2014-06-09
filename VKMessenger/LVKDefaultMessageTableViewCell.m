@@ -11,9 +11,9 @@
 
 @implementation LVKDefaultMessageTableViewCell
 
-@synthesize minCollectionItemWidth;
+@synthesize minCollectionItemWidth, collectionViewDelegate;
 
--(void)layoutSubviews
+- (void)layoutSubviews
 {
     [super layoutSubviews];
     
@@ -62,13 +62,14 @@
     }
     
     self.messageContainerViewWidthConstraint.constant = maxWidth+0.5;
-
 }
 
 -(void)setCollectionViewDelegates:(id<UICollectionViewDataSource, UICollectionViewDelegate>)dataSourceDelegate forMessageWithIndexPath:(NSIndexPath *)indexPath
 {
-    self.collectionView.dataSource = dataSourceDelegate;
-    self.collectionView.delegate   = dataSourceDelegate;
+    self.collectionViewDelegate = (LVKDialogCollectionViewDelegate *)dataSourceDelegate;
+    
+    self.collectionView.dataSource = self.collectionViewDelegate;
+    self.collectionView.delegate   = self.collectionViewDelegate;
     
     self.collectionView.messageIndexPath = indexPath;
     
