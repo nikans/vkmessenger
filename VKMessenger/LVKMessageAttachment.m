@@ -9,6 +9,10 @@
 #import "LVKMessageAttachment.h"
 #import "LVKAudioAttachment.h"
 #import "LVKPhotoAttachment.h"
+#import "LVKStickerAttachment.h"
+#import "LVKWallAttachment.h"
+#import "LVKVideoAttachment.h"
+#import "LVKDocumentAttachment.h"
 
 @implementation LVKMessageAttachment
 
@@ -25,11 +29,27 @@
     
     if([tmpType isEqualToString:@"audio"])
     {
-        self = [[LVKAudioAttachment alloc] initWithDictionary:[dictionary objectForKey:@"audio"] andTypeString:tmpType];
+        self = [[LVKAudioAttachment alloc] initWithDictionary:[dictionary objectForKey:tmpType] andTypeString:tmpType];
     }
     else if([tmpType isEqualToString:@"photo"])
     {
-        self = [[LVKPhotoAttachment alloc] initWithDictionary:[dictionary objectForKey:@"photo"] andTypeString:tmpType];
+        self = [[LVKPhotoAttachment alloc] initWithDictionary:[dictionary objectForKey:tmpType] andTypeString:tmpType];
+    }
+    else if([tmpType isEqualToString:@"sticker"])
+    {
+        self = [[LVKStickerAttachment alloc] initWithDictionary:[dictionary objectForKey:tmpType] andTypeString:tmpType];
+    }
+    else if([tmpType isEqualToString:@"video"])
+    {
+        self = [[LVKVideoAttachment alloc] initWithDictionary:[dictionary objectForKey:tmpType] andTypeString:tmpType];
+    }
+    else if([tmpType isEqualToString:@"wall"])
+    {
+        self = [[LVKWallAttachment alloc] initWithDictionary:[dictionary objectForKey:tmpType] andTypeString:tmpType];
+    }
+    else if([tmpType isEqualToString:@"doc"])
+    {
+        self = [[LVKDocumentAttachment alloc] initWithDictionary:[dictionary objectForKey:tmpType] andTypeString:tmpType];
     }
     else
     {
