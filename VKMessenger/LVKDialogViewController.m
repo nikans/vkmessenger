@@ -11,6 +11,7 @@
 #import "LVKAppDelegate.h"
 #import "AVHexColor.h"
 #import <UIImageView+WebCache.h>
+#import <UIButton+WebCache.h>
 #import "LVKMessagePartProtocol.h"
 #import "LVKDialogCollectionViewDelegate.h"
 
@@ -34,7 +35,7 @@
 
 @implementation LVKDialogViewController
 
-@synthesize tableView, textView , dialog;
+@synthesize tableView, textView, dialog;
 
 
 #pragma mark - Networking
@@ -235,10 +236,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    
+
+    // Navbar
     [[self navigationItem] setTitle:dialog.title];
     
+    // TODO: placeholder, spacing
+    if (self.dialog.type == Dialog) {
+        UIButton *avatarButton = [[UIButton alloc] initWithFrame:CGRectMake(0,0,36,36)];
+        [avatarButton setImageWithURL:self.dialog.user.photo_100 forState:UIControlStateNormal];
+        [avatarButton addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
+        avatarButton.layer.cornerRadius = 18.0f;
+        avatarButton.layer.masksToBounds = YES;
+        
+        UIView *avatarButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 36, 36)];
+        avatarButtonView.bounds = CGRectOffset(avatarButtonView.bounds, -11, -1);
+        [avatarButtonView addSubview:avatarButton];
+
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:avatarButtonView];
+    }
+    
+    // TODO: style
+    self.tableView.backgroundColor = [AVHexColor colorWithHexString:@"#edf3fa"];
+    
+    
+    // Load data
     [self registerObservers];
     
     hasDataToLoad = YES;
@@ -250,9 +271,6 @@
     bottomRefreshControl = [[UIRefreshControl alloc]init];
     [bottomRefreshControl addTarget:self action:@selector(onBottomRefreshControl) forControlEvents:UIControlEventValueChanged];
     [self.tableView setBottomRefreshControl:bottomRefreshControl];
-    
-    // TODO: style
-    self.tableView.backgroundColor = [AVHexColor colorWithHexString:@"#edf3fa"];
     
     [self loadData:0];
 }
