@@ -24,7 +24,8 @@
     NSMutableArray *_objects;
     BOOL isLoading;
     BOOL hasDataToLoad;
-    UIRefreshControl *refreshControl;
+    UIRefreshControl *topRefreshControl;
+    UIRefreshControl *bottomRefreshControl;
 }
 
 // TODO: interface 4 cell
@@ -147,7 +148,7 @@
 {
     if(!hasDataToLoad)
     {
-        [refreshControl endRefreshing];
+        [topRefreshControl endRefreshing];
         return;
     }
     if(dialog)
@@ -188,12 +189,14 @@
             }
             
             isLoading = NO;
-            [refreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
+            [topRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
+            [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
             
             if(_objects.count >= [[historyCollection count] intValue])
             {
                 hasDataToLoad = NO;
-                [refreshControl performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:YES];
+                [topRefreshControl performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:YES];
+                [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
             }
         } errorBlock:^(NSError *error) {
             if (error.code != VK_API_ERROR)
@@ -205,16 +208,25 @@
                 NSLog(@"%@", error);
             }
             isLoading = NO;
-            [refreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
+            [topRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
+            [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
         }];
     }
 }
 
-- (void)onRefreshControl
+- (void)onTopRefreshControl
 {
     if(!isLoading)
     {
         [self loadData:_objects.count];
+    }
+}
+
+- (void)onBottomRefreshControl
+{
+    if(!isLoading)
+    {
+        [self loadData:0];
     }
 }
 
@@ -229,9 +241,13 @@
     
     hasDataToLoad = YES;
     
-    refreshControl = [[UIRefreshControl alloc]init];
-    [self.tableView addSubview:refreshControl];
-    [refreshControl addTarget:self action:@selector(onRefreshControl) forControlEvents:UIControlEventValueChanged];
+    topRefreshControl = [[UIRefreshControl alloc]init];
+    [self.tableView addSubview:topRefreshControl];
+    [topRefreshControl addTarget:self action:@selector(onTopRefreshControl) forControlEvents:UIControlEventValueChanged];
+    
+    bottomRefreshControl = [[UIRefreshControl alloc]init];
+    [bottomRefreshControl addTarget:self action:@selector(onBottomRefreshControl) forControlEvents:UIControlEventValueChanged];
+    [self.tableView setBottomRefreshControl:bottomRefreshControl];
     
     // TODO: style
     self.tableView.backgroundColor = [AVHexColor colorWithHexString:@"#edf3fa"];
