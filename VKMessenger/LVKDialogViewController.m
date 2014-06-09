@@ -10,10 +10,13 @@
 #import "LVKMessageViewController.h"
 #import "LVKAppDelegate.h"
 #import "AVHexColor.h"
+#import <UIImageView+WebCache.h>
 
 #import "LVKDefaultMessageTableViewCell.h"
 #import "LVKMessagePartProtocol.h"
 #import "LVKRepostedMessage.h"
+#import "LVKPhotoAttachment.h"
+#import "LVKAudioAttachment.h"
 
 @interface LVKDialogViewController () {
     NSMutableArray *_objects;
@@ -346,6 +349,7 @@
     
     UICollectionViewCell *cell;
 
+    // Repost
     if([cellData isKindOfClass:[LVKRepostedMessage class]])
     {
         cell = (LVKDefaultMessageRepostBodyItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultRepostBodyItem" forIndexPath:indexPath];
@@ -354,11 +358,22 @@
                 [(LVKRepostedMessage *)cellData date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle] forKeyPath:@"date.text"];
         [cell setValue:[[(LVKRepostedMessage *)cellData user] fullName] forKeyPath:@"userName.text"];
     }
+    
+    // Body
     else if([cellData isKindOfClass:[LVKMessage class]])
     {
         cell = (LVKDefaultMessageBodyItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultBodyItem" forIndexPath:indexPath];
         [cell setValue:[(LVKMessage *)cellData body] forKeyPath:@"body.text"];
     }
+    
+    // Photo
+    else if([cellData isKindOfClass:[LVKPhotoAttachment class]])
+    {
+        cell = (LVKDefaultMessagePhotoItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultPhotoItem" forIndexPath:indexPath];
+        [[(LVKDefaultMessagePhotoItem *)cell photo] setImageWithURL:[(LVKPhotoAttachment *)cellData photo_604]];
+    }
+    
+    // Body (probably empty)
     else
     {
         cell = (LVKDefaultMessageBodyItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultBodyItem" forIndexPath:indexPath];
@@ -430,26 +445,28 @@
     // TODO smth
     LVKMessage *message = _objects[collectionView.messageIndexPath.row];
     if([message isOutgoing])
-        maxWidth = 234;
+        maxWidth = 233;
     else
-        maxWidth = 196;
+        maxWidth = 195;
 
+    // Body
     if([cellData isKindOfClass:[LVKMessage class]])
-    {
-        cellSize = [LVKDefaultMessageBodyItem calculateContentSizeWithData:cellData maxWidth:maxWidth];
-    }
-    else if([cellData isKindOfClass:[LVKRepostedMessage class]])
-    {
-        cellSize = [LVKDefaultMessageRepostBodyItem calculateContentSizeWithData:cellData maxWidth:maxWidth];
-    }
-    else
-    {
-        cellSize = [LVKDefaultMessageBodyItem calculateContentSizeWithData:[[LVKMessage alloc] init] maxWidth:maxWidth];
-    }
+        cellSize = [LVKDefaultMessageBodyItem calculateContentSizeWithData:(LVKMessage *)cellData maxWidth:maxWidth];
     
-    if (cellSize.width > maxWidth) {
+    // Repost
+    else if([cellData isKindOfClass:[LVKRepostedMessage class]])
+        cellSize = [LVKDefaultMessageRepostBodyItem calculateContentSizeWithData:(LVKMessage *)cellData maxWidth:maxWidth];
+    
+    // Photo
+    else if([cellData isKindOfClass:[LVKPhotoAttachment class]])
+        cellSize = [LVKDefaultMessagePhotoItem calculateContentSizeWithData:(LVKPhotoAttachment *)cellData maxWidth:maxWidth];
+    
+    // Body (probably empty)
+    else
+        cellSize = [LVKDefaultMessageBodyItem calculateContentSizeWithData:[[LVKMessage alloc] init] maxWidth:maxWidth];
+    
+    if (cellSize.width > maxWidth)
         cellSize = CGSizeMake(maxWidth, cellSize.height);
-    }
 
     
 //    if (collectionView.maximumItemWidth < cellSize.width) {

@@ -7,7 +7,6 @@
 //
 
 #import "LVKDefaultMessageTableViewCell.h"
-#import "LVKDefaultMessageBodyItem.h"
 
 @implementation LVKDefaultMessageTableViewCell
 
@@ -16,6 +15,8 @@
 -(void)layoutSubviews
 {
     [super layoutSubviews];
+    
+    self.messageContainerViewWidthConstraint.constant = 234;
     
     // Making avatar cute and round
     self.avatarImage.layer.cornerRadius = 14;
@@ -48,10 +49,11 @@
         CGRect cellFrame = layoutAttributes.frame;
         if (cellFrame.size.width > maxWidth) {
             maxWidth = cellFrame.size.width;
-            self.messageContainerViewWidthConstraint.constant = maxWidth+16.0f;
         }
 //        [self.collectionView layoutSubviews];
     }
+    self.messageContainerViewWidthConstraint.constant = maxWidth+1;
+
 }
 
 -(void)setCollectionViewDelegates:(id<UICollectionViewDataSource, UICollectionViewDelegate>)dataSourceDelegate forMessageWithIndexPath:(NSIndexPath *)indexPath
