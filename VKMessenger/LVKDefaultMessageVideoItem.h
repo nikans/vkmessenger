@@ -1,5 +1,5 @@
 //
-//  LVKDefaultMessagePhotoItem.h
+//  LVKDefaultMessageVideoItem.h
 //  VKMessenger
 //
 //  Created by Eliah Nikans on 6/9/14.
@@ -8,9 +8,10 @@
 
 #import "LVKMessageItemProtocol.h"
 
-@interface LVKDefaultMessagePhotoItem : UICollectionViewCell <LVKMessageItemProtocol>
+@interface LVKDefaultMessageVideoItem : UICollectionViewCell <LVKMessageItemProtocol>
 
 @property (weak, nonatomic) IBOutlet UIImageView *image;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageWidthConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *durationLabel;
 
 @end

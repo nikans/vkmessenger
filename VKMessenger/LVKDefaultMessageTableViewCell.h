@@ -10,8 +10,10 @@
 #import "LVKDefaultMessagesCollectionView.h"
 
 #import "LVKDefaultMessageBodyItem.h"
-#import "LVKDefaultMessagePhotoItem.h"
 #import "LVKDefaultMessageRepostBodyItem.h"
+#import "LVKDefaultMessagePhotoItem.h"
+#import "LVKDefaultMessageStickerItem.h"
+#import "LVKDefaultMessageVideoItem.h"
 
 static NSString *CollectionViewCellIdentifier = @"BodyItem";
 

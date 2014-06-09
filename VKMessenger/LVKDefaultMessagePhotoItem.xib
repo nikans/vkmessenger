@@ -11,20 +11,23 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rbH-SJ-sRD">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                    <rect key="frame" x="160" y="0.0" width="0.0" height="70"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" id="d6t-5n-LNd"/>
+                    </constraints>
                 </imageView>
             </subviews>
+            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="rbH-SJ-sRD" secondAttribute="trailing" id="CB3-hE-pyD"/>
-                <constraint firstAttribute="bottom" secondItem="rbH-SJ-sRD" secondAttribute="bottom" id="Lce-1r-4dq"/>
-                <constraint firstItem="rbH-SJ-sRD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="PQ2-Ik-dyG"/>
-                <constraint firstItem="rbH-SJ-sRD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="yxT-fT-C0D"/>
+                <constraint firstItem="rbH-SJ-sRD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="14C-me-xDs"/>
+                <constraint firstAttribute="bottom" secondItem="rbH-SJ-sRD" secondAttribute="bottom" id="Wbi-R1-vyG"/>
+                <constraint firstAttribute="centerX" secondItem="rbH-SJ-sRD" secondAttribute="centerX" id="XFR-Dp-Cay"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="photo" destination="rbH-SJ-sRD" id="12U-XR-9bO"/>
+                <outlet property="image" destination="rbH-SJ-sRD" id="6c9-nE-TAK"/>
+                <outlet property="imageWidthConstraint" destination="d6t-5n-LNd" id="1ys-Xo-51n"/>
             </connections>
         </view>
     </objects>

@@ -21,7 +21,7 @@
     return self;
 }
 
-+ (CGSize)calculateContentSizeWithData:(LVKMessage *)_data maxWidth:(int)_maxWidth {
++ (CGSize)calculateContentSizeWithData:(LVKMessage *)_data maxWidth:(CGFloat)_maxWidth {
     if ([_data.body length] == 0)
         return CGSizeMake(1.f, 1.f);
     

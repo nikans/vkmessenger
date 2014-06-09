@@ -22,7 +22,7 @@
     return self;
 }
 
-+ (CGSize)calculateContentSizeWithData:(LVKRepostedMessage *)_data maxWidth:(int)_maxWidth {
++ (CGSize)calculateContentSizeWithData:(LVKRepostedMessage *)_data maxWidth:(CGFloat)_maxWidth {
     CGSize textSize = [(NSString *)[_data body] integralSizeWithFont:[UIFont systemFontOfSize:16] maxWidth:_maxWidth numberOfLines:INFINITY];
     CGSize contentSize = CGSizeMake(200, textSize.height + 58); // avatar height
     return contentSize;

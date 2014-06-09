@@ -17,6 +17,8 @@
 #import "LVKRepostedMessage.h"
 #import "LVKPhotoAttachment.h"
 #import "LVKAudioAttachment.h"
+#import "LVKStickerAttachment.h"
+#import "LVKVideoAttachment.h"
 
 @interface LVKDialogViewController () {
     NSMutableArray *_objects;
@@ -388,8 +390,24 @@
     else if([cellData isKindOfClass:[LVKPhotoAttachment class]])
     {
         cell = (LVKDefaultMessagePhotoItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultPhotoItem" forIndexPath:indexPath];
-        [[(LVKDefaultMessagePhotoItem *)cell photo] setImageWithURL:[(LVKPhotoAttachment *)cellData photo_604]];
+        [[(LVKDefaultMessagePhotoItem *)cell image] setImageWithURL:[(LVKPhotoAttachment *)cellData photo_604]];
     }
+    
+    // Video
+    else if([cellData isKindOfClass:[LVKVideoAttachment class]])
+    {
+        cell = (LVKDefaultMessageVideoItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultVideoItem" forIndexPath:indexPath];
+        [[(LVKDefaultMessageVideoItem *)cell image] setImageWithURL:[(LVKVideoAttachment *)cellData photo_130]];
+        [[(LVKDefaultMessageVideoItem *)cell durationLabel] setText:[NSString stringWithFormat:@"%@", [(LVKVideoAttachment *)cellData duration]]];
+    }
+    
+    // Sticker
+    else if([cellData isKindOfClass:[LVKStickerAttachment class]])
+    {
+        cell = (LVKDefaultMessageStickerItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultStickerItem" forIndexPath:indexPath];
+        [[(LVKDefaultMessageStickerItem *)cell image] setImageWithURL:[(LVKStickerAttachment *)cellData photo_128]];
+    }
+
     
     // Body (probably empty)
     else
@@ -458,14 +476,14 @@
     id<LVKMessagePartProtocol> cellData = [self collectionView:collectionView dataForItemAtIndexPath:indexPath];
 
     CGSize cellSize;
-    int maxWidth;
+    CGFloat maxWidth;
     
     // TODO smth
     LVKMessage *message = _objects[collectionView.messageIndexPath.row];
     if([message isOutgoing])
-        maxWidth = 233;
+        maxWidth = 233.5;
     else
-        maxWidth = 195;
+        maxWidth = 195.5;
 
     // Body
     if([cellData isKindOfClass:[LVKMessage class]])
@@ -478,6 +496,15 @@
     // Photo
     else if([cellData isKindOfClass:[LVKPhotoAttachment class]])
         cellSize = [LVKDefaultMessagePhotoItem calculateContentSizeWithData:(LVKPhotoAttachment *)cellData maxWidth:maxWidth];
+    
+    // Sticker
+    else if([cellData isKindOfClass:[LVKStickerAttachment class]])
+        cellSize = [LVKDefaultMessageStickerItem calculateContentSizeWithData:(LVKStickerAttachment *)cellData maxWidth:maxWidth];
+    
+    // Video
+    else if([cellData isKindOfClass:[LVKVideoAttachment class]])
+        cellSize = [LVKDefaultMessageVideoItem calculateContentSizeWithData:(LVKVideoAttachment *)cellData maxWidth:maxWidth];
+    
     
     // Body (probably empty)
     else

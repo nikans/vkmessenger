@@ -7,6 +7,7 @@
 //
 
 #import "LVKDefaultMessageTableViewCell.h"
+#import "LVKMessageItemProtocol.h"
 
 @implementation LVKDefaultMessageTableViewCell
 
@@ -52,7 +53,15 @@
         }
 //        [self.collectionView layoutSubviews];
     }
-    self.messageContainerViewWidthConstraint.constant = maxWidth+1;
+    
+    for (NSInteger i = 0; i < numberOfCells; i++) {
+        UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+        if ([cell respondsToSelector:@selector(layoutIfNeededForCalculatedWidth:)]) {
+            [(id<LVKMessageItemProtocol>)cell layoutIfNeededForCalculatedWidth:maxWidth];
+        }
+    }
+    
+    self.messageContainerViewWidthConstraint.constant = maxWidth+0.5;
 
 }
 

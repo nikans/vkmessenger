@@ -1,8 +1,8 @@
 //
-//  LVKMessagePictureItem.m
-//  VKMessengerViews
+//  LVKDefaultMessagePhotoItem.m
+//  VKMessenger
 //
-//  Created by Eliah Nikans on 6/4/14.
+//  Created by Eliah Nikans on 6/9/14.
 //  Copyright (c) 2014 Levelab. All rights reserved.
 //
 
@@ -21,12 +21,12 @@
 }
 
 - (void)awakeFromNib {
-    self.photo.image = [UIImage imageNamed:@"camera"];
-    self.photo.layer.cornerRadius = 10;
-    self.photo.layer.masksToBounds = YES;
+    self.layer.cornerRadius = 10;
+    self.layer.masksToBounds = YES;
+    self.imageWidthConstraint.constant = self.frame.size.width;
 }
 
-+ (CGSize)calculateContentSizeWithData:(LVKPhotoAttachment *)_data maxWidth:(int)_maxWidth {
++ (CGSize)calculateContentSizeWithData:(LVKPhotoAttachment *)_data maxWidth:(CGFloat)_maxWidth {
     CGFloat scaleFactor = [_data.width floatValue] / [_data.height floatValue];
     CGFloat _maxHeight = 150.0f;
     CGFloat maxScaleFactor = (CGFloat)_maxWidth / _maxHeight;
@@ -36,5 +36,9 @@
         return CGSizeMake(_maxWidth, [_data.height floatValue] * (_maxWidth / [_data.width floatValue]));
     return CGSizeMake([_data.width floatValue] * (_maxHeight / [_data.height floatValue]), _maxHeight);
 }
+
+//- (void)layoutIfNeededForCalculatedWidth:(CGFloat)_width {
+//    self.frame = CGRectMake(0, 0, _width, self.photo.frame.size.height);
+//}
 
 @end

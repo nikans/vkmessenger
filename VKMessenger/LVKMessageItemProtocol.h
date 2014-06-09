@@ -15,6 +15,10 @@
 
 //- (int)contentWidth;
 //- (CGSize)calculateContentSize;
-+ (CGSize)calculateContentSizeWithData:(id<LVKMessagePartProtocol>)_data maxWidth:(int)_maxWidth;
+@required
++ (CGSize)calculateContentSizeWithData:(id<LVKMessagePartProtocol>)_data maxWidth:(CGFloat)_maxWidth;
+
+@optional
+- (void)layoutIfNeededForCalculatedWidth:(CGFloat)_width;
 
 @end

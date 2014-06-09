@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="LVKDefaultMessageVideoItem">
+            <rect key="frame" x="0.0" y="0.0" width="350" height="62"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fAY-se-a03">
+                    <rect key="frame" x="5" y="5" width="340" height="52"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7TJ-ii-XCa">
+                            <rect key="frame" x="105" y="0.0" width="130" height="52"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rmU-81-9QD">
+                                    <rect key="frame" x="0.0" y="0.0" width="130" height="52"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </imageView>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="145:56" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Udm-xy-ESU">
+                                    <rect key="frame" x="88" y="31" width="42" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="21" id="6xl-pd-Pac"/>
+                                        <constraint firstAttribute="width" constant="42" id="V76-gz-bJl"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="Udm-xy-ESU" secondAttribute="bottom" id="0zd-oE-Iqi"/>
+                                <constraint firstAttribute="width" constant="130" id="1n0-AQ-8XM"/>
+                                <constraint firstAttribute="trailing" secondItem="Udm-xy-ESU" secondAttribute="trailing" id="7Jw-7b-xjP"/>
+                                <constraint firstItem="rmU-81-9QD" firstAttribute="top" secondItem="7TJ-ii-XCa" secondAttribute="top" id="J4X-Vy-uga"/>
+                                <constraint firstAttribute="bottom" secondItem="rmU-81-9QD" secondAttribute="bottom" id="RjU-aJ-ypR"/>
+                                <constraint firstItem="rmU-81-9QD" firstAttribute="leading" secondItem="7TJ-ii-XCa" secondAttribute="leading" id="Sd6-4e-M92"/>
+                                <constraint firstAttribute="trailing" secondItem="rmU-81-9QD" secondAttribute="trailing" id="wxA-Dp-LRF"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="7TJ-ii-XCa" secondAttribute="bottom" id="KGs-FD-7cO"/>
+                        <constraint firstAttribute="centerX" secondItem="7TJ-ii-XCa" secondAttribute="centerX" id="MMV-1n-m4N"/>
+                        <constraint firstItem="7TJ-ii-XCa" firstAttribute="top" secondItem="fAY-se-a03" secondAttribute="top" id="NFX-FG-dIb"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="fAY-se-a03" secondAttribute="trailing" constant="5" id="AAc-5a-oaD"/>
+                <constraint firstAttribute="bottom" secondItem="fAY-se-a03" secondAttribute="bottom" constant="5" id="Qzn-0N-RUb"/>
+                <constraint firstItem="fAY-se-a03" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="dph-Xd-xnW"/>
+                <constraint firstItem="fAY-se-a03" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="ftj-wK-AYW"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="durationLabel" destination="Udm-xy-ESU" id="lyb-kw-prF"/>
+                <outlet property="image" destination="rmU-81-9QD" id="AKC-G1-9B6"/>
+                <outlet property="imageWidthConstraint" destination="1n0-AQ-8XM" id="SUO-5y-LQD"/>
+            </connections>
+        </view>
+    </objects>
+</document>
