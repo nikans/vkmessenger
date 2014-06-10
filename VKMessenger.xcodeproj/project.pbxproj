@@ -478,6 +478,8 @@
 		D038C3351944E36C00E7895D /* Message CollectionView */ = {
 			isa = PBXGroup;
 			children = (
+				D0A210CA1946637B008508BF /* LVKDialogCollectionViewDelegate.h */,
+				D0A210CB1946637B008508BF /* LVKDialogCollectionViewDelegate.m */,
 				D038C3051944E13F00E7895D /* LVKDefaultMessagesCollectionView.h */,
 				D038C3061944E13F00E7895D /* LVKDefaultMessagesCollectionView.m */,
 				D038C3341944E31E00E7895D /* LVKMessageItemProtocol.h */,
@@ -505,8 +507,6 @@
 			children = (
 				A4017DCB193DE8EA000EAD87 /* LVKDialogViewController.h */,
 				A4017DCC193DE8EA000EAD87 /* LVKDialogViewController.m */,
-				D0A210CA1946637B008508BF /* LVKDialogCollectionViewDelegate.h */,
-				D0A210CB1946637B008508BF /* LVKDialogCollectionViewDelegate.m */,
 				D038C3021944DE3000E7895D /* LVKDefaultMessageTableViewCell.h */,
 				D038C3031944DE3000E7895D /* LVKDefaultMessageTableViewCell.m */,
 				A474AF88193FD6B8009EB0D2 /* LVKMessageViewController.h */,

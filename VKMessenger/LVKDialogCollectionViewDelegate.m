@@ -31,7 +31,6 @@
 }
 
 
-
 #pragma mark - UICollectionView Datasource
 
 // TODO
@@ -53,6 +52,7 @@
         [cell setValue:[NSDateFormatter localizedStringFromDate:
                         [(LVKRepostedMessage *)cellData date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle] forKeyPath:@"date.text"];
         [cell setValue:[[(LVKRepostedMessage *)cellData user] fullName] forKeyPath:@"userName.text"];
+        [[(LVKDefaultMessageRepostBodyItem *)cell avatar] setImageWithURL:[[(LVKRepostedMessage *)cellData user] photo_100]];
     }
     
     // Body
@@ -92,37 +92,8 @@
         [cell setValue:@"" forKeyPath:@"body.text"];
     }
     
-    
-    //    switch (itemType) {
-    //        case bodyItem:
-    //            cell = (LVKMessageBodyItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"BodyItem" forIndexPath:indexPath];
-    //            [cell setValue:cellData[@"body"] forKeyPath:@"body.text"];
-    //            break;
-    //
-    //        case photoItem:
-    //            cell = (LVKMessagePhotoItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoItem" forIndexPath:indexPath];
-    //            [cell setValue:[UIImage imageNamed:@"camera"] forKeyPath:@"photo.image"];
-    //            break;
-    //
-    //        case repostBodyItem:
-    //            cell = (LVKMessageRepostBodyItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"RepostBodyItem" forIndexPath:indexPath];
-    //            [cell setValue:[UIImage imageNamed:@"camera"] forKeyPath:@"avatar.image"];
-    //            [cell setValue:cellData[@"body"] forKeyPath:@"body.text"];
-    //            [cell setValue:cellData[@"date"] forKeyPath:@"date.text"];
-    //            [cell setValue:cellData[@"userName"] forKeyPath:@"userName.text"];
-    //            break;
-    //
-    //
-    //        default:
-    //            break;
-    //    }
-    
-    return cell;
+     return cell;
 }
-
-//- (DefaultMessageItemType)collectionView:(LVKDefaultMessagesCollectionView *)collectionView typeOfItemAtIndexPath:(NSIndexPath *)indexPath {
-//    return [[[self collectionView:collectionView dataForItemAtIndexPath:indexPath] objectForKey:@"type"] intValue];
-//}
 
 // TODO
 - (id<LVKMessagePartProtocol>)collectionView:(LVKDefaultMessagesCollectionView *)collectionView dataForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -152,14 +123,7 @@
     id<LVKMessagePartProtocol> cellData = [self collectionView:collectionView dataForItemAtIndexPath:indexPath];
     
     CGSize cellSize;
-    CGFloat maxWidth;
-    
-    // TODO smth
-    LVKMessage *message = self.data;
-    if([message isOutgoing])
-        maxWidth = 233.5;
-    else
-        maxWidth = 195.5;
+    CGFloat maxWidth = collectionView.maxWidth - 0.5;
     
     // Body
     if([cellData isKindOfClass:[LVKMessage class]])
@@ -188,31 +152,7 @@
     
     if (cellSize.width > maxWidth)
         cellSize = CGSizeMake(maxWidth, cellSize.height);
-    
-    
-    //    if (collectionView.maximumItemWidth < cellSize.width) {
-    //        collectionView.maximumItemWidth = cellSize.width;
-    //    }
-    //
-    //    NSLog(@"act %f", cellSize.width);
-    //    cellSize = [LVKDefaultMessageBodyItem calculateContentSizeWithData:cellData];
-    
-    //    switch (itemType) {
-    //        case bodyItem:
-    //            cellSize = [LVKMessageBodyItem calculateContentSizeWithData:cellData];
-    //            break;
-    //
-    //        case photoItem:
-    //            cellSize = [LVKMessagePhotoItem calculateContentSizeWithData:cellData];
-    //            break;
-    //
-    //        case repostBodyItem:
-    //            cellSize = [LVKMessageRepostBodyItem calculateContentSizeWithData:cellData];
-    //            break;
-    //            
-    //        default:
-    //            break;
-    //    }
+ 
     return cellSize;
 }
 

@@ -8,22 +8,24 @@
 
 #import "LVKDefaultMessageTableViewCell.h"
 #import "LVKMessageItemProtocol.h"
+#import "AVHexColor.h"
 
 @implementation LVKDefaultMessageTableViewCell
 
-@synthesize minCollectionItemWidth, collectionViewDelegate;
+@synthesize collectionViewDelegate;
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     
-    self.messageContainerViewWidthConstraint.constant = 234;
+    self.collectionViewWidthConstraint.constant = self.collectionViewMaxWidth;
+    self.collectionViewHeightConstraint.constant = 0;
     
     // Making avatar cute and round
     self.avatarImage.layer.cornerRadius = 14;
     self.avatarImage.layer.masksToBounds = YES;
     
-    //Adding bubble
+    // Adding bubble
     UIImage *bubble;
     UIEdgeInsets capInsets;
     
@@ -36,18 +38,31 @@
     capInsets = UIEdgeInsetsMake(center.y, center.x, center.y, center.x);
     self.messageContainerBackgroundImage.image = [bubble resizableImageWithCapInsets:capInsets];
     
-    // Setting height
     [self.contentView layoutIfNeeded];
-    CGFloat height = self.collectionView.collectionViewLayout.collectionViewContentSize.height;
-    self.collectionViewHeightConstraint.constant = height;
     
-    // Width
+    // Status
+    if (self.isUnread) {
+        self.backgroundColor = [AVHexColor colorWithHexString:@"#e1e9f5"];
+    }
+    
+    // Sending adversary's avatar to hell
+    if (!self.isRoom && !self.isOutgoing) {
+        self.avatarImage.hidden = YES;
+        self.incomingMessageContainerConstraint.constant = 4;
+    }
+    
+    // Width & height
+
+    self.collectionViewHeightConstraint.constant = self.collectionView.collectionViewLayout.collectionViewContentSize.height;
+    
     NSInteger numberOfCells = [self.collectionView numberOfItemsInSection:0];
     UICollectionViewLayout *layout = self.collectionView.collectionViewLayout;
     CGFloat maxWidth = 0.0f;
+    CGFloat height = 0.0f;
     for (NSInteger i = 0; i < numberOfCells; i++) {
         UICollectionViewLayoutAttributes *layoutAttributes = [layout layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
         CGRect cellFrame = layoutAttributes.frame;
+        height += cellFrame.size.height;
         if (cellFrame.size.width > maxWidth) {
             maxWidth = cellFrame.size.width;
         }
@@ -61,13 +76,14 @@
         }
     }
     
-    self.messageContainerViewWidthConstraint.constant = maxWidth+0.5;
+    self.collectionViewHeightConstraint.constant = height + ([self.collectionView numberOfItemsInSection:0]-1)*5; // TODO
+    self.collectionViewWidthConstraint.constant = maxWidth+0.5 < self.collectionViewMaxWidth ? maxWidth+0.5 : self.collectionViewMaxWidth;
 }
 
 -(void)setCollectionViewDelegates:(id<UICollectionViewDataSource, UICollectionViewDelegate>)dataSourceDelegate forMessageWithIndexPath:(NSIndexPath *)indexPath
 {
     self.collectionViewDelegate = (LVKDialogCollectionViewDelegate *)dataSourceDelegate;
-    
+    self.collectionView.maxWidth = self.collectionViewMaxWidth;
     self.collectionView.dataSource = self.collectionViewDelegate;
     self.collectionView.delegate   = self.collectionViewDelegate;
     

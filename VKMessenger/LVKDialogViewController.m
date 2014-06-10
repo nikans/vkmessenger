@@ -11,6 +11,7 @@
 #import "LVKAppDelegate.h"
 #import "AVHexColor.h"
 #import <UIImageView+WebCache.h>
+#import <UIButton+WebCache.h>
 #import "LVKMessagePartProtocol.h"
 #import "LVKDialogCollectionViewDelegate.h"
 
@@ -34,7 +35,7 @@
 
 @implementation LVKDialogViewController
 
-@synthesize tableView, textView , dialog;
+@synthesize tableView, textView, dialog;
 
 
 #pragma mark - Networking
@@ -240,14 +241,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    
+
+    // Navbar
     [[self navigationItem] setTitle:dialog.title];
     
-    [self registerObservers];
+    // TODO: placeholder
+    if (self.dialog.type == Dialog) {
+        UIButton *avatarButton = [[UIButton alloc] initWithFrame:CGRectMake(0,0,36,36)];
+        [avatarButton setImageWithURL:self.dialog.user.photo_100 forState:UIControlStateNormal];
+//        [avatarButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+        avatarButton.layer.cornerRadius = 18.0f;
+        avatarButton.layer.masksToBounds = YES;
+        
+        UIView *avatarButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 36, 36)];
+        avatarButtonView.bounds = CGRectOffset(avatarButtonView.bounds, -11, -1);
+        [avatarButtonView addSubview:avatarButton];
+
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:avatarButtonView];
+    }
     
-    hasDataToLoad = YES;
-    
+    // Refresh controls
     topRefreshControl = [[UIRefreshControl alloc]init];
     [self.tableView addSubview:topRefreshControl];
     [topRefreshControl addTarget:self action:@selector(onTopRefreshControl) forControlEvents:UIControlEventValueChanged];
@@ -256,8 +269,16 @@
     [bottomRefreshControl addTarget:self action:@selector(onBottomRefreshControl) forControlEvents:UIControlEventValueChanged];
     [self.tableView setBottomRefreshControl:bottomRefreshControl];
     
+    
     // TODO: style
     self.tableView.backgroundColor = [AVHexColor colorWithHexString:@"#edf3fa"];
+    [self.tableView setContentInset:UIEdgeInsetsMake(0,0,5,0)];
+    
+    
+    // Load data
+    [self registerObservers];
+    
+    hasDataToLoad = YES;
     
     [self loadData:0];
 }
@@ -267,7 +288,6 @@
     [super viewWillAppear:animated];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeShown:) name:UIKeyboardWillShowNotification object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHidden:) name:UIKeyboardWillHideNotification object:nil];
 }
 
@@ -277,9 +297,7 @@
     
     // unregister for keyboard notifications
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -320,7 +338,6 @@
 {
     LVKDefaultMessageTableViewCell *prototypeCell;
     
-    // TODO
     LVKMessage *message = _objects[indexPath.row];
     if([message isOutgoing])
         prototypeCell = self.prototypeCellOutgoing;
@@ -329,11 +346,7 @@
     
     [self tableView:tableView configureCell:prototypeCell forRowAtIndexPath:indexPath];
     
-    // Need to set the width of the prototype cell to the width of the table view
-    // as this will change when the device is rotated.
-    
     prototypeCell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(tableView.bounds), CGRectGetHeight(prototypeCell.bounds));
-    
     [prototypeCell layoutIfNeeded];
     
     CGSize size = [prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
@@ -343,9 +356,17 @@
 - (void)tableView:(UITableView *)tableView configureCell:(LVKDefaultMessageTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     LVKMessage *message = _objects[indexPath.row];
     cell.isOutgoing = [message isOutgoing];
+    cell.isRoom     = message.type == Room ? YES : NO;
+    cell.isUnread   = message.isUnread;
+    
+    CGFloat maxCVWidth;
+    if (!cell.isOutgoing)
+        if (cell.isRoom) maxCVWidth = 196.f;
+        else maxCVWidth = 230.f;
+    else maxCVWidth = 234.f;
+    cell.collectionViewMaxWidth = maxCVWidth;
     
     LVKDialogCollectionViewDelegate *collectionViewDelegate = [[LVKDialogCollectionViewDelegate alloc] initWithData:message];
-    
     [cell setCollectionViewDelegates:collectionViewDelegate forMessageWithIndexPath:indexPath];
 }
 
@@ -438,14 +459,14 @@
 }
 
 
--(IBAction) sendMessage:(id)sender
+- (IBAction)sendMessage:(id)sender
 {
     NSString *text = [textView text];
     [textView setText:@""];
     [self composeAndSendMessageWithText:text];
 }
 
--(void) markAllAsRead
+- (void)markAllAsRead
 {
     NSString *messageIds = nil;
     
@@ -512,6 +533,14 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
     [self markAllAsRead];
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    if (self.textViewHeightConstraint.constant != self.textView.contentSize.height) {
+        [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height-1, 320, 1) animated:YES];
+//        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[_objects count]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+    self.textViewHeightConstraint.constant = self.textView.contentSize.height;
 }
 
 #pragma mark - Scroll view

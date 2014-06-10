@@ -22,18 +22,22 @@ static NSString *CollectionViewCellIdentifier = @"BodyItem";
 @interface LVKDefaultMessageTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatarImage;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+
 @property (weak, nonatomic) IBOutlet UIView *messageContainerView;
 @property (weak, nonatomic) IBOutlet UIImageView *messageContainerBackgroundImage;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *incomingMessageContainerConstraint;
 @property (nonatomic, weak) IBOutlet LVKDefaultMessagesCollectionView *collectionView;
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewHeightConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageContainerViewWidthConstraint;
-@property (nonatomic) int minCollectionItemWidth;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewWidthConstraint;
+@property (nonatomic) CGFloat collectionViewMaxWidth;
 
 @property (strong, nonatomic) LVKDialogCollectionViewDelegate *collectionViewDelegate;
 
-
 @property (nonatomic) BOOL isOutgoing;
+@property (nonatomic) BOOL isRoom;
+@property (nonatomic) BOOL isUnread;
 
 - (void)setCollectionViewDelegates:(id<UICollectionViewDataSource, UICollectionViewDelegate>)dataSourceDelegate forMessageWithIndexPath:(NSIndexPath *)indexPath;
 

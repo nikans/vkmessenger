@@ -12,16 +12,6 @@
 
 @synthesize messageIndexPath;
 
-- (id)initWithFrame:(CGRect)frame forMessageWithIndexPath:(NSIndexPath *)_messageIndexPath
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.messageIndexPath = _messageIndexPath;
-        
-    }
-    return self;
-}
-
 - (void)awakeFromNib {
     [self registerNib:[UINib nibWithNibName:@"LVKDefaultMessageBodyItem" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"DefaultBodyItem"];
     [self registerNib:[UINib nibWithNibName:@"LVKDefaultMessageRepostBodyItem" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"DefaultRepostBodyItem"];
