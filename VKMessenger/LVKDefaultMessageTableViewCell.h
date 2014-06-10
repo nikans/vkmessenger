@@ -37,6 +37,7 @@ static NSString *CollectionViewCellIdentifier = @"BodyItem";
 
 @property (nonatomic) BOOL isOutgoing;
 @property (nonatomic) BOOL isRoom;
+@property (nonatomic) BOOL isUnread;
 
 - (void)setCollectionViewDelegates:(id<UICollectionViewDataSource, UICollectionViewDelegate>)dataSourceDelegate forMessageWithIndexPath:(NSIndexPath *)indexPath;
 

@@ -8,6 +8,7 @@
 
 #import "LVKDefaultMessageTableViewCell.h"
 #import "LVKMessageItemProtocol.h"
+#import "AVHexColor.h"
 
 @implementation LVKDefaultMessageTableViewCell
 
@@ -38,6 +39,11 @@
     self.messageContainerBackgroundImage.image = [bubble resizableImageWithCapInsets:capInsets];
     
     [self.contentView layoutIfNeeded];
+    
+    // Status
+    if (self.isUnread) {
+        self.backgroundColor = [AVHexColor colorWithHexString:@"#e1e9f5"];
+    }
     
     // Sending adversary's avatar to hell
     if (!self.isRoom && !self.isOutgoing) {

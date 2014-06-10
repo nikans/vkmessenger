@@ -267,7 +267,7 @@
     
     // TODO: style
     self.tableView.backgroundColor = [AVHexColor colorWithHexString:@"#edf3fa"];
-    [self.tableView setContentInset:UIEdgeInsetsMake(0,0,10,0)];
+    [self.tableView setContentInset:UIEdgeInsetsMake(0,0,5,0)];
     
     
     // Load data
@@ -351,7 +351,8 @@
 - (void)tableView:(UITableView *)tableView configureCell:(LVKDefaultMessageTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     LVKMessage *message = _objects[indexPath.row];
     cell.isOutgoing = [message isOutgoing];
-    cell.isRoom = message.type == Room ? YES : NO;
+    cell.isRoom     = message.type == Room ? YES : NO;
+    cell.isUnread   = message.isUnread;
     
     CGFloat maxCVWidth;
     if (!cell.isOutgoing)
@@ -527,6 +528,14 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
     [self markAllAsRead];
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    if (self.textViewHeightConstraint.constant != self.textView.contentSize.height) {
+        [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height-1, 320, 1) animated:YES];
+//        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[_objects count]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
+    self.textViewHeightConstraint.constant = self.textView.contentSize.height;
 }
 
 #pragma mark - Scroll view

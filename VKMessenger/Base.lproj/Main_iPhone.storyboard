@@ -520,16 +520,15 @@
                                     <outlet property="delegate" destination="Ah7-4n-0Wa" id="iFk-eY-VoP"/>
                                 </connections>
                             </tableView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rr9-QY-7Zw">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="Палпатин император, путин лох" translatesAutoresizingMaskIntoConstraints="NO" id="Rr9-QY-7Zw">
                                 <rect key="frame" x="20" y="535" width="246" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="p68-8y-SBY"/>
-                                    <constraint firstAttribute="width" constant="246" id="zMp-UM-lKF"/>
+                                    <constraint firstAttribute="height" constant="22" id="nGi-Wl-7gZ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert"/>
                                 <connections>
                                     <outlet property="delegate" destination="Ah7-4n-0Wa" id="nmC-9G-vx6"/>
                                 </connections>
@@ -551,18 +550,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="5MT-5d-gQd" secondAttribute="bottom" constant="44" id="4c4-Nn-YL6"/>
-                            <constraint firstItem="nyX-wv-HJn" firstAttribute="bottom" secondItem="Rr9-QY-7Zw" secondAttribute="bottom" id="6QU-cM-pL5"/>
                             <constraint firstItem="5MT-5d-gQd" firstAttribute="leading" secondItem="jqM-jc-iYI" secondAttribute="leading" id="747-bb-geG"/>
                             <constraint firstItem="Rr9-QY-7Zw" firstAttribute="leading" secondItem="jqM-jc-iYI" secondAttribute="leading" constant="20" id="ElA-cp-PI0"/>
-                            <constraint firstAttribute="bottom" secondItem="5MT-5d-gQd" secondAttribute="bottom" constant="44" id="GrH-9G-hSB"/>
                             <constraint firstItem="nyX-wv-HJn" firstAttribute="leading" secondItem="Rr9-QY-7Zw" secondAttribute="trailing" constant="8" id="He5-Xi-riO"/>
                             <constraint firstItem="5MT-5d-gQd" firstAttribute="top" secondItem="jqM-jc-iYI" secondAttribute="top" id="HjN-0U-kxR"/>
                             <constraint firstAttribute="bottom" secondItem="Rr9-QY-7Zw" secondAttribute="bottom" constant="11" id="Nwq-BK-hCg"/>
-                            <constraint firstItem="nyX-wv-HJn" firstAttribute="top" secondItem="Rr9-QY-7Zw" secondAttribute="top" id="Zoy-D0-jTi"/>
-                            <constraint firstAttribute="bottom" secondItem="5MT-5d-gQd" secondAttribute="bottom" constant="44" id="bcA-Ne-V6P"/>
                             <constraint firstAttribute="trailing" secondItem="5MT-5d-gQd" secondAttribute="trailing" id="dvv-tj-BrR"/>
-                            <constraint firstItem="Rr9-QY-7Zw" firstAttribute="top" secondItem="jqM-jc-iYI" secondAttribute="top" constant="535" id="nld-J7-rFD"/>
+                            <constraint firstAttribute="trailing" secondItem="nyX-wv-HJn" secondAttribute="trailing" constant="12" id="iiz-xn-YjV"/>
+                            <constraint firstItem="E49-Wj-tXp" firstAttribute="top" secondItem="nyX-wv-HJn" secondAttribute="bottom" constant="11" id="oLf-wW-3wm"/>
+                            <constraint firstItem="Rr9-QY-7Zw" firstAttribute="top" secondItem="5MT-5d-gQd" secondAttribute="bottom" constant="11" id="vgo-wP-fwd"/>
                             <constraint firstAttribute="trailing" secondItem="Rr9-QY-7Zw" secondAttribute="trailing" constant="54" id="xC1-a4-NGI"/>
                         </constraints>
                     </view>
@@ -570,6 +566,7 @@
                     <connections>
                         <outlet property="tableView" destination="5MT-5d-gQd" id="FFP-ef-rBW"/>
                         <outlet property="textView" destination="Rr9-QY-7Zw" id="OzP-rE-ELy"/>
+                        <outlet property="textViewHeightConstraint" destination="nGi-Wl-7gZ" id="50U-dI-ncL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lrm-kH-fPn" sceneMemberID="firstResponder"/>
