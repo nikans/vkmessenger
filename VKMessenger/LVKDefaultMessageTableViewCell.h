@@ -15,6 +15,7 @@
 #import "LVKDefaultMessageStickerItem.h"
 #import "LVKDefaultMessageVideoItem.h"
 
+#import "LVKBubbleActionsDelegate.h"
 #import "LVKDialogCollectionViewDelegate.h"
 
 static NSString *CollectionViewCellIdentifier = @"BodyItem";
@@ -26,6 +27,9 @@ static NSString *CollectionViewCellIdentifier = @"BodyItem";
 
 @property (weak, nonatomic) IBOutlet UIView *messageContainerView;
 @property (weak, nonatomic) IBOutlet UIImageView *messageContainerBackgroundImage;
+
+@property (weak, nonatomic) id<LVKBubbleActionsDelegate> bubbleDelegate;
+@property (strong, nonatomic) NSIndexPath *cellIndexPath;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *incomingMessageContainerConstraint;
 @property (nonatomic, weak) IBOutlet LVKDefaultMessagesCollectionView *collectionView;
@@ -40,5 +44,6 @@ static NSString *CollectionViewCellIdentifier = @"BodyItem";
 @property (nonatomic) BOOL isUnread;
 
 - (void)setCollectionViewDelegates:(id<UICollectionViewDataSource, UICollectionViewDelegate>)dataSourceDelegate forMessageWithIndexPath:(NSIndexPath *)indexPath;
+- (void)setBubbleActionsDelegate:(id<LVKBubbleActionsDelegate>)delegate forMessageWithIndexPath:(NSIndexPath *)indexPath;
 
 @end

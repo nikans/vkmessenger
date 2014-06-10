@@ -14,8 +14,10 @@
 #import "LVKHistoryCollection.h"
 #import "LVKDialog.h"
 #import "LVKLongPoll.h"
+#import "LVKBubbleActionsDelegate.h"
 
-@interface LVKDialogViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISplitViewControllerDelegate, UITextViewDelegate, NSLayoutManagerDelegate>
+
+@interface LVKDialogViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISplitViewControllerDelegate, UITextViewDelegate, LVKBubbleActionsDelegate/*, NSLayoutManagerDelegate*/>
 
 @property (strong, nonatomic) LVKDialog *dialog;
 

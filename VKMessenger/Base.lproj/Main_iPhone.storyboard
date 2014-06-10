@@ -397,7 +397,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:55 pm" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1g5-ic-OYO">
-                                                    <rect key="frame" x="258" y="54" width="50" height="14"/>
+                                                    <rect key="frame" x="258" y="57" width="50" height="14"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="lG5-aN-XKg"/>
@@ -415,7 +415,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="ZRI-g8-WgA" secondAttribute="bottom" constant="4" id="Nfk-RS-TRZ"/>
                                                 <constraint firstAttribute="bottom" secondItem="p2h-LI-mWF" secondAttribute="bottom" constant="4" id="RBD-c2-gGI"/>
                                                 <constraint firstItem="1g5-ic-OYO" firstAttribute="leading" secondItem="ZRI-g8-WgA" secondAttribute="trailing" constant="11" id="W4j-cT-2O8"/>
-                                                <constraint firstAttribute="bottom" secondItem="1g5-ic-OYO" secondAttribute="bottom" constant="14" id="qTh-4y-WWE"/>
+                                                <constraint firstAttribute="bottom" secondItem="1g5-ic-OYO" secondAttribute="bottom" constant="11" id="qTh-4y-WWE"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -482,7 +482,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:48" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8OF-at-jZX">
-                                                    <rect key="frame" x="5" y="54" width="50" height="14"/>
+                                                    <rect key="frame" x="5" y="57" width="50" height="14"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="qjL-Ie-Sm8"/>
@@ -496,7 +496,7 @@
                                             <constraints>
                                                 <constraint firstItem="OI6-S6-e0s" firstAttribute="leading" secondItem="8OF-at-jZX" secondAttribute="trailing" constant="11" id="VXc-QR-Ys1"/>
                                                 <constraint firstAttribute="bottom" secondItem="OI6-S6-e0s" secondAttribute="bottom" constant="4" id="dhu-Tz-etu"/>
-                                                <constraint firstAttribute="bottom" secondItem="8OF-at-jZX" secondAttribute="bottom" constant="14" id="ibs-dk-ACY"/>
+                                                <constraint firstAttribute="bottom" secondItem="8OF-at-jZX" secondAttribute="bottom" constant="11" id="ibs-dk-ACY"/>
                                                 <constraint firstItem="OI6-S6-e0s" firstAttribute="top" secondItem="wul-WN-ePi" secondAttribute="top" constant="4" id="kTn-RA-xRE"/>
                                                 <constraint firstAttribute="trailing" secondItem="OI6-S6-e0s" secondAttribute="trailing" constant="4" id="pTj-Yg-6jx"/>
                                             </constraints>

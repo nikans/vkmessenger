@@ -18,6 +18,8 @@
 {
     [super layoutSubviews];
     
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     self.collectionViewWidthConstraint.constant = self.collectionViewMaxWidth;
     self.collectionViewHeightConstraint.constant = 0;
     
@@ -51,6 +53,12 @@
         self.avatarImage.hidden = YES;
         self.incomingMessageContainerConstraint.constant = 4;
     }
+    
+    // Tap action - go to message VC
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self.bubbleDelegate
+                                                                                 action:@selector(pushToMessageVC:)];
+    [self addGestureRecognizer:tapGesture];
+    
     
     // Width & height
 
@@ -91,6 +99,11 @@
     self.collectionView.messageIndexPath = indexPath;
     
     [self.collectionView reloadData];
+}
+
+- (void)setBubbleActionsDelegate:(id<LVKBubbleActionsDelegate>)delegate forMessageWithIndexPath:(NSIndexPath *)indexPath {
+    self.bubbleDelegate = delegate;
+    self.cellIndexPath = indexPath;
 }
 
 - (void)awakeFromNib
