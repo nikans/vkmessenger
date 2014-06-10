@@ -463,6 +463,10 @@
 {
     NSString *text = [textView text];
     [textView setText:@""];
+    
+    // TODO: shit stuff
+    self.textViewHeightConstraint.constant = 37;//self.textView.contentSize.height;
+    
     [self composeAndSendMessageWithText:text];
 }
 
