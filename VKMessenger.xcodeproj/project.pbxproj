@@ -77,6 +77,7 @@
 		D038C3571944E78200E7895D /* NSString+StringSize.m in Sources */ = {isa = PBXBuildFile; fileRef = D038C3561944E78200E7895D /* NSString+StringSize.m */; };
 		D038C3631945098600E7895D /* default-bubbleIncoming@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D038C3611945098600E7895D /* default-bubbleIncoming@2x.png */; };
 		D038C3681945135900E7895D /* default-bubbleOutgoing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D038C3671945135900E7895D /* default-bubbleOutgoing@2x.png */; };
+		D076494E1947A7C300911C65 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = D076494D1947A7C300911C65 /* UIImage+Color.m */; };
 		D0A210BF194646CF008508BF /* LVKDefaultMessagePhotoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A210BE194646CF008508BF /* LVKDefaultMessagePhotoItem.m */; };
 		D0A210C21946476D008508BF /* LVKDefaultMessageVideoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A210C11946476D008508BF /* LVKDefaultMessageVideoItem.m */; };
 		D0A210C519464786008508BF /* LVKDefaultMessageStickerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A210C419464786008508BF /* LVKDefaultMessageStickerItem.m */; };
@@ -207,6 +208,9 @@
 		D038C3561944E78200E7895D /* NSString+StringSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StringSize.m"; sourceTree = "<group>"; };
 		D038C3611945098600E7895D /* default-bubbleIncoming@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default-bubbleIncoming@2x.png"; sourceTree = "<group>"; };
 		D038C3671945135900E7895D /* default-bubbleOutgoing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default-bubbleOutgoing@2x.png"; sourceTree = "<group>"; };
+		D076494B19479CBC00911C65 /* LVKBubbleActionsDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKBubbleActionsDelegate.h; sourceTree = "<group>"; };
+		D076494C1947A7C300911C65 /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
+		D076494D1947A7C300911C65 /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
 		D0A210BD194646CF008508BF /* LVKDefaultMessagePhotoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultMessagePhotoItem.h; sourceTree = "<group>"; };
 		D0A210BE194646CF008508BF /* LVKDefaultMessagePhotoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDefaultMessagePhotoItem.m; sourceTree = "<group>"; };
 		D0A210C01946476D008508BF /* LVKDefaultMessageVideoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultMessageVideoItem.h; sourceTree = "<group>"; };
@@ -298,6 +302,8 @@
 		A4017DB7193DE8EA000EAD87 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D076494C1947A7C300911C65 /* UIImage+Color.h */,
+				D076494D1947A7C300911C65 /* UIImage+Color.m */,
 				D038C3551944E78200E7895D /* NSString+StringSize.h */,
 				D038C3561944E78200E7895D /* NSString+StringSize.m */,
 				A4017DB8193DE8EA000EAD87 /* VKMessenger-Info.plist */,
@@ -509,6 +515,7 @@
 				A4017DCC193DE8EA000EAD87 /* LVKDialogViewController.m */,
 				D038C3021944DE3000E7895D /* LVKDefaultMessageTableViewCell.h */,
 				D038C3031944DE3000E7895D /* LVKDefaultMessageTableViewCell.m */,
+				D076494B19479CBC00911C65 /* LVKBubbleActionsDelegate.h */,
 				A474AF88193FD6B8009EB0D2 /* LVKMessageViewController.h */,
 				A474AF89193FD6B8009EB0D2 /* LVKMessageViewController.m */,
 			);
@@ -689,6 +696,7 @@
 				D038C3041944DE3000E7895D /* LVKDefaultMessageTableViewCell.m in Sources */,
 				A4017DF0193E122E000EAD87 /* LVKDialogsCollection.m in Sources */,
 				D0A210BF194646CF008508BF /* LVKDefaultMessagePhotoItem.m in Sources */,
+				D076494E1947A7C300911C65 /* UIImage+Color.m in Sources */,
 				A4017DBD193DE8EA000EAD87 /* main.m in Sources */,
 				A4017DCA193DE8EA000EAD87 /* LVKDialogListViewController.m in Sources */,
 				A474AF81193FB56B009EB0D2 /* LVKAudioAttachment.m in Sources */,

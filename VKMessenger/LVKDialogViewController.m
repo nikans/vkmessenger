@@ -359,6 +359,9 @@
     self.tableView.backgroundColor = [AVHexColor colorWithHexString:@"#edf3fa"];
     [self.tableView setContentInset:UIEdgeInsetsMake(0,0,5,0)];
     
+    // Text view
+//    textView.layoutManager.delegate = self;
+    
     
     // Load data
     [self registerObservers];
@@ -443,6 +446,7 @@
     cell.isOutgoing = [message isOutgoing];
     cell.isRoom     = message.type == Room ? YES : NO;
     cell.isUnread   = message.isUnread;
+    cell.bubbleDelegate = self;
     
     CGFloat maxCVWidth;
     if (!cell.isOutgoing)
@@ -453,6 +457,7 @@
     
     LVKDialogCollectionViewDelegate *collectionViewDelegate = [[LVKDialogCollectionViewDelegate alloc] initWithData:message];
     [cell setCollectionViewDelegates:collectionViewDelegate forMessageWithIndexPath:indexPath];
+    [cell setBubbleActionsDelegate:self forMessageWithIndexPath:indexPath];
 }
 
 // TODO
@@ -571,7 +576,6 @@
         }];
         
         messageIds = [unreadMessageIds componentsJoinedByString:@","];
-    
     }
     
     VKRequest *markAsRead = [VKApi
@@ -618,7 +622,9 @@
     }];
 }
 
+
 #pragma mark - Text view
+
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
     [self markAllAsRead];
@@ -626,13 +632,15 @@
 
 - (void)textViewDidChange:(UITextView *)textView {
     if (self.textViewHeightConstraint.constant != self.textView.contentSize.height) {
-        [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height-1, 320, 1) animated:YES];
-//        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[_objects count]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+//        [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height-1, 320, 1) animated:YES];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[_objects count]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     }
     self.textViewHeightConstraint.constant = self.textView.contentSize.height;
 }
 
+
 #pragma mark - Scroll view
+
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     if([scrollView isEqual:tableView])
@@ -640,6 +648,21 @@
         [[self textView] endEditing:YES];
     }
 }
+
+
+#pragma mark - Bubble actions
+
+- (void)pushToMessageVC:(UITapGestureRecognizer *)tapGesture {
+    
+    // TODO protocol
+    LVKDefaultMessageTableViewCell *cell = (LVKDefaultMessageTableViewCell *)tapGesture.view;
+    
+    // TODO
+//    cell.messageContainerBackgroundImage.image = [cell.messageContainerBackgroundImage.image addColor:[UIColor blackColor] drawAsOverlay:YES];
+    
+    [self performSegueWithIdentifier:@"showMessage" sender:cell.cellIndexPath];
+}
+
 
 #pragma mark - Split view
 
@@ -657,17 +680,29 @@
     self.masterPopoverController = nil;
 }
 
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+//    if ([[segue identifier] isEqualToString:@"showMessage"]) {
+//        LVKMessage *object = nil;
+//        
+//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//        object = _objects[indexPath.row];
+//        
+//        [(LVKMessageViewController *)[segue destinationViewController] setMessage:object];
+//    }
+    
     if ([[segue identifier] isEqualToString:@"showMessage"]) {
         LVKMessage *object = nil;
-        
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+
+        NSIndexPath *indexPath = sender;
         object = _objects[indexPath.row];
-        
+
         [(LVKMessageViewController *)[segue destinationViewController] setMessage:object];
     }
+    
+    
 }
 @end
