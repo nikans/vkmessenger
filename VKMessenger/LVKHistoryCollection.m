@@ -54,13 +54,17 @@
 -(void)adoptUserArray:(NSArray *)array
 {
     [messages enumerateObjectsUsingBlock:^(LVKMessage *message, NSUInteger idx, BOOL *stop) {
-        for (LVKUser *user in array)
-        {
-            if(([user isCurrent] && [[message userId] intValue] == 0) || (![user isCurrent] && [[message userId] isEqualToNumber:[user _id]]))
-            {
-                [message adoptUser:user];
-            }
-        }
+        [message adoptUserArray:array];
     }];
+}
+
+-(NSArray *)getUserIds
+{
+    NSMutableArray *userIds = [[NSMutableArray alloc] init];
+    [messages enumerateObjectsUsingBlock:^(LVKMessage *message, NSUInteger idx, BOOL *stop) {
+        [userIds addObjectsFromArray:[message getUserIds]];
+    }];
+    
+    return [NSArray arrayWithArray:userIds];
 }
 @end

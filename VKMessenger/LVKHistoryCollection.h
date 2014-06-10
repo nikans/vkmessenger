@@ -20,4 +20,6 @@
 
 -(void)adoptUserArray:(NSArray *)array;
 
+-(NSArray *)getUserIds;
+
 @end

@@ -29,7 +29,8 @@
 -(id)initWithDictionary:(NSDictionary *)dictionary;
 -(void)adoptAttachments:(NSArray *)_attachments;
 -(void)adoptForwarded:(NSArray *)_forwarded;
--(void)adoptUser:(LVKUser *)adoptedUser;
+-(void)adoptUserArray:(NSArray *)array;
+-(NSArray *)getUserIds;
 -(readState)getReadState;
 -(NSArray *)getMessageParts;
 

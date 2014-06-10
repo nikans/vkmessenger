@@ -72,9 +72,28 @@
     forwarded = [NSArray arrayWithArray:tmpForwarded];
 }
 
--(void)adoptUser:(LVKUser *)adoptedUser
+-(void)adoptUserArray:(NSArray *)array
 {
-    [self setUser:adoptedUser];
+    for (LVKUser *user in array) {
+        if(([user isCurrent] && [userId intValue] == 0) || (![user isCurrent] && [userId isEqualToNumber:[user _id]]))
+        {
+            [self setUser:user];
+        }
+    }
+    [forwarded enumerateObjectsUsingBlock:^(LVKRepostedMessage *repostedMessage, NSUInteger idx, BOOL *stop) {
+        [repostedMessage adoptUserArray:array];
+    }];
+    
+}
+
+-(NSArray *)getUserIds
+{
+    NSMutableArray *userIds = [NSMutableArray arrayWithObject:userId];
+    [forwarded enumerateObjectsUsingBlock:^(LVKRepostedMessage *repostedMessage, NSUInteger idx, BOOL *stop) {
+        [userIds addObjectsFromArray:[repostedMessage getUserIds]];
+    }];
+    
+    return [NSArray arrayWithArray:userIds];
 }
 
 -(readState)getReadState
