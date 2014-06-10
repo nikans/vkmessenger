@@ -15,6 +15,7 @@
 #import "LVKMessagePartProtocol.h"
 #import "LVKDialogCollectionViewDelegate.h"
 #import "LVKUsersCollection.h"
+#import "UIImage+Color.h"
 
 #import "LVKDefaultMessageTableViewCell.h"
 
@@ -97,7 +98,11 @@
                 NSMutableArray *userIds = [NSMutableArray arrayWithArray:[historyCollection getUserIds]];
                 
                 for (LVKUser *userObject in userArray) {
-                    if([userIds indexOfObject:[userObject _id]] != NSNotFound)
+                    if([userObject isCurrent])
+                    {
+                        [userIds removeObject:[NSNumber numberWithInt:0]];
+                    }
+                    else if([userIds indexOfObject:[userObject _id]] != NSNotFound)
                     {
                         [userIds removeObject:[userObject _id]];
                     }
@@ -124,8 +129,6 @@
                         [self networkRestored];
                         [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
                         isLoading = NO;
-                        [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
-                        [topRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
                     } errorBlock:^(NSError *error) {
                         if (error.code != VK_API_ERROR)
                         {
@@ -136,9 +139,18 @@
                             NSLog(@"%@", error);
                         }
                         isLoading = NO;
-                        [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
-                        [topRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
                     }];
+                }
+                else
+                {
+                    [historyCollection adoptUserArray:userArray];
+                    
+                    [_objects addObject:[[historyCollection messages] firstObject]];
+                    [self tableViewReloadDataWithScrollToIndexPath:[NSIndexPath indexPathForRow:_objects.count-1 inSection:0]];
+                    
+                    [self networkRestored];
+                    [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+                    isLoading = NO;
                 }
             } errorBlock:^(NSError *error) {
                 if (error.code != VK_API_ERROR)
@@ -226,7 +238,11 @@
             NSMutableArray *userIds = [NSMutableArray arrayWithArray:[historyCollection getUserIds]];
             
             for (LVKUser *userObject in userArray) {
-                if([userIds indexOfObject:[userObject _id]] != NSNotFound)
+                if([userObject isCurrent])
+                {
+                    [userIds removeObject:[NSNumber numberWithInt:0]];
+                }
+                else if([userIds indexOfObject:[userObject _id]] != NSNotFound)
                 {
                     [userIds removeObject:[userObject _id]];
                 }
@@ -263,6 +279,13 @@
                     isLoading = NO;
                     [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
                     [topRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
+                    
+                    if(_objects.count >= [[historyCollection count] intValue])
+                    {
+                        hasDataToLoad = NO;
+                        [topRefreshControl performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:YES];
+                        [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
+                    }
                 } errorBlock:^(NSError *error) {
                     if (error.code != VK_API_ERROR)
                     {
@@ -277,16 +300,33 @@
                     [topRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
                 }];
             }
-            
-            isLoading = NO;
-            [topRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
-            [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
-            
-            if(_objects.count >= [[historyCollection count] intValue])
+            else
             {
-                hasDataToLoad = NO;
-                [topRefreshControl performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:YES];
+                [historyCollection adoptUserArray:userArray];
+                
+                if(_objects.count == 0 || reload)
+                {
+                    _objects = [NSMutableArray arrayWithArray:[historyCollection messages]];
+                    [self performSelectorOnMainThread:@selector(tableViewReloadDataWithScrollToIndexPath:) withObject:[NSIndexPath indexPathForRow:_objects.count-1 inSection:0] waitUntilDone:YES];
+                }
+                else if(offset == _objects.count)
+                {
+                    [_objects insertObjects:[historyCollection messages] atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [historyCollection messages].count)]];
+                    [self performSelectorOnMainThread:@selector(tableViewReloadDataWithScrollToIndexPath:) withObject:[NSIndexPath indexPathForRow:[historyCollection messages].count inSection:0] waitUntilDone:YES];
+                }
+                
+                [self networkRestored];
+                [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+                isLoading = NO;
+                [topRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
                 [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
+                
+                if(_objects.count >= [[historyCollection count] intValue])
+                {
+                    hasDataToLoad = NO;
+                    [topRefreshControl performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:YES];
+                    [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
+                }
             }
         } errorBlock:^(NSError *error) {
             if (error.code != VK_API_ERROR)
