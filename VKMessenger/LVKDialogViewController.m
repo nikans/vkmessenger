@@ -299,6 +299,8 @@
 {
     [super viewWillDisappear:animated];
     
+    [self.textView resignFirstResponder];
+    
     // unregister for keyboard notifications
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
@@ -562,6 +564,7 @@
     if([scrollView isEqual:tableView])
     {
         [[self textView] endEditing:YES];
+//        [self.textView resignFirstResponder];
     }
 }
 
