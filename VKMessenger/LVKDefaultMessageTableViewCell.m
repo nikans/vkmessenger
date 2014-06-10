@@ -11,20 +11,20 @@
 
 @implementation LVKDefaultMessageTableViewCell
 
-@synthesize minCollectionItemWidth, collectionViewDelegate;
+@synthesize collectionViewDelegate;
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
     
-    self.messageContainerViewWidthConstraint.constant = 234;
+    self.collectionViewWidthConstraint.constant = self.collectionViewMaxWidth;
     self.collectionViewHeightConstraint.constant = 0;
     
     // Making avatar cute and round
     self.avatarImage.layer.cornerRadius = 14;
     self.avatarImage.layer.masksToBounds = YES;
     
-    //Adding bubble
+    // Adding bubble
     UIImage *bubble;
     UIEdgeInsets capInsets;
     
@@ -39,6 +39,11 @@
     
     [self.contentView layoutIfNeeded];
     
+    // Sending adversary's avatar to hell
+    if (!self.isRoom && !self.isOutgoing) {
+        self.avatarImage.hidden = YES;
+        self.incomingMessageContainerConstraint.constant = 4;
+    }
     
     // Width & height
 
@@ -66,13 +71,13 @@
     }
     
     self.collectionViewHeightConstraint.constant = height + ([self.collectionView numberOfItemsInSection:0]-1)*5; // TODO
-    self.messageContainerViewWidthConstraint.constant = maxWidth+0.5;
+    self.collectionViewWidthConstraint.constant = maxWidth+0.5 < self.collectionViewMaxWidth ? maxWidth+0.5 : self.collectionViewMaxWidth;
 }
 
 -(void)setCollectionViewDelegates:(id<UICollectionViewDataSource, UICollectionViewDelegate>)dataSourceDelegate forMessageWithIndexPath:(NSIndexPath *)indexPath
 {
     self.collectionViewDelegate = (LVKDialogCollectionViewDelegate *)dataSourceDelegate;
-    
+    self.collectionView.maxWidth = self.collectionViewMaxWidth;
     self.collectionView.dataSource = self.collectionViewDelegate;
     self.collectionView.delegate   = self.collectionViewDelegate;
     

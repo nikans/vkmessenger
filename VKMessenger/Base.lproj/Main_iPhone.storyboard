@@ -409,8 +409,8 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
+                                                <constraint firstItem="ZRI-g8-WgA" firstAttribute="leading" secondItem="v8s-xQ-D3e" secondAttribute="leading" constant="35" id="3QI-zA-aHt"/>
                                                 <constraint firstItem="p2h-LI-mWF" firstAttribute="leading" secondItem="v8s-xQ-D3e" secondAttribute="leading" constant="4" id="D41-ab-aMc"/>
-                                                <constraint firstItem="ZRI-g8-WgA" firstAttribute="leading" secondItem="p2h-LI-mWF" secondAttribute="trailing" constant="3" id="Kcm-ka-Tb3"/>
                                                 <constraint firstItem="ZRI-g8-WgA" firstAttribute="top" secondItem="v8s-xQ-D3e" secondAttribute="top" constant="4" id="MEL-gr-UB1"/>
                                                 <constraint firstAttribute="bottom" secondItem="ZRI-g8-WgA" secondAttribute="bottom" constant="4" id="Nfk-RS-TRZ"/>
                                                 <constraint firstAttribute="bottom" secondItem="p2h-LI-mWF" secondAttribute="bottom" constant="4" id="RBD-c2-gGI"/>
@@ -424,9 +424,10 @@
                                             <outlet property="avatarImage" destination="p2h-LI-mWF" id="gPu-2V-dZe"/>
                                             <outlet property="collectionView" destination="E3z-g0-LTu" id="Bqh-H5-3Yw"/>
                                             <outlet property="collectionViewHeightConstraint" destination="6YL-xh-12R" id="jEC-d3-JXh"/>
+                                            <outlet property="collectionViewWidthConstraint" destination="hDd-gA-8Qr" id="iqN-TE-fks"/>
+                                            <outlet property="incomingMessageContainerConstraint" destination="3QI-zA-aHt" id="pd7-9I-8sb"/>
                                             <outlet property="messageContainerBackgroundImage" destination="Eid-4T-heM" id="zmC-R8-kmD"/>
                                             <outlet property="messageContainerView" destination="ZRI-g8-WgA" id="NHW-oo-ISq"/>
-                                            <outlet property="messageContainerViewWidthConstraint" destination="hDd-gA-8Qr" id="5Sq-Ed-4Yy"/>
                                             <outlet property="timeLabel" destination="1g5-ic-OYO" id="kpl-dr-oKa"/>
                                             <segue destination="AxX-8Y-Tck" kind="push" identifier="showMessage" id="1jP-Sb-eNu"/>
                                         </connections>
@@ -505,9 +506,9 @@
                                         <connections>
                                             <outlet property="collectionView" destination="aIT-W1-odb" id="22I-O4-tY3"/>
                                             <outlet property="collectionViewHeightConstraint" destination="lV7-Ji-S5I" id="P0B-B9-ofv"/>
+                                            <outlet property="collectionViewWidthConstraint" destination="AZb-vm-IHa" id="UoR-VX-kfS"/>
                                             <outlet property="messageContainerBackgroundImage" destination="TsR-wQ-JAD" id="lnk-qU-akS"/>
                                             <outlet property="messageContainerView" destination="OI6-S6-e0s" id="pme-jE-de1"/>
-                                            <outlet property="messageContainerViewWidthConstraint" destination="AZb-vm-IHa" id="FmI-wD-8Bf"/>
                                             <outlet property="timeLabel" destination="8OF-at-jZX" id="UN5-Xu-ODv"/>
                                             <segue destination="AxX-8Y-Tck" kind="push" identifier="showMessage" id="Spc-A0-PR9"/>
                                         </connections>
