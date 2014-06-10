@@ -477,7 +477,6 @@
         }];
         
         messageIds = [unreadMessageIds componentsJoinedByString:@","];
-    
     }
     
     VKRequest *markAsRead = [VKApi

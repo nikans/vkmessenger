@@ -520,46 +520,72 @@
                                     <outlet property="delegate" destination="Ah7-4n-0Wa" id="iFk-eY-VoP"/>
                                 </connections>
                             </tableView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rr9-QY-7Zw">
-                                <rect key="frame" x="20" y="535" width="246" height="22"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Imp-zM-eEi">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nyX-wv-HJn">
+                                        <rect key="frame" x="278" y="12" width="34" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="yI7-OZ-Vem"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal" title="Send">
+                                            <color key="titleColor" red="0.502" green="0.502" blue="0.502" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="sendMessage:" destination="Ah7-4n-0Wa" eventType="touchDown" id="cKK-Nl-Q2F"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KBr-tI-qOn">
+                                        <rect key="frame" x="12" y="12" width="258" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rr9-QY-7Zw">
+                                                <rect key="frame" x="0.0" y="0.0" width="258" height="22"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="22" id="nGi-Wl-7gZ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="Ah7-4n-0Wa" id="nmC-9G-vx6"/>
+                                                </connections>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="Rr9-QY-7Zw" firstAttribute="leading" secondItem="KBr-tI-qOn" secondAttribute="leading" id="Ds2-Z1-jME"/>
+                                            <constraint firstItem="Rr9-QY-7Zw" firstAttribute="top" secondItem="KBr-tI-qOn" secondAttribute="top" id="LyA-3G-awl"/>
+                                            <constraint firstAttribute="bottom" secondItem="Rr9-QY-7Zw" secondAttribute="bottom" id="k7T-QY-g0L"/>
+                                            <constraint firstAttribute="trailing" secondItem="Rr9-QY-7Zw" secondAttribute="trailing" id="vxz-I5-MvR"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="nGi-Wl-7gZ"/>
+                                    <constraint firstItem="KBr-tI-qOn" firstAttribute="top" secondItem="Imp-zM-eEi" secondAttribute="top" constant="12" id="ERR-f2-AF3"/>
+                                    <constraint firstAttribute="trailing" secondItem="nyX-wv-HJn" secondAttribute="trailing" constant="8" id="IK7-x3-pUe"/>
+                                    <constraint firstAttribute="bottom" secondItem="nyX-wv-HJn" secondAttribute="bottom" constant="10" id="W2W-bb-OUW"/>
+                                    <constraint firstAttribute="bottom" secondItem="KBr-tI-qOn" secondAttribute="bottom" constant="10" id="iED-TO-jOB"/>
+                                    <constraint firstItem="nyX-wv-HJn" firstAttribute="top" secondItem="Imp-zM-eEi" secondAttribute="top" constant="12" id="uKj-nI-19h"/>
+                                    <constraint firstItem="nyX-wv-HJn" firstAttribute="leading" secondItem="KBr-tI-qOn" secondAttribute="trailing" constant="8" id="v2f-Q9-fa0"/>
+                                    <constraint firstItem="KBr-tI-qOn" firstAttribute="leading" secondItem="Imp-zM-eEi" secondAttribute="leading" constant="12" id="x5z-dv-Xhe"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <connections>
-                                    <outlet property="delegate" destination="Ah7-4n-0Wa" id="nmC-9G-vx6"/>
-                                </connections>
-                            </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nyX-wv-HJn">
-                                <rect key="frame" x="274" y="535" width="34" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="22" id="yI7-OZ-Vem"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <state key="normal" title="Send">
-                                    <color key="titleColor" red="0.502" green="0.502" blue="0.502" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="sendMessage:" destination="Ah7-4n-0Wa" eventType="touchDown" id="cKK-Nl-Q2F"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="5MT-5d-gQd" firstAttribute="leading" secondItem="jqM-jc-iYI" secondAttribute="leading" id="747-bb-geG"/>
-                            <constraint firstItem="Rr9-QY-7Zw" firstAttribute="leading" secondItem="jqM-jc-iYI" secondAttribute="leading" constant="20" id="ElA-cp-PI0"/>
-                            <constraint firstItem="nyX-wv-HJn" firstAttribute="leading" secondItem="Rr9-QY-7Zw" secondAttribute="trailing" constant="8" id="He5-Xi-riO"/>
-                            <constraint firstItem="5MT-5d-gQd" firstAttribute="top" secondItem="jqM-jc-iYI" secondAttribute="top" id="HjN-0U-kxR"/>
-                            <constraint firstAttribute="bottom" secondItem="Rr9-QY-7Zw" secondAttribute="bottom" constant="11" id="Nwq-BK-hCg"/>
+                            <constraint firstItem="Imp-zM-eEi" firstAttribute="leading" secondItem="jqM-jc-iYI" secondAttribute="leading" id="9TO-FJ-58w"/>
+                            <constraint firstItem="E49-Wj-tXp" firstAttribute="top" secondItem="Imp-zM-eEi" secondAttribute="bottom" id="Gwi-UO-diX"/>
+                            <constraint firstItem="5MT-5d-gQd" firstAttribute="top" secondItem="jqM-jc-iYI" secondAttribute="top" id="WvC-2x-fyw"/>
                             <constraint firstAttribute="trailing" secondItem="5MT-5d-gQd" secondAttribute="trailing" id="dvv-tj-BrR"/>
-                            <constraint firstAttribute="trailing" secondItem="nyX-wv-HJn" secondAttribute="trailing" constant="12" id="iiz-xn-YjV"/>
-                            <constraint firstItem="E49-Wj-tXp" firstAttribute="top" secondItem="nyX-wv-HJn" secondAttribute="bottom" constant="11" id="oLf-wW-3wm"/>
-                            <constraint firstItem="Rr9-QY-7Zw" firstAttribute="top" secondItem="5MT-5d-gQd" secondAttribute="bottom" constant="11" id="vgo-wP-fwd"/>
-                            <constraint firstAttribute="trailing" secondItem="Rr9-QY-7Zw" secondAttribute="trailing" constant="54" id="xC1-a4-NGI"/>
+                            <constraint firstItem="Imp-zM-eEi" firstAttribute="top" secondItem="5MT-5d-gQd" secondAttribute="bottom" id="hks-Vz-bW0"/>
+                            <constraint firstAttribute="trailing" secondItem="Imp-zM-eEi" secondAttribute="trailing" id="rxh-rE-d8Q"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cra-N8-TIN"/>
@@ -576,7 +602,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="902" y="64"/>
+            <point key="canvasLocation" x="902" y="195"/>
         </scene>
         <!--Message View Controller - Сообщение-->
         <scene sceneID="vp1-fM-wBr">

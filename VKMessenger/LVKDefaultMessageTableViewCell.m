@@ -41,9 +41,10 @@
     [self.contentView layoutIfNeeded];
     
     // Status
-    if (self.isUnread) {
+    if (self.isUnread)
         self.backgroundColor = [AVHexColor colorWithHexString:@"#e1e9f5"];
-    }
+    else
+        self.backgroundColor = [UIColor clearColor];
     
     // Sending adversary's avatar to hell
     if (!self.isRoom && !self.isOutgoing) {
