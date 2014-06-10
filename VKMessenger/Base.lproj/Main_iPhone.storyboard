@@ -520,7 +520,7 @@
                                     <outlet property="delegate" destination="Ah7-4n-0Wa" id="iFk-eY-VoP"/>
                                 </connections>
                             </tableView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" text="Палпатин император, путин лох" translatesAutoresizingMaskIntoConstraints="NO" id="Rr9-QY-7Zw">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rr9-QY-7Zw">
                                 <rect key="frame" x="20" y="535" width="246" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -528,7 +528,7 @@
                                     <constraint firstAttribute="height" constant="22" id="nGi-Wl-7gZ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
                                     <outlet property="delegate" destination="Ah7-4n-0Wa" id="nmC-9G-vx6"/>
                                 </connections>
