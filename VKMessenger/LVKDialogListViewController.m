@@ -146,7 +146,12 @@
 
 - (void)loadData:(int)offset
 {
-    if(!hasDataToLoad)
+    [self loadData:offset reload:NO];
+}
+
+- (void)loadData:(int)offset reload:(BOOL)reload
+{
+    if(!hasDataToLoad && !reload)
     {
         [bottomRefreshControl endRefreshing];
         return;
@@ -175,7 +180,7 @@
                     
                     [dialogsCollection adoptUserCollection:usersCollection];
                     
-                    if(_objects.count == 0)
+                    if(_objects.count == 0 || reload)
                     {
                         _objects = [NSMutableArray arrayWithArray:[dialogsCollection dialogs]];
                     }
@@ -237,7 +242,7 @@
 {
     if(!isLoading)
     {
-        [self loadData:0];
+        [self loadData:0 reload:YES];
     }
 }
 

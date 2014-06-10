@@ -145,7 +145,12 @@
 
 - (void)loadData:(int)offset
 {
-    if(!hasDataToLoad)
+    [self loadData:offset reload:NO];
+}
+
+- (void)loadData:(int)offset reload:(BOOL)reload
+{
+    if(!hasDataToLoad && !reload)
     {
         [topRefreshControl endRefreshing];
         return;
@@ -176,7 +181,7 @@
             
             [historyCollection adoptUserArray:userArray];
             
-            if(_objects.count == 0)
+            if(_objects.count == 0 || reload)
             {
                 _objects = [NSMutableArray arrayWithArray:[historyCollection messages]];
                 [self performSelectorOnMainThread:@selector(tableViewReloadDataWithScrollToIndexPath:) withObject:[NSIndexPath indexPathForRow:_objects.count-1 inSection:0] waitUntilDone:YES];
@@ -225,7 +230,7 @@
 {
     if(!isLoading)
     {
-        [self loadData:0];
+        [self loadData:0 reload:YES];
     }
 }
 
