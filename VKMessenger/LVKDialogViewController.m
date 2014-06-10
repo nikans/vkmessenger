@@ -146,7 +146,12 @@
 
 - (void)loadData:(int)offset
 {
-    if(!hasDataToLoad)
+    [self loadData:offset reload:NO];
+}
+
+- (void)loadData:(int)offset reload:(BOOL)reload
+{
+    if(!hasDataToLoad && !reload)
     {
         [topRefreshControl endRefreshing];
         return;
@@ -177,7 +182,7 @@
             
             [historyCollection adoptUserArray:userArray];
             
-            if(_objects.count == 0)
+            if(_objects.count == 0 || reload)
             {
                 _objects = [NSMutableArray arrayWithArray:[historyCollection messages]];
                 [self performSelectorOnMainThread:@selector(tableViewReloadDataWithScrollToIndexPath:) withObject:[NSIndexPath indexPathForRow:_objects.count-1 inSection:0] waitUntilDone:YES];
@@ -226,7 +231,7 @@
 {
     if(!isLoading)
     {
-        [self loadData:0];
+        [self loadData:0 reload:YES];
     }
 }
 
@@ -268,6 +273,9 @@
     // TODO: style
     self.tableView.backgroundColor = [AVHexColor colorWithHexString:@"#edf3fa"];
     [self.tableView setContentInset:UIEdgeInsetsMake(0,0,5,0)];
+    
+    // Text view
+    textView.layoutManager.delegate = self;
     
     
     // Load data
@@ -458,6 +466,10 @@
 {
     NSString *text = [textView text];
     [textView setText:@""];
+    
+    // TODO: shit stuff
+    self.textViewHeightConstraint.constant = 37;//self.textView.contentSize.height;
+    
     [self composeAndSendMessageWithText:text];
 }
 
@@ -531,11 +543,12 @@
 
 - (void)textViewDidChange:(UITextView *)textView {
     if (self.textViewHeightConstraint.constant != self.textView.contentSize.height) {
-        [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height-1, 320, 1) animated:YES];
-//        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[_objects count]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+//        [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height-1, 320, 1) animated:YES];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[_objects count]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     }
     self.textViewHeightConstraint.constant = self.textView.contentSize.height;
 }
+
 
 #pragma mark - Scroll view
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView

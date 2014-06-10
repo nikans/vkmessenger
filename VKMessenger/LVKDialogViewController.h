@@ -15,7 +15,7 @@
 #import "LVKDialog.h"
 #import "LVKLongPoll.h"
 
-@interface LVKDialogViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISplitViewControllerDelegate, UITextViewDelegate>
+@interface LVKDialogViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISplitViewControllerDelegate, UITextViewDelegate, NSLayoutManagerDelegate>
 
 @property (strong, nonatomic) LVKDialog *dialog;
 
