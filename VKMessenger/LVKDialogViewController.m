@@ -737,8 +737,8 @@
 
 #pragma mark - Bubble actions
 
-- (void)pushToMessageVC:(UITapGestureRecognizer *)tapGesture {
-    
+- (void)pushToMessageVC:(UITapGestureRecognizer *)tapGesture
+{
     // TODO protocol
     LVKDefaultMessageTableViewCell *cell = (LVKDefaultMessageTableViewCell *)tapGesture.view;
     
@@ -748,8 +748,16 @@
     [self performSegueWithIdentifier:@"showMessage" sender:cell.cellIndexPath];
 }
 
-- (void)resendMessage:(UITapGestureRecognizer *)tapGesture {
+- (void)resendMessage:(UITapGestureRecognizer *)tapGesture
+{
+    // TODO protocol
+    LVKDefaultMessageTableViewCell *cell = (LVKDefaultMessageTableViewCell *)tapGesture.view;
     
+    // TODO
+    //    cell.messageContainerBackgroundImage.image = [cell.messageContainerBackgroundImage.image addColor:[UIColor blackColor] drawAsOverlay:YES];
+    
+    [self hasRetriedToSentMessageAtIndexPath:cell.cellIndexPath];
+    [self sendMessageForMessage:[_objects objectAtIndex:cell.cellIndexPath.row] andDialog:dialog];
 }
 
 
