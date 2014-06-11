@@ -405,9 +405,6 @@
     self.tableView.backgroundColor = [AVHexColor colorWithHexString:@"#edf3fa"];
     [self.tableView setContentInset:UIEdgeInsetsMake(0,0,5,0)];
     
-    // TODO: set proper inset, printout self.textView.contentSize.height and update TEXTVIEW_BASE_HEIGHT constant
-    [self.textView setTextContainerInset:UIEdgeInsetsZero];
-    
     // Text view
 //    textView.layoutManager.delegate = self;
     self.textViewContainer.layer.cornerRadius = 4.f;
@@ -502,12 +499,13 @@
     cell.isRoom     = message.type == Room ? YES : NO;
     cell.isUnread   = message.isUnread;
     cell.bubbleDelegate = self;
+    cell.sandingState = message.state;
     
     CGFloat maxCVWidth;
     if (!cell.isOutgoing)
         if (cell.isRoom) maxCVWidth = 196.f;
         else maxCVWidth = 230.f;
-    else maxCVWidth = 234.f;
+    else maxCVWidth = 217.f;
     cell.collectionViewMaxWidth = maxCVWidth;
     
     LVKDialogCollectionViewDelegate *collectionViewDelegate = [[LVKDialogCollectionViewDelegate alloc] initWithData:message];
@@ -681,6 +679,20 @@
     }];
 }
 
+- (void)hasSuccessfullySentMessageAtIndexPath:(NSIndexPath *)indexPath {
+    LVKDefaultMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultOutgoingMessageCell" forIndexPath:indexPath];
+    [cell hasSuccessfullySentMessage];
+}
+
+- (void)hasFailedToSentMessageAtIndexPath:(NSIndexPath *)indexPath {
+    LVKDefaultMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultOutgoingMessageCell" forIndexPath:indexPath];
+    [cell hasFailedToSentMessage];
+}
+
+- (void)hasRetriedToSentMessageAtIndexPath:(NSIndexPath *)indexPath {
+    LVKDefaultMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultOutgoingMessageCell" forIndexPath:indexPath];
+    [cell hasRetriedToSendMessage];
+}
 
 #pragma mark - Text view
 
@@ -730,6 +742,10 @@
 //    cell.messageContainerBackgroundImage.image = [cell.messageContainerBackgroundImage.image addColor:[UIColor blackColor] drawAsOverlay:YES];
     
     [self performSegueWithIdentifier:@"showMessage" sender:cell.cellIndexPath];
+}
+
+- (void)resendMessage:(UITapGestureRecognizer *)tapGesture {
+    
 }
 
 

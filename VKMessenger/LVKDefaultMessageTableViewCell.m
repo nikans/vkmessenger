@@ -10,6 +10,10 @@
 #import "LVKMessageItemProtocol.h"
 #import "AVHexColor.h"
 
+#define LVKDefaultCellBackgroundColorUnread  @"#e1e9f5"
+#define LVKDefaultCellBackgroundColorFailed  @"#fbd3d3"
+#define LVKDefaultCellBackgroundColorSending @"#f3f7fb"
+
 @implementation LVKDefaultMessageTableViewCell
 
 @synthesize collectionViewDelegate;
@@ -43,8 +47,18 @@
     [self.contentView layoutIfNeeded];
     
     // Status
-    if (self.isUnread)
-        self.backgroundColor = [AVHexColor colorWithHexString:@"#e1e9f5"];
+    self.sendingActivityIndicator.hidden = YES;
+    self.sentCheckImageView.hidden = YES;
+    
+    if (self.sandingState == Failed)
+        self.backgroundColor = [AVHexColor colorWithHexString:LVKDefaultCellBackgroundColorFailed];
+    else if (self.sandingState == Sending) {
+        self.backgroundColor = [AVHexColor colorWithHexString:LVKDefaultCellBackgroundColorSending];
+        self.sendingActivityIndicator.hidden = NO;
+    }
+    else if (self.isUnread) {
+        self.backgroundColor = [AVHexColor colorWithHexString:LVKDefaultCellBackgroundColorUnread];
+    }
     else
         self.backgroundColor = [UIColor clearColor];
     
@@ -54,10 +68,17 @@
         self.incomingMessageContainerConstraint.constant = 4;
     }
     
-    // Tap action - go to message VC
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self.bubbleDelegate
-                                                                                 action:@selector(pushToMessageVC:)];
-    [self addGestureRecognizer:tapGesture];
+    // Tap action - go to message VC or resend
+    if (self.sandingState == Failed) {
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self.bubbleDelegate
+                                                                                     action:@selector(resendMessage:)];
+        [self addGestureRecognizer:tapGesture];
+    }
+    else if(self.sandingState != Sending) {
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self.bubbleDelegate
+                                                                                     action:@selector(pushToMessageVC:)];
+        [self addGestureRecognizer:tapGesture];
+    }
     
     
     // Width & height
@@ -104,6 +125,42 @@
 - (void)setBubbleActionsDelegate:(id<LVKBubbleActionsDelegate>)delegate forMessageWithIndexPath:(NSIndexPath *)indexPath {
     self.bubbleDelegate = delegate;
     self.cellIndexPath = indexPath;
+}
+
+- (void)hasFailedToSentMessage {
+    
+    self.sendingActivityIndicator.hidden = YES;
+    self.sentCheckImageView.hidden = YES;
+    
+    [UIView animateWithDuration:.5 animations:^{
+        self.backgroundColor = [AVHexColor colorWithHexString:LVKDefaultCellBackgroundColorFailed];
+    } completion:nil];
+}
+
+- (void)hasRetriedToSendMessage {
+    self.sendingActivityIndicator.hidden = NO;
+    self.sentCheckImageView.hidden = YES;
+    
+    [UIView animateWithDuration:.5 animations:^{
+        self.backgroundColor = [AVHexColor colorWithHexString:LVKDefaultCellBackgroundColorSending];
+    } completion:nil];
+}
+
+- (void)hasSuccessfullySentMessage {
+    
+    self.sendingActivityIndicator.hidden = YES;
+    self.sentCheckImageView.hidden = NO;
+    
+    [UIView animateWithDuration:1 animations:^{
+        self.backgroundColor = [UIColor clearColor];
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:1 animations:^{
+            self.sentCheckImageView.alpha = 0;
+        } completion:^(BOOL finished) {
+            self.sentCheckImageView.hidden = YES;
+            self.sentCheckImageView.alpha = 1;
+        }];
+    }];
 }
 
 - (void)awakeFromNib

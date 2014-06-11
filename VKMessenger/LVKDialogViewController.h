@@ -29,4 +29,6 @@
 
 -(IBAction) sendMessage:(id)sender;
 
+- (void)hasSuccessfullySentMessageAtIndexPath:(NSIndexPath *)indexPath;
+
 @end

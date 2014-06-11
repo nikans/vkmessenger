@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LVKDefaultMessagesCollectionView.h"
 
+#import "LVKModelEnums.h"
 #import "LVKDefaultMessageBodyItem.h"
 #import "LVKDefaultMessageRepostBodyItem.h"
 #import "LVKDefaultMessagePhotoItem.h"
@@ -39,11 +40,20 @@ static NSString *CollectionViewCellIdentifier = @"BodyItem";
 
 @property (strong, nonatomic) LVKDialogCollectionViewDelegate *collectionViewDelegate;
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *sendingActivityIndicator;
+@property (weak, nonatomic) IBOutlet UIImageView *sentCheckImageView;
+
+@property (nonatomic) sendingState sandingState;
 @property (nonatomic) BOOL isOutgoing;
 @property (nonatomic) BOOL isRoom;
 @property (nonatomic) BOOL isUnread;
 
+// TODO add delegate 4 cell
 - (void)setCollectionViewDelegates:(id<UICollectionViewDataSource, UICollectionViewDelegate>)dataSourceDelegate forMessageWithIndexPath:(NSIndexPath *)indexPath;
 - (void)setBubbleActionsDelegate:(id<LVKBubbleActionsDelegate>)delegate forMessageWithIndexPath:(NSIndexPath *)indexPath;
+
+- (void)hasFailedToSentMessage;
+- (void)hasRetriedToSendMessage;
+- (void)hasSuccessfullySentMessage;
 
 @end
