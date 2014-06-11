@@ -15,6 +15,7 @@
 @interface LVKMessage : NSObject <LVKMessagePartProtocol>
 
 @property (nonatomic) NSNumber *_id;
+@property (nonatomic) sendingState state;
 @property (nonatomic) NSString *body;
 @property (nonatomic) NSNumber *chatId;
 @property (nonatomic) NSNumber *userId;

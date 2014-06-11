@@ -11,11 +11,16 @@
 
 @implementation LVKMessage
 
-@synthesize _id, body, chatId, userId, type, user, date, isUnread, isOutgoing, attachments, forwarded;
+@synthesize _id, state, body, chatId, userId, type, user, date, isUnread, isOutgoing, attachments, forwarded;
 
 -(id)init
 {
     self = [super init];
+    
+    if(self)
+    {
+        state = Default;
+    }
     
     return self;
 }

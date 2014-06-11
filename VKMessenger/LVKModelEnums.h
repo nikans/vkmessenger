@@ -20,4 +20,10 @@ typedef enum DialogTypes {
     Dialog
 } dialogType;
 
+typedef enum SendingStates {
+    Default,
+    Sending,
+    Failed
+} sendingState;
+
 #endif
