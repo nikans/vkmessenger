@@ -41,7 +41,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="vk_activity.png" translatesAutoresizingMaskIntoConstraints="NO" id="g9y-Tj-fOk">
+                                        <imageView userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g9y-Tj-fOk">
                                             <rect key="frame" x="0.0" y="0.0" width="43" height="43"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
@@ -78,19 +78,19 @@
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="vk_activity.png" translatesAutoresizingMaskIntoConstraints="NO" id="8wH-Pz-Ccb">
+                                        <imageView userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8wH-Pz-Ccb">
                                             <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="vk_activity.png" translatesAutoresizingMaskIntoConstraints="NO" id="O3T-nH-7v6">
+                                        <imageView userInteractionEnabled="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O3T-nH-7v6">
                                             <rect key="frame" x="22" y="0.0" width="21" height="21"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" tag="6" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="vk_activity.png" translatesAutoresizingMaskIntoConstraints="NO" id="eNB-Iz-0sa">
+                                        <imageView userInteractionEnabled="NO" tag="6" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eNB-Iz-0sa">
                                             <rect key="frame" x="0.0" y="22" width="21" height="21"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
-                                        <imageView userInteractionEnabled="NO" tag="7" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="vk_activity.png" translatesAutoresizingMaskIntoConstraints="NO" id="HpL-zB-eBy">
+                                        <imageView userInteractionEnabled="NO" tag="7" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HpL-zB-eBy">
                                             <rect key="frame" x="22" y="22" width="21" height="21"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
@@ -231,7 +231,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="253" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="vk_activity.png" translatesAutoresizingMaskIntoConstraints="NO" id="stb-cJ-pTx">
+                                        <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="stb-cJ-pTx">
                                             <rect key="frame" x="0.0" y="0.0" width="43" height="43"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
@@ -288,7 +288,7 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="vk_activity.png" translatesAutoresizingMaskIntoConstraints="NO" id="gbS-yW-etP">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gbS-yW-etP">
                                 <rect key="frame" x="60" y="84" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -425,7 +425,6 @@
                                             <outlet property="messageContainerBackgroundImage" destination="Eid-4T-heM" id="zmC-R8-kmD"/>
                                             <outlet property="messageContainerView" destination="ZRI-g8-WgA" id="NHW-oo-ISq"/>
                                             <outlet property="timeLabel" destination="1g5-ic-OYO" id="kpl-dr-oKa"/>
-                                            <segue destination="AxX-8Y-Tck" kind="push" identifier="showMessage" id="1jP-Sb-eNu"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DefaultOutgoingMessageCell" rowHeight="82" id="bxd-qi-SQS" customClass="LVKDefaultMessageTableViewCell">
@@ -520,7 +519,6 @@
                                             <outlet property="sendingActivityIndicator" destination="uic-BZ-W0D" id="ZM6-zt-QDd"/>
                                             <outlet property="sentCheckImageView" destination="Uwx-Eq-Ccr" id="ILy-m8-bAj"/>
                                             <outlet property="timeLabel" destination="8OF-at-jZX" id="UN5-Xu-ODv"/>
-                                            <segue destination="AxX-8Y-Tck" kind="push" identifier="showMessage" id="Spc-A0-PR9"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -617,14 +615,10 @@
                         <outlet property="textView" destination="Rr9-QY-7Zw" id="OzP-rE-ELy"/>
                         <outlet property="textViewContainer" destination="KBr-tI-qOn" id="Aez-Va-EoT"/>
                         <outlet property="textViewHeightConstraint" destination="nGi-Wl-7gZ" id="BTJ-oO-yTd"/>
+                        <segue destination="AxX-8Y-Tck" kind="push" identifier="showMessage" id="4wL-MC-Kcf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lrm-kH-fPn" sceneMemberID="firstResponder"/>
-                <view contentMode="scaleToFill" id="msz-tx-EFj">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="460"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                </view>
             </objects>
             <point key="canvasLocation" x="902" y="64"/>
         </scene>
@@ -727,7 +721,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="jUr-3t-vfg"/>
-        <segue reference="1jP-Sb-eNu"/>
-        <segue reference="gPN-Qz-Vpe"/>
+        <segue reference="cFB-OF-GRU"/>
     </inferredMetricsTieBreakers>
 </document>
