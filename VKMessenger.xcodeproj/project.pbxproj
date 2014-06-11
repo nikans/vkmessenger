@@ -573,7 +573,7 @@
 				ORGANIZATIONNAME = Levelab;
 				TargetAttributes = {
 					A4017DAC193DE8EA000EAD87 = {
-						DevelopmentTeam = 6VXW8XMBDL;
+						DevelopmentTeam = 88648Q4J25;
 					};
 					A4017DD3193DE8EA000EAD87 = {
 						TestTargetID = A4017DAC193DE8EA000EAD87;
