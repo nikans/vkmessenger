@@ -657,10 +657,14 @@
     [sendMessage executeWithResultBlock:^(VKResponse *response) {
         [message set_id:response.json];
         [self networkRestored];
+        [message setState:Default];
+        [self performSelectorOnMainThread:@selector(hasSuccessfullySentMessageAtIndexPath:) withObject:[NSIndexPath indexPathForRow:[_objects indexOfObject:message] inSection:0] waitUntilDone:YES];
     } errorBlock:^(NSError *error) {
         if (error.code != VK_API_ERROR)
         {
             [self networkFailedRequest:error.vkError.request];
+            [message setState:Failed];
+            [self performSelectorOnMainThread:@selector(hasFailedToSentMessageAtIndexPath:) withObject:[NSIndexPath indexPathForRow:[_objects indexOfObject:message] inSection:0] waitUntilDone:YES];
         }
         else
         {
@@ -673,8 +677,9 @@
 {
     LVKMessage *newMessage = [[LVKMessage alloc] initWithDictionary:[NSDictionary dictionaryWithObjectsAndKeys:[dialog chatId], [dialog chatIdKey], [NSNumber numberWithDouble: [[NSDate date] timeIntervalSince1970]], @"date", text, @"body", [NSNumber numberWithInt:1], @"out", [NSNumber numberWithInt:0], @"read_state", nil]];
     
+    [newMessage setState:Sending];
     [_objects addObject:newMessage];
-    [self tableViewReloadDataWithScrollToIndexPath:[NSIndexPath indexPathForRow:_objects.count-1 inSection:0]];
+    [self tableViewReloadDataWithScrollToIndexPath:[NSIndexPath indexPathForRow:[_objects indexOfObject:newMessage] inSection:0]];
     
     [self sendMessageForMessage:newMessage andDialog:dialog];
 }
