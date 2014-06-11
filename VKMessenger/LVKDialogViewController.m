@@ -678,7 +678,20 @@
     
     [self sendMessageForMessage:newMessage andDialog:dialog];
 }
+- (void)hasSuccessfullySentMessageAtIndexPath:(NSIndexPath *)indexPath {
+    LVKDefaultMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultOutgoingMessageCell" forIndexPath:indexPath];
+    [cell hasSuccessfullySentMessage];
+}
 
+- (void)hasFailedToSentMessageAtIndexPath:(NSIndexPath *)indexPath {
+    LVKDefaultMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultOutgoingMessageCell" forIndexPath:indexPath];
+    [cell hasFailedToSentMessage];
+}
+
+- (void)hasRetriedToSentMessageAtIndexPath:(NSIndexPath *)indexPath {
+    LVKDefaultMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultOutgoingMessageCell" forIndexPath:indexPath];
+    [cell hasRetriedToSendMessage];
+}
 
 #pragma mark - Text view
 
