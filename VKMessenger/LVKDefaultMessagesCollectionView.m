@@ -10,8 +10,6 @@
 
 @implementation LVKDefaultMessagesCollectionView
 
-@synthesize messageIndexPath;
-
 - (void)awakeFromNib {
     [self registerNib:[UINib nibWithNibName:@"LVKDefaultMessageBodyItem" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"DefaultBodyItem"];
     [self registerNib:[UINib nibWithNibName:@"LVKDefaultMessageRepostBodyItem" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"DefaultRepostBodyItem"];

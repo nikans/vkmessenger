@@ -84,7 +84,7 @@
 		D0A210C519464786008508BF /* LVKDefaultMessageStickerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A210C419464786008508BF /* LVKDefaultMessageStickerItem.m */; };
 		D0A210C7194647C2008508BF /* LVKDefaultMessageVideoItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0A210C6194647C2008508BF /* LVKDefaultMessageVideoItem.xib */; };
 		D0A210C9194647D4008508BF /* LVKDefaultMessageStickerItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0A210C8194647D4008508BF /* LVKDefaultMessageStickerItem.xib */; };
-		D0A210CC1946637B008508BF /* LVKDialogCollectionViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A210CB1946637B008508BF /* LVKDialogCollectionViewDelegate.m */; };
+		D0A210CC1946637B008508BF /* LVKMessageCollectionViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A210CB1946637B008508BF /* LVKMessageCollectionViewDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -221,8 +221,8 @@
 		D0A210C419464786008508BF /* LVKDefaultMessageStickerItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDefaultMessageStickerItem.m; sourceTree = "<group>"; };
 		D0A210C6194647C2008508BF /* LVKDefaultMessageVideoItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LVKDefaultMessageVideoItem.xib; sourceTree = "<group>"; };
 		D0A210C8194647D4008508BF /* LVKDefaultMessageStickerItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LVKDefaultMessageStickerItem.xib; sourceTree = "<group>"; };
-		D0A210CA1946637B008508BF /* LVKDialogCollectionViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDialogCollectionViewDelegate.h; sourceTree = "<group>"; };
-		D0A210CB1946637B008508BF /* LVKDialogCollectionViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDialogCollectionViewDelegate.m; sourceTree = "<group>"; };
+		D0A210CA1946637B008508BF /* LVKMessageCollectionViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKMessageCollectionViewDelegate.h; sourceTree = "<group>"; };
+		D0A210CB1946637B008508BF /* LVKMessageCollectionViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKMessageCollectionViewDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -487,8 +487,8 @@
 		D038C3351944E36C00E7895D /* Message CollectionView */ = {
 			isa = PBXGroup;
 			children = (
-				D0A210CA1946637B008508BF /* LVKDialogCollectionViewDelegate.h */,
-				D0A210CB1946637B008508BF /* LVKDialogCollectionViewDelegate.m */,
+				D0A210CA1946637B008508BF /* LVKMessageCollectionViewDelegate.h */,
+				D0A210CB1946637B008508BF /* LVKMessageCollectionViewDelegate.m */,
 				D038C3051944E13F00E7895D /* LVKDefaultMessagesCollectionView.h */,
 				D038C3061944E13F00E7895D /* LVKDefaultMessagesCollectionView.m */,
 				D038C3341944E31E00E7895D /* LVKMessageItemProtocol.h */,
@@ -726,7 +726,7 @@
 				9D2A4C17A76922050A4580FE /* LVKDocumentAttachment.m in Sources */,
 				9D2A4ED4CD0B4F119FF0C70A /* LVKWallAttachment.m in Sources */,
 				9D2A4F6BFB00357BCB07DCEE /* LVKStickerAttachment.m in Sources */,
-				D0A210CC1946637B008508BF /* LVKDialogCollectionViewDelegate.m in Sources */,
+				D0A210CC1946637B008508BF /* LVKMessageCollectionViewDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

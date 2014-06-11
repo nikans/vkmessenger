@@ -10,14 +10,9 @@
 #import "LVKDefaultMessagesCollectionView.h"
 
 #import "LVKModelEnums.h"
-#import "LVKDefaultMessageBodyItem.h"
-#import "LVKDefaultMessageRepostBodyItem.h"
-#import "LVKDefaultMessagePhotoItem.h"
-#import "LVKDefaultMessageStickerItem.h"
-#import "LVKDefaultMessageVideoItem.h"
 
 #import "LVKBubbleActionsDelegate.h"
-#import "LVKDialogCollectionViewDelegate.h"
+#import "LVKMessageCollectionViewDelegate.h"
 
 static NSString *CollectionViewCellIdentifier = @"BodyItem";
 
@@ -38,7 +33,7 @@ static NSString *CollectionViewCellIdentifier = @"BodyItem";
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewWidthConstraint;
 @property (nonatomic) CGFloat collectionViewMaxWidth;
 
-@property (strong, nonatomic) LVKDialogCollectionViewDelegate *collectionViewDelegate;
+@property (strong, nonatomic) LVKMessageCollectionViewDelegate *collectionViewDelegate;
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *sendingActivityIndicator;
 @property (weak, nonatomic) IBOutlet UIImageView *sentCheckImageView;

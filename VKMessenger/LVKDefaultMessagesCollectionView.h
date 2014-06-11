@@ -14,9 +14,6 @@
 
 @interface LVKDefaultMessagesCollectionView : UICollectionView
 
-@property (strong, nonatomic) NSIndexPath *messageIndexPath;
-@property (nonatomic) BOOL isOutgoing;
-@property (nonatomic) BOOL isRoom;
 @property (nonatomic) CGFloat maxWidth;
 
 @end

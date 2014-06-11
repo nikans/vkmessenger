@@ -8,6 +8,9 @@
 
 #import "LVKMessageViewController.h"
 #import "LVKUserViewController.h"
+#import "LVKMessage.h"
+#import "LVKMessageCollectionViewDelegate.h"
+#import "LVKDefaultMessagesCollectionView.h"
 
 @interface LVKMessageViewController ()
 
@@ -15,7 +18,7 @@
 
 @implementation LVKMessageViewController
 
-@synthesize message, photo, name, date, messageText;
+@synthesize message, photo, name, date;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,7 +37,15 @@
     [name setText:[[message user] fullName]];
     [photo setImageWithURL:[[message user] getPhoto:100]];
     [date setText:[NSDateFormatter localizedStringFromDate:[message date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle]];
-    [messageText setText:[message body]];
+//    [messageText setText:[message body]];
+    
+    self.collectionViewDelegate = [[LVKMessageCollectionViewDelegate alloc] initWithData:self.message];
+
+    self.collectionView.delegate = self.collectionViewDelegate;
+    self.collectionView.dataSource = self.collectionViewDelegate;
+    self.collectionView.maxWidth = 300.f;
+    
+    [self.collectionView reloadData];
 }
 
 - (void)didReceiveMemoryWarning

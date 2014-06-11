@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <VKSdk.h>
 #import <UIImageView+WebCache.h>
-#import "LVKMessage.h"
+
+@class LVKDefaultMessagesCollectionView;
+@class LVKMessage;
+@class LVKMessageCollectionViewDelegate;
 
 @interface LVKMessageViewController : UIViewController
 
@@ -17,6 +20,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *photo;
 @property (strong, nonatomic) IBOutlet UILabel *name;
 @property (strong, nonatomic) IBOutlet UILabel *date;
-@property (strong, nonatomic) IBOutlet UITextView *messageText;
+@property (weak, nonatomic) IBOutlet LVKDefaultMessagesCollectionView *collectionView;
+@property (strong, nonatomic) LVKMessageCollectionViewDelegate *collectionViewDelegate;
 
 @end

@@ -13,7 +13,7 @@
 #import <UIImageView+WebCache.h>
 #import <UIButton+WebCache.h>
 #import "LVKMessagePartProtocol.h"
-#import "LVKDialogCollectionViewDelegate.h"
+#import "LVKMessageCollectionViewDelegate.h"
 #import "LVKUsersCollection.h"
 #import "UIImage+Color.h"
 
@@ -497,7 +497,7 @@
     else maxCVWidth = 217.f;
     cell.collectionViewMaxWidth = maxCVWidth;
     
-    LVKDialogCollectionViewDelegate *collectionViewDelegate = [[LVKDialogCollectionViewDelegate alloc] initWithData:message];
+    LVKMessageCollectionViewDelegate *collectionViewDelegate = [[LVKMessageCollectionViewDelegate alloc] initWithData:message];
     [cell setCollectionViewDelegates:collectionViewDelegate forMessageWithIndexPath:indexPath];
     [cell setBubbleActionsDelegate:self forMessageWithIndexPath:indexPath];
 }
@@ -769,22 +769,14 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-//    if ([[segue identifier] isEqualToString:@"showMessage"]) {
-//        LVKMessage *object = nil;
-//        
-//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-//        object = _objects[indexPath.row];
-//        
-//        [(LVKMessageViewController *)[segue destinationViewController] setMessage:object];
-//    }
-    
     if ([[segue identifier] isEqualToString:@"showMessage"]) {
-        LVKMessage *object = nil;
+        LVKMessage *message = nil;
 
         NSIndexPath *indexPath = sender;
-        object = _objects[indexPath.row];
-
-        [(LVKMessageViewController *)[segue destinationViewController] setMessage:object];
+        message = _objects[indexPath.row];
+        
+//        LVKMessageViewController *destinationViewController = [segue destinationViewController];
+        [[segue destinationViewController] setMessage:message];
     }
     
     
