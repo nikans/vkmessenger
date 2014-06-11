@@ -687,8 +687,8 @@
 
 - (void)textViewDidChange:(UITextView *)textView {
     if (self.textViewHeightConstraint.constant != self.textView.contentSize.height) {
-//        [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height-1, 320, 1) animated:YES];
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[_objects count]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+        [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height-1, 1, 1) animated:NO];
+//        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[_objects count]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     }
     self.textViewHeightConstraint.constant = self.textView.contentSize.height;
 }
