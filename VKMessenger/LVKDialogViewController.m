@@ -19,7 +19,7 @@
 
 #import "LVKDefaultMessageTableViewCell.h"
 
-#define TEXTVIEW_BASE_HEIGHT (21)
+#define TEXTVIEW_BASE_HEIGHT (27)
 
 @interface LVKDialogViewController () {
     NSMutableArray *_objects;
@@ -410,7 +410,11 @@
     
     // Text view
 //    textView.layoutManager.delegate = self;
-    
+    self.textViewContainer.layer.cornerRadius = 4.f;
+    self.textViewContainer.layer.masksToBounds = YES;
+    self.textView.layer.cornerRadius = 4.f;
+    self.textView.layer.masksToBounds = YES;
+    [self.textView setTextContainerInset:UIEdgeInsetsMake(3, 3, 3, 3)];
     
     // Load data
     [self registerObservers];
