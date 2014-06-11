@@ -63,6 +63,84 @@
     }
 }
 
+- (NSArray *)dialogUsers
+{
+    NSMutableArray *userArray = [[NSMutableArray alloc] init];
+    
+    if([dialog type] == Room)
+    {
+        [userArray addObjectsFromArray:[dialog users]];
+    }
+    else if([dialog type] == Dialog)
+    {
+        [userArray addObject:[dialog user]];
+    }
+    [userArray addObject:[(LVKAppDelegate *)[[UIApplication sharedApplication] delegate] currentUser]];
+    
+    return [NSArray arrayWithArray:userArray];
+}
+
+- (void)loadMessageData:(LVKMessage *)message withResultBlock:(void (^)(VKResponse *))completeBlock
+                                           errorBlock:(void (^)(NSError *))errorBlock
+{
+    VKRequest *messageRequest = [VKApi requestWithMethod:@"messages.getById" andParameters:[NSDictionary dictionaryWithObject:[message _id] forKey:@"message_id"] andHttpMethod:@"GET"];
+    
+    messageRequest.attempts = 2;
+    messageRequest.requestTimeout = 5;
+    [messageRequest executeWithResultBlock:completeBlock errorBlock:errorBlock];
+}
+
+- (void)loadHistoryDataOffsettedBy:(int) offset withResultBlock:(void (^)(VKResponse *))completeBlock
+             errorBlock:(void (^)(NSError *))errorBlock
+{
+    VKRequest *history = [VKApi
+                          requestWithMethod:@"messages.getHistory"
+                          andParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"30", @"count", [NSNumber numberWithInt:offset], @"offset", [dialog chatId], [dialog chatIdKey], nil]
+                          andHttpMethod:@"GET"];
+    history.attempts = 3;
+    history.requestTimeout = 3;
+    [history executeWithResultBlock:completeBlock errorBlock:errorBlock];
+}
+
+- (void)loadUserDataForIdsInArray:(NSArray *)_userIds excludingUsersFromArray:(NSArray *)_userArray withResultBlock:(void (^)(NSArray *))completeBlock
+             errorBlock:(void (^)(NSError *))errorBlock
+{
+    NSMutableArray *userArray = [NSMutableArray arrayWithArray:_userArray];
+    NSMutableArray *userIds = [NSMutableArray arrayWithArray:_userIds];
+    
+    for (LVKUser *userObject in userArray) {
+        if([userObject isCurrent])
+        {
+            [userIds removeObject:[NSNumber numberWithInt:0]];
+        }
+        else if([userIds indexOfObject:[userObject _id]] != NSNotFound)
+        {
+            [userIds removeObject:[userObject _id]];
+        }
+    }
+    
+    NSString *userIdsCSV = [userIds componentsJoinedByString:@","];
+    
+    if([userIdsCSV length] > 0)
+    {
+        VKRequest *users = [[VKApi users] get:[NSDictionary dictionaryWithObjectsAndKeys:userIdsCSV, @"user_ids", @"photo_100", @"fields", nil]];
+        
+        users.attempts = 3;
+        users.requestTimeout = 3;
+        [users executeWithResultBlock:^(VKResponse *response) {
+            LVKUsersCollection *usersCollection = [[LVKUsersCollection alloc] initWithArray:response.json];
+            
+            [userArray addObjectsFromArray:[usersCollection users]];
+            
+            completeBlock([NSArray arrayWithArray:userArray]);
+        } errorBlock:errorBlock];
+    }
+    else
+    {
+        completeBlock([NSArray arrayWithArray:userArray]);
+    }
+}
+
 - (void)receiveNewMessage:(NSNotification *)notification
 {
     LVKLongPollNewMessage *newMessageUpdate = [notification object];
@@ -76,61 +154,18 @@
         if(result.count == 0)
         {
             LVKMessage *message = [newMessageUpdate message];
-            VKRequest *messageRequest = [VKApi requestWithMethod:@"messages.getById" andParameters:[NSDictionary dictionaryWithObject:[message _id] forKey:@"message_id"] andHttpMethod:@"GET"];
-            
-            messageRequest.attempts = 2;
-            messageRequest.requestTimeout = 5;
-            [messageRequest executeWithResultBlock:^(VKResponse *response) {
+            [self loadMessageData:message withResultBlock:^(VKResponse *response) {
                 [message adoptAttachments:[[[response.json objectForKey:@"items"] firstObject] objectForKey:@"attachments"]];
                 [message adoptForwarded:[[[response.json objectForKey:@"items"] firstObject] objectForKey:@"fwd_messages"]];
-                LVKHistoryCollection *historyCollection = [[LVKHistoryCollection alloc] initWithMessage:message];
                 
-                NSMutableArray *userArray = [[NSMutableArray alloc] init];
+                NSArray *result = [_objects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(LVKMessage *message, NSDictionary *bindings) {
+                    return [message isEqual:[newMessageUpdate message]];
+                }]];
                 
-                if([dialog type] == Room)
+                if(result.count == 0)
                 {
-                    [userArray addObjectsFromArray:[dialog users]];
-                }
-                else if([dialog type] == Dialog)
-                {
-                    [userArray addObject:[dialog user]];
-                }
-                [userArray addObject:[(LVKAppDelegate *)[[UIApplication sharedApplication] delegate] currentUser]];
-                
-                NSMutableArray *userIds = [NSMutableArray arrayWithArray:[historyCollection getUserIds]];
-                
-                for (LVKUser *userObject in userArray) {
-                    if([userObject isCurrent])
-                    {
-                        [userIds removeObject:[NSNumber numberWithInt:0]];
-                    }
-                    else if([userIds indexOfObject:[userObject _id]] != NSNotFound)
-                    {
-                        [userIds removeObject:[userObject _id]];
-                    }
-                }
-                
-                NSString *userIdsCSV = [userIds componentsJoinedByString:@","];
-                
-                if([userIdsCSV length] > 0)
-                {
-                    VKRequest *users = [[VKApi users] get:[NSDictionary dictionaryWithObjectsAndKeys:userIdsCSV, @"user_ids", @"photo_100", @"fields", nil]];
-                    
-                    users.attempts = 3;
-                    users.requestTimeout = 3;
-                    [users executeWithResultBlock:^(VKResponse *response) {
-                        LVKUsersCollection *usersCollection = [[LVKUsersCollection alloc] initWithArray:response.json];
-                        
-                        [userArray addObjectsFromArray:[usersCollection users]];
-                        
-                        [historyCollection adoptUserArray:userArray];
-                        
-                        [_objects addObject:[[historyCollection messages] firstObject]];
-                        [self tableViewReloadDataWithScrollToIndexPath:[NSIndexPath indexPathForRow:_objects.count-1 inSection:0]];
-                        
-                        [self networkRestored];
-                        [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
-                        isLoading = NO;
+                    [self loadUserDataForIdsInArray:[message getUserIds] excludingUsersFromArray:[self dialogUsers] withResultBlock:^(NSArray *userArray) {
+                        [self didLoadMessage:message withUserArray:userArray];
                     } errorBlock:^(NSError *error) {
                         if (error.code != VK_API_ERROR)
                         {
@@ -145,9 +180,11 @@
                 }
                 else
                 {
-                    [historyCollection adoptUserArray:userArray];
+                    [message adoptUserArray:[self dialogUsers]];
                     
-                    [_objects addObject:[[historyCollection messages] firstObject]];
+                    LVKMessage *existingMessage = [result firstObject];
+                    
+                    [_objects replaceObjectAtIndex:[_objects indexOfObject:existingMessage] withObject:message];
                     [self tableViewReloadDataWithScrollToIndexPath:[NSIndexPath indexPathForRow:_objects.count-1 inSection:0]];
                     
                     [self networkRestored];
@@ -205,6 +242,58 @@
                                                object:nil];
 }
 
+- (void)didLoadMessage:(LVKMessage *)message withUserArray:(NSArray *)userArray
+{
+    [message adoptUserArray:userArray];
+    
+    [_objects addObject:message];
+    [self tableViewReloadDataWithScrollToIndexPath:[NSIndexPath indexPathForRow:_objects.count-1 inSection:0]];
+    
+    [self networkRestored];
+    [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+    isLoading = NO;
+}
+
+- (void)didLoadHistoryCollection:(LVKHistoryCollection *)historyCollection withUserArray:(NSArray *)userArray offset:(int)offset reload:(BOOL)reload
+{
+    [historyCollection adoptUserArray:userArray];
+    
+    if(_objects.count == 0 || reload)
+    {
+        _objects = [NSMutableArray arrayWithArray:[historyCollection messages]];
+        [self performSelectorOnMainThread:@selector(tableViewReloadDataWithScrollToIndexPath:) withObject:[NSIndexPath indexPathForRow:_objects.count-1 inSection:0] waitUntilDone:YES];
+    }
+    else if(offset == _objects.count)
+    {
+        [_objects insertObjects:[historyCollection messages] atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [historyCollection messages].count)]];
+        [self performSelectorOnMainThread:@selector(tableViewReloadDataWithScrollToIndexPath:) withObject:[NSIndexPath indexPathForRow:[historyCollection messages].count inSection:0] waitUntilDone:YES];
+    }
+    
+    [self networkRestored];
+    [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+    
+    [self didFinishedLoadingHistoryCollection];
+    
+    [self endOfDataSourceHandlerForHistoryCollection:historyCollection];
+}
+
+- (void)endOfDataSourceHandlerForHistoryCollection:(LVKHistoryCollection *)historyCollection
+{
+    if(_objects.count >= [[historyCollection count] intValue])
+    {
+        hasDataToLoad = NO;
+        [topRefreshControl performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:YES];
+        [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
+    }
+}
+
+- (void)didFinishedLoadingHistoryCollection
+{
+    isLoading = NO;
+    [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
+    [topRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
+}
+
 - (void)loadData:(int)offset
 {
     [self loadData:offset reload:NO];
@@ -220,120 +309,22 @@
     if(dialog)
     {
         isLoading = YES;
-        VKRequest *history = [VKApi
-                              requestWithMethod:@"messages.getHistory"
-                              andParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"30", @"count", [NSNumber numberWithInt:offset], @"offset", [dialog chatId], [dialog chatIdKey], nil]
-                              andHttpMethod:@"GET"];
-        history.attempts = 3;
-        history.requestTimeout = 3;
-        [history executeWithResultBlock:^(VKResponse *response) {
+        [self loadHistoryDataOffsettedBy:offset withResultBlock:^(VKResponse *response) {
             LVKHistoryCollection *historyCollection = [[LVKHistoryCollection alloc] initWithDictionary:response.json];
             
-            NSMutableArray *userArray = [[NSMutableArray alloc] init];
-            
-            if([dialog type] == Room)
-            {
-                [userArray addObjectsFromArray:[dialog users]];
-            }
-            else if([dialog type] == Dialog)
-            {
-                [userArray addObject:[dialog user]];
-            }
-            [userArray addObject:[(LVKAppDelegate *)[[UIApplication sharedApplication] delegate] currentUser]];
-            
-            NSMutableArray *userIds = [NSMutableArray arrayWithArray:[historyCollection getUserIds]];
-            
-            for (LVKUser *userObject in userArray) {
-                if([userObject isCurrent])
+            [self loadUserDataForIdsInArray:[historyCollection getUserIds] excludingUsersFromArray:[self dialogUsers] withResultBlock:^(NSArray *userArray) {
+                [self didLoadHistoryCollection:historyCollection withUserArray:userArray offset:offset reload:reload];
+            } errorBlock:^(NSError *error) {
+                if (error.code != VK_API_ERROR)
                 {
-                    [userIds removeObject:[NSNumber numberWithInt:0]];
+                    [self networkFailedRequest:error.vkError.request];
                 }
-                else if([userIds indexOfObject:[userObject _id]] != NSNotFound)
+                else
                 {
-                    [userIds removeObject:[userObject _id]];
+                    NSLog(@"%@", error);
                 }
-            }
-            
-            NSString *userIdsCSV = [userIds componentsJoinedByString:@","];
-            
-            if([userIdsCSV length] > 0)
-            {
-                VKRequest *users = [[VKApi users] get:[NSDictionary dictionaryWithObjectsAndKeys:userIdsCSV, @"user_ids", @"photo_100", @"fields", nil]];
-                
-                users.attempts = 3;
-                users.requestTimeout = 3;
-                [users executeWithResultBlock:^(VKResponse *response) {
-                    LVKUsersCollection *usersCollection = [[LVKUsersCollection alloc] initWithArray:response.json];
-                    
-                    [userArray addObjectsFromArray:[usersCollection users]];
-                    
-                    [historyCollection adoptUserArray:userArray];
-                    
-                    if(_objects.count == 0 || reload)
-                    {
-                        _objects = [NSMutableArray arrayWithArray:[historyCollection messages]];
-                        [self performSelectorOnMainThread:@selector(tableViewReloadDataWithScrollToIndexPath:) withObject:[NSIndexPath indexPathForRow:_objects.count-1 inSection:0] waitUntilDone:YES];
-                    }
-                    else if(offset == _objects.count)
-                    {
-                        [_objects insertObjects:[historyCollection messages] atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [historyCollection messages].count)]];
-                        [self performSelectorOnMainThread:@selector(tableViewReloadDataWithScrollToIndexPath:) withObject:[NSIndexPath indexPathForRow:[historyCollection messages].count inSection:0] waitUntilDone:YES];
-                    }
-                    
-                    [self networkRestored];
-                    [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
-                    isLoading = NO;
-                    [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
-                    [topRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
-                    
-                    if(_objects.count >= [[historyCollection count] intValue])
-                    {
-                        hasDataToLoad = NO;
-                        [topRefreshControl performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:YES];
-                        [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
-                    }
-                } errorBlock:^(NSError *error) {
-                    if (error.code != VK_API_ERROR)
-                    {
-                        [self networkFailedRequest:error.vkError.request];
-                    }
-                    else
-                    {
-                        NSLog(@"%@", error);
-                    }
-                    isLoading = NO;
-                    [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
-                    [topRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
-                }];
-            }
-            else
-            {
-                [historyCollection adoptUserArray:userArray];
-                
-                if(_objects.count == 0 || reload)
-                {
-                    _objects = [NSMutableArray arrayWithArray:[historyCollection messages]];
-                    [self performSelectorOnMainThread:@selector(tableViewReloadDataWithScrollToIndexPath:) withObject:[NSIndexPath indexPathForRow:_objects.count-1 inSection:0] waitUntilDone:YES];
-                }
-                else if(offset == _objects.count)
-                {
-                    [_objects insertObjects:[historyCollection messages] atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [historyCollection messages].count)]];
-                    [self performSelectorOnMainThread:@selector(tableViewReloadDataWithScrollToIndexPath:) withObject:[NSIndexPath indexPathForRow:[historyCollection messages].count inSection:0] waitUntilDone:YES];
-                }
-                
-                [self networkRestored];
-                [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
                 isLoading = NO;
-                [topRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
-                [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
-                
-                if(_objects.count >= [[historyCollection count] intValue])
-                {
-                    hasDataToLoad = NO;
-                    [topRefreshControl performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:YES];
-                    [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
-                }
-            }
+            }];
         } errorBlock:^(NSError *error) {
             if (error.code != VK_API_ERROR)
             {
@@ -343,9 +334,7 @@
             {
                 NSLog(@"%@", error);
             }
-            isLoading = NO;
-            [topRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
-            [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
+            [self didFinishedLoadingHistoryCollection];
         }];
     }
 }
@@ -658,16 +647,17 @@
     }
 }
 
-- (void)composeAndSendMessageWithText:(NSString *)text
+- (void)sendMessageForMessage:(LVKMessage *)message andDialog:(LVKDialog *)currentDialog
 {
     VKRequest *sendMessage = [VKApi
-                          requestWithMethod:@"messages.send"
-                          andParameters:[NSDictionary dictionaryWithObjectsAndKeys:text, @"message", [dialog chatId], [dialog chatIdKey], nil]
-                          andHttpMethod:@"POST"];
+                              requestWithMethod:@"messages.send"
+                              andParameters:[NSDictionary dictionaryWithObjectsAndKeys:[message body], @"message", [currentDialog chatId], [currentDialog chatIdKey], /*[NSNumber numberWithInt:rand()], @"guid",*/ nil]
+                              andHttpMethod:@"POST"];
     
-    sendMessage.attempts = 2;
-    sendMessage.requestTimeout = 10;
+    sendMessage.attempts = 3;
+    sendMessage.requestTimeout = 3;
     [sendMessage executeWithResultBlock:^(VKResponse *response) {
+        [message set_id:response.json];
         [self networkRestored];
     } errorBlock:^(NSError *error) {
         if (error.code != VK_API_ERROR)
@@ -679,6 +669,16 @@
             NSLog(@"%@", error);
         }
     }];
+}
+
+- (void)composeAndSendMessageWithText:(NSString *)text
+{
+    LVKMessage *newMessage = [[LVKMessage alloc] initWithDictionary:[NSDictionary dictionaryWithObjectsAndKeys:[dialog chatId], [dialog chatIdKey], [NSNumber numberWithDouble: [[NSDate date] timeIntervalSince1970]], @"date", text, @"body", [NSNumber numberWithInt:1], @"out", [NSNumber numberWithInt:0], @"read_state", nil]];
+    
+    [_objects addObject:newMessage];
+    [self tableViewReloadDataWithScrollToIndexPath:[NSIndexPath indexPathForRow:_objects.count-1 inSection:0]];
+    
+    [self sendMessageForMessage:newMessage andDialog:dialog];
 }
 
 
