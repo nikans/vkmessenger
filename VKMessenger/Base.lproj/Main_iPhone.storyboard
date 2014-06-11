@@ -318,7 +318,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="5MT-5d-gQd">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="517"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -539,11 +539,19 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Imp-zM-eEi">
-                                <rect key="frame" x="0.0" y="517" width="320" height="51"/>
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MXD-cg-I2j">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.78823529410000004" green="0.78823529410000004" blue="0.80784313730000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="zmm-f3-xh6"/>
+                                        </constraints>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nyX-wv-HJn">
-                                        <rect key="frame" x="278" y="15" width="34" height="23"/>
+                                        <rect key="frame" x="278" y="14" width="34" height="23"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="23" id="yI7-OZ-Vem"/>
@@ -557,7 +565,7 @@
                                         </connections>
                                     </button>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KBr-tI-qOn">
-                                        <rect key="frame" x="12" y="12" width="258" height="29"/>
+                                        <rect key="frame" x="12" y="11" width="258" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="Rr9-QY-7Zw">
@@ -583,11 +591,14 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="KBr-tI-qOn" firstAttribute="top" secondItem="Imp-zM-eEi" secondAttribute="top" constant="12" id="ERR-f2-AF3"/>
+                                    <constraint firstItem="MXD-cg-I2j" firstAttribute="leading" secondItem="Imp-zM-eEi" secondAttribute="leading" id="7bS-HZ-yfE"/>
+                                    <constraint firstItem="KBr-tI-qOn" firstAttribute="top" secondItem="Imp-zM-eEi" secondAttribute="top" constant="11" id="ERR-f2-AF3"/>
+                                    <constraint firstItem="MXD-cg-I2j" firstAttribute="top" secondItem="Imp-zM-eEi" secondAttribute="top" id="G2W-yf-xtb"/>
                                     <constraint firstAttribute="trailing" secondItem="nyX-wv-HJn" secondAttribute="trailing" constant="8" id="IK7-x3-pUe"/>
                                     <constraint firstAttribute="bottom" secondItem="nyX-wv-HJn" secondAttribute="bottom" constant="13" id="W2W-bb-OUW"/>
+                                    <constraint firstAttribute="trailing" secondItem="MXD-cg-I2j" secondAttribute="trailing" id="Ywj-8W-P4m"/>
                                     <constraint firstAttribute="bottom" secondItem="KBr-tI-qOn" secondAttribute="bottom" constant="10" id="iED-TO-jOB"/>
                                     <constraint firstItem="nyX-wv-HJn" firstAttribute="leading" secondItem="KBr-tI-qOn" secondAttribute="trailing" constant="8" id="v2f-Q9-fa0"/>
                                     <constraint firstItem="KBr-tI-qOn" firstAttribute="leading" secondItem="Imp-zM-eEi" secondAttribute="leading" constant="12" id="x5z-dv-Xhe"/>

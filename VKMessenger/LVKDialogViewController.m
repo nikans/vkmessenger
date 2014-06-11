@@ -385,7 +385,7 @@
         avatarButton.layer.masksToBounds = YES;
         
         UIView *avatarButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 36, 36)];
-        avatarButtonView.bounds = CGRectOffset(avatarButtonView.bounds, -11, -1);
+        avatarButtonView.bounds = CGRectOffset(avatarButtonView.bounds, -11, 1);
         [avatarButtonView addSubview:avatarButton];
 
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:avatarButtonView];
