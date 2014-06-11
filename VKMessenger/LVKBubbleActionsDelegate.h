@@ -14,5 +14,6 @@
 
 // TODO: protocol
 - (void)pushToMessageVC:(UITapGestureRecognizer *)tapGesture;
+- (void)resendMessage:(UITapGestureRecognizer *)tapGesture;
 
 @end

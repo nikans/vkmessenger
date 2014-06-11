@@ -374,7 +374,7 @@
         avatarButton.layer.masksToBounds = YES;
         
         UIView *avatarButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 36, 36)];
-        avatarButtonView.bounds = CGRectOffset(avatarButtonView.bounds, -11, -1);
+        avatarButtonView.bounds = CGRectOffset(avatarButtonView.bounds, -11, 1);
         [avatarButtonView addSubview:avatarButton];
 
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:avatarButtonView];
@@ -393,9 +393,6 @@
     // TODO: style
     self.tableView.backgroundColor = [AVHexColor colorWithHexString:@"#edf3fa"];
     [self.tableView setContentInset:UIEdgeInsetsMake(0,0,5,0)];
-    
-    // TODO: set proper inset, printout self.textView.contentSize.height and update TEXTVIEW_BASE_HEIGHT constant
-    [self.textView setTextContainerInset:UIEdgeInsetsZero];
     
     // Text view
 //    textView.layoutManager.delegate = self;
@@ -491,12 +488,13 @@
     cell.isRoom     = message.type == Room ? YES : NO;
     cell.isUnread   = message.isUnread;
     cell.bubbleDelegate = self;
+    cell.sandingState = message.state;
     
     CGFloat maxCVWidth;
     if (!cell.isOutgoing)
         if (cell.isRoom) maxCVWidth = 196.f;
         else maxCVWidth = 230.f;
-    else maxCVWidth = 234.f;
+    else maxCVWidth = 217.f;
     cell.collectionViewMaxWidth = maxCVWidth;
     
     LVKDialogCollectionViewDelegate *collectionViewDelegate = [[LVKDialogCollectionViewDelegate alloc] initWithData:message];
@@ -730,6 +728,10 @@
 //    cell.messageContainerBackgroundImage.image = [cell.messageContainerBackgroundImage.image addColor:[UIColor blackColor] drawAsOverlay:YES];
     
     [self performSegueWithIdentifier:@"showMessage" sender:cell.cellIndexPath];
+}
+
+- (void)resendMessage:(UITapGestureRecognizer *)tapGesture {
+    
 }
 
 
