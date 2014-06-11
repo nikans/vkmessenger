@@ -532,7 +532,7 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="Send">
-                                            <color key="titleColor" red="0.502" green="0.502" blue="0.502" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
                                             <action selector="sendMessage:" destination="Ah7-4n-0Wa" eventType="touchDown" id="cKK-Nl-Q2F"/>
@@ -589,6 +589,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="cra-N8-TIN"/>
                     <connections>
+                        <outlet property="sendButton" destination="nyX-wv-HJn" id="4NN-4R-A8m"/>
                         <outlet property="tableView" destination="5MT-5d-gQd" id="FFP-ef-rBW"/>
                         <outlet property="textView" destination="Rr9-QY-7Zw" id="OzP-rE-ELy"/>
                         <outlet property="textViewContainer" destination="KBr-tI-qOn" id="Aez-Va-EoT"/>

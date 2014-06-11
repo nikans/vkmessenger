@@ -25,6 +25,7 @@
 @property (strong, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIView *textViewContainer;
+@property (weak, nonatomic) IBOutlet UIButton *sendButton;
 
 -(IBAction) sendMessage:(id)sender;
 

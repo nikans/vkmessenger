@@ -606,10 +606,14 @@
 
 - (IBAction)sendMessage:(id)sender
 {
+    if([textView text].length == 0)
+        return;
+    
     NSString *text = [textView text];
     [textView setText:@""];
     
     // TODO: shit stuff
+    [self.sendButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     self.textViewHeightConstraint.constant = TEXTVIEW_BASE_HEIGHT;
     
     [self composeAndSendMessageWithText:text];
@@ -631,27 +635,27 @@
         }];
         
         messageIds = [unreadMessageIds componentsJoinedByString:@","];
+    
+        VKRequest *markAsRead = [VKApi
+                                  requestWithMethod:@"messages.markAsRead"
+                                  andParameters:[NSDictionary dictionaryWithObjectsAndKeys:messageIds, @"message_ids", nil]
+                                  andHttpMethod:@"POST"];
+
+        markAsRead.attempts = 3;
+        markAsRead.requestTimeout = 3;
+        [markAsRead executeWithResultBlock:^(VKResponse *response) {
+            [self networkRestored];
+        } errorBlock:^(NSError *error) {
+            if (error.code != VK_API_ERROR)
+            {
+                [self networkFailedRequest:error.vkError.request];
+            }
+            else
+            {
+                NSLog(@"%@", error);
+            }
+        }];
     }
-    
-    VKRequest *markAsRead = [VKApi
-                              requestWithMethod:@"messages.markAsRead"
-                              andParameters:[NSDictionary dictionaryWithObjectsAndKeys:messageIds, @"message_ids", nil]
-                              andHttpMethod:@"POST"];
-    
-    markAsRead.attempts = 3;
-    markAsRead.requestTimeout = 3;
-    [markAsRead executeWithResultBlock:^(VKResponse *response) {
-        [self networkRestored];
-    } errorBlock:^(NSError *error) {
-        if (error.code != VK_API_ERROR)
-        {
-            [self networkFailedRequest:error.vkError.request];
-        }
-        else
-        {
-            NSLog(@"%@", error);
-        }
-    }];
 }
 
 - (void)composeAndSendMessageWithText:(NSString *)text
@@ -691,6 +695,15 @@
 //        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:[_objects count]-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     }
     self.textViewHeightConstraint.constant = self.textView.contentSize.height;
+    
+    if(self.textView.text.length > 0)
+    {
+        [self.sendButton setTitleColor:self.sendButton.titleLabel.tintColor forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.sendButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    }
 }
 
 
