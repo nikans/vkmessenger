@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Levelab. All rights reserved.
 //
 
-#import "LVKDialogCollectionViewDelegate.h"
+#import "LVKMessageCollectionViewDelegate.h"
 
 #import "LVKDefaultMessageTableViewCell.h"
 #import "LVKDefaultMessagesCollectionView.h"
@@ -18,7 +18,7 @@
 #import "LVKVideoAttachment.h"
 #import <UIImageView+WebCache.h>
 
-@implementation LVKDialogCollectionViewDelegate
+@implementation LVKMessageCollectionViewDelegate
 
 @synthesize data;
 

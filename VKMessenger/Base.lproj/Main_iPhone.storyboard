@@ -369,10 +369,6 @@
                                                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             </collectionViewFlowLayout>
                                                             <cells/>
-                                                            <connections>
-                                                                <outlet property="dataSource" destination="Ah7-4n-0Wa" id="8om-nL-Uiy"/>
-                                                                <outlet property="delegate" destination="Ah7-4n-0Wa" id="4Dt-R8-YP5"/>
-                                                            </connections>
                                                         </collectionView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -463,10 +459,6 @@
                                                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             </collectionViewFlowLayout>
                                                             <cells/>
-                                                            <connections>
-                                                                <outlet property="dataSource" destination="Ah7-4n-0Wa" id="b83-uk-CBF"/>
-                                                                <outlet property="delegate" destination="Ah7-4n-0Wa" id="1Z4-uj-Vef"/>
-                                                            </connections>
                                                         </collectionView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -616,7 +608,9 @@
                             <constraint firstAttribute="trailing" secondItem="Imp-zM-eEi" secondAttribute="trailing" id="rxh-rE-d8Q"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="cra-N8-TIN"/>
+                    <navigationItem key="navigationItem" title="Чат" id="cra-N8-TIN">
+                        <barButtonItem key="backBarButtonItem" title="Чат" id="Onb-Q2-tmf"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="sendButton" destination="nyX-wv-HJn" id="4NN-4R-A8m"/>
                         <outlet property="tableView" destination="5MT-5d-gQd" id="FFP-ef-rBW"/>
@@ -632,7 +626,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="902" y="195"/>
+            <point key="canvasLocation" x="902" y="64"/>
         </scene>
         <!--Message View Controller - Сообщение-->
         <scene sceneID="vp1-fM-wBr">
@@ -646,42 +640,58 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Вася Пупкин" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8mO-7u-biC">
-                                <rect key="frame" x="51" y="75" width="196" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вася Пупкин" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8mO-7u-biC">
+                                <rect key="frame" x="60" y="76" width="240" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Zj-wq-VED">
-                                <rect key="frame" x="0.0" y="104" width="320" height="464"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="+7 800 500 00 00 ya.ru http://ya.ru ">
-                                        <attributes>
-                                            <font key="NSFont" size="14" name="HelveticaNeue"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
-                            </textView>
-                            <imageView userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="vk_activity.png" translatesAutoresizingMaskIntoConstraints="NO" id="ufZ-6L-P2b">
-                                <rect key="frame" x="0.0" y="64" width="43" height="43"/>
+                            <imageView userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vk_activity.png" translatesAutoresizingMaskIntoConstraints="NO" id="ufZ-6L-P2b">
+                                <rect key="frame" x="10" y="74" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="GBB-JI-MPu"/>
+                                    <constraint firstAttribute="width" constant="40" id="SW5-Y2-CYW"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9pU-Fj-O0h">
-                                <rect key="frame" x="255" y="75" width="60" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="right" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вчера" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9pU-Fj-O0h">
+                                <rect key="frame" x="60" y="94" width="240" height="18"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14.5"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="topRight" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ChA-BB-tcn" customClass="LVKDefaultMessagesCollectionView">
+                                <rect key="frame" x="5" y="120" width="310" height="448"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="yP1-vF-P4N">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="9pU-Fj-O0h" secondAttribute="trailing" constant="20" id="ANz-uX-lg5"/>
+                            <constraint firstAttribute="trailing" secondItem="8mO-7u-biC" secondAttribute="trailing" constant="20" id="CQw-JH-AhC"/>
+                            <constraint firstItem="ufZ-6L-P2b" firstAttribute="top" secondItem="hEM-hb-EWL" secondAttribute="bottom" constant="10" id="Dqh-z0-icw"/>
+                            <constraint firstAttribute="trailing" secondItem="ChA-BB-tcn" secondAttribute="trailing" constant="5" id="Fui-ee-scs"/>
+                            <constraint firstItem="8mO-7u-biC" firstAttribute="top" secondItem="hEM-hb-EWL" secondAttribute="bottom" constant="12" id="NrV-cV-bgM"/>
+                            <constraint firstItem="ufZ-6L-P2b" firstAttribute="leading" secondItem="yqQ-BZ-7IX" secondAttribute="leading" constant="10" id="OTt-tJ-A65"/>
+                            <constraint firstItem="ChA-BB-tcn" firstAttribute="leading" secondItem="yqQ-BZ-7IX" secondAttribute="leading" constant="5" id="UCx-UG-gpa"/>
+                            <constraint firstItem="8mO-7u-biC" firstAttribute="leading" secondItem="ufZ-6L-P2b" secondAttribute="trailing" constant="10" id="WB9-W4-XHd"/>
+                            <constraint firstItem="ChA-BB-tcn" firstAttribute="top" secondItem="9pU-Fj-O0h" secondAttribute="bottom" constant="8" id="ZU3-RS-jSc"/>
+                            <constraint firstItem="9pU-Fj-O0h" firstAttribute="top" secondItem="8mO-7u-biC" secondAttribute="bottom" id="scU-Bx-F8n"/>
+                            <constraint firstItem="M9L-FW-s29" firstAttribute="top" secondItem="ChA-BB-tcn" secondAttribute="bottom" id="urY-B5-Itm"/>
+                            <constraint firstItem="9pU-Fj-O0h" firstAttribute="leading" secondItem="ufZ-6L-P2b" secondAttribute="trailing" constant="10" id="zhE-pk-xa5"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Сообщение" id="O1s-Xy-ZR1">
+                        <barButtonItem key="backBarButtonItem" title="Назад" id="SJc-kk-BOR"/>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="wfE-ig-FqB">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" id="wL8-oD-ScQ">
                                 <rect key="frame" x="282" y="11" width="22" height="22"/>
@@ -696,15 +706,15 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="collectionView" destination="ChA-BB-tcn" id="rcP-IR-NIg"/>
                         <outlet property="date" destination="9pU-Fj-O0h" id="dZK-UT-nw3"/>
-                        <outlet property="messageText" destination="8Zj-wq-VED" id="Of5-aP-FxX"/>
                         <outlet property="name" destination="8mO-7u-biC" id="7e0-Ia-Dpr"/>
                         <outlet property="photo" destination="ufZ-6L-P2b" id="1mu-X4-99S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OB7-4w-ggq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1337" y="64"/>
+            <point key="canvasLocation" x="1355" y="64"/>
         </scene>
     </scenes>
     <resources>

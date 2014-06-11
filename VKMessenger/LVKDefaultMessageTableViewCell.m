@@ -112,12 +112,12 @@
 
 -(void)setCollectionViewDelegates:(id<UICollectionViewDataSource, UICollectionViewDelegate>)dataSourceDelegate forMessageWithIndexPath:(NSIndexPath *)indexPath
 {
-    self.collectionViewDelegate = (LVKDialogCollectionViewDelegate *)dataSourceDelegate;
+    self.collectionViewDelegate = (LVKMessageCollectionViewDelegate *)dataSourceDelegate;
     self.collectionView.maxWidth = self.collectionViewMaxWidth;
     self.collectionView.dataSource = self.collectionViewDelegate;
     self.collectionView.delegate   = self.collectionViewDelegate;
     
-    self.collectionView.messageIndexPath = indexPath;
+//    self.collectionView.messageIndexPath = indexPath;
     
     [self.collectionView reloadData];
 }
