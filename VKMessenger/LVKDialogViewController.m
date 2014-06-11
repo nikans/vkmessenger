@@ -19,6 +19,8 @@
 
 #import "LVKDefaultMessageTableViewCell.h"
 
+#define TEXTVIEW_BASE_HEIGHT (21)
+
 @interface LVKDialogViewController () {
     NSMutableArray *_objects;
     BOOL isLoading;
@@ -196,6 +198,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(resetMessageFlags:)
                                                  name:@"resetMessageFlags"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:textView
+                                             selector:@selector(resignFirstResponder)
+                                                 name:@"appBecomeActive"
                                                object:nil];
 }
 
@@ -399,6 +405,9 @@
     self.tableView.backgroundColor = [AVHexColor colorWithHexString:@"#edf3fa"];
     [self.tableView setContentInset:UIEdgeInsetsMake(0,0,5,0)];
     
+    // TODO: set proper inset, printout self.textView.contentSize.height and update TEXTVIEW_BASE_HEIGHT constant
+    [self.textView setTextContainerInset:UIEdgeInsetsZero];
+    
     // Text view
 //    textView.layoutManager.delegate = self;
     
@@ -597,7 +606,7 @@
     [textView setText:@""];
     
     // TODO: shit stuff
-    self.textViewHeightConstraint.constant = 37;//self.textView.contentSize.height;
+    self.textViewHeightConstraint.constant = TEXTVIEW_BASE_HEIGHT;
     
     [self composeAndSendMessageWithText:text];
 }
