@@ -23,8 +23,8 @@
 }
 
 + (CGSize)calculateContentSizeWithData:(LVKRepostedMessage *)_data maxWidth:(CGFloat)_maxWidth {
-    CGSize textSize = [(NSString *)[_data body] integralSizeWithFont:[UIFont systemFontOfSize:16] maxWidth:_maxWidth numberOfLines:INFINITY];
-    CGSize contentSize = CGSizeMake(_maxWidth, textSize.height + 58); // avatar height
+    CGSize textSize = [(NSString *)[_data body] integralSizeWithFont:[UIFont systemFontOfSize:16] maxWidth:_maxWidth-8 numberOfLines:INFINITY];
+    CGSize contentSize = CGSizeMake(_maxWidth, textSize.height + 55 + 10);
     return contentSize;
 }
 //

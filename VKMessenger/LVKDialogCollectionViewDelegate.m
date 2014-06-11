@@ -125,13 +125,13 @@
     CGSize cellSize;
     CGFloat maxWidth = collectionView.maxWidth - 0.5;
     
-    // Body
-    if([cellData isKindOfClass:[LVKMessage class]])
-        cellSize = [LVKDefaultMessageBodyItem calculateContentSizeWithData:(LVKMessage *)cellData maxWidth:maxWidth];
-    
     // Repost
-    else if([cellData isKindOfClass:[LVKRepostedMessage class]])
+    if([cellData isKindOfClass:[LVKRepostedMessage class]])
         cellSize = [LVKDefaultMessageRepostBodyItem calculateContentSizeWithData:(LVKMessage *)cellData maxWidth:maxWidth];
+    
+    // Body
+    else if([cellData isKindOfClass:[LVKMessage class]])
+        cellSize = [LVKDefaultMessageBodyItem calculateContentSizeWithData:(LVKMessage *)cellData maxWidth:maxWidth];
     
     // Photo
     else if([cellData isKindOfClass:[LVKPhotoAttachment class]])

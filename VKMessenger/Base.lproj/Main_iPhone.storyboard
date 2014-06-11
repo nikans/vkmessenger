@@ -456,7 +456,7 @@
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" id="lV7-Ji-S5I"/>
                                                             </constraints>
                                                             <inset key="scrollIndicatorInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="10" id="hvg-VF-9x7">
+                                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="hvg-VF-9x7">
                                                                 <size key="itemSize" width="0.0" height="0.0"/>
                                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
