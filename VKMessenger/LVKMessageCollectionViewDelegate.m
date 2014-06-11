@@ -55,6 +55,16 @@
         [[(LVKDefaultMessageRepostBodyItem *)cell avatar] setImageWithURL:[[(LVKRepostedMessage *)cellData user] photo_100]];
     }
     
+    // Full-width Body
+    else if([cellData isKindOfClass:[LVKMessage class]] && collectionView.isFullWidth) {
+        cell = (LVKDefaultMessageFullBodyItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultFullBodyItem" forIndexPath:indexPath];
+        [cell setValue:[(LVKMessage *)cellData body] forKeyPath:@"body.text"];
+        [cell setValue:[NSDateFormatter localizedStringFromDate:
+                        [(LVKMessage *)cellData date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle] forKeyPath:@"date.text"];
+        [cell setValue:[[(LVKMessage *)cellData user] fullName] forKeyPath:@"userName.text"];
+        [[(LVKDefaultMessageRepostBodyItem *)cell avatar] setImageWithURL:[[(LVKMessage *)cellData user] photo_100]];
+    }
+    
     // Body
     else if([cellData isKindOfClass:[LVKMessage class]])
     {
@@ -113,8 +123,10 @@
 
 #pragma mark – UICollectionViewDelegateFlowLayout
 
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+- (UIEdgeInsets)collectionView:(LVKDefaultMessagesCollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
+    if (collectionView.isFullWidth)
+        return UIEdgeInsetsMake(10,5,10,5);
     return UIEdgeInsetsMake(0,0,0,0);
 }
 
@@ -123,11 +135,15 @@
     id<LVKMessagePartProtocol> cellData = [self collectionView:collectionView dataForItemAtIndexPath:indexPath];
     
     CGSize cellSize;
-    CGFloat maxWidth = collectionView.maxWidth - 0.5;
+    CGFloat maxWidth = collectionView.isFullWidth ? 309.5 : collectionView.maxWidth - 0.5;
     
     // Repost
     if([cellData isKindOfClass:[LVKRepostedMessage class]])
         cellSize = [LVKDefaultMessageRepostBodyItem calculateContentSizeWithData:(LVKMessage *)cellData maxWidth:maxWidth];
+    
+    // Full-width body
+    else if([cellData isKindOfClass:[LVKMessage class]] && collectionView.isFullWidth)
+        cellSize = [LVKDefaultMessageFullBodyItem calculateContentSizeWithData:(LVKMessage *)cellData maxWidth:maxWidth];
     
     // Body
     else if([cellData isKindOfClass:[LVKMessage class]])

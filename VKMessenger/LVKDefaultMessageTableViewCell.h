@@ -11,7 +11,7 @@
 
 #import "LVKModelEnums.h"
 
-#import "LVKBubbleActionsDelegate.h"
+#import "LVKBubbleActionsDelegateProtocol.h"
 #import "LVKMessageCollectionViewDelegate.h"
 
 static NSString *CollectionViewCellIdentifier = @"BodyItem";
@@ -24,7 +24,7 @@ static NSString *CollectionViewCellIdentifier = @"BodyItem";
 @property (weak, nonatomic) IBOutlet UIView *messageContainerView;
 @property (weak, nonatomic) IBOutlet UIImageView *messageContainerBackgroundImage;
 
-@property (weak, nonatomic) id<LVKBubbleActionsDelegate> bubbleDelegate;
+@property (weak, nonatomic) id<LVKBubbleActionsDelegateProtocol> bubbleDelegate;
 @property (strong, nonatomic) NSIndexPath *cellIndexPath;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *incomingMessageContainerConstraint;
@@ -45,7 +45,7 @@ static NSString *CollectionViewCellIdentifier = @"BodyItem";
 
 // TODO add delegate 4 cell
 - (void)setCollectionViewDelegates:(id<UICollectionViewDataSource, UICollectionViewDelegate>)dataSourceDelegate forMessageWithIndexPath:(NSIndexPath *)indexPath;
-- (void)setBubbleActionsDelegate:(id<LVKBubbleActionsDelegate>)delegate forMessageWithIndexPath:(NSIndexPath *)indexPath;
+- (void)setBubbleActionsDelegate:(id<LVKBubbleActionsDelegateProtocol>)delegate forMessageWithIndexPath:(NSIndexPath *)indexPath;
 
 - (void)hasFailedToSentMessage;
 - (void)hasRetriedToSendMessage;

@@ -8,12 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-#import "LVKDefaultMessageBodyItem.h"
-#import "LVKDefaultMessagePhotoItem.h"
-#import "LVKDefaultMessageRepostBodyItem.h"
-
 @interface LVKDefaultMessagesCollectionView : UICollectionView
 
 @property (nonatomic) CGFloat maxWidth;
+@property (nonatomic) BOOL isFullWidth;
 
 @end

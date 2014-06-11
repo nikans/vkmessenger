@@ -43,7 +43,10 @@
 
     self.collectionView.delegate = self.collectionViewDelegate;
     self.collectionView.dataSource = self.collectionViewDelegate;
-    self.collectionView.maxWidth = 300.f;
+    self.collectionView.isFullWidth = YES;
+    
+    self.photo.layer.cornerRadius = 2.f;
+    self.photo.layer.masksToBounds = YES;
     
     [self.collectionView reloadData];
 }

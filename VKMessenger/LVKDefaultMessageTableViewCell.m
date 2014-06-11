@@ -12,7 +12,6 @@
 
 #define LVKDefaultCellBackgroundColorUnread  @"#e1e9f5"
 #define LVKDefaultCellBackgroundColorFailed  @"#fbd3d3"
-#define LVKDefaultCellBackgroundColorSending @"#f3f7fb"
 
 @implementation LVKDefaultMessageTableViewCell
 
@@ -53,7 +52,7 @@
     if (self.sandingState == Failed)
         self.backgroundColor = [AVHexColor colorWithHexString:LVKDefaultCellBackgroundColorFailed];
     else if (self.sandingState == Sending) {
-        self.backgroundColor = [AVHexColor colorWithHexString:LVKDefaultCellBackgroundColorSending];
+        self.backgroundColor = [AVHexColor colorWithHexString:LVKDefaultCellBackgroundColorUnread];
         self.sendingActivityIndicator.hidden = NO;
     }
     else if (self.isUnread) {
@@ -122,7 +121,7 @@
     [self.collectionView reloadData];
 }
 
-- (void)setBubbleActionsDelegate:(id<LVKBubbleActionsDelegate>)delegate forMessageWithIndexPath:(NSIndexPath *)indexPath {
+- (void)setBubbleActionsDelegate:(id<LVKBubbleActionsDelegateProtocol>)delegate forMessageWithIndexPath:(NSIndexPath *)indexPath {
     self.bubbleDelegate = delegate;
     self.cellIndexPath = indexPath;
 }
@@ -142,7 +141,7 @@
     self.sentCheckImageView.hidden = YES;
     
     [UIView animateWithDuration:.5 animations:^{
-        self.backgroundColor = [AVHexColor colorWithHexString:LVKDefaultCellBackgroundColorSending];
+        self.backgroundColor = [AVHexColor colorWithHexString:LVKDefaultCellBackgroundColorUnread];
     } completion:nil];
 }
 
@@ -150,16 +149,13 @@
     
     self.sendingActivityIndicator.hidden = YES;
     self.sentCheckImageView.hidden = NO;
+    self.backgroundColor = [AVHexColor colorWithHexString:LVKDefaultCellBackgroundColorUnread];
     
     [UIView animateWithDuration:1 animations:^{
-        self.backgroundColor = [UIColor clearColor];
+        self.sentCheckImageView.alpha = 0;
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:1 animations:^{
-            self.sentCheckImageView.alpha = 0;
-        } completion:^(BOOL finished) {
-            self.sentCheckImageView.hidden = YES;
-            self.sentCheckImageView.alpha = 1;
-        }];
+        self.sentCheckImageView.hidden = YES;
+        self.sentCheckImageView.alpha = 1;
     }];
 }
 
