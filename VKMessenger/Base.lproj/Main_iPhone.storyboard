@@ -486,18 +486,18 @@
                                                     <rect key="frame" x="4" y="54" width="20" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </activityIndicatorView>
-                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Uwx-Eq-Ccr">
-                                                    <rect key="frame" x="4" y="55" width="21" height="17"/>
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check.png" translatesAutoresizingMaskIntoConstraints="NO" id="Uwx-Eq-Ccr">
+                                                    <rect key="frame" x="14" y="60" width="11" height="9"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="21" id="EH0-jZ-QRF"/>
-                                                        <constraint firstAttribute="height" constant="17" id="Hg6-IO-Fmf"/>
+                                                        <constraint firstAttribute="width" constant="11" id="75s-t0-TUY"/>
+                                                        <constraint firstAttribute="height" constant="9" id="xiI-DF-jYE"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="Uwx-Eq-Ccr" secondAttribute="bottom" constant="10" id="DjD-1e-q7y"/>
+                                                <constraint firstAttribute="bottom" secondItem="Uwx-Eq-Ccr" secondAttribute="bottom" constant="13" id="DjD-1e-q7y"/>
                                                 <constraint firstItem="8OF-at-jZX" firstAttribute="leading" secondItem="uic-BZ-W0D" secondAttribute="trailing" constant="1" id="P3u-I2-07q"/>
                                                 <constraint firstAttribute="bottom" secondItem="uic-BZ-W0D" secondAttribute="bottom" constant="8" id="UZ2-6i-0vR"/>
                                                 <constraint firstItem="OI6-S6-e0s" firstAttribute="leading" secondItem="8OF-at-jZX" secondAttribute="trailing" constant="8" id="VXc-QR-Ys1"/>
@@ -680,7 +680,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="vk_activity.png" width="43" height="43"/>
+        <image name="check.png" width="11" height="9"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

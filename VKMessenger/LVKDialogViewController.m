@@ -684,17 +684,17 @@
     [self sendMessageForMessage:newMessage andDialog:dialog];
 }
 - (void)hasSuccessfullySentMessageAtIndexPath:(NSIndexPath *)indexPath {
-    LVKDefaultMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultOutgoingMessageCell" forIndexPath:indexPath];
+    LVKDefaultMessageTableViewCell *cell = (LVKDefaultMessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     [cell hasSuccessfullySentMessage];
 }
 
 - (void)hasFailedToSentMessageAtIndexPath:(NSIndexPath *)indexPath {
-    LVKDefaultMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultOutgoingMessageCell" forIndexPath:indexPath];
+    LVKDefaultMessageTableViewCell *cell = (LVKDefaultMessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     [cell hasFailedToSentMessage];
 }
 
 - (void)hasRetriedToSentMessageAtIndexPath:(NSIndexPath *)indexPath {
-    LVKDefaultMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultOutgoingMessageCell" forIndexPath:indexPath];
+    LVKDefaultMessageTableViewCell *cell = (LVKDefaultMessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     [cell hasRetriedToSendMessage];
 }
 

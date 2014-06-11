@@ -127,7 +127,6 @@
 }
 
 - (void)hasFailedToSentMessage {
-    
     self.sendingActivityIndicator.hidden = YES;
     self.sentCheckImageView.hidden = YES;
     
@@ -146,12 +145,15 @@
 }
 
 - (void)hasSuccessfullySentMessage {
-    
     self.sendingActivityIndicator.hidden = YES;
     self.sentCheckImageView.hidden = NO;
     self.backgroundColor = [AVHexColor colorWithHexString:LVKDefaultCellBackgroundColorUnread];
     
-    [UIView animateWithDuration:1 animations:^{
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self.bubbleDelegate
+                                                                                 action:@selector(pushToMessageVC:)];
+    [self addGestureRecognizer:tapGesture];
+    
+    [UIView animateWithDuration:2 animations:^{
         self.sentCheckImageView.alpha = 0;
     } completion:^(BOOL finished) {
         self.sentCheckImageView.hidden = YES;

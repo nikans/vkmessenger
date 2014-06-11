@@ -78,9 +78,9 @@
 		D038C3631945098600E7895D /* default-bubbleIncoming@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D038C3611945098600E7895D /* default-bubbleIncoming@2x.png */; };
 		D038C3681945135900E7895D /* default-bubbleOutgoing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D038C3671945135900E7895D /* default-bubbleOutgoing@2x.png */; };
 		D076494E1947A7C300911C65 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = D076494D1947A7C300911C65 /* UIImage+Color.m */; };
-		D07649501948C97500911C65 /* check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D076494F1948C97500911C65 /* check@2x.png */; };
 		D07649541948F06000911C65 /* LVKDefaultMessageFullBodyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D07649521948F06000911C65 /* LVKDefaultMessageFullBodyItem.m */; };
 		D07649551948F06000911C65 /* LVKDefaultMessageFullBodyItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = D07649531948F06000911C65 /* LVKDefaultMessageFullBodyItem.xib */; };
+		D0764957194906F800911C65 /* check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0764956194906F800911C65 /* check@2x.png */; };
 		D0A210BF194646CF008508BF /* LVKDefaultMessagePhotoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A210BE194646CF008508BF /* LVKDefaultMessagePhotoItem.m */; };
 		D0A210C21946476D008508BF /* LVKDefaultMessageVideoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A210C11946476D008508BF /* LVKDefaultMessageVideoItem.m */; };
 		D0A210C519464786008508BF /* LVKDefaultMessageStickerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A210C419464786008508BF /* LVKDefaultMessageStickerItem.m */; };
@@ -214,10 +214,10 @@
 		D076494B19479CBC00911C65 /* LVKBubbleActionsDelegateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKBubbleActionsDelegateProtocol.h; sourceTree = "<group>"; };
 		D076494C1947A7C300911C65 /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
 		D076494D1947A7C300911C65 /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
-		D076494F1948C97500911C65 /* check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check@2x.png"; sourceTree = "<group>"; };
 		D07649511948F06000911C65 /* LVKDefaultMessageFullBodyItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultMessageFullBodyItem.h; sourceTree = "<group>"; };
 		D07649521948F06000911C65 /* LVKDefaultMessageFullBodyItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDefaultMessageFullBodyItem.m; sourceTree = "<group>"; };
 		D07649531948F06000911C65 /* LVKDefaultMessageFullBodyItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LVKDefaultMessageFullBodyItem.xib; sourceTree = "<group>"; };
+		D0764956194906F800911C65 /* check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check@2x.png"; sourceTree = "<group>"; };
 		D0A210BD194646CF008508BF /* LVKDefaultMessagePhotoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultMessagePhotoItem.h; sourceTree = "<group>"; };
 		D0A210BE194646CF008508BF /* LVKDefaultMessagePhotoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDefaultMessagePhotoItem.m; sourceTree = "<group>"; };
 		D0A210C01946476D008508BF /* LVKDefaultMessageVideoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultMessageVideoItem.h; sourceTree = "<group>"; };
@@ -448,7 +448,7 @@
 		D038C3081944E25900E7895D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				D076494F1948C97500911C65 /* check@2x.png */,
+				D0764956194906F800911C65 /* check@2x.png */,
 				D038C3671945135900E7895D /* default-bubbleOutgoing@2x.png */,
 				D038C3611945098600E7895D /* default-bubbleIncoming@2x.png */,
 				D038C3091944E25900E7895D /* Images */,
@@ -620,7 +620,6 @@
 				D038C31E1944E25900E7895D /* bubble@2x.png in Resources */,
 				D0A210C9194647D4008508BF /* LVKDefaultMessageStickerItem.xib in Resources */,
 				D038C3261944E25900E7895D /* bubble_stroked_tailless@2x.png in Resources */,
-				D07649501948C97500911C65 /* check@2x.png in Resources */,
 				D07649551948F06000911C65 /* LVKDefaultMessageFullBodyItem.xib in Resources */,
 				D0A210C7194647C2008508BF /* LVKDefaultMessageVideoItem.xib in Resources */,
 				D038C32B1944E25900E7895D /* typing.png in Resources */,
@@ -640,6 +639,7 @@
 				D038C32A1944E25900E7895D /* camera@2x.png in Resources */,
 				D038C3251944E25900E7895D /* bubble_stroked_tailless.png in Resources */,
 				D038C3231944E25900E7895D /* bubble_stroked.png in Resources */,
+				D0764957194906F800911C65 /* check@2x.png in Resources */,
 				A4017DC4193DE8EA000EAD87 /* Main_iPhone.storyboard in Resources */,
 				D038C3271944E25900E7895D /* bubble_tailless.png in Resources */,
 				A4017DBB193DE8EA000EAD87 /* InfoPlist.strings in Resources */,
