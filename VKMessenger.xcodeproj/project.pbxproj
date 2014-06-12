@@ -42,6 +42,7 @@
 		A4140DF01944D2220023DFAA /* LVKUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4140DEF1944D2220023DFAA /* LVKUserViewController.m */; };
 		A45AEA9A193E94D5007F418E /* LVKLongPollUpdatesCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = A45AEA99193E94D5007F418E /* LVKLongPollUpdatesCollection.m */; };
 		A4671F4A1949E01E00CB3BA4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A4671F491949E01E00CB3BA4 /* Settings.bundle */; };
+		A4671F4D194A5C8100CB3BA4 /* LVKDialogDeleteAlertDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A4671F4C194A5C8100CB3BA4 /* LVKDialogDeleteAlertDelegate.m */; };
 		A474AF7E193FB41B009EB0D2 /* LVKMessageAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = A474AF7D193FB41B009EB0D2 /* LVKMessageAttachment.m */; };
 		A474AF81193FB56B009EB0D2 /* LVKAudioAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = A474AF80193FB56B009EB0D2 /* LVKAudioAttachment.m */; };
 		A474AF84193FB73D009EB0D2 /* LVKPhotoAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = A474AF83193FB73D009EB0D2 /* LVKPhotoAttachment.m */; };
@@ -164,6 +165,8 @@
 		A45AEA98193E94D5007F418E /* LVKLongPollUpdatesCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKLongPollUpdatesCollection.h; sourceTree = "<group>"; };
 		A45AEA99193E94D5007F418E /* LVKLongPollUpdatesCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKLongPollUpdatesCollection.m; sourceTree = "<group>"; };
 		A4671F491949E01E00CB3BA4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		A4671F4B194A5C8100CB3BA4 /* LVKDialogDeleteAlertDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDialogDeleteAlertDelegate.h; sourceTree = "<group>"; };
+		A4671F4C194A5C8100CB3BA4 /* LVKDialogDeleteAlertDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDialogDeleteAlertDelegate.m; sourceTree = "<group>"; };
 		A474AF7C193FB41B009EB0D2 /* LVKMessageAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKMessageAttachment.h; sourceTree = "<group>"; };
 		A474AF7D193FB41B009EB0D2 /* LVKMessageAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKMessageAttachment.m; sourceTree = "<group>"; };
 		A474AF7F193FB56B009EB0D2 /* LVKAudioAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKAudioAttachment.h; sourceTree = "<group>"; };
@@ -305,6 +308,8 @@
 				A474AF78193FB3B2009EB0D2 /* DataStructures */,
 				A4017DB7193DE8EA000EAD87 /* Supporting Files */,
 				A4671F491949E01E00CB3BA4 /* Settings.bundle */,
+				A4671F4B194A5C8100CB3BA4 /* LVKDialogDeleteAlertDelegate.h */,
+				A4671F4C194A5C8100CB3BA4 /* LVKDialogDeleteAlertDelegate.m */,
 			);
 			path = VKMessenger;
 			sourceTree = "<group>";
@@ -736,6 +741,7 @@
 				A410F674193F4DD70030D7CC /* LVKUserPickerViewController.m in Sources */,
 				A474AF87193FC77D009EB0D2 /* LVKWelcomeViewController.m in Sources */,
 				9D2A465997B77066592F6D3C /* LVKRepostedMessage.m in Sources */,
+				A4671F4D194A5C8100CB3BA4 /* LVKDialogDeleteAlertDelegate.m in Sources */,
 				9D2A426EEE2286942C35EEE0 /* LVKVideoAttachment.m in Sources */,
 				9D2A4C17A76922050A4580FE /* LVKDocumentAttachment.m in Sources */,
 				9D2A4ED4CD0B4F119FF0C70A /* LVKWallAttachment.m in Sources */,

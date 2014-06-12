@@ -9,6 +9,7 @@
 #import "LVKDialogListViewController.h"
 #import "LVKDialogViewController.h"
 #import "LVKUserPickerViewController.h"
+#import "LVKDialogDeleteAlertDelegate.h"
 #import "UIScrollView+BottomRefreshControl.h"
 
 @interface LVKDialogListViewController () {
@@ -18,6 +19,7 @@
     BOOL hasDataToLoad;
     UIRefreshControl *topRefreshControl;
     UIRefreshControl *bottomRefreshControl;
+    LVKDialogDeleteAlertDelegate *dialogDeleteAlertDelegate;
 }
 @end
 
@@ -408,8 +410,22 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [[self getObjects] removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        LVKDialog *dialog = [[self getObjects] objectAtIndex:indexPath.row];
+        VKRequest *deleteDialogRequest = [VKApi requestWithMethod:@"messages.deleteDialog" andParameters:[NSDictionary dictionaryWithObjectsAndKeys:[dialog chatId], [dialog chatIdKey], nil] andHttpMethod:@"GET"];
+        
+        dialogDeleteAlertDelegate = [[LVKDialogDeleteAlertDelegate alloc] initWithRequest:deleteDialogRequest resultBlock:^(VKResponse *response) {
+            [[self getObjects] removeObjectAtIndex:indexPath.row];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        } errorBlock:^(NSError *error) {
+            
+        }];
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"Удалить диалог %@", [dialog title]]
+                                                          message:@"Все сообщения в диалоге будут удалены!"
+                                                         delegate:dialogDeleteAlertDelegate
+                                                cancelButtonTitle:@"Отмена"
+                                                otherButtonTitles:@"Удалить", nil];
+        
+        [message show];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
