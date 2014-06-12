@@ -8,6 +8,7 @@
 
 #import "LVKDialogViewController.h"
 #import "LVKMessageViewController.h"
+#import "LVKUserViewController.h"
 #import "LVKAppDelegate.h"
 #import "AVHexColor.h"
 #import <UIImageView+WebCache.h>
@@ -185,10 +186,10 @@
                     LVKMessage *existingMessage = [result firstObject];
                     
                     [_objects replaceObjectAtIndex:[_objects indexOfObject:existingMessage] withObject:message];
-                    [self tableViewReloadDataWithScrollToIndexPath:[NSIndexPath indexPathForRow:_objects.count-1 inSection:0]];
+//                    [self tableViewReloadDataWithScrollToIndexPath:[NSIndexPath indexPathForRow:_objects.count-1 inSection:0]];
                     
                     [self networkRestored];
-                    [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+                    [self performSelectorOnMainThread:@selector(tableViewReloadDataWithScrollToIndexPath:) withObject:[NSIndexPath indexPathForRow:[_objects indexOfObject:existingMessage] inSection:0] waitUntilDone:NO];
                     isLoading = NO;
                 }
             } errorBlock:^(NSError *error) {
@@ -247,10 +248,10 @@
     [message adoptUserArray:userArray];
     
     [_objects addObject:message];
-    [self tableViewReloadDataWithScrollToIndexPath:[NSIndexPath indexPathForRow:_objects.count-1 inSection:0]];
+//    [self tableViewReloadDataWithScrollToIndexPath:];
     
     [self networkRestored];
-    [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+    [self performSelectorOnMainThread:@selector(tableViewReloadDataWithScrollToIndexPath:) withObject:[NSIndexPath indexPathForRow:[_objects indexOfObject:message] inSection:0] waitUntilDone:NO];
     isLoading = NO;
 }
 
@@ -261,19 +262,16 @@
     if(_objects.count == 0 || reload)
     {
         _objects = [NSMutableArray arrayWithArray:[historyCollection messages]];
-        [self performSelectorOnMainThread:@selector(tableViewReloadDataWithScrollToIndexPath:) withObject:[NSIndexPath indexPathForRow:_objects.count-1 inSection:0] waitUntilDone:YES];
+        [self performSelectorOnMainThread:@selector(tableViewReloadDataWithScrollToIndexPath:) withObject:[NSIndexPath indexPathForRow:_objects.count-1 inSection:0] waitUntilDone:NO];
     }
     else if(offset == _objects.count)
     {
         [_objects insertObjects:[historyCollection messages] atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, [historyCollection messages].count)]];
-        [self performSelectorOnMainThread:@selector(tableViewReloadDataWithScrollToIndexPath:) withObject:[NSIndexPath indexPathForRow:[historyCollection messages].count inSection:0] waitUntilDone:YES];
+        [self performSelectorOnMainThread:@selector(tableViewReloadDataWithScrollToIndexPath:) withObject:[NSIndexPath indexPathForRow:[historyCollection messages].count inSection:0] waitUntilDone:NO];
     }
     
     [self networkRestored];
-    [tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
-    
     [self didFinishedLoadingHistoryCollection];
-    
     [self endOfDataSourceHandlerForHistoryCollection:historyCollection];
 }
 
@@ -282,16 +280,16 @@
     if(_objects.count >= [[historyCollection count] intValue])
     {
         hasDataToLoad = NO;
-        [topRefreshControl performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:YES];
-        [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
+        [topRefreshControl performSelectorOnMainThread:@selector(removeFromSuperview) withObject:nil waitUntilDone:NO];
+        [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
     }
 }
 
 - (void)didFinishedLoadingHistoryCollection
 {
     isLoading = NO;
-    [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
-    [topRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:YES];
+    [bottomRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
+    [topRefreshControl performSelectorOnMainThread:@selector(endRefreshing) withObject:nil waitUntilDone:NO];
 }
 
 - (void)loadData:(int)offset
@@ -369,7 +367,7 @@
     if (self.dialog.type == Dialog) {
         UIButton *avatarButton = [[UIButton alloc] initWithFrame:CGRectMake(0,0,36,36)];
         [avatarButton setImageWithURL:self.dialog.user.photo_100 forState:UIControlStateNormal];
-//        [avatarButton addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+        [avatarButton addTarget:self action:@selector(pushToUserVC) forControlEvents:UIControlEventTouchUpInside];
         avatarButton.layer.cornerRadius = 18.0f;
         avatarButton.layer.masksToBounds = YES;
         
@@ -606,6 +604,27 @@
     [self composeAndSendMessageWithText:text];
 }
 
+- (void)pushToUserVC
+{
+    LVKUser *user = [dialog user];
+    
+    UIStoryboard *storyboard = nil;
+    
+    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+    {
+        
+    }
+    else
+    {
+        storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    }
+    
+    LVKUserViewController *userViewController = [storyboard instantiateViewControllerWithIdentifier:@"userViewController"];
+    [userViewController setUser:user];
+    
+    [[self navigationController] pushViewController:userViewController animated:YES];
+}
+
 - (void)markAllAsRead
 {
     NSString *messageIds = nil;
@@ -658,13 +677,13 @@
         [message set_id:response.json];
         [self networkRestored];
         [message setState:Default];
-        [self performSelectorOnMainThread:@selector(hasSuccessfullySentMessageAtIndexPath:) withObject:[NSIndexPath indexPathForRow:[_objects indexOfObject:message] inSection:0] waitUntilDone:YES];
+        [self performSelectorOnMainThread:@selector(hasSuccessfullySentMessageAtIndexPath:) withObject:[NSIndexPath indexPathForRow:[_objects indexOfObject:message] inSection:0] waitUntilDone:NO];
     } errorBlock:^(NSError *error) {
         if (error.code != VK_API_ERROR)
         {
             [self networkFailedRequest:error.vkError.request];
             [message setState:Failed];
-            [self performSelectorOnMainThread:@selector(hasFailedToSentMessageAtIndexPath:) withObject:[NSIndexPath indexPathForRow:[_objects indexOfObject:message] inSection:0] waitUntilDone:YES];
+            [self performSelectorOnMainThread:@selector(hasFailedToSentMessageAtIndexPath:) withObject:[NSIndexPath indexPathForRow:[_objects indexOfObject:message] inSection:0] waitUntilDone:NO];
         }
         else
         {

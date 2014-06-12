@@ -273,7 +273,7 @@
         <!--User View Controller-->
         <scene sceneID="AcC-hY-0AG">
             <objects>
-                <viewController id="sIt-0S-hCK" customClass="LVKUserViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="userViewController" id="sIt-0S-hCK" customClass="LVKUserViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IgL-Z1-Mcq"/>
                         <viewControllerLayoutGuide type="bottom" id="RDL-7i-ekX"/>
