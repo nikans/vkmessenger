@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSDictionary *usersIdx;
 
 -(id)initWithArray:(NSArray *)array;
+-(id)initWithUserArray:(NSArray *)array;
 -(id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end

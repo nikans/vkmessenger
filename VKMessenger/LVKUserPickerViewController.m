@@ -231,6 +231,7 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    [self loadSearchData:0];
     [searchBar resignFirstResponder];
 }
 

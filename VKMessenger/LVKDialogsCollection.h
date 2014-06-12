@@ -15,6 +15,8 @@
 @property (strong, nonatomic) NSNumber *count;
 @property (strong, nonatomic) NSArray *dialogs;
 
+-(id)initWithArray:(NSArray *)array;
+
 -(id)initWithDictionary:(NSDictionary *)dictionary;
 
 -(NSArray *)getUserIds;

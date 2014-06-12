@@ -18,9 +18,10 @@
 
 @class LVKDialogViewController;
 
-@interface LVKDialogListViewController : UITableViewController
+@interface LVKDialogListViewController : UITableViewController <UISearchBarDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) LVKDialogViewController *detailViewController;
 
 @end

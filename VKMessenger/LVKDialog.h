@@ -23,6 +23,7 @@
 
 -(id)initWithDictionary:(NSDictionary *)dictionary;
 -(id)initWithPlainDictionary:(NSDictionary *)dictionary;
+-(id)initWithDictionaryFromSearch:(NSDictionary *)dictionary;
 -(void)adoptUser:(LVKUser *)adoptedUser;
 -(void)adoptUsers:(NSArray *)adoptedUsers;
 -(NSString *)chatIdKey;

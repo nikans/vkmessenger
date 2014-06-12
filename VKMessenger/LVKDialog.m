@@ -45,10 +45,33 @@
     
     if(self)
     {
-        chatId = [dictionary valueForKeyPath:@"chat_id"];
-        type = [[dictionary valueForKeyPath:@"type"] intValue];
-        title = [dictionary valueForKeyPath:@"title"];
+        chatId = [dictionary valueForKey:@"chat_id"];
+        type = [[dictionary valueForKey:@"type"] intValue];
+        title = [dictionary valueForKey:@"title"];
         lastMessage = [dictionary valueForKey:@"message"];
+    }
+    
+    return self;
+}
+
+-(id)initWithDictionaryFromSearch:(NSDictionary *)dictionary
+{
+    self = [self init];
+    
+    if(self)
+    {
+        chatId = [dictionary valueForKey:@"id"];
+        chatUserIds = [dictionary valueForKey:@"users"];
+        
+        NSString *tmpType = [dictionary valueForKey:@"type"];
+        
+        if([tmpType isEqualToString:@"chat"])
+            type = Room;
+        else if([tmpType isEqualToString:@"profile"])
+            type = Dialog;
+        
+        title = [dictionary valueForKeyPath:@"title"];
+        lastMessage = [[LVKMessage alloc] initWithDictionary:[dictionary valueForKey:@"message"]];
     }
     
     return self;

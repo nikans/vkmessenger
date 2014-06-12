@@ -20,6 +20,26 @@
     return self;
 }
 
+-(id)initWithArray:(NSArray *)array
+{
+    self = [self init];
+    
+    if(self)
+    {
+        count = [NSNumber numberWithInt:array.count];
+        NSMutableArray *_tmpDialogs = [[NSMutableArray alloc] init];
+        
+        for (NSDictionary *dialogDictionary in array)
+        {
+            [_tmpDialogs addObject:[[LVKDialog alloc] initWithDictionaryFromSearch:dialogDictionary]];
+        }
+        
+        dialogs = [NSArray arrayWithArray:_tmpDialogs];
+    }
+    
+    return self;
+}
+
 -(id)initWithDictionary:(NSDictionary *)dictionary
 {
     self = [self init];

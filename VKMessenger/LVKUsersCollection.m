@@ -44,6 +44,28 @@
     return self;
 }
 
+-(id)initWithUserArray:(NSArray *)array
+{
+    self = [self init];
+    
+    if(self)
+    {
+        NSMutableArray *_tmpUsers = [[NSMutableArray alloc] init];
+        NSMutableDictionary *_tmpUsersIdx = [[NSMutableDictionary alloc] init];
+        
+        for (LVKUser *user in array)
+        {
+            [_tmpUsers addObject:user];
+            [_tmpUsersIdx setObject:user forKey:[user _id]];
+        }
+        
+        users = [NSArray arrayWithArray:_tmpUsers];
+        usersIdx = [NSDictionary dictionaryWithDictionary:_tmpUsersIdx];
+    }
+    
+    return self;
+}
+
 -(id)initWithDictionary:(NSDictionary *)dictionary
 {
     self = [self init];
