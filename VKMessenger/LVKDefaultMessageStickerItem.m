@@ -30,5 +30,8 @@
     return CGSizeMake(128, 128);
 }
 
+- (void)dealloc {
+    self.image = nil;
+}
 
 @end

@@ -31,4 +31,12 @@
     return contentSize;
 }
 
+- (void)dealloc {
+    self.avatar = nil;
+    self.userName = nil;
+    self.body = nil;
+    self.date = nil;
+    self.collectionView = nil;
+}
+
 @end

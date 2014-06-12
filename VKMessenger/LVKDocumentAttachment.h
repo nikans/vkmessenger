@@ -8,8 +8,8 @@
 
 @interface LVKDocumentAttachment : LVKMessageAttachment
 
-@property (nonatomic) NSNumber *_id;
-@property (nonatomic) NSNumber *size;
-@property (nonatomic) NSString *url;
+@property (strong, nonatomic) NSNumber *_id;
+@property (strong, nonatomic) NSNumber *size;
+@property (strong, nonatomic) NSString *url;
 
 @end

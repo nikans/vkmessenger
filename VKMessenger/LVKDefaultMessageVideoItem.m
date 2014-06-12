@@ -30,4 +30,9 @@
     return CGSizeMake(130+10, 97.5+10);
 }
 
+- (void)dealloc {
+    self.image = nil;
+    self.durationLabel = nil;
+}
+
 @end

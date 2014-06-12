@@ -14,6 +14,7 @@
 #import <UIImageView+WebCache.h>
 #import <UIButton+WebCache.h>
 #import "LVKMessagePartProtocol.h"
+#import "LVKMessageItemProtocol.h"
 #import "LVKMessageCollectionViewDelegate.h"
 #import "LVKUsersCollection.h"
 #import "UIImage+Color.h"
@@ -33,8 +34,8 @@
 @property (nonatomic) NSTimeInterval lastActivityRequestTiming;
 
 // TODO: interface 4 cell
-@property (nonatomic, strong) LVKDefaultMessageTableViewCell *prototypeCellIncoming;
-@property (nonatomic, strong) LVKDefaultMessageTableViewCell *prototypeCellOutgoing;
+//@property (nonatomic, strong) LVKDefaultMessageTableViewCell *prototypeCellIncoming;
+//@property (nonatomic, strong) LVKDefaultMessageTableViewCell *prototypeCellOutgoing;
 
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
 
@@ -438,19 +439,18 @@
 #pragma mark - Table View
 
 
-// TODO some shit w/ interface 4 cell
-- (LVKDefaultMessageTableViewCell *)prototypeCellIncoming
-{
-    if (!_prototypeCellIncoming)
-        _prototypeCellIncoming = [self.tableView dequeueReusableCellWithIdentifier:@"DefaultIncomingMessageCell"];
-    return _prototypeCellIncoming;
-}
-- (LVKDefaultMessageTableViewCell *)prototypeCellOutgoing
-{
-    if (!_prototypeCellOutgoing)
-        _prototypeCellOutgoing = [self.tableView dequeueReusableCellWithIdentifier:@"DefaultOutgoingMessageCell"];
-    return _prototypeCellOutgoing;
-}
+//- (LVKDefaultMessageTableViewCell *)prototypeCellIncoming
+//{
+//    if (!_prototypeCellIncoming)
+//        _prototypeCellIncoming = [self.tableView dequeueReusableCellWithIdentifier:@"DefaultIncomingMessageCell"];
+//    return _prototypeCellIncoming;
+//}
+//- (LVKDefaultMessageTableViewCell *)prototypeCellOutgoing
+//{
+//    if (!_prototypeCellOutgoing)
+//        _prototypeCellOutgoing = [self.tableView dequeueReusableCellWithIdentifier:@"DefaultOutgoingMessageCell"];
+//    return _prototypeCellOutgoing;
+//}
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -465,21 +465,44 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    LVKDefaultMessageTableViewCell *prototypeCell;
-    
     LVKMessage *message = _objects[indexPath.row];
-    if([message isOutgoing])
-        prototypeCell = self.prototypeCellOutgoing;
-    else
-        prototypeCell = self.prototypeCellIncoming;
+
+    // TODO
+    CGFloat maxCVWidth;
+    if (![message isOutgoing])
+        if ([message type] == Room) maxCVWidth = 196.f;
+        else maxCVWidth = 230.f;
+    else maxCVWidth = 217.f;
     
-    [self tableView:tableView configureCell:prototypeCell forRowAtIndexPath:indexPath];
+    CGFloat cellHeight = 0;
     
-    prototypeCell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(tableView.bounds), CGRectGetHeight(prototypeCell.bounds));
-    [prototypeCell layoutIfNeeded];
+    NSUInteger countParts = 0;
+    for (id<LVKMessagePartProtocol> messagePart in [message getMessageParts]) {
+        Class <LVKMessageItemProtocol>messageItemClass = [LVKMessageCollectionViewDelegate classForViewItemBasedOnDataPartClass:[messagePart class]];
+        CGSize cellSize = [messageItemClass calculateContentSizeWithData:messagePart maxWidth:maxCVWidth];
+        cellHeight += cellSize.height + (countParts == 0 || countParts == [message getMessageParts].count ? 0 : 5.f);
+        countParts++;
+    }
+    return cellHeight+18.f;
     
-    CGSize size = [prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    return size.height+1;
+//    LVKDefaultMessageTableViewCell *prototypeCell;
+//    
+//    LVKMessage *message = _objects[indexPath.row];
+//    if([message isOutgoing])
+//        prototypeCell = self.prototypeCellOutgoing;
+//    else
+//        prototypeCell = self.prototypeCellIncoming;
+//    
+//    [self tableView:tableView configureCell:prototypeCell forRowAtIndexPath:indexPath];
+//    
+//    prototypeCell.bounds = CGRectMake(0.0f, 0.0f, CGRectGetWidth(tableView.bounds), CGRectGetHeight(prototypeCell.bounds));
+//    [prototypeCell layoutIfNeeded];
+//    
+//    CGSize size = [prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+//    return size.height+1;
+
+    //    return 400;
+
 }
 
 - (void)tableView:(UITableView *)tableView configureCell:(LVKDefaultMessageTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -532,7 +555,6 @@
 {
     return NO;
 }
-
 
 
 #pragma mark - Keyboard & new message GUI

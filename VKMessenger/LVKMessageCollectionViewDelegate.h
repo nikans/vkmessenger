@@ -21,5 +21,6 @@
 @property (strong, nonatomic) LVKMessage *data;
 
 - (id)initWithData:(LVKMessage *)_data;
++ (Class)classForViewItemBasedOnDataPartClass:(Class)dataPartClass;
 
 @end

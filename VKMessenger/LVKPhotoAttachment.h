@@ -10,9 +10,9 @@
 
 @interface LVKPhotoAttachment : LVKMessageAttachment
 
-@property (nonatomic) NSString *photo_604;
-@property (nonatomic) NSNumber *height;
-@property (nonatomic) NSNumber *width;
-@property (nonatomic) NSString *text;
+@property (strong, nonatomic) NSString *photo_604;
+@property (strong, nonatomic) NSNumber *height;
+@property (strong, nonatomic) NSNumber *width;
+@property (strong, nonatomic) NSString *text;
 
 @end

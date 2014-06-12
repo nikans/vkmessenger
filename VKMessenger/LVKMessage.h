@@ -14,18 +14,18 @@
 
 @interface LVKMessage : NSObject <LVKMessagePartProtocol>
 
-@property (nonatomic) NSNumber *_id;
+@property (strong, nonatomic) NSNumber *_id;
 @property (nonatomic) sendingState state;
-@property (nonatomic) NSString *body;
-@property (nonatomic) NSNumber *chatId;
-@property (nonatomic) NSNumber *userId;
+@property (strong, nonatomic) NSString *body;
+@property (strong, nonatomic) NSNumber *chatId;
+@property (strong, nonatomic) NSNumber *userId;
 @property (nonatomic) dialogType type;
-@property (nonatomic) LVKUser *user;
-@property (nonatomic) NSDate *date;
+@property (strong, nonatomic) LVKUser *user;
+@property (strong, nonatomic) NSDate *date;
 @property (nonatomic) BOOL isUnread;
 @property (nonatomic) BOOL isOutgoing;
-@property (nonatomic) NSArray *attachments;
-@property (nonatomic) NSArray *forwarded;
+@property (strong, nonatomic) NSArray *attachments;
+@property (strong, nonatomic) NSArray *forwarded;
 
 -(id)initWithDictionary:(NSDictionary *)dictionary;
 -(void)adoptAttachments:(NSArray *)_attachments;

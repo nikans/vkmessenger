@@ -11,7 +11,7 @@
 
 @interface LVKLongPollUpdatesCollection : NSObject
 
-@property (nonatomic) NSArray *updates;
+@property (strong, nonatomic) NSArray *updates;
 
 -(id)initWithArray:(NSArray *)array;
 

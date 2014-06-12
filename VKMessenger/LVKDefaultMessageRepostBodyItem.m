@@ -40,5 +40,13 @@
 //    [self.collectionView reloadData];
 //}
 
+- (void)dealloc {
+    self.avatar = nil;
+    self.userName = nil;
+    self.body = nil;
+    self.date = nil;
+    self.collectionView = nil;
+    self.separatorView = nil;
+}
 
 @end

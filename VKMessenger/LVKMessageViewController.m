@@ -57,6 +57,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc {
+    self.message = nil;
+    self.photo = nil;
+    self.name = nil;
+    self.date = nil;
+    self.collectionView = nil;
+    self.collectionViewDelegate = nil;
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation

@@ -166,11 +166,28 @@
     // Initialization code
 }
 
+- (void)prepareForReuse {
+    self.collectionViewDelegate = nil;
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)dealloc {
+    self.avatarImage = nil;
+    self.timeLabel = nil;
+    self.messageContainerView = nil;
+    self.messageContainerBackgroundImage = nil;
+    self.bubbleDelegate = nil;
+    self.cellIndexPath = nil;
+    self.collectionView = nil;
+    self.collectionViewDelegate = nil;
+    self.sendingActivityIndicator = nil;
+    self.sentCheckImageView = nil;
 }
 
 @end

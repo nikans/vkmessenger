@@ -12,8 +12,8 @@
 
 @interface LVKDialogsCollection : NSObject
 
-@property (nonatomic) NSNumber *count;
-@property (nonatomic) NSArray *dialogs;
+@property (strong, nonatomic) NSNumber *count;
+@property (strong, nonatomic) NSArray *dialogs;
 
 -(id)initWithDictionary:(NSDictionary *)dictionary;
 

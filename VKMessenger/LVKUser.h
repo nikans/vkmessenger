@@ -10,11 +10,11 @@
 
 @interface LVKUser : NSObject
 
-@property (nonatomic) NSNumber *_id;
-@property (nonatomic) NSString *firstName;
-@property (nonatomic) NSString *lastName;
-@property (nonatomic) NSString *fullName;
-@property (nonatomic) NSString *photo_100;
+@property (strong, nonatomic) NSNumber *_id;
+@property (strong, nonatomic) NSString *firstName;
+@property (strong, nonatomic) NSString *lastName;
+@property (strong, nonatomic) NSString *fullName;
+@property (strong, nonatomic) NSString *photo_100;
 @property (nonatomic) BOOL isCurrent;
 
 -(id)initWithDictionary:(NSDictionary *)dictionary;

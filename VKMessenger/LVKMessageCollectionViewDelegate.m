@@ -11,6 +11,7 @@
 #import "LVKDefaultMessageTableViewCell.h"
 #import "LVKDefaultMessagesCollectionView.h"
 #import "LVKMessagePartProtocol.h"
+#import "LVKMessageItemProtocol.h"
 #import "LVKRepostedMessage.h"
 #import "LVKPhotoAttachment.h"
 #import "LVKAudioAttachment.h"
@@ -170,6 +171,25 @@
         cellSize = CGSizeMake(maxWidth, cellSize.height);
  
     return cellSize;
+}
+
+// TODO use it here
++ (Class)classForViewItemBasedOnDataPartClass:(Class)dataPartClass {
+    if (dataPartClass == [LVKRepostedMessage class])
+        return [LVKDefaultMessageRepostBodyItem class];
+    if (dataPartClass == [LVKMessage class])
+        return [LVKDefaultMessageBodyItem class];
+    if (dataPartClass == [LVKPhotoAttachment class])
+        return [LVKDefaultMessagePhotoItem class];
+    if (dataPartClass == [LVKStickerAttachment class])
+        return [LVKDefaultMessageStickerItem class];
+    if (dataPartClass == [LVKVideoAttachment class])
+        return [LVKDefaultMessageVideoItem class];
+    return [LVKDefaultMessageBodyItem class];
+}
+
+- (void)dealloc {
+    self.data = nil;
 }
 
 

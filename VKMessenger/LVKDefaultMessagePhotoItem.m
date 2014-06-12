@@ -37,6 +37,11 @@
     return CGSizeMake([_data.width floatValue] * (_maxHeight / [_data.height floatValue]), _maxHeight);
 }
 
+- (void)dealloc {
+    self.image = nil;
+}
+
+
 //- (void)layoutIfNeededForCalculatedWidth:(CGFloat)_width {
 //    self.frame = CGRectMake(0, 0, _width, self.photo.frame.size.height);
 //}

@@ -384,8 +384,8 @@
 				A4017DFD193E6DC7000EAD87 /* LVKUsersCollection.h */,
 				A4017DFE193E6DC7000EAD87 /* LVKUsersCollection.m */,
 				A4140DEB19422ED50023DFAA /* LVKModelEnums.h */,
-				9D2A457C9CBE414A7B9C6503 /* LVKRepostedMessage.m */,
 				9D2A45BA46A997A579B9701C /* LVKRepostedMessage.h */,
+				9D2A457C9CBE414A7B9C6503 /* LVKRepostedMessage.m */,
 				9D2A401F55555B5F84F36BA6 /* LVKMessagePartProtocol.h */,
 			);
 			name = Core;
@@ -427,14 +427,14 @@
 				A474AF80193FB56B009EB0D2 /* LVKAudioAttachment.m */,
 				A474AF82193FB73D009EB0D2 /* LVKPhotoAttachment.h */,
 				A474AF83193FB73D009EB0D2 /* LVKPhotoAttachment.m */,
-				9D2A4E5E8B40A9C7574973EF /* LVKVideoAttachment.m */,
 				9D2A45D81AF221ABB44FA158 /* LVKVideoAttachment.h */,
-				9D2A42DA375C2595E0E762E1 /* LVKDocumentAttachment.m */,
+				9D2A4E5E8B40A9C7574973EF /* LVKVideoAttachment.m */,
 				9D2A44F87DADBFD57036B80C /* LVKDocumentAttachment.h */,
-				9D2A40CD5D052521C4CD55F5 /* LVKWallAttachment.m */,
+				9D2A42DA375C2595E0E762E1 /* LVKDocumentAttachment.m */,
 				9D2A41D802530382445A1521 /* LVKWallAttachment.h */,
-				9D2A42AD347166DAFB424979 /* LVKStickerAttachment.m */,
+				9D2A40CD5D052521C4CD55F5 /* LVKWallAttachment.m */,
 				9D2A4A8E3775841137DC65D7 /* LVKStickerAttachment.h */,
+				9D2A42AD347166DAFB424979 /* LVKStickerAttachment.m */,
 			);
 			name = MessageAttachments;
 			sourceTree = "<group>";
