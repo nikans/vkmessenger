@@ -30,6 +30,8 @@
     UIRefreshControl *bottomRefreshControl;
 }
 
+@property (nonatomic) NSTimeInterval lastActivityRequestTiming;
+
 // TODO: interface 4 cell
 @property (nonatomic, strong) LVKDefaultMessageTableViewCell *prototypeCellIncoming;
 @property (nonatomic, strong) LVKDefaultMessageTableViewCell *prototypeCellOutgoing;
@@ -664,6 +666,31 @@
     }
 }
 
+- (void)sendActivityState
+{
+    NSTimeInterval intervalFromLastRequest = [[NSDate date] timeIntervalSinceDate:[NSDate dateWithTimeIntervalSince1970:self.lastActivityRequestTiming]];
+    if(intervalFromLastRequest > 5)
+    {
+        self.lastActivityRequestTiming = [[NSDate date] timeIntervalSince1970];
+        VKRequest *sendActivityState = [VKApi
+                                        requestWithMethod:@"messages.setActivity"
+                                        andParameters:[NSDictionary dictionaryWithObjectsAndKeys:@"typing", @"type", [dialog chatId], [dialog chatIdKey], nil]
+                                        andHttpMethod:@"POST"];
+        
+        [sendActivityState executeWithResultBlock:^(VKResponse *response) {
+        } errorBlock:^(NSError *error) {
+            if (error.code != VK_API_ERROR)
+            {
+                
+            }
+            else
+            {
+                NSLog(@"%@", error);
+            }
+        }];
+    }
+}
+
 - (void)sendMessageForMessage:(LVKMessage *)message andDialog:(LVKDialog *)currentDialog
 {
     VKRequest *sendMessage = [VKApi
@@ -702,6 +729,7 @@
     
     [self sendMessageForMessage:newMessage andDialog:dialog];
 }
+
 - (void)hasSuccessfullySentMessageAtIndexPath:(NSIndexPath *)indexPath {
     LVKDefaultMessageTableViewCell *cell = (LVKDefaultMessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     [cell hasSuccessfullySentMessage];
@@ -721,7 +749,8 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    [self markAllAsRead];
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"send_read_state_preference"] intValue] == 1)
+        [self markAllAsRead];
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
@@ -733,6 +762,9 @@
     
     if(self.textView.text.length > 0)
     {
+        if([[[NSUserDefaults standardUserDefaults] objectForKey:@"send_iam_typing_preference"] intValue] == 1)
+            [self sendActivityState];
+        
         [self.sendButton setTitleColor:self.sendButton.titleLabel.tintColor forState:UIControlStateNormal];
     }
     else

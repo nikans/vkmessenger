@@ -127,13 +127,20 @@
                             <outlet property="delegate" destination="pGg-6v-bdr" id="Y6K-Cp-Qkv"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Диалоги" id="tQt-TN-PWz">
+                        <barButtonItem key="leftBarButtonItem" title="Настройки" id="YP4-Lg-Hst">
+                            <connections>
+                                <segue destination="6yW-3U-asa" kind="push" id="qnI-WN-7mG"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="Vny-e8-wuw">
                             <connections>
                                 <segue destination="JXW-Gf-fXJ" kind="modal" identifier="pickUsers" id="bbC-ZF-GBP"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="mLL-gJ-YKr" id="jDy-UW-FjV"/>
                     </connections>
@@ -176,6 +183,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="MEY-zX-i6W">
+                        <barButtonItem key="leftBarButtonItem" title="Настройки" id="g8d-2t-qi6">
+                            <connections>
+                                <segue destination="6yW-3U-asa" kind="push" id="RgZ-ah-TJe"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Войти" id="sSN-Yc-0NA">
                             <connections>
                                 <action selector="loginButtonPress:" destination="5yM-Ku-V5Y" id="dik-nf-pve"/>
@@ -186,6 +198,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0vJ-c1-lOG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1" y="860"/>
+        </scene>
+        <!--App Settings View Controller-->
+        <scene sceneID="MeZ-Xw-iEu">
+            <objects>
+                <viewController id="6yW-3U-asa" customClass="IASKAppSettingsViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="eIe-p2-mUi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="dwr-7A-te9"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pK1-qF-E3P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1" y="1561"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0MQ-58-9Y5">
@@ -317,7 +344,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="5MT-5d-gQd">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="5MT-5d-gQd">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -528,7 +555,7 @@
                                     <outlet property="delegate" destination="Ah7-4n-0Wa" id="iFk-eY-VoP"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Imp-zM-eEi">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Imp-zM-eEi">
                                 <rect key="frame" x="0.0" y="518" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -634,7 +661,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="topRight" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ChA-BB-tcn" customClass="LVKDefaultMessagesCollectionView">
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="topRight" misplaced="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ChA-BB-tcn" customClass="LVKDefaultMessagesCollectionView">
                                 <rect key="frame" x="5" y="0.0" width="310" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -689,6 +716,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="jUr-3t-vfg"/>
+        <segue reference="qnI-WN-7mG"/>
         <segue reference="cFB-OF-GRU"/>
     </inferredMetricsTieBreakers>
 </document>

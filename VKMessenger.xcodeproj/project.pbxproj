@@ -41,6 +41,7 @@
 		A4140DE81942155E0023DFAA /* LVKLongPollResetMessageFlags.m in Sources */ = {isa = PBXBuildFile; fileRef = A4140DE71942155E0023DFAA /* LVKLongPollResetMessageFlags.m */; };
 		A4140DF01944D2220023DFAA /* LVKUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A4140DEF1944D2220023DFAA /* LVKUserViewController.m */; };
 		A45AEA9A193E94D5007F418E /* LVKLongPollUpdatesCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = A45AEA99193E94D5007F418E /* LVKLongPollUpdatesCollection.m */; };
+		A4671F4A1949E01E00CB3BA4 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A4671F491949E01E00CB3BA4 /* Settings.bundle */; };
 		A474AF7E193FB41B009EB0D2 /* LVKMessageAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = A474AF7D193FB41B009EB0D2 /* LVKMessageAttachment.m */; };
 		A474AF81193FB56B009EB0D2 /* LVKAudioAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = A474AF80193FB56B009EB0D2 /* LVKAudioAttachment.m */; };
 		A474AF84193FB73D009EB0D2 /* LVKPhotoAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = A474AF83193FB73D009EB0D2 /* LVKPhotoAttachment.m */; };
@@ -162,6 +163,7 @@
 		A4140DEF1944D2220023DFAA /* LVKUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKUserViewController.m; sourceTree = "<group>"; };
 		A45AEA98193E94D5007F418E /* LVKLongPollUpdatesCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKLongPollUpdatesCollection.h; sourceTree = "<group>"; };
 		A45AEA99193E94D5007F418E /* LVKLongPollUpdatesCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKLongPollUpdatesCollection.m; sourceTree = "<group>"; };
+		A4671F491949E01E00CB3BA4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		A474AF7C193FB41B009EB0D2 /* LVKMessageAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKMessageAttachment.h; sourceTree = "<group>"; };
 		A474AF7D193FB41B009EB0D2 /* LVKMessageAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKMessageAttachment.m; sourceTree = "<group>"; };
 		A474AF7F193FB56B009EB0D2 /* LVKAudioAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKAudioAttachment.h; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 				A4017DCE193DE8EA000EAD87 /* Images.xcassets */,
 				A474AF78193FB3B2009EB0D2 /* DataStructures */,
 				A4017DB7193DE8EA000EAD87 /* Supporting Files */,
+				A4671F491949E01E00CB3BA4 /* Settings.bundle */,
 			);
 			path = VKMessenger;
 			sourceTree = "<group>";
@@ -623,6 +626,7 @@
 				D07649551948F06000911C65 /* LVKDefaultMessageFullBodyItem.xib in Resources */,
 				D0A210C7194647C2008508BF /* LVKDefaultMessageVideoItem.xib in Resources */,
 				D038C32B1944E25900E7895D /* typing.png in Resources */,
+				A4671F4A1949E01E00CB3BA4 /* Settings.bundle in Resources */,
 				A4017DC7193DE8EA000EAD87 /* Main_iPad.storyboard in Resources */,
 				D038C3331944E28200E7895D /* LVKDefaultMessageBodyItem.xib in Resources */,
 				D038C31F1944E25900E7895D /* bubble_min.png in Resources */,
