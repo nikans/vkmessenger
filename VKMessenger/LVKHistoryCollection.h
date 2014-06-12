@@ -11,8 +11,8 @@
 
 @interface LVKHistoryCollection : NSObject
 
-@property (nonatomic) NSNumber *count;
-@property (nonatomic) NSArray *messages;
+@property (strong, nonatomic) NSNumber *count;
+@property (strong, nonatomic) NSArray *messages;
 
 -(id)initWithMessage:(LVKMessage *)message;
 

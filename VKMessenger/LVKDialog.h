@@ -13,13 +13,13 @@
 
 @interface LVKDialog : NSObject
 
-@property (nonatomic) NSString *title;
-@property (nonatomic) NSNumber *chatId;
-@property (nonatomic) NSArray *chatUserIds;
+@property (strong, nonatomic) NSString *title;
+@property (strong, nonatomic) NSNumber *chatId;
+@property (strong, nonatomic) NSArray *chatUserIds;
 @property (nonatomic) dialogType type;
-@property (nonatomic) LVKMessage *lastMessage;
-@property (nonatomic) LVKUser *user;
-@property (nonatomic) NSArray *users;
+@property (strong, nonatomic) LVKMessage *lastMessage;
+@property (strong, nonatomic) LVKUser *user;
+@property (strong, nonatomic) NSArray *users;
 
 -(id)initWithDictionary:(NSDictionary *)dictionary;
 -(id)initWithPlainDictionary:(NSDictionary *)dictionary;

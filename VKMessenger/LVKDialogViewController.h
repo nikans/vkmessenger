@@ -21,8 +21,8 @@
 
 @property (strong, nonatomic) LVKDialog *dialog;
 
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet UIView *textViewContainer;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;

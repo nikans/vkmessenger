@@ -28,7 +28,7 @@ static NSString *CollectionViewCellIdentifier = @"BodyItem";
 @property (strong, nonatomic) NSIndexPath *cellIndexPath;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *incomingMessageContainerConstraint;
-@property (nonatomic, weak) IBOutlet LVKDefaultMessagesCollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet LVKDefaultMessagesCollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewWidthConstraint;
 @property (nonatomic) CGFloat collectionViewMaxWidth;

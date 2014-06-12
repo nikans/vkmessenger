@@ -11,7 +11,7 @@
 
 @interface LVKMessageAttachment : NSObject <LVKMessagePartProtocol>
 
-@property (nonatomic) NSString *type;
+@property (strong, nonatomic) NSString *type;
 
 -(id)initWithDictionary:(NSDictionary *)dictionary;
 

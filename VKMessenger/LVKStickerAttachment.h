@@ -8,10 +8,10 @@
 
 @interface LVKStickerAttachment : LVKMessageAttachment
 
-@property (nonatomic) NSString *photo_64;
-@property (nonatomic) NSString *photo_128;
-@property (nonatomic) NSString *photo_256;
-@property (nonatomic) NSNumber *height;
-@property (nonatomic) NSNumber *width;
+@property (strong, nonatomic) NSString *photo_64;
+@property (strong, nonatomic) NSString *photo_128;
+@property (strong, nonatomic) NSString *photo_256;
+@property (strong, nonatomic) NSNumber *height;
+@property (strong, nonatomic) NSNumber *width;
 
 @end

@@ -8,10 +8,10 @@
 
 @interface LVKVideoAttachment : LVKMessageAttachment
 
-@property (nonatomic) NSString *photo_130;
-@property (nonatomic) NSString *photo_320;
-@property (nonatomic) NSNumber *_id;
-@property (nonatomic) NSString *title;
-@property (nonatomic) NSNumber *duration;
+@property (strong, nonatomic) NSString *photo_130;
+@property (strong, nonatomic) NSString *photo_320;
+@property (strong, nonatomic) NSNumber *_id;
+@property (strong, nonatomic) NSString *title;
+@property (strong, nonatomic) NSNumber *duration;
 
 @end

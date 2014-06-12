@@ -20,7 +20,7 @@
 
 @interface LVKDialogListViewController : UITableViewController
 
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) LVKDialogViewController *detailViewController;
 
 @end

@@ -8,7 +8,7 @@
 
 @interface LVKWallAttachment : LVKMessageAttachment
 
-@property (nonatomic) NSNumber *_id;
-@property (nonatomic) NSString *text;
+@property (strong, nonatomic) NSNumber *_id;
+@property (strong, nonatomic) NSString *text;
 
 @end

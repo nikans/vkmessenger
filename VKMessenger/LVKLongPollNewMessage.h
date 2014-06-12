@@ -11,15 +11,15 @@
 
 @interface LVKLongPollNewMessage : LVKLongPollUpdate
 
-@property (nonatomic) NSNumber *messageId;
-@property (nonatomic) NSNumber *flags;
+@property (strong, nonatomic) NSNumber *messageId;
+@property (strong, nonatomic) NSNumber *flags;
 @property (nonatomic) dialogType type;
-@property (nonatomic) NSNumber *chatId;
-@property (nonatomic) NSNumber *userId;
-@property (nonatomic) NSDate *date;
-@property (nonatomic) NSString *text;
-@property (nonatomic) NSString *subject;
-@property (nonatomic) LVKMessage *message;
-@property (nonatomic) LVKDialog *dialog;
+@property (strong, nonatomic) NSNumber *chatId;
+@property (strong, nonatomic) NSNumber *userId;
+@property (strong, nonatomic) NSDate *date;
+@property (strong, nonatomic) NSString *text;
+@property (strong, nonatomic) NSString *subject;
+@property (strong, nonatomic) LVKMessage *message;
+@property (strong, nonatomic) LVKDialog *dialog;
 
 @end

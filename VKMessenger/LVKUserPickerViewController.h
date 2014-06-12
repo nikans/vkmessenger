@@ -16,7 +16,7 @@
 @interface LVKUserPickerViewController : UITableViewController <UISearchBarDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) UIViewController *callerViewController;
 
 - (IBAction)closeModal:(id)sender;

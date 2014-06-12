@@ -13,7 +13,7 @@
 @interface LVKUserViewController : UIViewController
 
 @property (strong, nonatomic) LVKUser *user;
-@property (strong, nonatomic) IBOutlet UIImageView *photo;
-@property (strong, nonatomic) IBOutlet UILabel *name;
+@property (weak, nonatomic) IBOutlet UIImageView *photo;
+@property (weak, nonatomic) IBOutlet UILabel *name;
 
 @end

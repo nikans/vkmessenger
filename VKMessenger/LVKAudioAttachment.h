@@ -10,9 +10,9 @@
 
 @interface LVKAudioAttachment : LVKMessageAttachment
 
-@property (nonatomic) NSString *url;
-@property (nonatomic) NSString *artist;
-@property (nonatomic) NSString *title;
-@property (nonatomic) NSNumber *duration;
+@property (strong, nonatomic) NSString *url;
+@property (strong, nonatomic) NSString *artist;
+@property (strong, nonatomic) NSString *title;
+@property (strong, nonatomic) NSNumber *duration;
 
 @end

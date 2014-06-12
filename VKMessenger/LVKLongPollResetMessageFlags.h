@@ -11,9 +11,9 @@
 
 @interface LVKLongPollResetMessageFlags : LVKLongPollUpdate
 
-@property (nonatomic) NSNumber *messageId;
-@property (nonatomic) NSNumber *mask;
+@property (strong, nonatomic) NSNumber *messageId;
+@property (strong, nonatomic) NSNumber *mask;
 @property (nonatomic) BOOL isUnread;
-@property (nonatomic) NSNumber *chatId;
+@property (strong, nonatomic) NSNumber *chatId;
 
 @end
