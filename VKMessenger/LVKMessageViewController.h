@@ -17,9 +17,6 @@
 @interface LVKMessageViewController : UIViewController
 
 @property (strong, nonatomic) LVKMessage *message;
-@property (weak, nonatomic) IBOutlet UIImageView *photo;
-@property (weak, nonatomic) IBOutlet UILabel *name;
-@property (weak, nonatomic) IBOutlet UILabel *date;
 @property (weak, nonatomic) IBOutlet LVKDefaultMessagesCollectionView *collectionView;
 @property (strong, nonatomic) LVKMessageCollectionViewDelegate *collectionViewDelegate;
 

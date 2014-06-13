@@ -83,6 +83,9 @@
 		D07649541948F06000911C65 /* LVKDefaultMessageFullBodyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D07649521948F06000911C65 /* LVKDefaultMessageFullBodyItem.m */; };
 		D07649551948F06000911C65 /* LVKDefaultMessageFullBodyItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = D07649531948F06000911C65 /* LVKDefaultMessageFullBodyItem.xib */; };
 		D0764957194906F800911C65 /* check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0764956194906F800911C65 /* check@2x.png */; };
+		D09E64F7194AD7D900B36B86 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D09E64F6194AD7D900B36B86 /* settings@2x.png */; };
+		D09E64F9194B69AA00B36B86 /* usergroup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D09E64F8194B69AA00B36B86 /* usergroup@2x.png */; };
+		D09E64FE194B7F6600B36B86 /* LVKDefaultDialogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D09E64FC194B7F6600B36B86 /* LVKDefaultDialogTableViewCell.m */; };
 		D0A210BF194646CF008508BF /* LVKDefaultMessagePhotoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A210BE194646CF008508BF /* LVKDefaultMessagePhotoItem.m */; };
 		D0A210C21946476D008508BF /* LVKDefaultMessageVideoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A210C11946476D008508BF /* LVKDefaultMessageVideoItem.m */; };
 		D0A210C519464786008508BF /* LVKDefaultMessageStickerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A210C419464786008508BF /* LVKDefaultMessageStickerItem.m */; };
@@ -223,6 +226,10 @@
 		D07649521948F06000911C65 /* LVKDefaultMessageFullBodyItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDefaultMessageFullBodyItem.m; sourceTree = "<group>"; };
 		D07649531948F06000911C65 /* LVKDefaultMessageFullBodyItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LVKDefaultMessageFullBodyItem.xib; sourceTree = "<group>"; };
 		D0764956194906F800911C65 /* check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check@2x.png"; sourceTree = "<group>"; };
+		D09E64F6194AD7D900B36B86 /* settings@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "settings@2x.png"; sourceTree = "<group>"; };
+		D09E64F8194B69AA00B36B86 /* usergroup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "usergroup@2x.png"; sourceTree = "<group>"; };
+		D09E64FB194B7F6600B36B86 /* LVKDefaultDialogTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultDialogTableViewCell.h; sourceTree = "<group>"; };
+		D09E64FC194B7F6600B36B86 /* LVKDefaultDialogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDefaultDialogTableViewCell.m; sourceTree = "<group>"; };
 		D0A210BD194646CF008508BF /* LVKDefaultMessagePhotoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultMessagePhotoItem.h; sourceTree = "<group>"; };
 		D0A210BE194646CF008508BF /* LVKDefaultMessagePhotoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDefaultMessagePhotoItem.m; sourceTree = "<group>"; };
 		D0A210C01946476D008508BF /* LVKDefaultMessageVideoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultMessageVideoItem.h; sourceTree = "<group>"; };
@@ -299,6 +306,7 @@
 				A483A280194644FD00BC553C /* Network */,
 				D038C3361944E37E00E7895D /* Dialogs */,
 				D038C3351944E36C00E7895D /* Message CollectionView */,
+				D09E64FA194B7EFA00B36B86 /* Dialog List */,
 				A4017DBF193DE8EA000EAD87 /* LVKAppDelegate.h */,
 				A4017DC0193DE8EA000EAD87 /* LVKAppDelegate.m */,
 				A4017DC2193DE8EA000EAD87 /* Main_iPhone.storyboard */,
@@ -363,8 +371,6 @@
 			children = (
 				A474AF85193FC77D009EB0D2 /* LVKWelcomeViewController.h */,
 				A474AF86193FC77D009EB0D2 /* LVKWelcomeViewController.m */,
-				A4017DC8193DE8EA000EAD87 /* LVKDialogListViewController.h */,
-				A4017DC9193DE8EA000EAD87 /* LVKDialogListViewController.m */,
 				A410F672193F4DD70030D7CC /* LVKUserPickerViewController.h */,
 				A410F673193F4DD70030D7CC /* LVKUserPickerViewController.m */,
 				A4140DEE1944D2220023DFAA /* LVKUserViewController.h */,
@@ -456,6 +462,8 @@
 		D038C3081944E25900E7895D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				D09E64F8194B69AA00B36B86 /* usergroup@2x.png */,
+				D09E64F6194AD7D900B36B86 /* settings@2x.png */,
 				D0764956194906F800911C65 /* check@2x.png */,
 				D038C3671945135900E7895D /* default-bubbleOutgoing@2x.png */,
 				D038C3611945098600E7895D /* default-bubbleIncoming@2x.png */,
@@ -539,6 +547,17 @@
 				A474AF89193FD6B8009EB0D2 /* LVKMessageViewController.m */,
 			);
 			name = Dialogs;
+			sourceTree = "<group>";
+		};
+		D09E64FA194B7EFA00B36B86 /* Dialog List */ = {
+			isa = PBXGroup;
+			children = (
+				A4017DC8193DE8EA000EAD87 /* LVKDialogListViewController.h */,
+				A4017DC9193DE8EA000EAD87 /* LVKDialogListViewController.m */,
+				D09E64FB194B7F6600B36B86 /* LVKDefaultDialogTableViewCell.h */,
+				D09E64FC194B7F6600B36B86 /* LVKDefaultDialogTableViewCell.m */,
+			);
+			name = "Dialog List";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -645,6 +664,7 @@
 				A4017DCF193DE8EA000EAD87 /* Images.xcassets in Resources */,
 				D038C31D1944E25900E7895D /* bubble.png in Resources */,
 				D038C3201944E25900E7895D /* bubble_min@2x.png in Resources */,
+				D09E64F7194AD7D900B36B86 /* settings@2x.png in Resources */,
 				D038C32A1944E25900E7895D /* camera@2x.png in Resources */,
 				D038C3251944E25900E7895D /* bubble_stroked_tailless.png in Resources */,
 				D038C3231944E25900E7895D /* bubble_stroked.png in Resources */,
@@ -653,6 +673,7 @@
 				D038C3271944E25900E7895D /* bubble_tailless.png in Resources */,
 				A4017DBB193DE8EA000EAD87 /* InfoPlist.strings in Resources */,
 				D038C3281944E25900E7895D /* bubble_tailless@2x.png in Resources */,
+				D09E64F9194B69AA00B36B86 /* usergroup@2x.png in Resources */,
 				D038C32D1944E25900E7895D /* message_received.aiff in Resources */,
 				D038C3541944E64E00E7895D /* LVKDefaultMessageRepostBodyItem.xib in Resources */,
 			);
@@ -727,6 +748,7 @@
 				A474AF8A193FD6B8009EB0D2 /* LVKMessageViewController.m in Sources */,
 				A4140DE81942155E0023DFAA /* LVKLongPollResetMessageFlags.m in Sources */,
 				A45AEA9A193E94D5007F418E /* LVKLongPollUpdatesCollection.m in Sources */,
+				D09E64FE194B7F6600B36B86 /* LVKDefaultDialogTableViewCell.m in Sources */,
 				D0A210C519464786008508BF /* LVKDefaultMessageStickerItem.m in Sources */,
 				A410F677193F57B00030D7CC /* LVKMessage.m in Sources */,
 				D038C3531944E64E00E7895D /* LVKDefaultMessageRepostBodyItem.m in Sources */,

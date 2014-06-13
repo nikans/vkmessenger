@@ -11,6 +11,16 @@
 #import "LVKUserPickerViewController.h"
 #import "LVKDialogDeleteAlertDelegate.h"
 #import "UIScrollView+BottomRefreshControl.h"
+#import <VKSdk.h>
+#import <CCBottomRefreshControl/UIScrollView+BottomRefreshControl.h>
+#import <UIImageView+WebCache.h>
+#import "UIViewController+NetworkNotifications.h"
+#import "LVKDialogsCollection.h"
+#import "LVKUsersCollection.h"
+#import <AudioToolbox/AudioToolbox.h>
+#import "LVKLongPoll.h"
+#import "LVKDefaultDialogTableViewCell.h"
+#import "LVKAppDelegate.h"
 
 @interface LVKDialogListViewController () {
     NSMutableArray *_objects, *_filteredObjects;
@@ -375,28 +385,40 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LVKDialog *dialog = [self getObjects][indexPath.row];
-    UITableViewCell *cell = nil;
+    LVKDefaultDialogTableViewCell *cell = nil;
     
-    if(dialog.type == Dialog)
+    if(dialog.type == Dialog || dialog.lastMessage.user == [(LVKAppDelegate *)[[UIApplication sharedApplication] delegate] currentUser])
     {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"DialogCell" forIndexPath:indexPath];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultDialogCell" forIndexPath:indexPath];
         
-        [(UIImageView *)[cell viewWithTag:4] setImageWithURL:[dialog getChatPicture]];
+//        [(UIImageView *)[cell viewWithTag:4] setImageWithURL:[dialog getChatPicture]];
     }
     else if(dialog.type == Room)
     {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"RoomCell" forIndexPath:indexPath];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultDialogCellWithMessageDetails" forIndexPath:indexPath];
         NSArray *pictures = [dialog getChatPicture];
         
-        [pictures enumerateObjectsUsingBlock:^(NSString *picture, NSUInteger idx, BOOL *stop) {
-            UIView *subview = [cell viewWithTag:idx+4];
-            [(UIImageView *)subview setImageWithURL:picture];
-        }];
+//        [pictures enumerateObjectsUsingBlock:^(NSString *picture, NSUInteger idx, BOOL *stop) {
+//            UIView *subview = [cell viewWithTag:idx+4];
+//            [(UIImageView *)subview setImageWithURL:picture];
+//        }];
     }
     
-    [(UILabel *)[cell viewWithTag:1] setText:[NSString stringWithFormat:@"%@%@", [dialog getReadState] == UnreadIncoming ? @"(!) " : [dialog getReadState] == UnreadOutgoing ? @"(?) " : @"", [dialog title]]];
-    [(UILabel *)[cell viewWithTag:2] setText:[[dialog lastMessage] body]];
-    [(UILabel *)[cell viewWithTag:3] setText:[NSDateFormatter localizedStringFromDate:[[dialog lastMessage] date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle]];
+    cell.title.text = dialog.title;
+    cell.message.text = dialog.lastMessage.body;
+    cell.date.text = [NSDateFormatter localizedStringFromDate:dialog.lastMessage.date dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
+    
+    [cell.messageAvatar setImageWithURL:dialog.lastMessage.user.photo_100];
+    BOOL isUnread = dialog.getReadState == UnreadIncoming || dialog.getReadState == UnreadOutgoing ? YES : NO;
+    [cell ajustLayoutLastMessageIsUnread:isUnread];
+    
+    [cell setAvatars:[dialog getChatPicture]];
+    
+//    [cell ajustLayoutUserIsOnline:dialog.user.]
+    
+//    [(UILabel *)[cell viewWithTag:1] setText:[NSString stringWithFormat:@"%@%@", [dialog getReadState] == UnreadIncoming ? @"(!) " : [dialog getReadState] == UnreadOutgoing ? @"(?) " : @"", [dialog title]]];
+//    [(UILabel *)[cell viewWithTag:2] setText:[[dialog lastMessage] body]];
+//    [(UILabel *)[cell viewWithTag:3] setText:[NSDateFormatter localizedStringFromDate:[[dialog lastMessage] date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle]];
     
     return cell;
 }

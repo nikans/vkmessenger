@@ -18,7 +18,7 @@
 
 @implementation LVKMessageViewController
 
-@synthesize message, photo, name, date;
+@synthesize message;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,19 +34,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
         
-    [name setText:[[message user] fullName]];
-    [photo setImageWithURL:[[message user] getPhoto:100]];
-    [date setText:[NSDateFormatter localizedStringFromDate:[message date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle]];
-//    [messageText setText:[message body]];
-    
     self.collectionViewDelegate = [[LVKMessageCollectionViewDelegate alloc] initWithData:self.message];
 
     self.collectionView.delegate = self.collectionViewDelegate;
     self.collectionView.dataSource = self.collectionViewDelegate;
     self.collectionView.isFullWidth = YES;
-    
-    self.photo.layer.cornerRadius = 2.f;
-    self.photo.layer.masksToBounds = YES;
     
     [self.collectionView reloadData];
 }
@@ -59,9 +51,6 @@
 
 - (void)dealloc {
     self.message = nil;
-    self.photo = nil;
-    self.name = nil;
-    self.date = nil;
     self.collectionView = nil;
     self.collectionViewDelegate = nil;
 }

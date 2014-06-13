@@ -7,21 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <VKSdk.h>
-#import <CCBottomRefreshControl/UIScrollView+BottomRefreshControl.h>
-#import <UIImageView+WebCache.h>
-#import "UIViewController+NetworkNotifications.h"
-#import "LVKDialogsCollection.h"
-#import "LVKUsersCollection.h"
-#import <AudioToolbox/AudioToolbox.h>
-#import "LVKLongPoll.h"
 
 @class LVKDialogViewController;
 
 @interface LVKDialogListViewController : UITableViewController <UISearchBarDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) LVKDialogViewController *detailViewController;
 
 @end

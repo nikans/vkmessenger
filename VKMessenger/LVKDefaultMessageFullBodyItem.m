@@ -31,6 +31,11 @@
     return contentSize;
 }
 
+- (void)awakeFromNib {
+    self.avatar.layer.cornerRadius = 2.f;
+    self.avatar.layer.masksToBounds = YES;
+}
+
 - (void)dealloc {
     self.avatar = nil;
     self.userName = nil;
