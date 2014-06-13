@@ -43,11 +43,11 @@
         type = Room;
     }
     
-    date = [[NSDate alloc] initWithTimeIntervalSince1970:[[array objectAtIndex:3] intValue]];
+    date = [[NSDate alloc] initWithTimeIntervalSince1970:[[array objectAtIndex:3] doubleValue]];
     subject = [array objectAtIndex:4];
     text = [array objectAtIndex:5];
     
-    message = [[LVKMessage alloc] initWithDictionary:[NSDictionary dictionaryWithObjectsAndKeys:messageId, @"id", userId, @"user_id", [NSNumber numberWithBool:!isUnread], @"read_state", [NSNumber numberWithBool:isOutbox], @"out", chatId, @"chat_id", text, @"body", nil]];
+    message = [[LVKMessage alloc] initWithDictionary:[NSDictionary dictionaryWithObjectsAndKeys:messageId, @"id", userId, @"user_id", [NSNumber numberWithBool:!isUnread], @"read_state", [NSNumber numberWithBool:isOutbox], @"out", chatId, @"chat_id", text, @"body", [NSNumber numberWithDouble:[date timeIntervalSince1970]], @"date", nil]];
     dialog = [[LVKDialog alloc] initWithPlainDictionary:[NSDictionary dictionaryWithObjectsAndKeys:chatId, @"chat_id", [NSNumber numberWithInt:type], @"type", subject, @"title", message, @"message", nil]];
 }
 

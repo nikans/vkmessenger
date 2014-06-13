@@ -26,6 +26,7 @@
 @interface LVKDialogViewController () {
     NSMutableArray *_objects;
     BOOL isLoading;
+    NSMutableArray *sending;
     BOOL hasDataToLoad;
     UIRefreshControl *topRefreshControl;
     UIRefreshControl *bottomRefreshControl;
@@ -145,67 +146,78 @@
     }
 }
 
+- (void)processRecievedMessage:(LVKMessage *)message
+{
+    NSArray *result = [_objects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(LVKMessage *existingMessage, NSDictionary *bindings) {
+        return [existingMessage isEqual:message];
+    }]];
+    
+    if(sending.count > 0)
+    {
+        [self performSelector:@selector(processRecievedMessage:) withObject:message afterDelay:1.0];
+        return;
+    }
+    
+    if(result.count == 0)
+    {
+        [self loadUserDataForIdsInArray:[message getUserIds] excludingUsersFromArray:[self dialogUsers] withResultBlock:^(NSArray *userArray) {
+            [self didLoadMessage:message withUserArray:userArray];
+        } errorBlock:^(NSError *error) {
+            if (error.code != VK_API_ERROR)
+            {
+                [self networkFailedRequest:error.vkError.request];
+            }
+            else
+            {
+                NSLog(@"%@", error);
+            }
+            isLoading = NO;
+        }];
+    }
+    else
+    {
+        [message adoptUserArray:[self dialogUsers]];
+        
+        LVKMessage *existingMessage = [result firstObject];
+        
+        [_objects replaceObjectAtIndex:[_objects indexOfObject:existingMessage] withObject:message];
+        
+        [self networkRestored];
+        [self performSelectorOnMainThread:@selector(tableViewReloadDataWithScrollToIndexPath:) withObject:[NSIndexPath indexPathForRow:[_objects indexOfObject:existingMessage] inSection:0] waitUntilDone:NO];
+        isLoading = NO;
+    }
+}
+
 - (void)receiveNewMessage:(NSNotification *)notification
 {
     LVKLongPollNewMessage *newMessageUpdate = [notification object];
     
     if([dialog isEqual:[newMessageUpdate dialog]])
     {
-        NSArray *result = [_objects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(LVKMessage *message, NSDictionary *bindings) {
-            return [message isEqual:[newMessageUpdate message]];
-        }]];
-        
-        if(result.count == 0)
-        {
-            LVKMessage *message = [newMessageUpdate message];
-            [self loadMessageData:message withResultBlock:^(VKResponse *response) {
-                [message adoptAttachments:[[[response.json objectForKey:@"items"] firstObject] objectForKey:@"attachments"]];
-                [message adoptForwarded:[[[response.json objectForKey:@"items"] firstObject] objectForKey:@"fwd_messages"]];
-                
-                NSArray *result = [_objects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(LVKMessage *message, NSDictionary *bindings) {
-                    return [message isEqual:[newMessageUpdate message]];
-                }]];
-                
-                if(result.count == 0)
-                {
-                    [self loadUserDataForIdsInArray:[message getUserIds] excludingUsersFromArray:[self dialogUsers] withResultBlock:^(NSArray *userArray) {
-                        [self didLoadMessage:message withUserArray:userArray];
-                    } errorBlock:^(NSError *error) {
-                        if (error.code != VK_API_ERROR)
-                        {
-                            [self networkFailedRequest:error.vkError.request];
-                        }
-                        else
-                        {
-                            NSLog(@"%@", error);
-                        }
-                        isLoading = NO;
-                    }];
-                }
-                else
-                {
-                    [message adoptUserArray:[self dialogUsers]];
-                    
-                    LVKMessage *existingMessage = [result firstObject];
-                    
-                    [_objects replaceObjectAtIndex:[_objects indexOfObject:existingMessage] withObject:message];
-//                    [self tableViewReloadDataWithScrollToIndexPath:[NSIndexPath indexPathForRow:_objects.count-1 inSection:0]];
-                    
-                    [self networkRestored];
-                    [self performSelectorOnMainThread:@selector(tableViewReloadDataWithScrollToIndexPath:) withObject:[NSIndexPath indexPathForRow:[_objects indexOfObject:existingMessage] inSection:0] waitUntilDone:NO];
-                    isLoading = NO;
-                }
-            } errorBlock:^(NSError *error) {
-                if (error.code != VK_API_ERROR)
-                {
-                    [self networkFailedRequest:error.vkError.request];
-                }
-                else
-                {
-                    NSLog(@"%@", error);
-                }
-            }];
-        }
+//        NSArray *result = [_objects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(LVKMessage *message, NSDictionary *bindings) {
+//            return [message isEqual:[newMessageUpdate message]];
+//        }]];
+//        
+//        if(result.count == 0)
+//        {
+        LVKMessage *message = [newMessageUpdate message];
+        [self loadMessageData:message withResultBlock:^(VKResponse *response) {
+            [message adoptAttachments:[[[response.json objectForKey:@"items"] firstObject] objectForKey:@"attachments"]];
+            [message adoptForwarded:[[[response.json objectForKey:@"items"] firstObject] objectForKey:@"fwd_messages"]];
+            
+            [self processRecievedMessage:message];
+            
+        } errorBlock:^(NSError *error) {
+            if (error.code != VK_API_ERROR)
+            {
+                [self networkFailedRequest:error.vkError.request];
+            }
+            else
+            {
+                NSLog(@"%@", error);
+            }
+        }];
+//        }
     }
 }
 
@@ -715,9 +727,10 @@
 
 - (void)sendMessageForMessage:(LVKMessage *)message andDialog:(LVKDialog *)currentDialog
 {
+    [sending addObject:message];
     VKRequest *sendMessage = [VKApi
                               requestWithMethod:@"messages.send"
-                              andParameters:[NSDictionary dictionaryWithObjectsAndKeys:[message body], @"message", [currentDialog chatId], [currentDialog chatIdKey], /*[NSNumber numberWithInt:rand()], @"guid",*/ nil]
+                              andParameters:[NSDictionary dictionaryWithObjectsAndKeys:[message body], @"message", [currentDialog chatId], [currentDialog chatIdKey], [NSNumber numberWithDouble:[[message date] timeIntervalSince1970]], @"guid", nil]
                               andHttpMethod:@"POST"];
     
     sendMessage.attempts = 3;
@@ -726,6 +739,7 @@
         [message set_id:response.json];
         [self networkRestored];
         [message setState:Default];
+        [sending removeObject:message];
         [self performSelectorOnMainThread:@selector(hasSuccessfullySentMessageAtIndexPath:) withObject:[NSIndexPath indexPathForRow:[_objects indexOfObject:message] inSection:0] waitUntilDone:NO];
     } errorBlock:^(NSError *error) {
         if (error.code != VK_API_ERROR)
