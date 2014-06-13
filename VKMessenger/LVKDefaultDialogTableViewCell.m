@@ -79,7 +79,7 @@ typedef enum {
         UIImageView *avatar = [self imageViewForAvatarAtPlace:[place intValue] withURL:(NSString *)avatars[i]];
         avatar.layer.cornerRadius = 2.f;
         avatar.layer.masksToBounds = YES;
-        avatar.contentMode = UIViewContentModeCenter;
+        avatar.contentMode = UIViewContentModeScaleAspectFill;
         [self.avatarsView addSubview:avatar];
     }
 }
