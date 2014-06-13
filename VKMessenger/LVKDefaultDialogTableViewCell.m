@@ -63,36 +63,24 @@ typedef enum {
 
 // TODO: refactor
 - (void)setAvatars:(NSArray *)avatarsURLArray {
-    if ([avatarsURLArray isKindOfClass:[NSString class]]) {
-        UIImageView *avatar = [self imageViewForAvatarAtPlace:Single withURL:(NSString *)avatarsURLArray];
+    if ([avatarsURLArray isKindOfClass:[NSString class]]) 
+        [self addAvatars:@[avatarsURLArray] withPlaces:@[@(Single)]];
+    else if ([avatarsURLArray count] == 2)
+        [self addAvatars:avatarsURLArray withPlaces:@[@(FirstHalf), @(SecondHalf)]];
+    else if ([avatarsURLArray count] == 3)
+        [self addAvatars:avatarsURLArray withPlaces:@[@(FirstHalf), @(SecondQuarter), @(ForthQuarter)]];
+    else if ([avatarsURLArray count] == 4)
+        [self addAvatars:avatarsURLArray withPlaces:@[@(FirstQarter), @(SecondQuarter), @(ThirdQuarter), @(ForthQuarter)]];
+}
+
+- (void)addAvatars:(NSArray *)avatars withPlaces:(NSArray *)places {
+    for (int i=0; i<[places count]; i++) {
+        NSNumber *place = places[i];
+        UIImageView *avatar = [self imageViewForAvatarAtPlace:[place intValue] withURL:(NSString *)avatars[i]];
+        avatar.layer.cornerRadius = 2.f;
+        avatar.layer.masksToBounds = YES;
+        avatar.contentMode = UIViewContentModeCenter;
         [self.avatarsView addSubview:avatar];
-    }
-    
-    else if ([avatarsURLArray count] == 2) {
-        UIImageView *avatar1 = [self imageViewForAvatarAtPlace:FirstHalf withURL:(NSString *)avatarsURLArray[0]];
-        [self.avatarsView addSubview:avatar1];
-        UIImageView *avatar2 = [self imageViewForAvatarAtPlace:SecondHalf withURL:(NSString *)avatarsURLArray[1]];
-        [self.avatarsView addSubview:avatar2];
-    }
-    
-    else if ([avatarsURLArray count] == 3) {
-        UIImageView *avatar1 = [self imageViewForAvatarAtPlace:FirstHalf withURL:(NSString *)avatarsURLArray[0]];
-        [self.avatarsView addSubview:avatar1];
-        UIImageView *avatar2 = [self imageViewForAvatarAtPlace:SecondQuarter withURL:(NSString *)avatarsURLArray[1]];
-        [self.avatarsView addSubview:avatar2];
-        UIImageView *avatar3 = [self imageViewForAvatarAtPlace:ForthQuarter withURL:(NSString *)avatarsURLArray[2]];
-        [self.avatarsView addSubview:avatar3];
-    }
-    
-    else if ([avatarsURLArray count] == 4) {
-        UIImageView *avatar1 = [self imageViewForAvatarAtPlace:FirstQarter withURL:(NSString *)avatarsURLArray[0]];
-        [self.avatarsView addSubview:avatar1];
-        UIImageView *avatar2 = [self imageViewForAvatarAtPlace:SecondQuarter withURL:(NSString *)avatarsURLArray[1]];
-        [self.avatarsView addSubview:avatar2];
-        UIImageView *avatar3 = [self imageViewForAvatarAtPlace:ThirdQuarter withURL:(NSString *)avatarsURLArray[2]];
-        [self.avatarsView addSubview:avatar3];
-        UIImageView *avatar4 = [self imageViewForAvatarAtPlace:ForthQuarter withURL:(NSString *)avatarsURLArray[3]];
-        [self.avatarsView addSubview:avatar4];
     }
 }
 
