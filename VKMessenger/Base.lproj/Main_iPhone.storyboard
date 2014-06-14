@@ -33,7 +33,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" searchBarStyle="minimal" placeholder="Поиск" id="jhy-eW-HMw">
                             <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -210,6 +209,7 @@
                                         <constraint firstAttribute="trailing" secondItem="Far-Ts-P8T" secondAttribute="trailing" constant="10" id="o0B-js-tey"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="avatarsView" destination="5EW-jn-KcW" id="xd4-hi-HRg"/>
                                     <outlet property="date" destination="Far-Ts-P8T" id="xBb-qb-ZG4"/>
@@ -287,7 +287,7 @@
                                             <rect key="frame" x="114" y="32" width="196" height="31"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label Label Label Label Label Label Label Label Label " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieT-LH-3tt">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieT-LH-3tt">
                                                     <rect key="frame" x="10" y="7" width="176" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -322,6 +322,7 @@
                                         <constraint firstItem="5RE-LT-hUY" firstAttribute="leading" secondItem="4hp-En-jPI" secondAttribute="trailing" constant="10" id="y97-6e-Nwb"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <connections>
                                     <outlet property="avatarsView" destination="4hp-En-jPI" id="UDb-HJ-vyJ"/>
                                     <outlet property="date" destination="tOZ-22-NJH" id="xid-eL-akA"/>
@@ -334,6 +335,44 @@
                                     <outlet property="title" destination="y68-Wq-AeD" id="jwp-Ni-OPx"/>
                                     <outlet property="titleConstraint" destination="SIo-Vk-zeF" id="Jds-WX-p7w"/>
                                     <segue destination="Ah7-4n-0Wa" kind="push" identifier="showDetail" id="rlK-3H-5RC"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="DefaultUserCell" rowHeight="50" id="vRa-c2-qHY" customClass="LVKDefaultUserTableViewCell">
+                                <rect key="frame" x="0.0" y="410" width="320" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vRa-c2-qHY" id="YMr-yB-Tru">
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="49"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iS5-Gq-FD5">
+                                            <rect key="frame" x="10" y="5" width="40" height="40"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="tzO-a3-meR"/>
+                                                <constraint firstAttribute="width" constant="40" id="wfi-ya-fBa"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Wh-lJ-oa7">
+                                            <rect key="frame" x="60" y="14" width="227" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="centerY" secondItem="3Wh-lJ-oa7" secondAttribute="centerY" id="59Z-cz-BMD"/>
+                                        <constraint firstAttribute="trailing" secondItem="3Wh-lJ-oa7" secondAttribute="trailing" id="Gob-3U-AwO"/>
+                                        <constraint firstAttribute="centerY" secondItem="iS5-Gq-FD5" secondAttribute="centerY" id="cMo-RM-Njz"/>
+                                        <constraint firstItem="iS5-Gq-FD5" firstAttribute="leading" secondItem="YMr-yB-Tru" secondAttribute="leading" constant="10" id="mYa-z3-acu"/>
+                                        <constraint firstItem="3Wh-lJ-oa7" firstAttribute="leading" secondItem="iS5-Gq-FD5" secondAttribute="trailing" constant="10" id="pqR-dD-k05"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <inset key="separatorInset" minX="60" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="avatar" destination="iS5-Gq-FD5" id="Ga9-0l-EvB"/>
+                                    <outlet property="name" destination="3Wh-lJ-oa7" id="cxo-vz-eRX"/>
+                                    <segue destination="Ah7-4n-0Wa" kind="push" identifier="showDetail" id="Vvq-g2-EWH"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -935,7 +974,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="sf3-kQ-slx"/>
-        <segue reference="rlK-3H-5RC"/>
+        <segue reference="jUr-3t-vfg"/>
         <segue reference="cFB-OF-GRU"/>
     </inferredMetricsTieBreakers>
 </document>

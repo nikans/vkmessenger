@@ -16,4 +16,6 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) LVKDialogViewController *detailViewController;
 
+@property (nonatomic) BOOL isSearching;
+
 @end

@@ -69,7 +69,7 @@ typedef enum {
         [self addAvatars:avatarsURLArray withPlaces:@[@(FirstHalf), @(SecondHalf)]];
     else if ([avatarsURLArray count] == 3)
         [self addAvatars:avatarsURLArray withPlaces:@[@(FirstHalf), @(SecondQuarter), @(ForthQuarter)]];
-    else if ([avatarsURLArray count] == 4)
+    else
         [self addAvatars:avatarsURLArray withPlaces:@[@(FirstQarter), @(SecondQuarter), @(ThirdQuarter), @(ForthQuarter)]];
 }
 

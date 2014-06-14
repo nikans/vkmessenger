@@ -20,6 +20,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "LVKLongPoll.h"
 #import "LVKDefaultDialogTableViewCell.h"
+#import "LVKDefaultUserTableViewCell.h"
 #import "LVKAppDelegate.h"
 
 @interface LVKDialogListViewController () {
@@ -55,7 +56,10 @@
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     hasDataToLoad = YES;
-
+    self.isSearching = NO;
+    
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
     bottomRefreshControl = [[UIRefreshControl alloc]init];
     [bottomRefreshControl addTarget:self action:@selector(onBottomRefreshControl) forControlEvents:UIControlEventValueChanged];
     [self.tableView setBottomRefreshControl:bottomRefreshControl];
@@ -180,7 +184,12 @@
 
 -(NSMutableArray *)getObjects
 {
-    return [searchString length] > 0 ? _filteredObjects : _objects;
+    if ([searchString length] > 0) {
+        self.isSearching = YES;
+        return _filteredObjects;
+    }
+    self.isSearching = NO;
+    return _objects;
 }
 
 - (void)registerObservers
@@ -382,45 +391,53 @@
     return [self getObjects].count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.isSearching)
+        return 50;
+    return 70;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     LVKDialog *dialog = [self getObjects][indexPath.row];
-    LVKDefaultDialogTableViewCell *cell = nil;
     
-    if(dialog.type == Dialog || dialog.lastMessage.user == [(LVKAppDelegate *)[[UIApplication sharedApplication] delegate] currentUser])
-    {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultDialogCell" forIndexPath:indexPath];
+    // Searching
+    if (self.isSearching) {
+        LVKDefaultUserTableViewCell *cell = nil;
         
-//        [(UIImageView *)[cell viewWithTag:4] setImageWithURL:[dialog getChatPicture]];
-    }
-    else if(dialog.type == Room)
-    {
-        cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultDialogCellWithMessageDetails" forIndexPath:indexPath];
-        NSArray *pictures = [dialog getChatPicture];
+        cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultUserCell" forIndexPath:indexPath];
+        cell.name.text = dialog.title;
+        [cell.avatar setImageWithURL:(NSString *)[dialog getChatPicture]];
         
-//        [pictures enumerateObjectsUsingBlock:^(NSString *picture, NSUInteger idx, BOOL *stop) {
-//            UIView *subview = [cell viewWithTag:idx+4];
-//            [(UIImageView *)subview setImageWithURL:picture];
-//        }];
+        return cell;
     }
     
-    cell.title.text = dialog.title;
-    cell.message.text = dialog.lastMessage.body;
-    cell.date.text = [NSDateFormatter localizedStringFromDate:dialog.lastMessage.date dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
-    
-    [cell.messageAvatar setImageWithURL:dialog.lastMessage.user.photo_100];
-    BOOL isUnread = dialog.getReadState == UnreadIncoming || dialog.getReadState == UnreadOutgoing ? YES : NO;
-    [cell ajustLayoutLastMessageIsUnread:isUnread];
-    
-    [cell setAvatars:[dialog getChatPicture]];
-    
-//    [cell ajustLayoutUserIsOnline:dialog.user.]
-    
-//    [(UILabel *)[cell viewWithTag:1] setText:[NSString stringWithFormat:@"%@%@", [dialog getReadState] == UnreadIncoming ? @"(!) " : [dialog getReadState] == UnreadOutgoing ? @"(?) " : @"", [dialog title]]];
-//    [(UILabel *)[cell viewWithTag:2] setText:[[dialog lastMessage] body]];
-//    [(UILabel *)[cell viewWithTag:3] setText:[NSDateFormatter localizedStringFromDate:[[dialog lastMessage] date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle]];
-    
-    return cell;
+    // Displaying
+    else {
+        LVKDefaultDialogTableViewCell *cell = nil;
+        
+        if(dialog.type == Dialog || dialog.lastMessage.user == [(LVKAppDelegate *)[[UIApplication sharedApplication] delegate] currentUser])
+            cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultDialogCell" forIndexPath:indexPath];
+        
+        else if(dialog.type == Room)
+            cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultDialogCellWithMessageDetails" forIndexPath:indexPath];
+        
+        cell.title.text = dialog.title;
+        if ([dialog.lastMessage.body length])
+            cell.message.text = dialog.lastMessage.body;
+        
+        cell.date.text = [NSDateFormatter localizedStringFromDate:dialog.lastMessage.date dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
+        
+        [cell.messageAvatar setImageWithURL:dialog.lastMessage.user.photo_100];
+        BOOL isUnread = dialog.getReadState == UnreadIncoming || dialog.getReadState == UnreadOutgoing ? YES : NO;
+        [cell ajustLayoutLastMessageIsUnread:isUnread];
+        
+        [cell setAvatars:[dialog getChatPicture]];
+        
+//        [cell ajustLayoutUserIsOnline:dialog.user.]
+        
+        return cell;
+    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
