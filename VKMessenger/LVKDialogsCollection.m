@@ -97,6 +97,7 @@
             LVKUser *currentUser = [[collection usersIdx] objectForKey:dialog.chatId];
             [dialog adoptUser:currentUser];
         }
+        [dialog adoptLastMessageUsers:[collection users]];
     }];
 }
 @end
