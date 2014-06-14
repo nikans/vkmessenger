@@ -494,7 +494,7 @@
         <scene sceneID="ddy-Ao-fRS">
             <objects>
                 <tableViewController id="29n-2a-gtL" customClass="LVKUserPickerViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="vy0-6E-2ie">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" id="vy0-6E-2ie">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -507,15 +507,15 @@
                             </connections>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserCell" id="kcG-dn-kOt">
-                                <rect key="frame" x="0.0" y="130" width="320" height="44"/>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="UserCell" rowHeight="50" id="kcG-dn-kOt">
+                                <rect key="frame" x="0.0" y="130" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kcG-dn-kOt" id="BYz-Tj-ofo">
-                                    <rect key="frame" x="0.0" y="0.0" width="253" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="253" height="49"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="stb-cJ-pTx">
-                                            <rect key="frame" x="0.0" y="0.0" width="43" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="43" height="49"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="202" translatesAutoresizingMaskIntoConstraints="NO" id="9HV-QQ-V2B">
@@ -529,6 +529,44 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="sIt-0S-hCK" kind="push" identifier="showUserInfo" trigger="accessoryAction" id="cFB-OF-GRU"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="DefaultUserInfoButtonCell" rowHeight="50" id="nBw-50-UWu" customClass="LVKDefaultUserTableViewCell">
+                                <rect key="frame" x="0.0" y="180" width="320" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nBw-50-UWu" id="OZa-8G-3Dd">
+                                    <rect key="frame" x="0.0" y="0.0" width="253" height="49"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="59p-RB-C6v">
+                                            <rect key="frame" x="10" y="5" width="40" height="40"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="OK3-1c-Jxo"/>
+                                                <constraint firstAttribute="height" constant="40" id="p2L-NU-NDx"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wf4-Xr-QLa">
+                                            <rect key="frame" x="60" y="14" width="193" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="wf4-Xr-QLa" secondAttribute="trailing" id="7ac-gX-2xB"/>
+                                        <constraint firstAttribute="centerY" secondItem="59p-RB-C6v" secondAttribute="centerY" id="AVF-XL-sB5"/>
+                                        <constraint firstAttribute="centerY" secondItem="wf4-Xr-QLa" secondAttribute="centerY" id="GSc-ZX-zFo"/>
+                                        <constraint firstItem="59p-RB-C6v" firstAttribute="leading" secondItem="OZa-8G-3Dd" secondAttribute="leading" constant="10" id="Jxv-ZV-dgj"/>
+                                        <constraint firstItem="wf4-Xr-QLa" firstAttribute="leading" secondItem="59p-RB-C6v" secondAttribute="trailing" constant="10" id="u8y-yF-KYe"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <inset key="separatorInset" minX="60" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="avatar" destination="59p-RB-C6v" id="zGk-1c-fJl"/>
+                                    <outlet property="name" destination="wf4-Xr-QLa" id="r1A-o9-FG1"/>
+                                    <segue destination="sIt-0S-hCK" kind="push" identifier="showUserInfo" trigger="accessoryAction" id="ztk-sL-94A"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -974,7 +1012,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="sf3-kQ-slx"/>
-        <segue reference="nWb-OS-La0"/>
-        <segue reference="cFB-OF-GRU"/>
+        <segue reference="rlK-3H-5RC"/>
+        <segue reference="ztk-sL-94A"/>
     </inferredMetricsTieBreakers>
 </document>

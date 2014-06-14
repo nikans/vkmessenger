@@ -22,6 +22,8 @@
 - (void)awakeFromNib
 {
     // Initialization code
+    self.avatar.layer.cornerRadius = 2.f;
+    self.avatar.layer.masksToBounds = YES;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

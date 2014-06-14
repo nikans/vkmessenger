@@ -8,6 +8,7 @@
 
 #import "LVKUserPickerViewController.h"
 #import "LVKUserViewController.h"
+#import "LVKDefaultUserTableViewCell.h"
 
 @interface LVKUserPickerViewController ()
 {
@@ -152,11 +153,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UserCell" forIndexPath:indexPath];
+    LVKDefaultUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultUserInfoButtonCell" forIndexPath:indexPath];
     
     LVKUser *user = _filteredObjects[indexPath.row];
-    [(UILabel *)[cell viewWithTag:1] setText:[user fullName]];
-    [(UIImageView *)[cell viewWithTag:2] setImageWithURL:[user photo_100]];
+    cell.name.text = user.fullName;
+    [cell.avatar setImageWithURL:[user photo_100]];
     
     return cell;
 }

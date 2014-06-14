@@ -40,7 +40,6 @@
 
 - (void)awakeFromNib
 {
-#pragma mark - iPad
 //    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
 //        self.clearsSelectionOnViewWillAppear = NO;
 //        self.preferredContentSize = CGSizeMake(320.0, 600.0);
@@ -68,12 +67,13 @@
     [self.tableView addSubview:topRefreshControl];
     [topRefreshControl addTarget:self action:@selector(onTopRefreshControl) forControlEvents:UIControlEventValueChanged];
 
-#pragma mark - iPad
 //    self.detailViewController = (LVKDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     
     [self registerObservers];
     
     [self loadData:0];
+    
+    self.tableView.contentOffset = CGPointMake(0, self.searchBar.frame.size.height);
 }
 
 - (void)resetMessageFlags:(NSNotification *)notification
