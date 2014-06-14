@@ -26,6 +26,7 @@
 -(id)initWithDictionaryFromSearch:(NSDictionary *)dictionary;
 -(void)adoptUser:(LVKUser *)adoptedUser;
 -(void)adoptUsers:(NSArray *)adoptedUsers;
+-(void)adoptLastMessageUsers:(NSArray *)adoptedUsers;
 -(NSString *)chatIdKey;
 -(readState)getReadState;
 -(id)getChatPicture;

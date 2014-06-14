@@ -88,6 +88,11 @@
     [self setUsers:adoptedUsers];
 }
 
+-(void)adoptLastMessageUsers:(NSArray *)adoptedUsers
+{
+    [[self lastMessage] adoptUserArray:adoptedUsers];
+}
+
 -(BOOL)isEqual:(id)object
 {
     return [chatId isEqual:[object chatId]];

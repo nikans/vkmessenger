@@ -56,7 +56,7 @@
         for (LVKUser *user in array)
         {
             [_tmpUsers addObject:user];
-            [_tmpUsersIdx setObject:user forKey:[user _id]];
+            [_tmpUsersIdx setObject:user forKey:[user isCurrent] ? @"current" : [user _id]];
         }
         
         users = [NSArray arrayWithArray:_tmpUsers];
