@@ -17,5 +17,6 @@
 @property (strong, nonatomic) LVKDialogViewController *detailViewController;
 
 @property (nonatomic) BOOL isSearching;
+@property (nonatomic) BOOL isCompactView;
 
 @end
