@@ -13,10 +13,13 @@
 
 @synthesize currentUser;
 
+
+#pragma mark - Application Delegate
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-#pragma mark - iPad
+
 //    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
 //        UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
 //        UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
@@ -38,14 +41,6 @@
     
     return YES;
 }
-
-- (void)authorize
-{
-    NSArray *scope = [NSArray arrayWithObjects:@"friends", @"messages", @"notify", nil];
-    
-    [VKSdk authorize:scope];
-}
-
 
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
@@ -88,6 +83,17 @@
 {
     [VKSdk processOpenURL:url fromApplication:sourceApplication];
     return YES;
+}
+
+
+
+#pragma mark - Setup & networking
+
+- (void)authorize
+{
+    NSArray *scope = [NSArray arrayWithObjects:@"friends", @"messages", @"notify", nil];
+    
+    [VKSdk authorize:scope];
 }
 
 - (void)setup
@@ -199,6 +205,10 @@
         }];
     }
 }
+
+
+
+#pragma mark - VK SDK Delegate
 
 - (void)vkSdkNeedCaptchaEnter:(VKError *)captchaError
 {
