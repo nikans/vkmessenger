@@ -32,6 +32,7 @@
 }
 
 
+
 #pragma mark - UICollectionView Datasource
 
 // TODO
@@ -112,6 +113,7 @@
 }
 
 
+
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -120,6 +122,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     // TODO: Deselect item
 }
+
 
 
 #pragma mark – UICollectionViewDelegateFlowLayout
@@ -187,6 +190,10 @@
         return [LVKDefaultMessageVideoItem class];
     return [LVKDefaultMessageBodyItem class];
 }
+
+
+
+#pragma mark - Lifecycle callbacks
 
 - (void)dealloc {
     self.data = nil;

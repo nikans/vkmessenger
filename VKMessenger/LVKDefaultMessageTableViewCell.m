@@ -17,6 +17,9 @@
 
 @synthesize collectionViewDelegate;
 
+
+#pragma mark - TableViewCell callbacks
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -87,11 +90,11 @@
     NSInteger numberOfCells = [self.collectionView numberOfItemsInSection:0];
     UICollectionViewLayout *layout = self.collectionView.collectionViewLayout;
     CGFloat maxWidth = 0.0f;
-    CGFloat height = 0.0f;
+//    CGFloat height = 0.0f;
     for (NSInteger i = 0; i < numberOfCells; i++) {
         UICollectionViewLayoutAttributes *layoutAttributes = [layout layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
         CGRect cellFrame = layoutAttributes.frame;
-        height += cellFrame.size.height;
+//        height += cellFrame.size.height;
         if (cellFrame.size.width > maxWidth) {
             maxWidth = cellFrame.size.width;
         }
@@ -105,9 +108,20 @@
         }
     }
     
-    self.collectionViewHeightConstraint.constant = height + ([self.collectionView numberOfItemsInSection:0]-1)*5; // TODO
+//    self.collectionViewHeightConstraint.constant = height + ([self.collectionView numberOfItemsInSection:0]-1)*5; // TODO
     self.collectionViewWidthConstraint.constant = maxWidth+0.5 < self.collectionViewMaxWidth ? maxWidth+0.5 : self.collectionViewMaxWidth;
 }
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+    [super setSelected:selected animated:animated];
+    
+    // Configure the view for the selected state
+}
+
+
+
+#pragma mark - Init methods
 
 -(void)setCollectionViewDelegates:(id<UICollectionViewDataSource, UICollectionViewDelegate>)dataSourceDelegate forMessageWithIndexPath:(NSIndexPath *)indexPath
 {
@@ -125,6 +139,10 @@
     self.bubbleDelegate = delegate;
     self.cellIndexPath = indexPath;
 }
+
+
+
+#pragma mark - Status callbacks
 
 - (void)hasFailedToSentMessage {
     self.sendingActivityIndicator.hidden = YES;
@@ -161,6 +179,10 @@
     }];
 }
 
+
+
+#pragma mark - Lifecycle callbacks
+
 - (void)awakeFromNib
 {
     // Initialization code
@@ -168,13 +190,6 @@
 
 - (void)prepareForReuse {
     self.collectionViewDelegate = nil;
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 - (void)dealloc {
