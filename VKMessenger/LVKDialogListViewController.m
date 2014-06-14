@@ -429,8 +429,7 @@
         cell.date.text = [NSDateFormatter localizedStringFromDate:dialog.lastMessage.date dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
         
         [cell.messageAvatar setImageWithURL:dialog.lastMessage.user.photo_100];
-        BOOL isUnread = dialog.getReadState == UnreadIncoming || dialog.getReadState == UnreadOutgoing ? YES : NO;
-        [cell ajustLayoutLastMessageIsUnread:isUnread];
+        [cell ajustLayoutForReadState:dialog.getReadState];
         
         [cell setAvatars:[dialog getChatPicture]];
         

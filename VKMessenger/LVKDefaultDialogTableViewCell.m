@@ -43,14 +43,18 @@ typedef enum {
     self.avatarInset = 2;
 }
 
-- (void)ajustLayoutLastMessageIsUnread:(BOOL)isUnread {
-    if (isUnread) {
-        self.messageInsetConstraint.constant = 10;
-        self.messageBackground.backgroundColor = [AVHexColor colorWithHexString:@"#edf2f7"];
-    }
-    else {
+- (void)ajustLayoutForReadState:(readState)state {
+    if (state == Read) {
         self.messageInsetConstraint.constant = 0;
         self.messageBackground.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor clearColor];
+    }
+    else if (state == UnreadIncoming) {
+        self.backgroundColor = [AVHexColor colorWithHexString:@"#edf2f7"];
+    }
+    else if (state == UnreadOutgoing) {
+        self.messageInsetConstraint.constant = 10;
+        self.messageBackground.backgroundColor = [AVHexColor colorWithHexString:@"#edf2f7"];
     }
 }
 

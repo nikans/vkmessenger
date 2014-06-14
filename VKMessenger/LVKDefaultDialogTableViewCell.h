@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "LVKModelEnums.h"
+
 @interface LVKDefaultDialogTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIView *avatarsView;
@@ -22,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleConstraint;
 @property (nonatomic) int avatarInset;
 
-- (void)ajustLayoutLastMessageIsUnread:(BOOL)isUnread;
+- (void)ajustLayoutForReadState:(readState)state;
 - (void)ajustLayoutUserIsOnline:(BOOL)isOnline;
 - (void)setAvatars:(NSArray *)avatarsURLArray;
 
