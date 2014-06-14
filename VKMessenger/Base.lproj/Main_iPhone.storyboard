@@ -49,6 +49,11 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7uS-fp-4uT">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5EW-jn-KcW">
                                             <rect key="frame" x="9" y="7" width="56" height="56"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -109,14 +114,18 @@
                                         <constraint firstItem="Lvb-tc-GIi" firstAttribute="leading" secondItem="5EW-jn-KcW" secondAttribute="trailing" constant="10" id="A6O-NS-sXa"/>
                                         <constraint firstAttribute="trailing" secondItem="Lvb-tc-GIi" secondAttribute="trailing" constant="20" id="AwC-Yf-rF7"/>
                                         <constraint firstItem="4Z4-15-rAV" firstAttribute="leading" secondItem="5EW-jn-KcW" secondAttribute="trailing" constant="31" id="D7o-tQ-XTY"/>
+                                        <constraint firstItem="7uS-fp-4uT" firstAttribute="leading" secondItem="d5s-S3-Geh" secondAttribute="leading" id="H6R-dl-TTN"/>
                                         <constraint firstItem="Far-Ts-P8T" firstAttribute="leading" secondItem="4Z4-15-rAV" secondAttribute="trailing" constant="12" id="JH7-ke-fzq"/>
                                         <constraint firstItem="5EW-jn-KcW" firstAttribute="top" secondItem="d5s-S3-Geh" secondAttribute="top" constant="7" id="KYS-pG-De0"/>
                                         <constraint firstItem="9bS-P4-Fho" firstAttribute="top" secondItem="d5s-S3-Geh" secondAttribute="top" constant="14" id="QMv-gM-YuB"/>
+                                        <constraint firstAttribute="trailing" secondItem="7uS-fp-4uT" secondAttribute="trailing" id="UAk-4A-LhA"/>
                                         <constraint firstItem="9bS-P4-Fho" firstAttribute="leading" secondItem="4Z4-15-rAV" secondAttribute="trailing" constant="3" id="XkM-9L-rpj"/>
                                         <constraint firstItem="Lvb-tc-GIi" firstAttribute="top" secondItem="4Z4-15-rAV" secondAttribute="bottom" id="Xoh-ur-Xyc"/>
+                                        <constraint firstAttribute="bottom" secondItem="7uS-fp-4uT" secondAttribute="bottom" id="gPv-0x-E2K"/>
                                         <constraint firstAttribute="bottom" secondItem="Lvb-tc-GIi" secondAttribute="bottom" constant="6" id="gfF-Iw-s2Y"/>
                                         <constraint firstItem="Far-Ts-P8T" firstAttribute="top" secondItem="d5s-S3-Geh" secondAttribute="top" constant="10" id="lOM-kt-RY4"/>
                                         <constraint firstItem="5EW-jn-KcW" firstAttribute="leading" secondItem="d5s-S3-Geh" secondAttribute="leading" constant="9" id="la0-zH-AIt"/>
+                                        <constraint firstItem="7uS-fp-4uT" firstAttribute="top" secondItem="d5s-S3-Geh" secondAttribute="top" id="nvR-a8-I5s"/>
                                         <constraint firstAttribute="trailing" secondItem="Far-Ts-P8T" secondAttribute="trailing" constant="10" id="o0B-js-tey"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -125,6 +134,7 @@
                                     <outlet property="avatarsView" destination="5EW-jn-KcW" id="xd4-hi-HRg"/>
                                     <outlet property="date" destination="Far-Ts-P8T" id="xBb-qb-ZG4"/>
                                     <outlet property="message" destination="Lvb-tc-GIi" id="NjL-Na-gzF"/>
+                                    <outlet property="messageBackground" destination="7uS-fp-4uT" id="nMY-uO-1BQ"/>
                                     <outlet property="onlineIndicator" destination="9bS-P4-Fho" id="hl8-zr-DQM"/>
                                     <outlet property="roomIndicator" destination="4Fz-Xt-kdz" id="HTG-GU-Zif"/>
                                     <outlet property="title" destination="4Z4-15-rAV" id="wRx-TH-4Xh"/>
@@ -184,7 +194,6 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5RE-LT-hUY">
                                             <rect key="frame" x="75" y="32" width="31" height="31"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="31" id="LA4-zQ-aRk"/>
                                                 <constraint firstAttribute="height" constant="31" id="zlX-Qr-nEt"/>
@@ -253,6 +262,11 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q8g-bY-h5F">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
                                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Nw-tk-Ffj">
                                             <rect key="frame" x="9" y="6" width="40" height="40"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -309,14 +323,18 @@
                                         <constraint firstItem="7Nw-tk-Ffj" firstAttribute="top" secondItem="c4n-A0-UR3" secondAttribute="top" constant="6" id="Hit-fP-Lvn"/>
                                         <constraint firstItem="AuZ-o9-Mmm" firstAttribute="leading" secondItem="7Nw-tk-Ffj" secondAttribute="trailing" constant="10" id="Ii1-9e-KFG"/>
                                         <constraint firstItem="RoV-JV-8Yg" firstAttribute="leading" secondItem="RJ5-Vf-qtb" secondAttribute="trailing" constant="12" id="LaT-kD-nGm"/>
+                                        <constraint firstItem="q8g-bY-h5F" firstAttribute="top" secondItem="c4n-A0-UR3" secondAttribute="top" id="N2L-Io-T1F"/>
+                                        <constraint firstItem="q8g-bY-h5F" firstAttribute="leading" secondItem="c4n-A0-UR3" secondAttribute="leading" id="N4c-Ym-tgo"/>
                                         <constraint firstItem="7Nw-tk-Ffj" firstAttribute="leading" secondItem="c4n-A0-UR3" secondAttribute="leading" constant="9" id="NfT-kg-XQ7"/>
                                         <constraint firstItem="RJ5-Vf-qtb" firstAttribute="leading" secondItem="7Nw-tk-Ffj" secondAttribute="trailing" constant="31" id="PFF-Z4-3m5"/>
                                         <constraint firstItem="2VB-KD-3PJ" firstAttribute="leading" secondItem="RJ5-Vf-qtb" secondAttribute="trailing" constant="3" id="VkZ-qi-CCZ"/>
                                         <constraint firstItem="RoV-JV-8Yg" firstAttribute="top" secondItem="c4n-A0-UR3" secondAttribute="top" constant="10" id="c6c-nA-Rmc"/>
                                         <constraint firstItem="Als-LW-KEe" firstAttribute="top" secondItem="c4n-A0-UR3" secondAttribute="top" constant="11" id="cQo-bb-e8F"/>
                                         <constraint firstItem="RJ5-Vf-qtb" firstAttribute="top" secondItem="c4n-A0-UR3" secondAttribute="top" constant="7" id="dLX-V7-Hnu"/>
+                                        <constraint firstAttribute="trailing" secondItem="q8g-bY-h5F" secondAttribute="trailing" id="gUY-1c-Iz1"/>
                                         <constraint firstAttribute="trailing" secondItem="AuZ-o9-Mmm" secondAttribute="trailing" constant="20" id="nnI-2H-26z"/>
                                         <constraint firstAttribute="trailing" secondItem="RoV-JV-8Yg" secondAttribute="trailing" constant="10" id="x9T-oe-RsQ"/>
+                                        <constraint firstAttribute="bottom" secondItem="q8g-bY-h5F" secondAttribute="bottom" id="yHo-lZ-yRo"/>
                                         <constraint firstItem="2VB-KD-3PJ" firstAttribute="top" secondItem="c4n-A0-UR3" secondAttribute="top" constant="14" id="zer-xf-bGw"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -325,6 +343,7 @@
                                     <outlet property="avatarsView" destination="7Nw-tk-Ffj" id="2Yi-CF-bcX"/>
                                     <outlet property="date" destination="RoV-JV-8Yg" id="nUr-zO-NWF"/>
                                     <outlet property="message" destination="AuZ-o9-Mmm" id="xiO-gQ-fLc"/>
+                                    <outlet property="messageBackground" destination="q8g-bY-h5F" id="9MQ-NS-ISk"/>
                                     <outlet property="onlineIndicator" destination="2VB-KD-3PJ" id="est-ju-5Fy"/>
                                     <outlet property="roomIndicator" destination="Als-LW-KEe" id="epe-cu-Trg"/>
                                     <outlet property="title" destination="RJ5-Vf-qtb" id="3KB-7S-cth"/>
@@ -389,7 +408,6 @@
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sIS-gn-VVy">
                                             <rect key="frame" x="59" y="27" width="18" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="18" id="HFM-rd-UiC"/>
                                                 <constraint firstAttribute="width" constant="18" id="v0a-yC-bg9"/>

@@ -128,17 +128,17 @@
     // Displaying
     LVKDefaultDialogTableViewCell *cell = nil;
     
-    if(dialog.type == Dialog)
-        if (self.isCompactView)
-            cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultCompactDialogCell" forIndexPath:indexPath];
-        else
-            cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultDialogCell" forIndexPath:indexPath];
-    
-    else if(dialog.type == Room || dialog.lastMessage.user == [(LVKAppDelegate *)[[UIApplication sharedApplication] delegate] currentUser])
+    if (dialog.type == Room || dialog.lastMessage.user == [(LVKAppDelegate *)[[UIApplication sharedApplication] delegate] currentUser])
         if (self.isCompactView)
             cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultCompactDialogCellWithMessageDetails" forIndexPath:indexPath];
         else
             cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultDialogCellWithMessageDetails" forIndexPath:indexPath];
+
+    else if (dialog.type == Dialog)
+        if (self.isCompactView)
+            cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultCompactDialogCell" forIndexPath:indexPath];
+        else
+            cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultDialogCell" forIndexPath:indexPath];
     
     cell.title.text = dialog.title;
     if ([dialog.lastMessage.body length])
@@ -190,6 +190,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 //    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
 //        LVKDialog *object = _objects[indexPath.row];
 //        self.detailViewController.dialog = object;

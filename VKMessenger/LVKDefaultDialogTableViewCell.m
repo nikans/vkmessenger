@@ -42,6 +42,7 @@ typedef enum {
 }
 
 - (void)layoutSubviews {
+    self.onlineIndicator.hidden = YES;
     self.onlineIndicator.layer.cornerRadius = 3.f;
     self.onlineIndicator.layer.masksToBounds = YES;
     
@@ -54,6 +55,10 @@ typedef enum {
     self.messageBackground.layer.cornerRadius = 2.f;
     self.messageBackground.layer.masksToBounds = YES;
     
+    self.messageAvatar.layer.cornerRadius = 2.f;
+    self.messageAvatar.layer.masksToBounds = YES;
+    
+    self.roomIndicator.hidden = YES;
     if (self.isRoom) {
         self.roomIndicator.hidden = NO;
         self.titleConstraint.constant = self.titleConstraintDefaultConstant;
