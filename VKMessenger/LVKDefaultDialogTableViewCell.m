@@ -51,6 +51,7 @@ typedef enum {
     }
     else if (state == UnreadIncoming) {
         self.backgroundColor = [AVHexColor colorWithHexString:@"#edf2f7"];
+        self.messageInsetConstraint.constant = 0;
     }
     else if (state == UnreadOutgoing) {
         self.messageInsetConstraint.constant = 10;

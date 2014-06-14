@@ -416,10 +416,10 @@
     else {
         LVKDefaultDialogTableViewCell *cell = nil;
         
-        if(dialog.type == Dialog || dialog.lastMessage.user == [(LVKAppDelegate *)[[UIApplication sharedApplication] delegate] currentUser])
+        if(dialog.type == Dialog)
             cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultDialogCell" forIndexPath:indexPath];
         
-        else if(dialog.type == Room)
+        else if(dialog.type == Room || dialog.lastMessage.user == [(LVKAppDelegate *)[[UIApplication sharedApplication] delegate] currentUser])
             cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultDialogCellWithMessageDetails" forIndexPath:indexPath];
         
         cell.title.text = dialog.title;
