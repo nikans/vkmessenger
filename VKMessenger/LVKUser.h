@@ -14,7 +14,10 @@
 @property (strong, nonatomic) NSString *firstName;
 @property (strong, nonatomic) NSString *lastName;
 @property (strong, nonatomic) NSString *fullName;
+@property (strong, nonatomic) NSString *photo_50;
 @property (strong, nonatomic) NSString *photo_100;
+@property (strong, nonatomic) NSString *photo_200;
+@property (strong, nonatomic) NSString *photo_400;
 @property (nonatomic) BOOL isCurrent;
 
 -(id)initWithDictionary:(NSDictionary *)dictionary;

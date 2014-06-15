@@ -11,7 +11,7 @@
 
 @implementation LVKUser
 
-@synthesize _id, firstName, lastName, fullName, photo_100, isCurrent;
+@synthesize _id, firstName, lastName, fullName, photo_50, photo_100, photo_200, photo_400, isCurrent;
 
 -(id)init
 {
@@ -30,7 +30,10 @@
         firstName = [dictionary valueForKey:@"first_name"];
         lastName = [dictionary valueForKey:@"last_name"];
         fullName = [NSString stringWithFormat:@"%@ %@", firstName, lastName];
+        photo_50 = [dictionary valueForKey:@"photo_50"];
         photo_100 = [dictionary valueForKey:@"photo_100"];
+        photo_200 = [dictionary valueForKey:@"photo_200"];
+        photo_400 = [dictionary valueForKey:@"photo_400_orig"];
     }
     
     return self;
@@ -38,7 +41,38 @@
 
 -(NSString *)getPhoto:(NSUInteger) size
 {
-    return photo_100;
+    if(size <= 50)
+    {
+        if(photo_50 != nil)
+            return photo_50;
+        else
+            return @"";
+    }
+    else if(size <= 100)
+    {
+        if(photo_100 != nil)
+            return photo_100;
+        else
+            return [self getPhoto:50];
+    }
+    else if(size <= 200)
+    {
+        if(photo_200 != nil)
+            return photo_200;
+        else
+            return [self getPhoto:100];
+    }
+    else if(size <= 400)
+    {
+        if(photo_400 != nil)
+            return photo_400;
+        else
+            return [self getPhoto:200];
+    }
+    else
+    {
+        return [self getPhoto:400];
+    }
 }
 
 -(id)createDialog

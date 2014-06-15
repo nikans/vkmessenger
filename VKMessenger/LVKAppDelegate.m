@@ -129,7 +129,7 @@
 
 - (void)createCurrentUserObjectWithUserId:(NSNumber *)userId
 {
-    VKRequest *userRequest = [[VKApi users] get:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@", userId], @"user_ids", @"photo_100", @"fields", nil]];
+    VKRequest *userRequest = [[VKApi users] get:[NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@", userId], @"user_ids", @"photo_50,photo_100,photo_200,photo_400_orig", @"fields", nil]];
     
     [userRequest executeWithResultBlock:^(VKResponse *response) {
         LVKUsersCollection *usersCollection = [[LVKUsersCollection alloc] initWithArray:response.json];

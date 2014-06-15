@@ -328,7 +328,7 @@
     
     if([userIdsCSV length] > 0)
     {
-        VKRequest *users = [[VKApi users] get:[NSDictionary dictionaryWithObjectsAndKeys:userIdsCSV, @"user_ids", @"photo_100", @"fields", nil]];
+        VKRequest *users = [[VKApi users] get:[NSDictionary dictionaryWithObjectsAndKeys:userIdsCSV, @"user_ids", @"photo_50,photo_100,photo_200,photo_400_orig", @"fields", nil]];
         
         users.attempts = 3;
         users.requestTimeout = 3;
