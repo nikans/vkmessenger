@@ -414,7 +414,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yPI-cc-Y3k">
-                                            <rect key="frame" x="80" y="28" width="220" height="18"/>
+                                            <rect key="frame" x="81" y="28" width="219" height="18"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" red="0.4941176471" green="0.50588235290000005" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -439,7 +439,7 @@
                                         <constraint firstAttribute="trailing" secondItem="ziT-3L-MGG" secondAttribute="trailing" constant="10" id="gQQ-SA-xnH"/>
                                         <constraint firstAttribute="trailing" secondItem="EIh-AW-7vj" secondAttribute="trailing" id="hop-47-Gqu"/>
                                         <constraint firstItem="EIh-AW-7vj" firstAttribute="top" secondItem="X7V-wy-R5s" secondAttribute="top" id="kUf-vB-JNB"/>
-                                        <constraint firstItem="yPI-cc-Y3k" firstAttribute="leading" secondItem="sIS-gn-VVy" secondAttribute="trailing" constant="3" id="nbF-oB-oz1"/>
+                                        <constraint firstItem="yPI-cc-Y3k" firstAttribute="leading" secondItem="sIS-gn-VVy" secondAttribute="trailing" constant="4" id="nbF-oB-oz1"/>
                                         <constraint firstItem="9tZ-dg-Igy" firstAttribute="leading" secondItem="MGz-bC-vjx" secondAttribute="trailing" constant="31" id="wnO-0i-7lr"/>
                                         <constraint firstItem="3cK-rw-1UU" firstAttribute="top" secondItem="X7V-wy-R5s" secondAttribute="top" constant="14" id="yvq-ox-Ubj"/>
                                     </constraints>

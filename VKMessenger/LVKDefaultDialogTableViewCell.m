@@ -15,6 +15,7 @@
 @property (nonatomic) CGFloat titleConstraintDefaultConstant;
 @property (nonatomic) CGFloat defaultMargin;
 @property (nonatomic) int avatarInset;
+@property (strong, nonatomic) NSString *messageDefaultText;
 
 @end
 
@@ -39,6 +40,7 @@ typedef enum {
     self.isRoom = NO;
     
     self.titleConstraintDefaultConstant = self.titleConstraint.constant;
+    self.messageDefaultText = self.message.text;
 }
 
 - (void)layoutSubviews {
@@ -69,6 +71,7 @@ typedef enum {
     for (UIView *avatar in self.avatarsView.subviews) {
         [avatar removeFromSuperview];
     }
+    self.message.text = self.messageDefaultText;
 }
 
 - (void)ajustLayoutForReadState:(readState)state {
