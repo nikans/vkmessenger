@@ -23,7 +23,7 @@
 - (void)awakeFromNib {
 //    self.layer.cornerRadius = 10;
 //    self.layer.masksToBounds = YES;
-    self.imageWidthConstraint.constant = self.frame.size.width-10;
+//    self.imageWidthConstraint.constant = self.frame.size.width-10;
 }
 
 - (void)setDurationWithSeconds:(int)_seconds {
@@ -40,6 +40,13 @@
 
 + (CGSize)calculateContentSizeWithData:(LVKVideoAttachment *)_data maxWidth:(CGFloat)_maxWidth {
     return CGSizeMake(130+10, 97.5+10);
+}
+
+- (void)layoutIfNeededForCalculatedWidth:(CGFloat)_width alignRight:(BOOL)_alignRight {
+    CGRect frame = self.frame;
+    frame.size.width = _width;
+    if (_alignRight) frame.origin.x = 0;
+    self.frame = frame;
 }
 
 - (void)dealloc {

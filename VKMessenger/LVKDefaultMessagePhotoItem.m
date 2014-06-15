@@ -42,8 +42,11 @@
 }
 
 
-//- (void)layoutIfNeededForCalculatedWidth:(CGFloat)_width {
-//    self.frame = CGRectMake(0, 0, _width, self.photo.frame.size.height);
-//}
+- (void)layoutIfNeededForCalculatedWidth:(CGFloat)_width alignRight:(BOOL)_alignRight {
+    CGRect frame = self.frame;
+    frame.size.width = _width;
+    if (_alignRight) frame.origin.x = 0;
+    self.frame = frame;
+}
 
 @end

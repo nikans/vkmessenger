@@ -14,7 +14,7 @@
                     <rect key="frame" x="6" y="5" width="130" height="96"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rmU-81-9QD">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rmU-81-9QD">
                             <rect key="frame" x="0.0" y="0.0" width="130" height="96"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -65,12 +65,11 @@
                     </constraints>
                 </view>
             </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="7TJ-ii-XCa" secondAttribute="trailing" constant="5" id="8nq-0P-I22"/>
                 <constraint firstAttribute="bottom" secondItem="7TJ-ii-XCa" secondAttribute="bottom" constant="5" id="Hy6-vd-tHU"/>
                 <constraint firstAttribute="centerX" secondItem="7TJ-ii-XCa" secondAttribute="centerX" id="aEs-i8-cex"/>
                 <constraint firstItem="7TJ-ii-XCa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="aqv-o6-7jQ"/>
-                <constraint firstItem="7TJ-ii-XCa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="qdA-IO-L2o"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

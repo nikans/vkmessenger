@@ -27,7 +27,7 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     self.collectionViewWidthConstraint.constant = self.collectionViewMaxWidth;
-    self.collectionViewHeightConstraint.constant = 0;
+//    self.collectionViewHeightConstraint.constant = 0;
     
     // Making avatar cute and round
     self.avatarImage.layer.cornerRadius = 14;
@@ -45,8 +45,6 @@
     CGPoint center = CGPointMake(bubble.size.width / 2.0f, bubble.size.height / 2.0f);
     capInsets = UIEdgeInsetsMake(center.y, center.x, center.y, center.x);
     self.messageContainerBackgroundImage.image = [bubble resizableImageWithCapInsets:capInsets];
-    
-    [self.contentView layoutIfNeeded];
     
     // Status
     self.sendingActivityIndicator.hidden = YES;
@@ -84,8 +82,9 @@
     
     
     // Width & height
+    [self.contentView layoutIfNeeded];
 
-    self.collectionViewHeightConstraint.constant = self.collectionView.collectionViewLayout.collectionViewContentSize.height;
+//    self.collectionViewHeightConstraint.constant = self.collectionView.collectionViewLayout.collectionViewContentSize.height;
     
     NSInteger numberOfCells = [self.collectionView numberOfItemsInSection:0];
     UICollectionViewLayout *layout = self.collectionView.collectionViewLayout;
@@ -101,15 +100,17 @@
 //        [self.collectionView layoutSubviews];
     }
     
-    for (NSInteger i = 0; i < numberOfCells; i++) {
-        UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
-        if ([cell respondsToSelector:@selector(layoutIfNeededForCalculatedWidth:)]) {
-            [(id<LVKMessageItemProtocol>)cell layoutIfNeededForCalculatedWidth:maxWidth];
+    if (numberOfCells > 0) {
+        for (NSInteger i = 0; i < numberOfCells; i++) {
+            UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+            if ([cell respondsToSelector:@selector(layoutIfNeededForCalculatedWidth:alignRight:)]) {
+                [(id<LVKMessageItemProtocol>)cell layoutIfNeededForCalculatedWidth:maxWidth alignRight:self.isOutgoing];
+            }
         }
     }
     
 //    self.collectionViewHeightConstraint.constant = height + ([self.collectionView numberOfItemsInSection:0]-1)*5; // TODO
-    self.collectionViewWidthConstraint.constant = maxWidth+0.5 < self.collectionViewMaxWidth ? maxWidth+0.5 : self.collectionViewMaxWidth;
+    self.collectionViewWidthConstraint.constant = maxWidth+1 < self.collectionViewMaxWidth ? maxWidth+1 : self.collectionViewMaxWidth;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
