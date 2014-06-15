@@ -26,7 +26,7 @@
     self.imageWidthConstraint.constant = self.frame.size.width;
 }
 
-+ (CGSize)calculateContentSizeWithData:(LVKStickerAttachment *)_data maxWidth:(CGFloat)_maxWidth {
++ (CGSize)calculateContentSizeWithData:(LVKStickerAttachment *)_data maxWidth:(CGFloat)_maxWidth minWidth:(CGFloat)_minWidth {
     return CGSizeMake(128, 128);
 }
 

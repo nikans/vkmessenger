@@ -11,6 +11,8 @@
 @interface LVKDefaultMessagesCollectionView : UICollectionView
 
 @property (nonatomic) CGFloat maxWidth;
+@property (nonatomic) CGFloat minWidth;
+
 @property (nonatomic) BOOL isFullWidth;
 
 @end

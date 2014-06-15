@@ -34,8 +34,8 @@
 }
 
 
-+ (CGSize)calculateContentSizeWithData:(id)_data maxWidth:(CGFloat)_maxWidth {
-    return CGSizeMake(_maxWidth, 50);
++ (CGSize)calculateContentSizeWithData:(id)_data maxWidth:(CGFloat)_maxWidth minWidth:(CGFloat)_minWidth {
+    return CGSizeMake(_maxWidth, 50.f);
 }
 
 //- (void)layoutIfNeededForCalculatedWidth:(CGFloat)_width alignRight:(BOOL)_alignRight {

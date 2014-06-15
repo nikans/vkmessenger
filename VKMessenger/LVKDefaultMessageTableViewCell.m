@@ -29,9 +29,11 @@
     self.collectionViewWidthConstraint.constant = self.collectionViewMaxWidth;
 //    self.collectionViewHeightConstraint.constant = 0;
     
+    
     // Making avatar cute and round
     self.avatarImage.layer.cornerRadius = 14;
     self.avatarImage.layer.masksToBounds = YES;
+    
     
     // Adding bubble
     UIImage *bubble;
@@ -45,6 +47,7 @@
     CGPoint center = CGPointMake(bubble.size.width / 2.0f, bubble.size.height / 2.0f);
     capInsets = UIEdgeInsetsMake(center.y, center.x, center.y, center.x);
     self.messageContainerBackgroundImage.image = [bubble resizableImageWithCapInsets:capInsets];
+    
     
     // Status
     self.sendingActivityIndicator.hidden = YES;
@@ -61,12 +64,7 @@
     }
     else
         self.backgroundColor = [UIColor clearColor];
-    
-    // Sending adversary's avatar to hell
-//    if (!self.isRoom && !self.isOutgoing) {
-//        self.avatarImage.hidden = YES;
-//        self.incomingMessageContainerConstraint.constant = 4;
-//    }
+
     
     // Tap action - go to message VC or resend
     if (self.sandingState == Failed) {
@@ -97,17 +95,23 @@
         if (cellFrame.size.width > maxWidth) {
             maxWidth = cellFrame.size.width;
         }
-//        [self.collectionView layoutSubviews];
+//        if (numberOfCells > 1) {
+//            NSLog(@"%f - %@", maxWidth, self.timeLabel.text);
+//        }
     }
     
-    if (numberOfCells > 0) {
-        for (NSInteger i = 0; i < numberOfCells; i++) {
-            UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
-            if ([cell respondsToSelector:@selector(layoutIfNeededForCalculatedWidth:alignRight:)]) {
-                [(id<LVKMessageItemProtocol>)cell layoutIfNeededForCalculatedWidth:maxWidth alignRight:self.isOutgoing];
-            }
-        }
-    }
+    self.collectionView.minWidth = maxWidth;
+    if (numberOfCells > 1)
+        [self.collectionView reloadData];
+    
+//    if (numberOfCells > 0) {
+//        for (NSInteger i = 0; i < numberOfCells; i++) {
+//            UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+//            if ([cell respondsToSelector:@selector(layoutIfNeededForCalculatedWidth:alignRight:)]) {
+//                [(id<LVKMessageItemProtocol>)cell layoutIfNeededForCalculatedWidth:maxWidth alignRight:self.isOutgoing];
+//            }
+//        }
+//    }
     
 //    self.collectionViewHeightConstraint.constant = height + ([self.collectionView numberOfItemsInSection:0]-1)*5; // TODO
     self.collectionViewWidthConstraint.constant = maxWidth+1 < self.collectionViewMaxWidth ? maxWidth+1 : self.collectionViewMaxWidth;
@@ -116,8 +120,6 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
 }
 
 
@@ -127,7 +129,7 @@
 -(void)setCollectionViewDelegates:(id<UICollectionViewDataSource, UICollectionViewDelegate>)dataSourceDelegate forMessageWithIndexPath:(NSIndexPath *)indexPath
 {
     self.collectionViewDelegate = (LVKMessageCollectionViewDelegate *)dataSourceDelegate;
-    self.collectionView.maxWidth = self.collectionViewMaxWidth;
+    self.collectionView.maxWidth   = self.collectionViewMaxWidth;
     self.collectionView.dataSource = self.collectionViewDelegate;
     self.collectionView.delegate   = self.collectionViewDelegate;
     
@@ -191,6 +193,7 @@
 
 - (void)prepareForReuse {
     self.collectionViewDelegate = nil;
+    self.collectionViewMaxWidth = 0;
 }
 
 - (void)dealloc {

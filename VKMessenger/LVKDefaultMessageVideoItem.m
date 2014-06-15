@@ -38,16 +38,16 @@
                                seconds < 10 ? [NSString stringWithFormat:@"0%i", seconds] : @(seconds)];
 }
 
-+ (CGSize)calculateContentSizeWithData:(LVKVideoAttachment *)_data maxWidth:(CGFloat)_maxWidth {
-    return CGSizeMake(130+10, 97.5+10);
++ (CGSize)calculateContentSizeWithData:(LVKVideoAttachment *)_data maxWidth:(CGFloat)_maxWidth minWidth:(CGFloat)_minWidth {
+    return CGSizeMake(140 > _minWidth ? 140 : _minWidth, 97.5+10);
 }
 
-- (void)layoutIfNeededForCalculatedWidth:(CGFloat)_width alignRight:(BOOL)_alignRight {
-    CGRect frame = self.frame;
-    frame.size.width = _width;
-    if (_alignRight) frame.origin.x = 0;
-    self.frame = frame;
-}
+//- (void)layoutIfNeededForCalculatedWidth:(CGFloat)_width alignRight:(BOOL)_alignRight {
+//    CGRect frame = self.frame;
+//    frame.size.width = _width;
+//    if (_alignRight) frame.origin.x = 0;
+//    self.frame = frame;
+//}
 
 - (void)dealloc {
     self.image = nil;

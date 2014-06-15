@@ -22,12 +22,12 @@
     return self;
 }
 
-+ (CGSize)calculateContentSizeWithData:(LVKRepostedMessage *)_data maxWidth:(CGFloat)_maxWidth {
++ (CGSize)calculateContentSizeWithData:(LVKRepostedMessage *)_data maxWidth:(CGFloat)_maxWidth minWidth:(CGFloat)_minWidth {
     CGSize textSize = [(NSString *)[_data body] integralSizeWithFont:[UIFont systemFontOfSize:16] maxWidth:_maxWidth-8 numberOfLines:INFINITY];
     CGSize contentSize = CGSizeMake(_maxWidth, textSize.height + 55 + 10);
     return contentSize;
 }
-//
+
 //-(void)setCollectionViewDelegates:(id<UICollectionViewDataSource, UICollectionViewDelegate>)dataSourceDelegate forMessageWithIndexPath:(NSIndexPath *)indexPath
 //{
 //    self.collectionViewDelegate = (LVKDialogCollectionViewDelegate *)dataSourceDelegate;

@@ -16,9 +16,9 @@
 //- (int)contentWidth;
 //- (CGSize)calculateContentSize;
 @required
-+ (CGSize)calculateContentSizeWithData:(id<LVKMessagePartProtocol>)_data maxWidth:(CGFloat)_maxWidth;
++ (CGSize)calculateContentSizeWithData:(id<LVKMessagePartProtocol>)_data maxWidth:(CGFloat)_maxWidth  minWidth:(CGFloat)_minWidth;
 
-@optional
-- (void)layoutIfNeededForCalculatedWidth:(CGFloat)_width alignRight:(BOOL)_alignRight;
+//@optional
+//- (void)layoutIfNeededForCalculatedWidth:(CGFloat)_width alignRight:(BOOL)_alignRight;
 
 @end

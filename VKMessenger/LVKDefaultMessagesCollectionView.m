@@ -18,8 +18,13 @@
     [self registerNib:[UINib nibWithNibName:@"LVKDefaultMessageVideoItem" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"DefaultVideoItem"];
     [self registerNib:[UINib nibWithNibName:@"LVKDefaultMessageStickerItem" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"DefaultStickerItem"];
     [self registerNib:[UINib nibWithNibName:@"LVKDefaultMessagePostItem" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"DefaultPostItem"];
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
     
     self.isFullWidth = NO;
+    self.minWidth = 0;
 }
 
 @end

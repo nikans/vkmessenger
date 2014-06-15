@@ -167,7 +167,7 @@
     NSUInteger countParts = 0;
     for (id<LVKMessagePartProtocol> messagePart in [message getMessageParts]) {
         Class <LVKMessageItemProtocol>messageItemClass = [LVKMessageCollectionViewDelegate classForViewItemBasedOnDataPartClass:[messagePart class]];
-        CGSize cellSize = [messageItemClass calculateContentSizeWithData:messagePart maxWidth:maxCVWidth];
+        CGSize cellSize = [messageItemClass calculateContentSizeWithData:messagePart maxWidth:maxCVWidth minWidth:0];
         cellHeight += cellSize.height + (countParts == 0 || countParts == [message getMessageParts].count ? 0 : 5.f);
         countParts++;
     }

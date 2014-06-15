@@ -165,42 +165,43 @@
     
     CGSize cellSize;
     CGFloat maxWidth = collectionView.isFullWidth ? 309.5 : collectionView.maxWidth - 2;
+    CGFloat minWidth = collectionView.minWidth;
     
     // Repost
     if([cellData isKindOfClass:[LVKRepostedMessage class]])
-        cellSize = [LVKDefaultMessageRepostBodyItem calculateContentSizeWithData:(LVKMessage *)cellData maxWidth:maxWidth];
+        cellSize = [LVKDefaultMessageRepostBodyItem calculateContentSizeWithData:(LVKMessage *)cellData maxWidth:maxWidth minWidth:minWidth];
     
     // Full-width body
     else if([cellData isKindOfClass:[LVKMessage class]] && collectionView.isFullWidth)
-        cellSize = [LVKDefaultMessageFullBodyItem calculateContentSizeWithData:(LVKMessage *)cellData maxWidth:maxWidth];
+        cellSize = [LVKDefaultMessageFullBodyItem calculateContentSizeWithData:(LVKMessage *)cellData maxWidth:maxWidth minWidth:minWidth];
     
     // Body
     else if([cellData isKindOfClass:[LVKMessage class]])
-        cellSize = [LVKDefaultMessageBodyItem calculateContentSizeWithData:(LVKMessage *)cellData maxWidth:maxWidth];
+        cellSize = [LVKDefaultMessageBodyItem calculateContentSizeWithData:(LVKMessage *)cellData maxWidth:maxWidth minWidth:minWidth];
     
     // Photo
     else if([cellData isKindOfClass:[LVKPhotoAttachment class]])
-        cellSize = [LVKDefaultMessagePhotoItem calculateContentSizeWithData:(LVKPhotoAttachment *)cellData maxWidth:maxWidth];
+        cellSize = [LVKDefaultMessagePhotoItem calculateContentSizeWithData:(LVKPhotoAttachment *)cellData maxWidth:maxWidth minWidth:minWidth];
     
     // Sticker
     else if([cellData isKindOfClass:[LVKStickerAttachment class]])
-        cellSize = [LVKDefaultMessageStickerItem calculateContentSizeWithData:(LVKStickerAttachment *)cellData maxWidth:maxWidth];
+        cellSize = [LVKDefaultMessageStickerItem calculateContentSizeWithData:(LVKStickerAttachment *)cellData maxWidth:maxWidth minWidth:minWidth];
     
     // Video
     else if([cellData isKindOfClass:[LVKVideoAttachment class]])
-        cellSize = [LVKDefaultMessageVideoItem calculateContentSizeWithData:(LVKVideoAttachment *)cellData maxWidth:maxWidth];
+        cellSize = [LVKDefaultMessageVideoItem calculateContentSizeWithData:(LVKVideoAttachment *)cellData maxWidth:maxWidth minWidth:minWidth];
     
     // Document
     else if([cellData isKindOfClass:[LVKDocumentAttachment class]])
-        cellSize = [LVKDefaultMessagePostItem calculateContentSizeWithData:(LVKDocumentAttachment *)cellData maxWidth:maxWidth];
+        cellSize = [LVKDefaultMessagePostItem calculateContentSizeWithData:(LVKDocumentAttachment *)cellData maxWidth:maxWidth minWidth:minWidth];
     
     // Wall post
     else if([cellData isKindOfClass:[LVKWallAttachment class]])
-        cellSize = [LVKDefaultMessagePostItem calculateContentSizeWithData:(LVKWallAttachment *)cellData maxWidth:maxWidth];
+        cellSize = [LVKDefaultMessagePostItem calculateContentSizeWithData:(LVKWallAttachment *)cellData maxWidth:maxWidth minWidth:minWidth];
     
     // Body (probably empty)
     else
-        cellSize = [LVKDefaultMessageBodyItem calculateContentSizeWithData:[[LVKMessage alloc] init] maxWidth:maxWidth];
+        cellSize = [LVKDefaultMessageBodyItem calculateContentSizeWithData:[[LVKMessage alloc] init] maxWidth:maxWidth minWidth:minWidth];
     
     if (cellSize.width > maxWidth)
         cellSize = CGSizeMake(maxWidth, cellSize.height);

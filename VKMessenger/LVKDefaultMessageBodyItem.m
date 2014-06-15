@@ -21,7 +21,7 @@
     return self;
 }
 
-+ (CGSize)calculateContentSizeWithData:(LVKMessage *)_data maxWidth:(CGFloat)_maxWidth {
++ (CGSize)calculateContentSizeWithData:(LVKMessage *)_data maxWidth:(CGFloat)_maxWidth minWidth:(CGFloat)_minWidth {
     if (![_data respondsToSelector:@selector(body)])
         return CGSizeMake(0.01f, 0.01f);
     
@@ -29,7 +29,8 @@
         return CGSizeMake(0.01f, 0.01f);
     
     CGSize textSize = [(NSString *)[(LVKMessage *)_data body] integralSizeWithFont:[UIFont systemFontOfSize:16] maxWidth:_maxWidth-10 numberOfLines:INFINITY];
-    CGSize cellSize = CGSizeMake(textSize.width+10 < _maxWidth ? textSize.width+10 : _maxWidth, textSize.height);
+    CGFloat cellWidth = textSize.width+10 < _maxWidth ? textSize.width+10 : _maxWidth;
+    CGSize cellSize = CGSizeMake(cellWidth > _minWidth ? cellWidth : _minWidth, textSize.height);
     return cellSize;
 }
 
