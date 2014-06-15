@@ -48,7 +48,14 @@
     subject = [array objectAtIndex:4];
     text = [array objectAtIndex:5];
     
-    message = [[LVKMessage alloc] initWithDictionary:[NSDictionary dictionaryWithObjectsAndKeys:messageId, @"id", userId, @"user_id", [NSNumber numberWithBool:!isUnread], @"read_state", [NSNumber numberWithBool:isOutbox], @"out", chatId, @"chat_id", text, @"body", [NSNumber numberWithDouble:[date timeIntervalSince1970]], @"date", nil]];
+    NSMutableDictionary *messageDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:messageId, @"id", userId, @"user_id", [NSNumber numberWithBool:!isUnread], @"read_state", [NSNumber numberWithBool:isOutbox], @"out", text, @"body", [NSNumber numberWithDouble:[date timeIntervalSince1970]], @"date", nil];
+    
+    if(type == Room)
+    {
+        [messageDictionary setObject:chatId forKey:@"chat_id"];
+    }
+    
+    message = [[LVKMessage alloc] initWithDictionary:messageDictionary];
     dialog = [[LVKDialog alloc] initWithPlainDictionary:[NSDictionary dictionaryWithObjectsAndKeys:chatId, @"chat_id", [NSNumber numberWithInt:type], @"type", subject, @"title", message, @"message", nil]];
 }
 
