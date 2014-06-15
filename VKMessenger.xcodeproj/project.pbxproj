@@ -51,6 +51,10 @@
 		A483A27F1946385D00BC553C /* UIViewController+NetworkNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = A483A27E1946385D00BC553C /* UIViewController+NetworkNotifications.m */; };
 		A483A2831946454100BC553C /* LVKNetworkRetryAlertDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A483A2821946454100BC553C /* LVKNetworkRetryAlertDelegate.m */; };
 		B66FE78CE40F46C2BEC1B04D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B5906D3D6B7B455798358AE9 /* libPods.a */; };
+		D0032739194DD68C0018B70E /* document@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0032738194DD68C0018B70E /* document@2x.png */; };
+		D0032742194DD7FC0018B70E /* LVKDefaultMessagePostItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D0032740194DD7FC0018B70E /* LVKDefaultMessagePostItem.m */; };
+		D0032743194DD7FC0018B70E /* LVKDefaultMessagePostItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0032741194DD7FC0018B70E /* LVKDefaultMessagePostItem.xib */; };
+		D0032745194DDA050018B70E /* wallPost@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0032744194DDA050018B70E /* wallPost@2x.png */; };
 		D038C3041944DE3000E7895D /* LVKDefaultMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D038C3031944DE3000E7895D /* LVKDefaultMessageTableViewCell.m */; };
 		D038C3071944E13F00E7895D /* LVKDefaultMessagesCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D038C3061944E13F00E7895D /* LVKDefaultMessagesCollectionView.m */; };
 		D038C31D1944E25900E7895D /* bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = D038C30A1944E25900E7895D /* bubble.png */; };
@@ -187,6 +191,11 @@
 		A483A2811946454100BC553C /* LVKNetworkRetryAlertDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKNetworkRetryAlertDelegate.h; sourceTree = "<group>"; };
 		A483A2821946454100BC553C /* LVKNetworkRetryAlertDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKNetworkRetryAlertDelegate.m; sourceTree = "<group>"; };
 		B5906D3D6B7B455798358AE9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0032738194DD68C0018B70E /* document@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "document@2x.png"; sourceTree = "<group>"; };
+		D003273F194DD7FC0018B70E /* LVKDefaultMessagePostItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultMessagePostItem.h; sourceTree = "<group>"; };
+		D0032740194DD7FC0018B70E /* LVKDefaultMessagePostItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDefaultMessagePostItem.m; sourceTree = "<group>"; };
+		D0032741194DD7FC0018B70E /* LVKDefaultMessagePostItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LVKDefaultMessagePostItem.xib; sourceTree = "<group>"; };
+		D0032744194DDA050018B70E /* wallPost@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wallPost@2x.png"; sourceTree = "<group>"; };
 		D038C3021944DE3000E7895D /* LVKDefaultMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultMessageTableViewCell.h; sourceTree = "<group>"; };
 		D038C3031944DE3000E7895D /* LVKDefaultMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDefaultMessageTableViewCell.m; sourceTree = "<group>"; };
 		D038C3051944E13F00E7895D /* LVKDefaultMessagesCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultMessagesCollectionView.h; sourceTree = "<group>"; };
@@ -467,6 +476,8 @@
 		D038C3081944E25900E7895D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				D0032744194DDA050018B70E /* wallPost@2x.png */,
+				D0032738194DD68C0018B70E /* document@2x.png */,
 				D09E6503194D28FE00B36B86 /* play-button@2x.png */,
 				D09E64F8194B69AA00B36B86 /* usergroup@2x.png */,
 				D09E64F6194AD7D900B36B86 /* settings@2x.png */,
@@ -531,6 +542,9 @@
 				D0A210C319464786008508BF /* LVKDefaultMessageStickerItem.h */,
 				D0A210C419464786008508BF /* LVKDefaultMessageStickerItem.m */,
 				D0A210C8194647D4008508BF /* LVKDefaultMessageStickerItem.xib */,
+				D003273F194DD7FC0018B70E /* LVKDefaultMessagePostItem.h */,
+				D0032740194DD7FC0018B70E /* LVKDefaultMessagePostItem.m */,
+				D0032741194DD7FC0018B70E /* LVKDefaultMessagePostItem.xib */,
 				D038C34C1944E64E00E7895D /* LVKDefaultMessageRepostBodyItem.h */,
 				D038C34D1944E64E00E7895D /* LVKDefaultMessageRepostBodyItem.m */,
 				D038C34E1944E64E00E7895D /* LVKDefaultMessageRepostBodyItem.xib */,
@@ -653,6 +667,7 @@
 				D038C3221944E25900E7895D /* bubble_min_tailless@2x.png in Resources */,
 				D038C3291944E25900E7895D /* camera.png in Resources */,
 				D038C31E1944E25900E7895D /* bubble@2x.png in Resources */,
+				D0032739194DD68C0018B70E /* document@2x.png in Resources */,
 				D0A210C9194647D4008508BF /* LVKDefaultMessageStickerItem.xib in Resources */,
 				D038C3261944E25900E7895D /* bubble_stroked_tailless@2x.png in Resources */,
 				D07649551948F06000911C65 /* LVKDefaultMessageFullBodyItem.xib in Resources */,
@@ -673,11 +688,13 @@
 				A4017DCF193DE8EA000EAD87 /* Images.xcassets in Resources */,
 				D038C31D1944E25900E7895D /* bubble.png in Resources */,
 				D038C3201944E25900E7895D /* bubble_min@2x.png in Resources */,
+				D0032745194DDA050018B70E /* wallPost@2x.png in Resources */,
 				D09E64F7194AD7D900B36B86 /* settings@2x.png in Resources */,
 				D038C32A1944E25900E7895D /* camera@2x.png in Resources */,
 				D038C3251944E25900E7895D /* bubble_stroked_tailless.png in Resources */,
 				D038C3231944E25900E7895D /* bubble_stroked.png in Resources */,
 				D0764957194906F800911C65 /* check@2x.png in Resources */,
+				D0032743194DD7FC0018B70E /* LVKDefaultMessagePostItem.xib in Resources */,
 				A4017DC4193DE8EA000EAD87 /* Main_iPhone.storyboard in Resources */,
 				D038C3271944E25900E7895D /* bubble_tailless.png in Resources */,
 				A4017DBB193DE8EA000EAD87 /* InfoPlist.strings in Resources */,
@@ -767,6 +784,7 @@
 				D038C3321944E28200E7895D /* LVKDefaultMessageBodyItem.m in Sources */,
 				A4017DCD193DE8EA000EAD87 /* LVKDialogViewController.m in Sources */,
 				D038C3571944E78200E7895D /* NSString+StringSize.m in Sources */,
+				D0032742194DD7FC0018B70E /* LVKDefaultMessagePostItem.m in Sources */,
 				A4017DF3193E1B2C000EAD87 /* LVKDialog.m in Sources */,
 				A4017DFF193E6DC7000EAD87 /* LVKUsersCollection.m in Sources */,
 				A483A2831946454100BC553C /* LVKNetworkRetryAlertDelegate.m in Sources */,

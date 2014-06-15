@@ -96,6 +96,14 @@
     [self registerObservers];
     hasDataToLoad = YES;
     [self loadData:0];
+    
+    
+    // CollectionView width variants
+//    LVKDefaultMessageTableViewCell *cell;
+//    self.collectionViewWidthVariants =
+    
+//    cell = [tableView dequeueReusableCellWithIdentifier:@""];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -145,7 +153,7 @@
     CGFloat maxCVWidth;
     if (![message isOutgoing])
         if ([message type] == Room) maxCVWidth = 196.f;
-        else maxCVWidth = 230.f;
+        else maxCVWidth = 227.f;
     else maxCVWidth = 217.f;
     
     CGFloat cellHeight = 0;
@@ -171,7 +179,7 @@
     CGFloat maxCVWidth;
     if (!cell.isOutgoing)
         if (cell.isRoom) maxCVWidth = 196.f;
-        else maxCVWidth = 230.f;
+        else maxCVWidth = 227.f;
     else maxCVWidth = 217.f;
     cell.collectionViewMaxWidth = maxCVWidth;
     
@@ -189,7 +197,10 @@
     if([message isOutgoing])
         cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultOutgoingMessageCell" forIndexPath:indexPath];
     else
-        cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultIncomingMessageCell" forIndexPath:indexPath];
+        if (message.type == Room)
+            cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultIncomingRoomMessageCell" forIndexPath:indexPath];
+        else
+            cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultIncomingDialogMessageCell" forIndexPath:indexPath];
     
 //    [(UILabel *)[cell viewWithTag:1] setText:[NSString stringWithFormat:@"%@%@", [message getReadState] == UnreadIncoming ? @"(!) " : [message getReadState] == UnreadOutgoing ? @"(?) " : @"", [message body]]];
 //    [(UILabel *)[cell viewWithTag:2] setText:[NSDateFormatter localizedStringFromDate:[message date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle]];

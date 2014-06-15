@@ -27,7 +27,6 @@ static NSString *CollectionViewCellIdentifier = @"BodyItem";
 @property (weak, nonatomic) id<LVKBubbleActionsDelegateProtocol> bubbleDelegate;
 @property (strong, nonatomic) NSIndexPath *cellIndexPath;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *incomingMessageContainerConstraint;
 @property (weak, nonatomic) IBOutlet LVKDefaultMessagesCollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *collectionViewWidthConstraint;

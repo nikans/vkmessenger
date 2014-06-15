@@ -17,6 +17,8 @@
 #import "LVKAudioAttachment.h"
 #import "LVKStickerAttachment.h"
 #import "LVKVideoAttachment.h"
+#import "LVKDocumentAttachment.h"
+#import "LVKWallAttachment.h"
 #import <UIImageView+WebCache.h>
 
 @implementation LVKMessageCollectionViewDelegate
@@ -106,6 +108,24 @@
         return cell;
     }
     
+    // Document
+    else if([cellData isKindOfClass:[LVKDocumentAttachment class]])
+    {
+        LVKDefaultMessagePostItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultPostItem" forIndexPath:indexPath];
+        cell.type = Document;
+//        cell.title.text = [(LVKDocumentAttachment *)cellData ];
+//        cell.subtitle.text =
+    }
+    
+    // Wall post
+    else if([cellData isKindOfClass:[LVKWallAttachment class]])
+    {
+        LVKDefaultMessagePostItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultPostItem" forIndexPath:indexPath];
+        cell.type = Wall;
+        cell.title.text = [(LVKWallAttachment *)cellData text];
+        cell.subtitle.text = @"Wall post"; //TODO: localize!
+    }
+    
     // Body (probably empty)
     LVKDefaultMessageBodyItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultBodyItem" forIndexPath:indexPath];
     cell.body.text = @"";
@@ -144,7 +164,7 @@
     id<LVKMessagePartProtocol> cellData = [self collectionView:collectionView dataForItemAtIndexPath:indexPath];
     
     CGSize cellSize;
-    CGFloat maxWidth = collectionView.isFullWidth ? 309.5 : collectionView.maxWidth - 0.5;
+    CGFloat maxWidth = collectionView.isFullWidth ? 309.5 : collectionView.maxWidth - 2;
     
     // Repost
     if([cellData isKindOfClass:[LVKRepostedMessage class]])
@@ -170,6 +190,13 @@
     else if([cellData isKindOfClass:[LVKVideoAttachment class]])
         cellSize = [LVKDefaultMessageVideoItem calculateContentSizeWithData:(LVKVideoAttachment *)cellData maxWidth:maxWidth];
     
+    // Document
+    else if([cellData isKindOfClass:[LVKDocumentAttachment class]])
+        cellSize = [LVKDefaultMessagePostItem calculateContentSizeWithData:(LVKDocumentAttachment *)cellData maxWidth:maxWidth];
+    
+    // Wall post
+    else if([cellData isKindOfClass:[LVKWallAttachment class]])
+        cellSize = [LVKDefaultMessagePostItem calculateContentSizeWithData:(LVKWallAttachment *)cellData maxWidth:maxWidth];
     
     // Body (probably empty)
     else

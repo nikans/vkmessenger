@@ -17,6 +17,7 @@
     [self registerNib:[UINib nibWithNibName:@"LVKDefaultMessagePhotoItem" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"DefaultPhotoItem"];
     [self registerNib:[UINib nibWithNibName:@"LVKDefaultMessageVideoItem" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"DefaultVideoItem"];
     [self registerNib:[UINib nibWithNibName:@"LVKDefaultMessageStickerItem" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"DefaultStickerItem"];
+    [self registerNib:[UINib nibWithNibName:@"LVKDefaultMessagePostItem" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:@"DefaultPostItem"];
     
     self.isFullWidth = NO;
 }

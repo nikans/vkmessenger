@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="LVKDefaultMessagePostItem">
+            <rect key="frame" x="0.0" y="0.0" width="285" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7TJ-ii-XCa">
+                    <rect key="frame" x="5" y="5" width="275" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallPost.png" translatesAutoresizingMaskIntoConstraints="NO" id="rmU-81-9QD">
+                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="5fW-m2-GWz"/>
+                                <constraint firstAttribute="width" constant="40" id="fk6-Y2-Y46"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zYO-FC-8ng">
+                            <rect key="frame" x="48" y="3" width="227" height="18"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wall Post" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hWR-92-9ba">
+                            <rect key="frame" x="48" y="21" width="227" height="17"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.52156862745098043" green="0.57647058823529407" blue="0.63921568627450975" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="rmU-81-9QD" firstAttribute="top" secondItem="7TJ-ii-XCa" secondAttribute="top" id="303-Ir-vGY"/>
+                        <constraint firstItem="hWR-92-9ba" firstAttribute="top" secondItem="zYO-FC-8ng" secondAttribute="bottom" id="ED6-KE-ctF"/>
+                        <constraint firstItem="hWR-92-9ba" firstAttribute="leading" secondItem="rmU-81-9QD" secondAttribute="trailing" constant="8" id="I2h-cS-2L1"/>
+                        <constraint firstItem="zYO-FC-8ng" firstAttribute="leading" secondItem="rmU-81-9QD" secondAttribute="trailing" constant="8" id="Mcb-Se-zuR"/>
+                        <constraint firstAttribute="bottom" secondItem="rmU-81-9QD" secondAttribute="bottom" id="VEt-Qb-QCL"/>
+                        <constraint firstAttribute="trailing" secondItem="zYO-FC-8ng" secondAttribute="trailing" id="ZTQ-BA-QxO"/>
+                        <constraint firstItem="zYO-FC-8ng" firstAttribute="top" secondItem="7TJ-ii-XCa" secondAttribute="top" constant="3" id="aIr-cs-GRn"/>
+                        <constraint firstAttribute="trailing" secondItem="hWR-92-9ba" secondAttribute="trailing" id="g0q-st-yFG"/>
+                        <constraint firstItem="rmU-81-9QD" firstAttribute="leading" secondItem="7TJ-ii-XCa" secondAttribute="leading" id="u40-fy-kgd"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="7TJ-ii-XCa" secondAttribute="trailing" constant="5" id="BDh-LY-xGL"/>
+                <constraint firstItem="7TJ-ii-XCa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="Gd5-8K-EWs"/>
+                <constraint firstAttribute="bottom" secondItem="7TJ-ii-XCa" secondAttribute="bottom" constant="5" id="Hy6-vd-tHU"/>
+                <constraint firstItem="7TJ-ii-XCa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="aqv-o6-7jQ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="icon" destination="rmU-81-9QD" id="He0-tQ-4e5"/>
+                <outlet property="subtitle" destination="hWR-92-9ba" id="ORk-vR-u19"/>
+                <outlet property="title" destination="zYO-FC-8ng" id="AFa-X6-HNm"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="wallPost.png" width="40" height="40"/>
+    </resources>
+</document>

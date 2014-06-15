@@ -15,6 +15,7 @@
 #import "LVKDefaultMessageStickerItem.h"
 #import "LVKDefaultMessageVideoItem.h"
 #import "LVKDefaultMessageFullBodyItem.h"
+#import "LVKDefaultMessagePostItem.h"
 
 @interface LVKMessageCollectionViewDelegate : NSObject <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 

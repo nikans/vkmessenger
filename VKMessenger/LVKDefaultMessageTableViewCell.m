@@ -63,10 +63,10 @@
         self.backgroundColor = [UIColor clearColor];
     
     // Sending adversary's avatar to hell
-    if (!self.isRoom && !self.isOutgoing) {
-        self.avatarImage.hidden = YES;
-        self.incomingMessageContainerConstraint.constant = 4;
-    }
+//    if (!self.isRoom && !self.isOutgoing) {
+//        self.avatarImage.hidden = YES;
+//        self.incomingMessageContainerConstraint.constant = 4;
+//    }
     
     // Tap action - go to message VC or resend
     if (self.sandingState == Failed) {

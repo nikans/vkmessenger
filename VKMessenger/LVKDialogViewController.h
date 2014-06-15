@@ -27,6 +27,8 @@
 @property (weak, nonatomic) IBOutlet UIView *textViewContainer;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
 
+@property (strong, nonatomic) NSMutableDictionary *collectionViewWidthVariants;
+
 -(IBAction) sendMessage:(id)sender;
 
 - (void)hasSuccessfullySentMessageAtIndexPath:(NSIndexPath *)indexPath;
