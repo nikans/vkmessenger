@@ -296,7 +296,13 @@
     {
         [userArray addObject:[dialog user]];
     }
-    [userArray addObject:[(LVKAppDelegate *)[[UIApplication sharedApplication] delegate] currentUser]];
+    
+    LVKUser *currentUser = [(LVKAppDelegate *)[[UIApplication sharedApplication] delegate] currentUser];
+    
+    if(currentUser != nil)
+    {
+        [userArray addObject:currentUser];
+    }
     
     return [NSArray arrayWithArray:userArray];
 }
@@ -353,7 +359,7 @@
         if([newMessageUpdate dialog].type == Dialog)
         {
             isLoading = YES;
-            [self loadUserDataForIdsInArray:[NSArray arrayWithObject:[[newMessageUpdate dialog] chatId]] excludingUsersFromArray:[NSArray arrayWithObject:[(LVKAppDelegate *)[[UIApplication sharedApplication] delegate] currentUser]] withResultBlock:^(NSArray *userArray) {
+            [self loadUserDataForIdsInArray:[NSArray arrayWithObject:[[newMessageUpdate dialog] chatId]] excludingUsersFromArray:[[NSArray alloc] init] withResultBlock:^(NSArray *userArray) {
                 [[newMessageUpdate dialog] adoptUser:[userArray firstObject]];
                 
                 [_objects insertObject:[newMessageUpdate dialog] atIndex:0];
@@ -428,7 +434,7 @@
             [dialogs executeWithResultBlock:^(VKResponse *response) {
                 LVKDialogsCollection *dialogsCollection = [[LVKDialogsCollection alloc] initWithArray:response.json];
                 
-                [self loadUserDataForIdsInArray:[dialogsCollection getUserIds] excludingUsersFromArray:[NSArray arrayWithObject:[(LVKAppDelegate *)[[UIApplication sharedApplication] delegate] currentUser]] withResultBlock:^(NSArray *userArray) {
+                [self loadUserDataForIdsInArray:[dialogsCollection getUserIds] excludingUsersFromArray:[[NSArray alloc] init] withResultBlock:^(NSArray *userArray) {
                     
                     [dialogsCollection adoptUserCollection:[[LVKUsersCollection alloc] initWithUserArray:userArray]];
                     
@@ -500,7 +506,7 @@
         [dialogs executeWithResultBlock:^(VKResponse *response) {
             LVKDialogsCollection *dialogsCollection = [[LVKDialogsCollection alloc] initWithDictionary:response.json];
             
-            [self loadUserDataForIdsInArray:[dialogsCollection getUserIds] excludingUsersFromArray:[NSArray arrayWithObject:[(LVKAppDelegate *)[[UIApplication sharedApplication] delegate] currentUser]] withResultBlock:^(NSArray *userArray) {
+            [self loadUserDataForIdsInArray:[dialogsCollection getUserIds] excludingUsersFromArray:[[NSArray alloc] init] withResultBlock:^(NSArray *userArray) {
                 
                 [dialogsCollection adoptUserCollection:[[LVKUsersCollection alloc] initWithUserArray:userArray]];
                 
