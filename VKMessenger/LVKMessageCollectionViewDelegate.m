@@ -44,67 +44,72 @@
     
     id<LVKMessagePartProtocol> cellData = [self collectionView:collectionView dataForItemAtIndexPath:indexPath];
     
-    UICollectionViewCell *cell;
-    
     // Repost
     if([cellData isKindOfClass:[LVKRepostedMessage class]])
     {
-        cell = (LVKDefaultMessageRepostBodyItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultRepostBodyItem" forIndexPath:indexPath];
-        [cell setValue:[(LVKRepostedMessage *)cellData body] forKeyPath:@"body.text"];
-        [cell setValue:[NSDateFormatter localizedStringFromDate:
-                        [(LVKRepostedMessage *)cellData date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle] forKeyPath:@"date.text"];
-        [cell setValue:[[(LVKRepostedMessage *)cellData user] fullName] forKeyPath:@"userName.text"];
-        [[(LVKDefaultMessageRepostBodyItem *)cell avatar] setImageWithURL:[[(LVKRepostedMessage *)cellData user] photo_100]];
+        LVKDefaultMessageRepostBodyItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultRepostBodyItem" forIndexPath:indexPath];
+        
+        cell.body.text = [(LVKRepostedMessage *)cellData body];
+        cell.date.text = [NSDateFormatter localizedStringFromDate:[(LVKRepostedMessage *)cellData date]
+                                                        dateStyle:NSDateFormatterNoStyle
+                                                        timeStyle:NSDateFormatterShortStyle];
+        cell.userName.text = [(LVKRepostedMessage *)cellData user].fullName;
+        [cell.avatar setImageWithURL:[(LVKRepostedMessage *)cellData user].photo_100];
+        return cell;
     }
     
     // Full-width Body
-    else if([cellData isKindOfClass:[LVKMessage class]] && collectionView.isFullWidth) {
-        cell = (LVKDefaultMessageFullBodyItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultFullBodyItem" forIndexPath:indexPath];
-        [cell setValue:[(LVKMessage *)cellData body] forKeyPath:@"body.text"];
-        [cell setValue:[NSDateFormatter localizedStringFromDate:
-                        [(LVKMessage *)cellData date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle] forKeyPath:@"date.text"];
-        [cell setValue:[[(LVKMessage *)cellData user] fullName] forKeyPath:@"userName.text"];
-        [[(LVKDefaultMessageRepostBodyItem *)cell avatar] setImageWithURL:[[(LVKMessage *)cellData user] photo_100]];
+    else if([cellData isKindOfClass:[LVKMessage class]] && collectionView.isFullWidth)
+    {
+        LVKDefaultMessageFullBodyItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultFullBodyItem" forIndexPath:indexPath];
+        
+        cell.body.text = [(LVKMessage *)cellData body];
+        cell.date.text = [NSDateFormatter localizedStringFromDate:[(LVKMessage *)cellData date]
+                                                        dateStyle:NSDateFormatterNoStyle
+                                                        timeStyle:NSDateFormatterShortStyle];
+        cell.userName.text = [(LVKMessage *)cellData user].fullName;
+        [cell.avatar setImageWithURL:[(LVKMessage *)cellData user].photo_100];
+        return cell;
     }
     
     // Body
     else if([cellData isKindOfClass:[LVKMessage class]])
     {
-        cell = (LVKDefaultMessageBodyItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultBodyItem" forIndexPath:indexPath];
-        [cell setValue:[(LVKMessage *)cellData body] forKeyPath:@"body.text"];
+        LVKDefaultMessageBodyItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultBodyItem" forIndexPath:indexPath];
+        cell.body.text = [(LVKMessage *)cellData body];
+        return cell;
     }
     
     // Photo
     else if([cellData isKindOfClass:[LVKPhotoAttachment class]])
     {
-        cell = (LVKDefaultMessagePhotoItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultPhotoItem" forIndexPath:indexPath];
-        [[(LVKDefaultMessagePhotoItem *)cell image] setImageWithURL:[(LVKPhotoAttachment *)cellData photo_604]];
+        LVKDefaultMessagePhotoItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultPhotoItem" forIndexPath:indexPath];
+        [cell.image setImageWithURL:[(LVKPhotoAttachment *)cellData photo_604]];
+        return cell;
     }
     
     // Video
     else if([cellData isKindOfClass:[LVKVideoAttachment class]])
     {
-        cell = (LVKDefaultMessageVideoItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultVideoItem" forIndexPath:indexPath];
-        [[(LVKDefaultMessageVideoItem *)cell image] setImageWithURL:[(LVKVideoAttachment *)cellData photo_130]];
-        [[(LVKDefaultMessageVideoItem *)cell durationLabel] setText:[NSString stringWithFormat:@"%@", [(LVKVideoAttachment *)cellData duration]]];
+        LVKDefaultMessageVideoItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultVideoItem" forIndexPath:indexPath];
+        [cell.image setImageWithURL:[(LVKVideoAttachment *)cellData photo_130]];
+        [cell setDurationWithSeconds:[[(LVKVideoAttachment *)cellData duration] intValue]];
+        
+        return cell;
     }
     
     // Sticker
     else if([cellData isKindOfClass:[LVKStickerAttachment class]])
     {
-        cell = (LVKDefaultMessageStickerItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultStickerItem" forIndexPath:indexPath];
-        [[(LVKDefaultMessageStickerItem *)cell image] setImageWithURL:[(LVKStickerAttachment *)cellData photo_128]];
+        LVKDefaultMessageStickerItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultStickerItem" forIndexPath:indexPath];
+        [cell.image setImageWithURL:[(LVKStickerAttachment *)cellData photo_128]];
+        return cell;
     }
-    
     
     // Body (probably empty)
-    else
-    {
-        cell = (LVKDefaultMessageBodyItem *)[collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultBodyItem" forIndexPath:indexPath];
-        [cell setValue:@"" forKeyPath:@"body.text"];
-    }
-    
-     return cell;
+    LVKDefaultMessageBodyItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultBodyItem" forIndexPath:indexPath];
+    cell.body.text = @"";
+    return cell;
 }
 
 // TODO

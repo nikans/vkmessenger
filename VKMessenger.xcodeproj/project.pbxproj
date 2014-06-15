@@ -87,6 +87,7 @@
 		D09E64F9194B69AA00B36B86 /* usergroup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D09E64F8194B69AA00B36B86 /* usergroup@2x.png */; };
 		D09E64FE194B7F6600B36B86 /* LVKDefaultDialogTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D09E64FC194B7F6600B36B86 /* LVKDefaultDialogTableViewCell.m */; };
 		D09E6502194C5A5800B36B86 /* LVKDefaultUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D09E6501194C5A5800B36B86 /* LVKDefaultUserTableViewCell.m */; };
+		D09E6504194D28FE00B36B86 /* play-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D09E6503194D28FE00B36B86 /* play-button@2x.png */; };
 		D0A210BF194646CF008508BF /* LVKDefaultMessagePhotoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A210BE194646CF008508BF /* LVKDefaultMessagePhotoItem.m */; };
 		D0A210C21946476D008508BF /* LVKDefaultMessageVideoItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A210C11946476D008508BF /* LVKDefaultMessageVideoItem.m */; };
 		D0A210C519464786008508BF /* LVKDefaultMessageStickerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A210C419464786008508BF /* LVKDefaultMessageStickerItem.m */; };
@@ -233,6 +234,7 @@
 		D09E64FC194B7F6600B36B86 /* LVKDefaultDialogTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDefaultDialogTableViewCell.m; sourceTree = "<group>"; };
 		D09E6500194C5A5800B36B86 /* LVKDefaultUserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultUserTableViewCell.h; sourceTree = "<group>"; };
 		D09E6501194C5A5800B36B86 /* LVKDefaultUserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDefaultUserTableViewCell.m; sourceTree = "<group>"; };
+		D09E6503194D28FE00B36B86 /* play-button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-button@2x.png"; sourceTree = "<group>"; };
 		D0A210BD194646CF008508BF /* LVKDefaultMessagePhotoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultMessagePhotoItem.h; sourceTree = "<group>"; };
 		D0A210BE194646CF008508BF /* LVKDefaultMessagePhotoItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDefaultMessagePhotoItem.m; sourceTree = "<group>"; };
 		D0A210C01946476D008508BF /* LVKDefaultMessageVideoItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultMessageVideoItem.h; sourceTree = "<group>"; };
@@ -465,6 +467,7 @@
 		D038C3081944E25900E7895D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				D09E6503194D28FE00B36B86 /* play-button@2x.png */,
 				D09E64F8194B69AA00B36B86 /* usergroup@2x.png */,
 				D09E64F6194AD7D900B36B86 /* settings@2x.png */,
 				D0764956194906F800911C65 /* check@2x.png */,
@@ -657,6 +660,7 @@
 				D038C32B1944E25900E7895D /* typing.png in Resources */,
 				A4671F4A1949E01E00CB3BA4 /* Settings.bundle in Resources */,
 				A4017DC7193DE8EA000EAD87 /* Main_iPad.storyboard in Resources */,
+				D09E6504194D28FE00B36B86 /* play-button@2x.png in Resources */,
 				D038C3331944E28200E7895D /* LVKDefaultMessageBodyItem.xib in Resources */,
 				D038C31F1944E25900E7895D /* bubble_min.png in Resources */,
 				D038C3521944E64E00E7895D /* LVKDefaultMessagePhotoItem.xib in Resources */,

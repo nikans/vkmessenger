@@ -59,11 +59,15 @@
 
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
+    // TODO
+    self.isCompactView = YES;
+    
     hasDataToLoad = YES;
     self.isSearching = NO;
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    
+    self.tableView.contentOffset = CGPointMake(0, self.searchBar.frame.size.height);
+
     bottomRefreshControl = [[UIRefreshControl alloc]init];
     [bottomRefreshControl addTarget:self action:@selector(onBottomRefreshControl) forControlEvents:UIControlEventValueChanged];
     [self.tableView setBottomRefreshControl:bottomRefreshControl];
@@ -75,10 +79,7 @@
 //    self.detailViewController = (LVKDetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
     
     [self registerObservers];
-    
     [self loadData:0];
-    
-    self.tableView.contentOffset = CGPointMake(0, self.searchBar.frame.size.height);
 }
 
 - (void)didReceiveMemoryWarning
@@ -104,6 +105,8 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.isSearching)
         return 50;
+    if (self.isCompactView)
+        return 54;
     return 70;
 }
 
@@ -123,30 +126,36 @@
     }
     
     // Displaying
-    else {
-        LVKDefaultDialogTableViewCell *cell = nil;
-        
-        if(dialog.type == Dialog)
-            cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultDialogCell" forIndexPath:indexPath];
-        
-        else if(dialog.type == Room || dialog.lastMessage.user == [(LVKAppDelegate *)[[UIApplication sharedApplication] delegate] currentUser])
+    LVKDefaultDialogTableViewCell *cell = nil;
+    
+    if (dialog.type == Room || dialog.lastMessage.user == [(LVKAppDelegate *)[[UIApplication sharedApplication] delegate] currentUser])
+        if (self.isCompactView)
+            cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultCompactDialogCellWithMessageDetails" forIndexPath:indexPath];
+        else
             cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultDialogCellWithMessageDetails" forIndexPath:indexPath];
-        
-        cell.title.text = dialog.title;
-        if ([dialog.lastMessage.body length])
-            cell.message.text = dialog.lastMessage.body;
-        
-        cell.date.text = [NSDateFormatter localizedStringFromDate:dialog.lastMessage.date dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
-        
-        [cell.messageAvatar setImageWithURL:dialog.lastMessage.user.photo_100];
-        [cell ajustLayoutForReadState:dialog.getReadState];
-        
-        [cell setAvatars:[dialog getChatPicture]];
-        
+
+    else if (dialog.type == Dialog)
+        if (self.isCompactView)
+            cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultCompactDialogCell" forIndexPath:indexPath];
+        else
+            cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultDialogCell" forIndexPath:indexPath];
+    
+    cell.title.text = dialog.title;
+    if ([dialog.lastMessage.body length])
+        cell.message.text = dialog.lastMessage.body;
+
+    cell.isRoom = dialog.type == Room ? YES : NO;
+
+    cell.date.text = [NSDateFormatter localizedStringFromDate:dialog.lastMessage.date dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
+
+    [cell.messageAvatar setImageWithURL:dialog.lastMessage.user.photo_100];
+    [cell ajustLayoutForReadState:dialog.getReadState];
+
+    [cell setAvatars:[dialog getChatPicture]];
+    
 //        [cell ajustLayoutUserIsOnline:dialog.user.]
-        
-        return cell;
-    }
+    
+    return cell;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -181,6 +190,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 //    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
 //        LVKDialog *object = _objects[indexPath.row];
 //        self.detailViewController.dialog = object;

@@ -14,4 +14,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageWidthConstraint;
 @property (weak, nonatomic) IBOutlet UILabel *durationLabel;
 
+- (void)setDurationWithSeconds:(int)_seconds;
+
 @end

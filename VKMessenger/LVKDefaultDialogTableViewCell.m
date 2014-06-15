@@ -10,6 +10,17 @@
 #import <AVHexColor.h>
 #import <UIImageView+WebCache.h>
 
+@interface LVKDefaultDialogTableViewCell ()
+
+@property (nonatomic) CGFloat titleConstraintDefaultConstant;
+@property (nonatomic) CGFloat defaultMargin;
+@property (nonatomic) int avatarInset;
+@property (strong, nonatomic) NSString *messageDefaultText;
+
+@end
+
+
+
 @implementation LVKDefaultDialogTableViewCell
 
 typedef enum {
@@ -22,15 +33,23 @@ typedef enum {
     ForthQuarter
 } AvatarPlace;
 
-- (void)awakeFromNib
-{
-    // Initialization code
+- (void)awakeFromNib {
+    self.avatarInset = 2;
+    self.defaultMargin = 10;
+    
+    self.isRoom = NO;
+    
+    self.titleConstraintDefaultConstant = self.titleConstraint.constant;
+    self.messageDefaultText = self.message.text;
+}
+
+- (void)layoutSubviews {
     self.onlineIndicator.hidden = YES;
     self.onlineIndicator.layer.cornerRadius = 3.f;
     self.onlineIndicator.layer.masksToBounds = YES;
     
-    self.titleConstraint.constant = 10;
-    self.messageInsetConstraint.constant = 0;
+    self.titleConstraint.constant = self.defaultMargin;
+//    self.messageInsetConstraint.constant = 0;
     
     self.avatarsView.layer.cornerRadius = 2.f;
     self.avatarsView.layer.masksToBounds = YES;
@@ -38,9 +57,21 @@ typedef enum {
     self.messageBackground.layer.cornerRadius = 2.f;
     self.messageBackground.layer.masksToBounds = YES;
     
-    self.roomIndicator.hidden = YES;
+    self.messageAvatar.layer.cornerRadius = 2.f;
+    self.messageAvatar.layer.masksToBounds = YES;
     
-    self.avatarInset = 2;
+    self.roomIndicator.hidden = YES;
+    if (self.isRoom) {
+        self.roomIndicator.hidden = NO;
+        self.titleConstraint.constant = self.titleConstraintDefaultConstant;
+    }
+}
+
+- (void)prepareForReuse {
+    for (UIView *avatar in self.avatarsView.subviews) {
+        [avatar removeFromSuperview];
+    }
+    self.message.text = self.messageDefaultText;
 }
 
 - (void)ajustLayoutForReadState:(readState)state {
@@ -54,7 +85,7 @@ typedef enum {
         self.messageInsetConstraint.constant = 0;
     }
     else if (state == UnreadOutgoing) {
-        self.messageInsetConstraint.constant = 10;
+        self.messageInsetConstraint.constant = self.defaultMargin;
         self.messageBackground.backgroundColor = [AVHexColor colorWithHexString:@"#edf2f7"];
     }
 }
@@ -66,7 +97,6 @@ typedef enum {
         self.onlineIndicator.hidden = YES;
 }
 
-// TODO: refactor
 - (void)setAvatars:(NSArray *)avatarsURLArray {
     if ([avatarsURLArray isKindOfClass:[NSString class]]) 
         [self addAvatars:@[avatarsURLArray] withPlaces:@[@(Single)]];
@@ -90,59 +120,54 @@ typedef enum {
 }
 
 - (UIImageView *)imageViewForAvatarAtPlace:(AvatarPlace)place withURL:(NSURL *)url {
+    CGSize avatarSize = [self sizeForAvatarInPlace:place];
+    CGPoint avatarOrigin = [self originForAvatarInPlace:place];
+    CGRect avatarFrame = CGRectMake(avatarOrigin.x, avatarOrigin.y, avatarSize.width, avatarSize.height);
+    UIImageView *avatar = [[UIImageView alloc] initWithFrame:avatarFrame];
+    [avatar setImageWithURL:url];
+
+    return avatar;
+}
+
+- (CGSize)sizeForAvatarInPlace:(AvatarPlace)place {
     CGRect baseFrame = self.avatarsView.frame;
-    baseFrame.origin.x = 0; baseFrame.origin.y = 0;
-    UIImageView *avatar;
     
     switch (place) {
         case Single:
-            avatar = [[UIImageView alloc] initWithFrame:baseFrame];
-            [avatar setImageWithURL:url];
-            return avatar;
+            return self.avatarsView.frame.size;
             break;
-        case FirstHalf:
-            avatar = [[UIImageView alloc] initWithFrame:CGRectMake(baseFrame.origin.x, baseFrame.origin.y, [self avatarMetricDividedByHalf:baseFrame.size.width], baseFrame.size.height)];
-            [avatar setImageWithURL:url];
-            return avatar;
+        case FirstHalf: case SecondHalf:
+            return CGSizeMake(baseFrame.size.width / 2 - self.avatarInset / 2, baseFrame.size.height);
             break;
-        case SecondHalf:
-            avatar = [[UIImageView alloc] initWithFrame:CGRectMake([self avatarOrigin:baseFrame.origin.x addedByHalfMetric:baseFrame.size.width], baseFrame.origin.y, [self avatarMetricDividedByHalf:baseFrame.size.width], baseFrame.size.height)];
-            [avatar setImageWithURL:url];
-            return avatar;
+        case FirstQarter: case SecondQuarter: case ThirdQuarter: case ForthQuarter:
+            return CGSizeMake(baseFrame.size.width / 2 - self.avatarInset / 2, baseFrame.size.height / 2 - self.avatarInset / 2);
             break;
-        case FirstQarter:
-            avatar = [[UIImageView alloc] initWithFrame:CGRectMake(baseFrame.origin.x, baseFrame.origin.y, [self avatarMetricDividedByHalf:baseFrame.size.width], [self avatarMetricDividedByHalf:baseFrame.size.height])];
-            [avatar setImageWithURL:url];
-            return avatar;
-            break;
-        case SecondQuarter:
-            avatar = [[UIImageView alloc] initWithFrame:CGRectMake([self avatarOrigin:baseFrame.origin.x addedByHalfMetric:baseFrame.size.width], baseFrame.origin.y, [self avatarMetricDividedByHalf:baseFrame.size.width], [self avatarMetricDividedByHalf:baseFrame.size.height])];
-            [avatar setImageWithURL:url];
-            return avatar;
-            break;
-        case ThirdQuarter:
-            avatar = [[UIImageView alloc] initWithFrame:CGRectMake(baseFrame.origin.x, [self avatarOrigin:baseFrame.origin.y addedByHalfMetric:baseFrame.size.height], [self avatarMetricDividedByHalf:baseFrame.size.width], [self avatarMetricDividedByHalf:baseFrame.size.height])];
-            [avatar setImageWithURL:url];
-            return avatar;
-            break;
-        case ForthQuarter:
-            avatar = [[UIImageView alloc] initWithFrame:CGRectMake([self avatarOrigin:baseFrame.origin.x addedByHalfMetric:baseFrame.size.width], [self avatarOrigin:baseFrame.origin.y addedByHalfMetric:baseFrame.size.height], [self avatarMetricDividedByHalf:baseFrame.size.width], [self avatarMetricDividedByHalf:baseFrame.size.height])];
-            [avatar setImageWithURL:url];
-            return avatar;
-            break;
-            
         default:
             break;
     }
-    
-    return nil;
 }
 
-- (CGFloat)avatarMetricDividedByHalf:(CGFloat)metric {
-    return metric / 2 - self.avatarInset / 2;
-}
-- (CGFloat)avatarOrigin:(CGFloat)origin addedByHalfMetric:(CGFloat)metric {
-    return origin + metric / 2 + self.avatarInset / 2;
+- (CGPoint)originForAvatarInPlace:(AvatarPlace)place {
+    CGRect baseFrame = self.avatarsView.frame;
+    baseFrame.origin.x = 0; baseFrame.origin.y = 0;
+    
+    switch (place) {
+        case Single: case FirstHalf: case FirstQarter:
+            return baseFrame.origin;
+            break;
+        case SecondHalf: case SecondQuarter:
+            return CGPointMake(baseFrame.origin.x + baseFrame.size.width / 2 + self.avatarInset / 2, baseFrame.origin.y);
+            break;
+        case ThirdQuarter:
+            return CGPointMake(baseFrame.origin.x, baseFrame.origin.y + baseFrame.size.height / 2 + self.avatarInset / 2);
+            break;
+        case ForthQuarter:
+            return CGPointMake(baseFrame.origin.x + baseFrame.size.width / 2 + self.avatarInset / 2, baseFrame.origin.y + baseFrame.size.height / 2 + self.avatarInset / 2);
+            break;
+        default:
+            break;
+    }
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated

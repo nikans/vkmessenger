@@ -22,7 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIView *onlineIndicator;
 @property (weak, nonatomic) IBOutlet UIImageView *roomIndicator;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleConstraint;
-@property (nonatomic) int avatarInset;
+
+@property (nonatomic) BOOL isRoom;
 
 - (void)ajustLayoutForReadState:(readState)state;
 - (void)ajustLayoutUserIsOnline:(BOOL)isOnline;

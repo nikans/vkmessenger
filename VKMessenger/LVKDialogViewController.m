@@ -157,7 +157,7 @@
         cellHeight += cellSize.height + (countParts == 0 || countParts == [message getMessageParts].count ? 0 : 5.f);
         countParts++;
     }
-    return cellHeight+18.f;
+    return MAX(cellHeight+18.f, 39);
 }
 
 - (void)tableView:(UITableView *)tableView configureCell:(LVKDefaultMessageTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
