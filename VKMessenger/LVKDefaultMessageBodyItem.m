@@ -23,10 +23,10 @@
 
 + (CGSize)calculateContentSizeWithData:(LVKMessage *)_data maxWidth:(CGFloat)_maxWidth {
     if (![_data respondsToSelector:@selector(body)])
-        return CGSizeMake(10.f, 13.f);
+        return CGSizeMake(0.01f, 0.01f);
     
     if ([_data.body length] == 0)
-        return CGSizeMake(1.f, 1.f);
+        return CGSizeMake(0.01f, 0.01f);
     
     CGSize textSize = [(NSString *)[(LVKMessage *)_data body] integralSizeWithFont:[UIFont systemFontOfSize:16] maxWidth:_maxWidth-10 numberOfLines:INFINITY];
     CGSize cellSize = CGSizeMake(textSize.width+10 < _maxWidth ? textSize.width+10 : _maxWidth, textSize.height);

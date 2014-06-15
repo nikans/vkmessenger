@@ -771,14 +771,16 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="212" height="74"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="rNU-Qy-tzJ"/>
+                                                            </constraints>
                                                         </imageView>
                                                         <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="TopLeft" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="E3z-g0-LTu" customClass="LVKDefaultMessagesCollectionView">
                                                             <rect key="frame" x="11" y="5" width="196" height="64"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" id="6YL-xh-12R"/>
-                                                                <constraint firstAttribute="width" constant="196" id="hDd-gA-8Qr"/>
+                                                                <constraint firstAttribute="width" priority="750" constant="196" id="hDd-gA-8Qr"/>
                                                             </constraints>
                                                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="3" minimumInteritemSpacing="0.0" id="uxN-k5-jZM">
                                                                 <size key="itemSize" width="0.0" height="0.0"/>
@@ -837,7 +839,6 @@
                                         <connections>
                                             <outlet property="avatarImage" destination="p2h-LI-mWF" id="gPu-2V-dZe"/>
                                             <outlet property="collectionView" destination="E3z-g0-LTu" id="Bqh-H5-3Yw"/>
-                                            <outlet property="collectionViewHeightConstraint" destination="6YL-xh-12R" id="jEC-d3-JXh"/>
                                             <outlet property="collectionViewWidthConstraint" destination="hDd-gA-8Qr" id="iqN-TE-fks"/>
                                             <outlet property="incomingMessageContainerConstraint" destination="3QI-zA-aHt" id="pd7-9I-8sb"/>
                                             <outlet property="messageContainerBackgroundImage" destination="Eid-4T-heM" id="zmC-R8-kmD"/>
@@ -859,14 +860,16 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TsR-wQ-JAD">
                                                             <rect key="frame" x="0.0" y="0.0" width="233" height="74"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="SyJ-oZ-J1z"/>
+                                                            </constraints>
                                                         </imageView>
                                                         <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="topRight" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aIT-W1-odb" customClass="LVKDefaultMessagesCollectionView">
                                                             <rect key="frame" x="5" y="5" width="217" height="64"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="217" id="AZb-vm-IHa"/>
-                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="750" id="lV7-Ji-S5I"/>
+                                                                <constraint firstAttribute="width" priority="750" constant="217" id="AZb-vm-IHa"/>
                                                             </constraints>
                                                             <inset key="scrollIndicatorInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                                             <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="hvg-VF-9x7">
@@ -930,7 +933,6 @@
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="collectionView" destination="aIT-W1-odb" id="22I-O4-tY3"/>
-                                            <outlet property="collectionViewHeightConstraint" destination="lV7-Ji-S5I" id="P0B-B9-ofv"/>
                                             <outlet property="collectionViewWidthConstraint" destination="AZb-vm-IHa" id="UoR-VX-kfS"/>
                                             <outlet property="messageContainerBackgroundImage" destination="TsR-wQ-JAD" id="lnk-qU-akS"/>
                                             <outlet property="messageContainerView" destination="OI6-S6-e0s" id="pme-jE-de1"/>
