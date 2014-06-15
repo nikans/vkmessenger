@@ -115,15 +115,21 @@
         cell.type = Document;
 //        cell.title.text = [(LVKDocumentAttachment *)cellData ];
 //        cell.subtitle.text =
+        return cell;
     }
     
     // Wall post
     else if([cellData isKindOfClass:[LVKWallAttachment class]])
     {
+//        LVKDefaultMessageBodyItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultBodyItem" forIndexPath:indexPath];
+//        cell.body.text = [(LVKWallAttachment *)cellData text];
+//        return cell;
+        
         LVKDefaultMessagePostItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultPostItem" forIndexPath:indexPath];
         cell.type = Wall;
         cell.title.text = [(LVKWallAttachment *)cellData text];
         cell.subtitle.text = @"Wall post"; //TODO: localize!
+        return cell;
     }
     
     // Body (probably empty)
@@ -221,6 +227,10 @@
         return [LVKDefaultMessageStickerItem class];
     if (dataPartClass == [LVKVideoAttachment class])
         return [LVKDefaultMessageVideoItem class];
+    if (dataPartClass == [LVKDocumentAttachment class])
+        return [LVKDefaultMessagePostItem class];
+    if (dataPartClass == [LVKWallAttachment class])
+        return [LVKDefaultMessagePostItem class];
     return [LVKDefaultMessageBodyItem class];
 }
 

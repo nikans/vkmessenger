@@ -7,7 +7,6 @@
 //
 
 #import "LVKDefaultMessagePostItem.h"
-#import "LVKVideoAttachment.h"
 
 @implementation LVKDefaultMessagePostItem
 
@@ -27,15 +26,16 @@
 }
 
 - (void)layoutSubviews {
+    [super layoutSubviews];
+    
     if (self.type == Document)
         self.icon.image = [UIImage imageNamed:@"document"];
     else
         self.icon.image = [UIImage imageNamed:@"wallPost"];
 }
 
-
 + (CGSize)calculateContentSizeWithData:(id)_data maxWidth:(CGFloat)_maxWidth minWidth:(CGFloat)_minWidth {
-    return CGSizeMake(_maxWidth, 50.f);
+    return CGSizeMake(_maxWidth, 50);
 }
 
 //- (void)layoutIfNeededForCalculatedWidth:(CGFloat)_width alignRight:(BOOL)_alignRight {
