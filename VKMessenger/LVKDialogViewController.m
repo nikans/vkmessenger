@@ -571,7 +571,13 @@
     {
         [userArray addObject:[dialog user]];
     }
-    [userArray addObject:[(LVKAppDelegate *)[[UIApplication sharedApplication] delegate] currentUser]];
+    
+    LVKUser *currentUser = [(LVKAppDelegate *)[[UIApplication sharedApplication] delegate] currentUser];
+    
+    if(currentUser != nil)
+    {
+        [userArray addObject:currentUser];
+    }
     
     return [NSArray arrayWithArray:userArray];
 }

@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Levelab. All rights reserved.
 //
 
+#import <VKSdk.h>
 #import "LVKDialogsCollection.h"
 
 @implementation LVKDialogsCollection
@@ -76,6 +77,7 @@
             [userIds addObject:[dialog chatId]];
         }
     }];
+    [userIds addObject:[NSNumber numberWithInt:[[[VKSdk getAccessToken] userId] intValue]]];
     
     return [NSArray arrayWithArray:userIds];
 }

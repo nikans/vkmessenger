@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Levelab. All rights reserved.
 //
 
+#import <VKSdk.h>
 #import "LVKLongPollNewMessage.h"
 
 @implementation LVKLongPollNewMessage
@@ -29,7 +30,7 @@
         
     if([userId intValue] == 0)
     {
-        userId = isOutbox ? [[NSNumber alloc] initWithInt:0] : [array objectAtIndex:2];
+        userId = isOutbox ? [NSNumber numberWithInt:[[[VKSdk getAccessToken] userId] intValue]] : [array objectAtIndex:2];
         chatId = [array objectAtIndex:2];
         type = Dialog;
     }
