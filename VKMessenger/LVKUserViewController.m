@@ -33,7 +33,7 @@
     [[self navigationItem] setTitle:[user fullName]];
     
     [name setText:[user fullName]];
-    [photo setImageWithURL:[user getPhoto:200]];
+    [photo setImageWithURL:[user getPhoto:400]];
 }
 
 - (void)didReceiveMemoryWarning
