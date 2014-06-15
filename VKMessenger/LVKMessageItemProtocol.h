@@ -19,6 +19,6 @@
 + (CGSize)calculateContentSizeWithData:(id<LVKMessagePartProtocol>)_data maxWidth:(CGFloat)_maxWidth;
 
 @optional
-- (void)layoutIfNeededForCalculatedWidth:(CGFloat)_width;
+- (void)layoutIfNeededForCalculatedWidth:(CGFloat)_width alignRight:(BOOL)_alignRight;
 
 @end

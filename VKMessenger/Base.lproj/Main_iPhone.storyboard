@@ -782,7 +782,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="width" priority="750" constant="196" id="hDd-gA-8Qr"/>
                                                             </constraints>
-                                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="3" minimumInteritemSpacing="0.0" id="uxN-k5-jZM">
+                                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="3" minimumInteritemSpacing="0.0" id="uxN-k5-jZM" customClass="UICollectionViewLeftAlignedLayout">
                                                                 <size key="itemSize" width="0.0" height="0.0"/>
                                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -872,7 +872,7 @@
                                                                 <constraint firstAttribute="width" priority="750" constant="217" id="AZb-vm-IHa"/>
                                                             </constraints>
                                                             <inset key="scrollIndicatorInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="hvg-VF-9x7">
+                                                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="hvg-VF-9x7" customClass="UICollectionViewRightAlignedLayout">
                                                                 <size key="itemSize" width="0.0" height="0.0"/>
                                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -1054,11 +1054,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="topRight" misplaced="YES" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ChA-BB-tcn" customClass="LVKDefaultMessagesCollectionView">
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="topRight" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" minimumZoomScale="0.0" maximumZoomScale="0.0" bouncesZoom="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ChA-BB-tcn" customClass="LVKDefaultMessagesCollectionView">
                                 <rect key="frame" x="5" y="0.0" width="310" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="yP1-vF-P4N">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="yP1-vF-P4N" customClass="UICollectionViewLeftAlignedLayout">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -1072,7 +1072,7 @@
                             <constraint firstAttribute="trailing" secondItem="ChA-BB-tcn" secondAttribute="trailing" constant="5" id="Fui-ee-scs"/>
                             <constraint firstItem="ChA-BB-tcn" firstAttribute="leading" secondItem="yqQ-BZ-7IX" secondAttribute="leading" constant="5" id="UCx-UG-gpa"/>
                             <constraint firstItem="ChA-BB-tcn" firstAttribute="top" secondItem="yqQ-BZ-7IX" secondAttribute="top" id="dNC-Et-XzA"/>
-                            <constraint firstItem="M9L-FW-s29" firstAttribute="top" secondItem="ChA-BB-tcn" secondAttribute="bottom" id="urY-B5-Itm"/>
+                            <constraint firstAttribute="bottom" secondItem="ChA-BB-tcn" secondAttribute="bottom" id="uOj-Ss-cSV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Сообщение" id="O1s-Xy-ZR1">
@@ -1090,6 +1090,7 @@
                             </button>
                         </barButtonItem>
                     </navigationItem>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="ChA-BB-tcn" id="rcP-IR-NIg"/>
                     </connections>
@@ -1112,6 +1113,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="sf3-kQ-slx"/>
         <segue reference="Vvq-g2-EWH"/>
-        <segue reference="ztk-sL-94A"/>
+        <segue reference="gPN-Qz-Vpe"/>
     </inferredMetricsTieBreakers>
 </document>
