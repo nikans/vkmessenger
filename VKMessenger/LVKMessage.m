@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Levelab. All rights reserved.
 //
 
+#import <VKSdk.h>
 #import "LVKMessage.h"
 #import "LVKRepostedMessage.h"
 
@@ -42,7 +43,7 @@
         if(type == Dialog)
             chatId = [dictionary valueForKeyPath:@"user_id"];
         
-        userId = isOutgoing ? [[NSNumber alloc] initWithInt:0] : [dictionary valueForKey:@"user_id"];
+        userId = isOutgoing ? [NSNumber numberWithInt:[[[VKSdk getAccessToken] userId] intValue]] : [dictionary valueForKey:@"user_id"];
         date = [NSDate dateWithTimeIntervalSince1970:[[dictionary valueForKey:@"date"] intValue]];
         body = [dictionary valueForKey:@"body"];
         
@@ -80,7 +81,7 @@
 -(void)adoptUserArray:(NSArray *)array
 {
     for (LVKUser *user in array) {
-        if(([user isCurrent] && [userId intValue] == 0) || (![user isCurrent] && [userId isEqualToNumber:[user _id]]))
+        if([userId isEqualToNumber:[user _id]])
         {
             [self setUser:user];
         }

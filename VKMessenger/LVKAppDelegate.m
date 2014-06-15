@@ -134,9 +134,7 @@
     [userRequest executeWithResultBlock:^(VKResponse *response) {
         LVKUsersCollection *usersCollection = [[LVKUsersCollection alloc] initWithArray:response.json];
         
-        LVKUser *responseUser = [[usersCollection users] firstObject];
-        
-        currentUser = [[LVKUser alloc] initWithDictionary:[NSDictionary dictionaryWithObjectsAndKeys:[responseUser firstName], @"first_name",[responseUser lastName], @"last_name",[responseUser photo_100], @"photo_100", nil]];
+        currentUser = [[usersCollection users] firstObject];
         
         [currentUser setIsCurrent:YES];
     } errorBlock:^(NSError *error) {
