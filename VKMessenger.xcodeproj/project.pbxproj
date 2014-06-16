@@ -55,6 +55,9 @@
 		D0032742194DD7FC0018B70E /* LVKDefaultMessagePostItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D0032740194DD7FC0018B70E /* LVKDefaultMessagePostItem.m */; };
 		D0032743194DD7FC0018B70E /* LVKDefaultMessagePostItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0032741194DD7FC0018B70E /* LVKDefaultMessagePostItem.xib */; };
 		D0032745194DDA050018B70E /* wallPost@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0032744194DDA050018B70E /* wallPost@2x.png */; };
+		D0032748194E28040018B70E /* UIImage+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = D0032747194E28040018B70E /* UIImage+Extensions.m */; };
+		D003274C194E58120018B70E /* UIImage+JTImageDecode.m in Sources */ = {isa = PBXBuildFile; fileRef = D003274B194E58120018B70E /* UIImage+JTImageDecode.m */; };
+		D003274F194E5CB60018B70E /* LVKImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = D003274E194E5CB60018B70E /* LVKImageLoader.m */; };
 		D038C3041944DE3000E7895D /* LVKDefaultMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D038C3031944DE3000E7895D /* LVKDefaultMessageTableViewCell.m */; };
 		D038C3071944E13F00E7895D /* LVKDefaultMessagesCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D038C3061944E13F00E7895D /* LVKDefaultMessagesCollectionView.m */; };
 		D038C31D1944E25900E7895D /* bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = D038C30A1944E25900E7895D /* bubble.png */; };
@@ -83,7 +86,6 @@
 		D038C3571944E78200E7895D /* NSString+StringSize.m in Sources */ = {isa = PBXBuildFile; fileRef = D038C3561944E78200E7895D /* NSString+StringSize.m */; };
 		D038C3631945098600E7895D /* default-bubbleIncoming@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D038C3611945098600E7895D /* default-bubbleIncoming@2x.png */; };
 		D038C3681945135900E7895D /* default-bubbleOutgoing@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D038C3671945135900E7895D /* default-bubbleOutgoing@2x.png */; };
-		D076494E1947A7C300911C65 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = D076494D1947A7C300911C65 /* UIImage+Color.m */; };
 		D07649541948F06000911C65 /* LVKDefaultMessageFullBodyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = D07649521948F06000911C65 /* LVKDefaultMessageFullBodyItem.m */; };
 		D07649551948F06000911C65 /* LVKDefaultMessageFullBodyItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = D07649531948F06000911C65 /* LVKDefaultMessageFullBodyItem.xib */; };
 		D0764957194906F800911C65 /* check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0764956194906F800911C65 /* check@2x.png */; };
@@ -196,6 +198,13 @@
 		D0032740194DD7FC0018B70E /* LVKDefaultMessagePostItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDefaultMessagePostItem.m; sourceTree = "<group>"; };
 		D0032741194DD7FC0018B70E /* LVKDefaultMessagePostItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LVKDefaultMessagePostItem.xib; sourceTree = "<group>"; };
 		D0032744194DDA050018B70E /* wallPost@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wallPost@2x.png"; sourceTree = "<group>"; };
+		D0032746194E28040018B70E /* UIImage+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extensions.h"; sourceTree = "<group>"; };
+		D0032747194E28040018B70E /* UIImage+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extensions.m"; sourceTree = "<group>"; };
+		D0032749194E47EE0018B70E /* LVKDialogListControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDialogListControllerDelegate.h; sourceTree = "<group>"; };
+		D003274A194E58120018B70E /* UIImage+JTImageDecode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+JTImageDecode.h"; sourceTree = "<group>"; };
+		D003274B194E58120018B70E /* UIImage+JTImageDecode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+JTImageDecode.m"; sourceTree = "<group>"; };
+		D003274D194E5CB60018B70E /* LVKImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKImageLoader.h; sourceTree = "<group>"; };
+		D003274E194E5CB60018B70E /* LVKImageLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKImageLoader.m; sourceTree = "<group>"; };
 		D038C3021944DE3000E7895D /* LVKDefaultMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultMessageTableViewCell.h; sourceTree = "<group>"; };
 		D038C3031944DE3000E7895D /* LVKDefaultMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDefaultMessageTableViewCell.m; sourceTree = "<group>"; };
 		D038C3051944E13F00E7895D /* LVKDefaultMessagesCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultMessagesCollectionView.h; sourceTree = "<group>"; };
@@ -231,8 +240,6 @@
 		D038C3611945098600E7895D /* default-bubbleIncoming@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default-bubbleIncoming@2x.png"; sourceTree = "<group>"; };
 		D038C3671945135900E7895D /* default-bubbleOutgoing@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default-bubbleOutgoing@2x.png"; sourceTree = "<group>"; };
 		D076494B19479CBC00911C65 /* LVKBubbleActionsDelegateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKBubbleActionsDelegateProtocol.h; sourceTree = "<group>"; };
-		D076494C1947A7C300911C65 /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
-		D076494D1947A7C300911C65 /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
 		D07649511948F06000911C65 /* LVKDefaultMessageFullBodyItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultMessageFullBodyItem.h; sourceTree = "<group>"; };
 		D07649521948F06000911C65 /* LVKDefaultMessageFullBodyItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDefaultMessageFullBodyItem.m; sourceTree = "<group>"; };
 		D07649531948F06000911C65 /* LVKDefaultMessageFullBodyItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LVKDefaultMessageFullBodyItem.xib; sourceTree = "<group>"; };
@@ -339,8 +346,10 @@
 		A4017DB7193DE8EA000EAD87 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D076494C1947A7C300911C65 /* UIImage+Color.h */,
-				D076494D1947A7C300911C65 /* UIImage+Color.m */,
+				D003274A194E58120018B70E /* UIImage+JTImageDecode.h */,
+				D003274B194E58120018B70E /* UIImage+JTImageDecode.m */,
+				D0032746194E28040018B70E /* UIImage+Extensions.h */,
+				D0032747194E28040018B70E /* UIImage+Extensions.m */,
 				D038C3551944E78200E7895D /* NSString+StringSize.h */,
 				D038C3561944E78200E7895D /* NSString+StringSize.m */,
 				A4017DB8193DE8EA000EAD87 /* VKMessenger-Info.plist */,
@@ -574,10 +583,13 @@
 			children = (
 				A4017DC8193DE8EA000EAD87 /* LVKDialogListViewController.h */,
 				A4017DC9193DE8EA000EAD87 /* LVKDialogListViewController.m */,
+				D0032749194E47EE0018B70E /* LVKDialogListControllerDelegate.h */,
 				D09E64FB194B7F6600B36B86 /* LVKDefaultDialogTableViewCell.h */,
 				D09E64FC194B7F6600B36B86 /* LVKDefaultDialogTableViewCell.m */,
 				D09E6500194C5A5800B36B86 /* LVKDefaultUserTableViewCell.h */,
 				D09E6501194C5A5800B36B86 /* LVKDefaultUserTableViewCell.m */,
+				D003274D194E5CB60018B70E /* LVKImageLoader.h */,
+				D003274E194E5CB60018B70E /* LVKImageLoader.m */,
 			);
 			name = "Dialog List";
 			sourceTree = "<group>";
@@ -633,7 +645,7 @@
 				ORGANIZATIONNAME = Levelab;
 				TargetAttributes = {
 					A4017DAC193DE8EA000EAD87 = {
-						DevelopmentTeam = 88648Q4J25;
+						DevelopmentTeam = 6VXW8XMBDL;
 					};
 					A4017DD3193DE8EA000EAD87 = {
 						TestTargetID = A4017DAC193DE8EA000EAD87;
@@ -766,7 +778,6 @@
 				D038C3041944DE3000E7895D /* LVKDefaultMessageTableViewCell.m in Sources */,
 				A4017DF0193E122E000EAD87 /* LVKDialogsCollection.m in Sources */,
 				D0A210BF194646CF008508BF /* LVKDefaultMessagePhotoItem.m in Sources */,
-				D076494E1947A7C300911C65 /* UIImage+Color.m in Sources */,
 				A4017DBD193DE8EA000EAD87 /* main.m in Sources */,
 				A4017DCA193DE8EA000EAD87 /* LVKDialogListViewController.m in Sources */,
 				A474AF81193FB56B009EB0D2 /* LVKAudioAttachment.m in Sources */,
@@ -779,6 +790,7 @@
 				D0A210C519464786008508BF /* LVKDefaultMessageStickerItem.m in Sources */,
 				A410F677193F57B00030D7CC /* LVKMessage.m in Sources */,
 				D038C3531944E64E00E7895D /* LVKDefaultMessageRepostBodyItem.m in Sources */,
+				D003274C194E58120018B70E /* UIImage+JTImageDecode.m in Sources */,
 				D0A210C21946476D008508BF /* LVKDefaultMessageVideoItem.m in Sources */,
 				D07649541948F06000911C65 /* LVKDefaultMessageFullBodyItem.m in Sources */,
 				D038C3321944E28200E7895D /* LVKDefaultMessageBodyItem.m in Sources */,
@@ -791,10 +803,12 @@
 				A410F674193F4DD70030D7CC /* LVKUserPickerViewController.m in Sources */,
 				A474AF87193FC77D009EB0D2 /* LVKWelcomeViewController.m in Sources */,
 				9D2A465997B77066592F6D3C /* LVKRepostedMessage.m in Sources */,
+				D003274F194E5CB60018B70E /* LVKImageLoader.m in Sources */,
 				A4671F4D194A5C8100CB3BA4 /* LVKDialogDeleteAlertDelegate.m in Sources */,
 				9D2A426EEE2286942C35EEE0 /* LVKVideoAttachment.m in Sources */,
 				9D2A4C17A76922050A4580FE /* LVKDocumentAttachment.m in Sources */,
 				9D2A4ED4CD0B4F119FF0C70A /* LVKWallAttachment.m in Sources */,
+				D0032748194E28040018B70E /* UIImage+Extensions.m in Sources */,
 				9D2A4F6BFB00357BCB07DCEE /* LVKStickerAttachment.m in Sources */,
 				D0A210CC1946637B008508BF /* LVKMessageCollectionViewDelegate.m in Sources */,
 			);
@@ -932,13 +946,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ilya Snakin (GJP2EFVESZ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ilya Snakin (GJP2EFVESZ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VKMessenger/VKMessenger-Prefix.pch";
 				INFOPLIST_FILE = "VKMessenger/VKMessenger-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "4700E702-619D-45EF-A93D-33F4A5E0B8A2";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
@@ -951,13 +965,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Ilya Snakin (GJP2EFVESZ)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ilya Snakin (GJP2EFVESZ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VKMessenger/VKMessenger-Prefix.pch";
 				INFOPLIST_FILE = "VKMessenger/VKMessenger-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "4700E702-619D-45EF-A93D-33F4A5E0B8A2";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;

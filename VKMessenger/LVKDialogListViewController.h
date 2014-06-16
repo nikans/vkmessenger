@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "LVKDialogListControllerDelegate.h"
 @class LVKDialogViewController;
 
-@interface LVKDialogListViewController : UITableViewController <UISearchBarDelegate>
+@interface LVKDialogListViewController : UITableViewController <UISearchBarDelegate, LVKDialogListControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
@@ -18,5 +18,7 @@
 
 @property (nonatomic) BOOL isSearching;
 @property (nonatomic) BOOL isCompactView;
+
+@property (strong, nonatomic) NSMutableDictionary *avatarsCache;
 
 @end

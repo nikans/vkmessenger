@@ -22,6 +22,7 @@
 #import "LVKDefaultDialogTableViewCell.h"
 #import "LVKDefaultUserTableViewCell.h"
 #import "LVKAppDelegate.h"
+#import "UIImage+JTImageDecode.h"
 
 @interface LVKDialogListViewController () {
     NSMutableArray *_objects, *_filteredObjects;
@@ -60,10 +61,11 @@
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     // TODO
-    self.isCompactView = YES;
+    self.isCompactView = NO;
     
     hasDataToLoad = YES;
     self.isSearching = NO;
+    self.avatarsCache = [NSMutableDictionary dictionary];
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.contentOffset = CGPointMake(0, self.searchBar.frame.size.height);
@@ -85,6 +87,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    [self.avatarsCache removeAllObjects];
     // Dispose of any resources that can be recreated.
 }
 
@@ -148,10 +151,23 @@
 
     cell.date.text = [NSDateFormatter localizedStringFromDate:dialog.lastMessage.date dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle];
 
-    [cell.messageAvatar setImageWithURL:dialog.lastMessage.user.photo_100];
+//    [cell.messageAvatar setImage:[UIImage imageNamed:@"camera"]];
+    [cell.messageAvatar setImageWithURL:[dialog.lastMessage.user getPhoto:20]];
     [cell ajustLayoutForReadState:dialog.getReadState];
+    
+    NSString *identifier = [NSString stringWithFormat:@"%@", dialog.chatId];
+    cell.identifier = identifier;
+    if (self.avatarsCache[identifier] == nil)
+        [cell setAvatars:[dialog getChatPictureOfSize:100]];
+    else {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^{
+            UIImage *cachedAvatar = [UIImage decodedImageWithImage:self.avatarsCache[identifier]];
 
-    [cell setAvatars:[dialog getChatPicture]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                cell.avatarsImageView.image = cachedAvatar;
+            });
+        });
+    }
     
 //        [cell ajustLayoutUserIsOnline:dialog.user.]
     
@@ -199,6 +215,14 @@
 
 
 
+#pragma mark - DialogListVC Delegate
+
+- (void)setImage:(UIImage *)image forIdentifier:(NSString *)identifier {
+    self.avatarsCache[identifier] = image;
+}
+
+
+
 #pragma mark - SearchBar Delegate
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
@@ -234,8 +258,10 @@
 
 - (void)onTopRefreshControl
 {
-    if(!isLoading)
+    if(!isLoading) {
+        [self.avatarsCache removeAllObjects];
         [self loadData:0 reload:YES];
+    }
 }
 
 

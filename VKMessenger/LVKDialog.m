@@ -12,14 +12,14 @@
 
 @synthesize title, chatId, chatUserIds, type, lastMessage, user, users;
 
--(id)init
+- (id)init
 {
     self = [super init];
     
     return self;
 }
 
--(id)initWithDictionary:(NSDictionary *)dictionary
+- (id)initWithDictionary:(NSDictionary *)dictionary
 {
     self = [self init];
     
@@ -39,7 +39,7 @@
     return self;
 }
 
--(id)initWithPlainDictionary:(NSDictionary *)dictionary
+- (id)initWithPlainDictionary:(NSDictionary *)dictionary
 {
     self = [self init];
     
@@ -54,7 +54,7 @@
     return self;
 }
 
--(id)initWithDictionaryFromSearch:(NSDictionary *)dictionary
+- (id)initWithDictionaryFromSearch:(NSDictionary *)dictionary
 {
     self = [self init];
     
@@ -77,28 +77,28 @@
     return self;
 }
 
--(void)adoptUser:(LVKUser *)adoptedUser
+- (void)adoptUser:(LVKUser *)adoptedUser
 {
     [self setUser:adoptedUser];
     [self setTitle:[adoptedUser fullName]];
 }
 
--(void)adoptUsers:(NSArray *)adoptedUsers
+- (void)adoptUsers:(NSArray *)adoptedUsers
 {
     [self setUsers:adoptedUsers];
 }
 
--(void)adoptLastMessageUsers:(NSArray *)adoptedUsers
+- (void)adoptLastMessageUsers:(NSArray *)adoptedUsers
 {
     [[self lastMessage] adoptUserArray:adoptedUsers];
 }
 
--(BOOL)isEqual:(id)object
+- (BOOL)isEqual:(id)object
 {
     return [chatId isEqual:[object chatId]];
 }
 
--(NSString *)chatIdKey
+- (NSString *)chatIdKey
 {
     switch (type) {
         case Dialog:
@@ -114,24 +114,29 @@
     }
 }
 
--(readState)getReadState
+- (readState)getReadState
 {
     return [lastMessage getReadState];
 }
 
--(id)getChatPicture
+- (id)getChatPicture
+{
+    return [self getChatPictureOfSize:50];
+}
+
+- (id)getChatPictureOfSize:(NSUInteger)size
 {
     if(type == Dialog)
-        return [user getPhoto:50];
+        return [user getPhoto:size];
     else if(type == Room)
     {
         NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, users.count > 4 ? 4 : users.count)];
         NSMutableArray *picturesArray = [[NSMutableArray alloc] init];
         
         [[[users filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(LVKUser *chatUser, NSDictionary *bindings) {
-            return [chatUser getPhoto:50] != nil;
+            return [chatUser getPhoto:size] != nil;
         }]] objectsAtIndexes:indexes] enumerateObjectsUsingBlock:^(LVKUser *chatUser, NSUInteger idx, BOOL *stop) {
-            [picturesArray addObject:[chatUser getPhoto:50]];
+            [picturesArray addObject:[chatUser getPhoto:size]];
         }];
         
         return picturesArray;
@@ -139,5 +144,6 @@
     else
         return @"";
 }
+
 
 @end

@@ -17,7 +17,6 @@
 #import "LVKMessageItemProtocol.h"
 #import "LVKMessageCollectionViewDelegate.h"
 #import "LVKUsersCollection.h"
-#import "UIImage+Color.h"
 
 #import "LVKDefaultMessageTableViewCell.h"
 

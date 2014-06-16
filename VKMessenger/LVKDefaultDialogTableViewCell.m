@@ -9,13 +9,20 @@
 #import "LVKDefaultDialogTableViewCell.h"
 #import <AVHexColor.h>
 #import <UIImageView+WebCache.h>
+#import <QuartzCore/QuartzCore.h>
+#import "UIImage+Extensions.h"
+#import <UIKit/UIGraphics.h>
+#import <UIImage+Resizing.h>
 
 @interface LVKDefaultDialogTableViewCell ()
 
 @property (nonatomic) CGFloat titleConstraintDefaultConstant;
 @property (nonatomic) CGFloat defaultMargin;
-@property (nonatomic) int avatarInset;
 @property (strong, nonatomic) NSString *messageDefaultText;
+
+@property (nonatomic) int avatarInset;
+@property (strong, nonatomic) NSMutableArray *avatarsArray;
+@property (nonatomic) NSMutableArray *avatarsToDraw;
 
 @end
 
@@ -37,30 +44,33 @@ typedef enum {
     self.avatarInset = 2;
     self.defaultMargin = 10;
     
+    self.avatarsToDraw = [NSMutableArray array];
+    
     self.isRoom = NO;
     
     self.titleConstraintDefaultConstant = self.titleConstraint.constant;
     self.messageDefaultText = self.message.text;
+    
+    self.onlineIndicator.layer.cornerRadius = 3.f;
+    self.onlineIndicator.clipsToBounds = YES;
+    
+    self.avatarsImageView.layer.cornerRadius = 2.f;
+    self.avatarsImageView.clipsToBounds = YES;
+    
+    self.messageBackground.layer.cornerRadius = 2.f;
+    self.messageBackground.clipsToBounds = YES;
+    
+    self.messageAvatar.layer.cornerRadius = 2.f;
+    self.messageAvatar.clipsToBounds = YES;
 }
 
 - (void)layoutSubviews {
-    self.onlineIndicator.hidden = YES;
-    self.onlineIndicator.layer.cornerRadius = 3.f;
-    self.onlineIndicator.layer.masksToBounds = YES;
+    [super layoutSubviews];
     
     self.titleConstraint.constant = self.defaultMargin;
+
 //    self.messageInsetConstraint.constant = 0;
-    
-    self.avatarsView.layer.cornerRadius = 2.f;
-    self.avatarsView.layer.masksToBounds = YES;
-    
-    self.messageBackground.layer.cornerRadius = 2.f;
-    self.messageBackground.layer.masksToBounds = YES;
-    
-    self.messageAvatar.layer.cornerRadius = 2.f;
-    self.messageAvatar.layer.masksToBounds = YES;
-    
-    self.roomIndicator.hidden = YES;
+
     if (self.isRoom) {
         self.roomIndicator.hidden = NO;
         self.titleConstraint.constant = self.titleConstraintDefaultConstant;
@@ -68,10 +78,13 @@ typedef enum {
 }
 
 - (void)prepareForReuse {
-    for (UIView *avatar in self.avatarsView.subviews) {
-        [avatar removeFromSuperview];
-    }
+    self.onlineIndicator.hidden = YES;
+    self.roomIndicator.hidden = YES;
+    
+    self.avatarsImageView.image = nil;
+    self.messageAvatar.image = nil;
     self.message.text = self.messageDefaultText;
+    [self.avatarsToDraw removeAllObjects];
 }
 
 - (void)ajustLayoutForReadState:(readState)state {
@@ -97,44 +110,100 @@ typedef enum {
         self.onlineIndicator.hidden = YES;
 }
 
-- (void)setAvatars:(NSArray *)avatarsURLArray {
-    if ([avatarsURLArray isKindOfClass:[NSString class]]) 
-        [self addAvatars:@[avatarsURLArray] withPlaces:@[@(Single)]];
-    else if ([avatarsURLArray count] == 2)
-        [self addAvatars:avatarsURLArray withPlaces:@[@(FirstHalf), @(SecondHalf)]];
-    else if ([avatarsURLArray count] == 3)
-        [self addAvatars:avatarsURLArray withPlaces:@[@(FirstHalf), @(SecondQuarter), @(ForthQuarter)]];
-    else
-        [self addAvatars:avatarsURLArray withPlaces:@[@(FirstQarter), @(SecondQuarter), @(ThirdQuarter), @(ForthQuarter)]];
-}
-
-- (void)addAvatars:(NSArray *)avatars withPlaces:(NSArray *)places {
-    for (int i=0; i<[places count]; i++) {
-        NSNumber *place = places[i];
-        UIImageView *avatar = [self imageViewForAvatarAtPlace:[place intValue] withURL:(NSString *)avatars[i]];
-        avatar.layer.cornerRadius = 2.f;
-        avatar.layer.masksToBounds = YES;
-        avatar.contentMode = UIViewContentModeScaleAspectFill;
-        [self.avatarsView addSubview:avatar];
+- (void)setAvatars:(id)avatarsURLArray {
+    NSArray *urlArray;
+    if ([avatarsURLArray isKindOfClass:[NSString class]])
+//        urlArray = @[avatarsURLArray];
+        [self.avatarsImageView setImageWithURL:avatarsURLArray];
+    else {
+        if ([avatarsURLArray count] > 4)
+            urlArray = [avatarsURLArray subarrayWithRange:NSMakeRange(0, 4)];
+        else
+            urlArray = avatarsURLArray;
+        
+        [self loadAvatarImagesWithURLArray:urlArray];
     }
 }
 
-- (UIImageView *)imageViewForAvatarAtPlace:(AvatarPlace)place withURL:(NSURL *)url {
+- (void)loadAvatarImagesWithURLArray:(NSArray *)urlArray {
+    
+    for (int i=0; i<[urlArray count]; i++) {
+        NSURL *url = [NSURL URLWithString:urlArray[i]];
+        
+        [SDWebImageDownloader.sharedDownloader
+         downloadImageWithURL:url
+         options:0
+         progress:^(NSInteger receivedSize, NSInteger expectedSize) {}
+         completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished)
+         {
+             if (image && finished)
+             {
+                 [self addImageToFinalAvatarImage:image targetQuantity:[urlArray count]];
+             }
+         }];
+    }
+}
+
+- (NSArray *)avatarPlacesForAvatarsArray:(NSArray *)avatars {
+    if ([avatars count] == 1)
+        return @[@(Single)];
+    else if ([avatars count] == 2)
+        return @[@(FirstHalf), @(SecondHalf)];
+    else if ([avatars count] == 3)
+        return @[@(FirstHalf), @(SecondQuarter), @(ForthQuarter)];
+    else
+        return @[@(FirstQarter), @(SecondQuarter), @(ThirdQuarter), @(ForthQuarter)];
+}
+
+- (CGRect)avatarRectForPlace:(AvatarPlace)place {
     CGSize avatarSize = [self sizeForAvatarInPlace:place];
     CGPoint avatarOrigin = [self originForAvatarInPlace:place];
-    CGRect avatarFrame = CGRectMake(avatarOrigin.x, avatarOrigin.y, avatarSize.width, avatarSize.height);
-    UIImageView *avatar = [[UIImageView alloc] initWithFrame:avatarFrame];
-    [avatar setImageWithURL:url];
+    return CGRectMake(avatarOrigin.x, avatarOrigin.y, avatarSize.width, avatarSize.height);
+}
 
-    return avatar;
+- (void)addImageToFinalAvatarImage:(UIImage *)partialImage targetQuantity:(NSUInteger)targetQuantity {
+    
+    [self.avatarsToDraw addObject:partialImage];
+        
+    if ([self.avatarsToDraw count] == targetQuantity) {
+        [self drawFinalImage];
+        
+    }
+}
+
+- (void)drawFinalImage {
+    
+    UIGraphicsBeginImageContext(self.avatarsImageView.frame.size);
+    
+    NSArray *avatarsPlaces = [self avatarPlacesForAvatarsArray:self.avatarsToDraw];
+    
+    for (int i=0; i<[self.avatarsToDraw count] && i<4; i++) {
+        UIImage *partialImage = self.avatarsToDraw[i];
+        CGRect avatarRect = [self avatarRectForPlace:[(NSNumber *)avatarsPlaces[i] intValue]];
+
+        partialImage = [partialImage scaleToSize:avatarRect.size usingMode:NYXResizeModeAspectFill];
+        partialImage = [partialImage cropToSize:avatarRect.size usingMode:NYXCropModeCenter];
+        partialImage = [partialImage makeRoundCornersWithRadius:2.f];
+//        [[UIBezierPath bezierPathWithRoundedRect:avatarRect cornerRadius:2.0] addClip];
+        
+        [partialImage drawInRect:avatarRect];
+    }
+
+    UIImage *finalImage = UIGraphicsGetImageFromCurrentImageContext();
+    self.avatarsImageView.image = finalImage;
+    [self.controllerDelegate setImage:finalImage forIdentifier:self.identifier];
+    
+    UIGraphicsEndImageContext();
+
+    [self.avatarsToDraw removeAllObjects];
 }
 
 - (CGSize)sizeForAvatarInPlace:(AvatarPlace)place {
-    CGRect baseFrame = self.avatarsView.frame;
+    CGRect baseFrame = self.avatarsImageView.frame;
     
     switch (place) {
         case Single:
-            return self.avatarsView.frame.size;
+            return baseFrame.size;
             break;
         case FirstHalf: case SecondHalf:
             return CGSizeMake(baseFrame.size.width / 2 - self.avatarInset / 2, baseFrame.size.height);
@@ -148,7 +217,7 @@ typedef enum {
 }
 
 - (CGPoint)originForAvatarInPlace:(AvatarPlace)place {
-    CGRect baseFrame = self.avatarsView.frame;
+    CGRect baseFrame = self.avatarsImageView.frame;
     baseFrame.origin.x = 0; baseFrame.origin.y = 0;
     
     switch (place) {
