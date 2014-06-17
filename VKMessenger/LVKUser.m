@@ -20,9 +20,34 @@
     return self;
 }
 
++(NSMutableDictionary *)users
+{
+    static NSMutableDictionary *_users = nil;
+    
+    if(_users == nil)
+    {
+        _users = [[NSMutableDictionary alloc] init];
+    }
+    
+    return _users;
+}
+
++(LVKUser *)getUserById:(NSNumber *)userId
+{
+    LVKUser *user = [[LVKUser users] objectForKey:userId];
+    
+    if(user == nil)
+    {
+        user = [LVKUser alloc];
+        [[LVKUser users] setObject:user forKey:userId];
+    }
+    
+    return user;
+}
+
 -(id)initWithDictionary:(NSDictionary *)dictionary
 {
-    self = [self init];
+    self = [LVKUser getUserById:[dictionary valueForKey:@"id"]];
     
     if(self)
     {
