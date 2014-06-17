@@ -91,6 +91,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)appBecomeActive
+{
+    [self loadData:0 reload:YES];
+}
+
 
 
 #pragma mark - Table View Delegate
@@ -439,6 +444,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(resetMessageFlags:)
                                                  name:@"resetMessageFlags"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(appBecomeActive)
+                                                 name:@"appBecomeActive"
                                                object:nil];
 }
 
