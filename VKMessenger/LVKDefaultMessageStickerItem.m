@@ -8,14 +8,15 @@
 
 #import "LVKDefaultMessageStickerItem.h"
 #import "LVKStickerAttachment.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation LVKDefaultMessageStickerItem
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
+    self = [[[NSBundle mainBundle] loadNibNamed:@"LVKDefaultMessageStickerItem" owner:self options:nil] firstObject];
     if (self) {
-        // Initialization code
+        self.frame = frame;
     }
     return self;
 }
@@ -28,6 +29,10 @@
 
 + (CGSize)calculateContentSizeWithData:(LVKStickerAttachment *)_data maxWidth:(CGFloat)_maxWidth minWidth:(CGFloat)_minWidth {
     return CGSizeMake(128, 128);
+}
+
+- (void)layoutData:(LVKStickerAttachment *)data {
+    [self.image setImageWithURL:[data photo_128]];
 }
 
 - (void)dealloc {

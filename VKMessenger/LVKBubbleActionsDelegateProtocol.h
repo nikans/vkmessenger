@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class LVKDefaultMessageTableViewCell;
+@class LVKDefaultCollectionViewMessageTableViewCell;
 
 @protocol LVKBubbleActionsDelegateProtocol <NSObject>
 

@@ -8,7 +8,7 @@
 
 #import "LVKMessageCollectionViewDelegate.h"
 
-#import "LVKDefaultMessageTableViewCell.h"
+#import "LVKDefaultCollectionViewMessageTableViewCell.h"
 #import "LVKDefaultMessagesCollectionView.h"
 #import "LVKMessagePartProtocol.h"
 #import "LVKMessageItemProtocol.h"
@@ -45,100 +45,30 @@
 - (UICollectionViewCell *)collectionView:(LVKDefaultMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
     id<LVKMessagePartProtocol> cellData = [self collectionView:collectionView dataForItemAtIndexPath:indexPath];
+    UICollectionViewCell <LVKMessageItemProtocol> *cell;
+   
+    // Full-width Body
+    // TODO: FIX THAT
+    if([cellData isKindOfClass:[LVKMessage class]] && collectionView.isFullWidth)
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultFullBodyItem" forIndexPath:indexPath];
+    
+    NSString *reuseIdentifier = [self reuseIdentifierForCellInCollectionView:collectionView basedOnDataPartClass:[cellData class]];
     
     // Repost
     if([cellData isKindOfClass:[LVKRepostedMessage class]])
-    {
-        LVKDefaultMessageRepostBodyItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultRepostBodyItem" forIndexPath:indexPath];
-        
-        cell.body.text = [(LVKRepostedMessage *)cellData body];
-        cell.date.text = [NSDateFormatter localizedStringFromDate:[(LVKRepostedMessage *)cellData date]
-                                                        dateStyle:NSDateFormatterNoStyle
-                                                        timeStyle:NSDateFormatterShortStyle];
-        cell.userName.text = [(LVKRepostedMessage *)cellData user].fullName;
-        [cell.avatar setImageWithURL:[(LVKRepostedMessage *)cellData user].photo_100];
-        return cell;
-    }
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultRepostBodyItem" forIndexPath:indexPath];
     
-    // Full-width Body
-    else if([cellData isKindOfClass:[LVKMessage class]] && collectionView.isFullWidth)
-    {
-        LVKDefaultMessageFullBodyItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultFullBodyItem" forIndexPath:indexPath];
-        
-        cell.body.text = [(LVKMessage *)cellData body];
-        cell.date.text = [NSDateFormatter localizedStringFromDate:[(LVKMessage *)cellData date]
-                                                        dateStyle:NSDateFormatterNoStyle
-                                                        timeStyle:NSDateFormatterShortStyle];
-        cell.userName.text = [(LVKMessage *)cellData user].fullName;
-        [cell.avatar setImageWithURL:[(LVKMessage *)cellData user].photo_100];
-        return cell;
-    }
-    
-    // Body
-    else if([cellData isKindOfClass:[LVKMessage class]])
-    {
-        LVKDefaultMessageBodyItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultBodyItem" forIndexPath:indexPath];
-        cell.body.text = [(LVKMessage *)cellData body];
-        return cell;
-    }
-    
-    // Photo
-    else if([cellData isKindOfClass:[LVKPhotoAttachment class]])
-    {
-        LVKDefaultMessagePhotoItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultPhotoItem" forIndexPath:indexPath];
-        [cell.image setImageWithURL:[(LVKPhotoAttachment *)cellData photo_604]];
-        return cell;
-    }
-    
-    // Video
-    else if([cellData isKindOfClass:[LVKVideoAttachment class]])
-    {
-        LVKDefaultMessageVideoItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultVideoItem" forIndexPath:indexPath];
-        [cell.image setImageWithURL:[(LVKVideoAttachment *)cellData photo_130]];
-        [cell setDurationWithSeconds:[[(LVKVideoAttachment *)cellData duration] intValue]];
-        
-        return cell;
-    }
-    
-    // Sticker
-    else if([cellData isKindOfClass:[LVKStickerAttachment class]])
-    {
-        LVKDefaultMessageStickerItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultStickerItem" forIndexPath:indexPath];
-        [cell.image setImageWithURL:[(LVKStickerAttachment *)cellData photo_128]];
-        return cell;
-    }
-    
-    // Document
-    else if([cellData isKindOfClass:[LVKDocumentAttachment class]])
-    {
-        LVKDefaultMessagePostItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultPostItem" forIndexPath:indexPath];
-        cell.type = Document;
-//        cell.title.text = [(LVKDocumentAttachment *)cellData ];
-//        cell.subtitle.text =
-        return cell;
-    }
-    
-    // Wall post
-    else if([cellData isKindOfClass:[LVKWallAttachment class]])
-    {
-//        LVKDefaultMessageBodyItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultBodyItem" forIndexPath:indexPath];
-//        cell.body.text = [(LVKWallAttachment *)cellData text];
-//        return cell;
-        
-        LVKDefaultMessagePostItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultPostItem" forIndexPath:indexPath];
-        cell.type = Wall;
-        cell.title.text = [(LVKWallAttachment *)cellData text];
-        cell.subtitle.text = @"Wall post"; //TODO: localize!
-        return cell;
-    }
+    else if(reuseIdentifier != nil)
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Body (probably empty)
-    LVKDefaultMessageBodyItem *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultBodyItem" forIndexPath:indexPath];
-    cell.body.text = @"";
+    else
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"DefaultBodyItem" forIndexPath:indexPath];
+    
+    [cell layoutData:cellData];
     return cell;
 }
 
-// TODO
 - (id<LVKMessagePartProtocol>)collectionView:(LVKDefaultMessagesCollectionView *)collectionView dataForItemAtIndexPath:(NSIndexPath *)indexPath {
     return [[self.data getMessageParts] objectAtIndex:indexPath.row];
 }
@@ -173,37 +103,15 @@
     CGFloat maxWidth = collectionView.isFullWidth ? 309.5 : collectionView.maxWidth - 2;
     CGFloat minWidth = collectionView.minWidth;
     
-    // Repost
-    if([cellData isKindOfClass:[LVKRepostedMessage class]])
-        cellSize = [LVKDefaultMessageRepostBodyItem calculateContentSizeWithData:(LVKMessage *)cellData maxWidth:maxWidth minWidth:minWidth];
+    Class itemClass = [LVKMessageCollectionViewDelegate classForViewItemBasedOnDataPartClass:[cellData class]];
     
-    // Full-width body
-    else if([cellData isKindOfClass:[LVKMessage class]] && collectionView.isFullWidth)
+    // Full-width Body
+    // TODO: FIX THAT
+    if ([cellData isKindOfClass:[LVKMessage class]] && collectionView.isFullWidth)
         cellSize = [LVKDefaultMessageFullBodyItem calculateContentSizeWithData:(LVKMessage *)cellData maxWidth:maxWidth minWidth:minWidth];
     
-    // Body
-    else if([cellData isKindOfClass:[LVKMessage class]])
-        cellSize = [LVKDefaultMessageBodyItem calculateContentSizeWithData:(LVKMessage *)cellData maxWidth:maxWidth minWidth:minWidth];
-    
-    // Photo
-    else if([cellData isKindOfClass:[LVKPhotoAttachment class]])
-        cellSize = [LVKDefaultMessagePhotoItem calculateContentSizeWithData:(LVKPhotoAttachment *)cellData maxWidth:maxWidth minWidth:minWidth];
-    
-    // Sticker
-    else if([cellData isKindOfClass:[LVKStickerAttachment class]])
-        cellSize = [LVKDefaultMessageStickerItem calculateContentSizeWithData:(LVKStickerAttachment *)cellData maxWidth:maxWidth minWidth:minWidth];
-    
-    // Video
-    else if([cellData isKindOfClass:[LVKVideoAttachment class]])
-        cellSize = [LVKDefaultMessageVideoItem calculateContentSizeWithData:(LVKVideoAttachment *)cellData maxWidth:maxWidth minWidth:minWidth];
-    
-    // Document
-    else if([cellData isKindOfClass:[LVKDocumentAttachment class]])
-        cellSize = [LVKDefaultMessagePostItem calculateContentSizeWithData:(LVKDocumentAttachment *)cellData maxWidth:maxWidth minWidth:minWidth];
-    
-    // Wall post
-    else if([cellData isKindOfClass:[LVKWallAttachment class]])
-        cellSize = [LVKDefaultMessagePostItem calculateContentSizeWithData:(LVKWallAttachment *)cellData maxWidth:maxWidth minWidth:minWidth];
+    else if (itemClass != nil)
+        cellSize = [itemClass calculateContentSizeWithData:cellData maxWidth:maxWidth minWidth:minWidth];
     
     // Body (probably empty)
     else
@@ -231,9 +139,26 @@
         return [LVKDefaultMessagePostItem class];
     if (dataPartClass == [LVKWallAttachment class])
         return [LVKDefaultMessagePostItem class];
-    return [LVKDefaultMessageBodyItem class];
+    return nil;
 }
 
+- (NSString *)reuseIdentifierForCellInCollectionView:(LVKDefaultMessagesCollectionView *)collectionView basedOnDataPartClass:(Class)dataPartClass {
+    if (dataPartClass == [LVKRepostedMessage class])
+        return @"DefaultRepostBodyItem";
+    if (dataPartClass == [LVKMessage class])
+        return @"DefaultBodyItem";
+    if (dataPartClass == [LVKPhotoAttachment class])
+        return @"DefaultPhotoItem";
+    if (dataPartClass == [LVKStickerAttachment class])
+        return @"DefaultStickerItem";
+    if (dataPartClass == [LVKVideoAttachment class])
+        return @"DefaultVideoItem";
+    if (dataPartClass == [LVKDocumentAttachment class])
+        return @"DefaultPostItem";
+    if (dataPartClass == [LVKWallAttachment class])
+        return @"DefaultPostItem";
+    return nil;
+}
 
 
 #pragma mark - Lifecycle callbacks

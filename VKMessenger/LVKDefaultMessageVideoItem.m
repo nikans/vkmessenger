@@ -8,14 +8,15 @@
 
 #import "LVKDefaultMessageVideoItem.h"
 #import "LVKVideoAttachment.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation LVKDefaultMessageVideoItem
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
+    self = [[[NSBundle mainBundle] loadNibNamed:@"LVKDefaultMessageVideoItem" owner:self options:nil] firstObject];
     if (self) {
-        // Initialization code
+        self.frame = frame;
     }
     return self;
 }
@@ -40,6 +41,11 @@
 
 + (CGSize)calculateContentSizeWithData:(LVKVideoAttachment *)_data maxWidth:(CGFloat)_maxWidth minWidth:(CGFloat)_minWidth {
     return CGSizeMake(140 > _minWidth ? 140 : _minWidth, 97.5+10);
+}
+
+- (void)layoutData:(LVKVideoAttachment *)data {
+    [self.image setImageWithURL:[data photo_130]];
+    [self setDurationWithSeconds:[[data duration] intValue]];
 }
 
 //- (void)layoutIfNeededForCalculatedWidth:(CGFloat)_width alignRight:(BOOL)_alignRight {

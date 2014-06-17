@@ -18,7 +18,9 @@
 #import "LVKMessageCollectionViewDelegate.h"
 #import "LVKUsersCollection.h"
 
-#import "LVKDefaultMessageTableViewCell.h"
+#import "LVKDefaultCollectionViewMessageTableViewCell.h"
+#import "LVKDefaultAbstractMessageTableViewCell.h"
+#import "LVKDefaultSingleItemMessageTableViewCell.h"
 
 #define TEXTVIEW_BASE_HEIGHT (27)
 
@@ -152,6 +154,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    //TODO: ADD WIDTH CALCULATION HERE!!!
+    
     LVKMessage *message = _objects[indexPath.row];
 
     // TODO
@@ -173,7 +177,7 @@
     return MAX(cellHeight+18.f, 39);
 }
 
-- (void)tableView:(UITableView *)tableView configureCell:(LVKDefaultMessageTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)configureCell:(LVKDefaultAbstractMessageTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     LVKMessage *message = _objects[indexPath.row];
     cell.isOutgoing = [message isOutgoing];
     cell.isRoom     = message.type == Room ? YES : NO;
@@ -186,35 +190,77 @@
         if (cell.isRoom) maxCVWidth = 196.f;
         else maxCVWidth = 227.f;
     else maxCVWidth = 217.f;
-    cell.collectionViewMaxWidth = maxCVWidth;
+    cell.messageItemsViewMaxWidth = maxCVWidth;
+    
+    if (!cell.isOutgoing && cell.isRoom)
+        [cell.avatarImage setImageWithURL:[[message user] getPhoto:100]];
+    [cell.timeLabel setText:[NSDateFormatter localizedStringFromDate:[message date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle]];
+    
+    [cell setBubbleActionsDelegate:self forMessageWithIndexPath:indexPath];
+}
+
+- (void)configureCollectionViewCell:(LVKDefaultCollectionViewMessageTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    LVKMessage *message = _objects[indexPath.row];
     
     LVKMessageCollectionViewDelegate *collectionViewDelegate = [[LVKMessageCollectionViewDelegate alloc] initWithData:message];
     [cell setCollectionViewDelegates:collectionViewDelegate forMessageWithIndexPath:indexPath];
-    [cell setBubbleActionsDelegate:self forMessageWithIndexPath:indexPath];
+}
+
+- (void)configureSingleItemCell:(LVKDefaultSingleItemMessageTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    LVKMessage *message = _objects[indexPath.row];
+    
+    id<LVKMessagePartProtocol> messagePart = [[message getMessageParts] objectAtIndex:0];
+    
+    Class itemClass = [LVKMessageCollectionViewDelegate classForViewItemBasedOnDataPartClass:[messagePart class]];
+    
+    CGFloat maxWidth = cell.messageItemsViewMaxWidth;
+    if (itemClass != nil) {
+        CGSize itemSize = [itemClass calculateContentSizeWithData:messagePart maxWidth:maxWidth minWidth:0];
+        UIView<LVKMessageItemProtocol> *item = [[itemClass alloc] initWithFrame:CGRectMake(0, 0, itemSize.width, itemSize.height)];
+        [item layoutData:messagePart];
+        [cell addItemView:item withSize:itemSize];
+    }
+    
 }
 
 // TODO
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    LVKDefaultMessageTableViewCell *cell = nil;
+    LVKDefaultAbstractMessageTableViewCell *cell = nil;
     LVKMessage *message = _objects[indexPath.row];
     
-    if([message isOutgoing])
-        cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultOutgoingMessageCell" forIndexPath:indexPath];
-    else
-        if (message.type == Room)
-            cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultIncomingRoomMessageCell" forIndexPath:indexPath];
+    NSString *reuseIdentifier;
+    BOOL isSingleItem = [[message getMessageParts] count] <= 1 ? YES : NO;
+    
+    if (isSingleItem) {
+        if([message isOutgoing])
+            reuseIdentifier = @"DefaultSingleItemOutgoingMessageCell";
         else
-            cell = [tableView dequeueReusableCellWithIdentifier:@"DefaultIncomingDialogMessageCell" forIndexPath:indexPath];
+            if (message.type == Room)
+                reuseIdentifier = @"DefaultSingleItemIncomingRoomMessageCell";
+            else
+                reuseIdentifier = @"DefaultSingleItemIncomingDialogMessageCell";
+    }
+    else {
+        if([message isOutgoing])
+            reuseIdentifier = @"DefaultOutgoingMessageCell";
+        else
+            if (message.type == Room)
+                reuseIdentifier = @"DefaultIncomingRoomMessageCell";
+            else
+                reuseIdentifier = @"DefaultIncomingDialogMessageCell";
+    }
     
-//    [(UILabel *)[cell viewWithTag:1] setText:[NSString stringWithFormat:@"%@%@", [message getReadState] == UnreadIncoming ? @"(!) " : [message getReadState] == UnreadOutgoing ? @"(?) " : @"", [message body]]];
-//    [(UILabel *)[cell viewWithTag:2] setText:[NSDateFormatter localizedStringFromDate:[message date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle]];
-//    [(UIImageView *)[cell viewWithTag:3] setImageWithURL:[[message user] getPhoto:100]];
+    cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    [cell.avatarImage setImageWithURL:[[message user] getPhoto:100]];
-    [cell.timeLabel setText:[NSDateFormatter localizedStringFromDate:[message date] dateStyle:NSDateFormatterNoStyle timeStyle:NSDateFormatterShortStyle]];
-    [self tableView:tableView configureCell:cell forRowAtIndexPath:indexPath];
+    [self configureCell:cell forRowAtIndexPath:indexPath];
     
+    if ([[message getMessageParts] count] > 0) {
+        if (isSingleItem)
+            [self configureSingleItemCell:(LVKDefaultSingleItemMessageTableViewCell *)cell forRowAtIndexPath:indexPath];
+        else
+            [self configureCollectionViewCell:(LVKDefaultCollectionViewMessageTableViewCell *)cell forRowAtIndexPath:indexPath];
+    }
     return cell;
 }
 
@@ -451,17 +497,17 @@
 }
 
 - (void)hasSuccessfullySentMessageAtIndexPath:(NSIndexPath *)indexPath {
-    LVKDefaultMessageTableViewCell *cell = (LVKDefaultMessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    LVKDefaultCollectionViewMessageTableViewCell *cell = (LVKDefaultCollectionViewMessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     [cell hasSuccessfullySentMessage];
 }
 
 - (void)hasFailedToSentMessageAtIndexPath:(NSIndexPath *)indexPath {
-    LVKDefaultMessageTableViewCell *cell = (LVKDefaultMessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    LVKDefaultCollectionViewMessageTableViewCell *cell = (LVKDefaultCollectionViewMessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     [cell hasFailedToSentMessage];
 }
 
 - (void)hasRetriedToSentMessageAtIndexPath:(NSIndexPath *)indexPath {
-    LVKDefaultMessageTableViewCell *cell = (LVKDefaultMessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    LVKDefaultCollectionViewMessageTableViewCell *cell = (LVKDefaultCollectionViewMessageTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     [cell hasRetriedToSendMessage];
 }
 
@@ -515,7 +561,7 @@
 - (void)pushToMessageVC:(UITapGestureRecognizer *)tapGesture
 {
     // TODO protocol
-    LVKDefaultMessageTableViewCell *cell = (LVKDefaultMessageTableViewCell *)tapGesture.view;
+    LVKDefaultCollectionViewMessageTableViewCell *cell = (LVKDefaultCollectionViewMessageTableViewCell *)tapGesture.view;
     
     // TODO
 //    cell.messageContainerBackgroundImage.image = [cell.messageContainerBackgroundImage.image addColor:[UIColor blackColor] drawAsOverlay:YES];
@@ -526,7 +572,7 @@
 - (void)resendMessage:(UITapGestureRecognizer *)tapGesture
 {
     // TODO protocol
-    LVKDefaultMessageTableViewCell *cell = (LVKDefaultMessageTableViewCell *)tapGesture.view;
+    LVKDefaultCollectionViewMessageTableViewCell *cell = (LVKDefaultCollectionViewMessageTableViewCell *)tapGesture.view;
     
     // TODO
     //    cell.messageContainerBackgroundImage.image = [cell.messageContainerBackgroundImage.image addColor:[UIColor blackColor] drawAsOverlay:YES];

@@ -8,14 +8,15 @@
 
 #import "LVKDefaultMessagePhotoItem.h"
 #import "LVKPhotoAttachment.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation LVKDefaultMessagePhotoItem
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
+    self = [[[NSBundle mainBundle] loadNibNamed:@"LVKDefaultMessagePhotoItem" owner:self options:nil] firstObject];
     if (self) {
-        // Initialization code
+        self.frame = frame;
     }
     return self;
 }
@@ -36,6 +37,10 @@
         return CGSizeMake(_maxWidth > _minWidth ? _maxWidth : _minWidth, [_data.height floatValue] * (_maxWidth / [_data.width floatValue]));
     CGFloat width = [_data.width floatValue] * (_maxHeight / [_data.height floatValue]);
     return CGSizeMake(width > _minWidth ? width : _minWidth, _maxHeight);
+}
+
+- (void)layoutData:(LVKPhotoAttachment *)data {
+    [self.image setImageWithURL:[data photo_604]];
 }
 
 - (void)dealloc {

@@ -8,6 +8,7 @@
 
 #import "LVKDefaultMessageFullBodyItem.h"
 #import "NSString+StringSize.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "LVKMessage.h"
 
 
@@ -34,6 +35,16 @@
 - (void)awakeFromNib {
     self.avatar.layer.cornerRadius = 2.f;
     self.avatar.layer.masksToBounds = YES;
+}
+
+- (void)layoutData:(LVKMessage *)data {
+    self.body.text = data.body;
+    self.date.text = [NSDateFormatter localizedStringFromDate:data.date
+                                                    dateStyle:NSDateFormatterNoStyle
+                                                    timeStyle:NSDateFormatterShortStyle];
+    self.userName.text = data.user.fullName;
+    [self.avatar setImageWithURL:[data.user getPhoto:50]];
+
 }
 
 - (void)dealloc {

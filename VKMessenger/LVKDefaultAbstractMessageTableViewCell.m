@@ -1,34 +1,27 @@
 //
-//  LVKMessageTableViewCell.m
-//  VKMessengerViews
+//  LVKDefaultAbstractMessageTableViewCell.m
+//  VKMessenger
 //
-//  Created by Eliah Nikans on 6/4/14.
+//  Created by Eliah Nikans on 6/17/14.
 //  Copyright (c) 2014 Levelab. All rights reserved.
 //
 
-#import "LVKDefaultMessageTableViewCell.h"
+#import "LVKDefaultAbstractMessageTableViewCell.h"
 #import "LVKMessageItemProtocol.h"
 #import "AVHexColor.h"
 
 #define LVKDefaultCellBackgroundColorUnread  @"#e1e9f5"
 #define LVKDefaultCellBackgroundColorFailed  @"#fbd3d3"
 
-@implementation LVKDefaultMessageTableViewCell
-
-@synthesize collectionViewDelegate;
+@implementation LVKDefaultAbstractMessageTableViewCell
 
 
 #pragma mark - TableViewCell callbacks
 
-- (void)layoutSubviews
-{
+- (void)layoutSubviews {
     [super layoutSubviews];
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    self.collectionViewWidthConstraint.constant = self.collectionViewMaxWidth;
-//    self.collectionViewHeightConstraint.constant = 0;
-    
     
     // Making avatar cute and round
     self.avatarImage.layer.cornerRadius = 14;
@@ -64,7 +57,7 @@
     }
     else
         self.backgroundColor = [UIColor clearColor];
-
+    
     
     // Tap action - go to message VC or resend
     if (self.sandingState == Failed) {
@@ -77,44 +70,7 @@
                                                                                      action:@selector(pushToMessageVC:)];
         [self addGestureRecognizer:tapGesture];
     }
-    
-    
-    // Width & height
-    [self.contentView layoutIfNeeded];
 
-//    self.collectionViewHeightConstraint.constant = self.collectionView.collectionViewLayout.collectionViewContentSize.height;
-    
-    NSInteger numberOfCells = [self.collectionView numberOfItemsInSection:0];
-    UICollectionViewLayout *layout = self.collectionView.collectionViewLayout;
-    CGFloat maxWidth = 0.0f;
-//    CGFloat height = 0.0f;
-    for (NSInteger i = 0; i < numberOfCells; i++) {
-        UICollectionViewLayoutAttributes *layoutAttributes = [layout layoutAttributesForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
-        CGRect cellFrame = layoutAttributes.frame;
-//        height += cellFrame.size.height;
-        if (cellFrame.size.width > maxWidth) {
-            maxWidth = cellFrame.size.width;
-        }
-//        if (numberOfCells > 1) {
-//            NSLog(@"%f - %@", maxWidth, self.timeLabel.text);
-//        }
-    }
-    
-    self.collectionView.minWidth = maxWidth;
-    if (numberOfCells > 1)
-        [self.collectionView reloadData];
-    
-//    if (numberOfCells > 0) {
-//        for (NSInteger i = 0; i < numberOfCells; i++) {
-//            UICollectionViewCell *cell = [self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
-//            if ([cell respondsToSelector:@selector(layoutIfNeededForCalculatedWidth:alignRight:)]) {
-//                [(id<LVKMessageItemProtocol>)cell layoutIfNeededForCalculatedWidth:maxWidth alignRight:self.isOutgoing];
-//            }
-//        }
-//    }
-    
-//    self.collectionViewHeightConstraint.constant = height + ([self.collectionView numberOfItemsInSection:0]-1)*5; // TODO
-    self.collectionViewWidthConstraint.constant = maxWidth+1 < self.collectionViewMaxWidth ? maxWidth+1 : self.collectionViewMaxWidth;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -123,20 +79,7 @@
 }
 
 
-
 #pragma mark - Init methods
-
--(void)setCollectionViewDelegates:(id<UICollectionViewDataSource, UICollectionViewDelegate>)dataSourceDelegate forMessageWithIndexPath:(NSIndexPath *)indexPath
-{
-    self.collectionViewDelegate = (LVKMessageCollectionViewDelegate *)dataSourceDelegate;
-    self.collectionView.maxWidth   = self.collectionViewMaxWidth;
-    self.collectionView.dataSource = self.collectionViewDelegate;
-    self.collectionView.delegate   = self.collectionViewDelegate;
-    
-//    self.collectionView.messageIndexPath = indexPath;
-    
-    [self.collectionView reloadData];
-}
 
 - (void)setBubbleActionsDelegate:(id<LVKBubbleActionsDelegateProtocol>)delegate forMessageWithIndexPath:(NSIndexPath *)indexPath {
     self.bubbleDelegate = delegate;
@@ -188,25 +131,10 @@
 
 - (void)awakeFromNib
 {
-    // Initialization code
 }
 
-- (void)prepareForReuse {
-    self.collectionViewDelegate = nil;
-    self.collectionViewMaxWidth = 0;
-}
-
-- (void)dealloc {
-    self.avatarImage = nil;
-    self.timeLabel = nil;
-    self.messageContainerView = nil;
-    self.messageContainerBackgroundImage = nil;
-    self.bubbleDelegate = nil;
-    self.cellIndexPath = nil;
-    self.collectionView = nil;
-    self.collectionViewDelegate = nil;
-    self.sendingActivityIndicator = nil;
-    self.sentCheckImageView = nil;
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    return nil;
 }
 
 @end

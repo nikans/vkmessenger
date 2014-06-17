@@ -7,14 +7,16 @@
 //
 
 #import "LVKDefaultMessagePostItem.h"
+#import "LVKWallAttachment.h"
+#import "LVKDocumentAttachment.h"
 
 @implementation LVKDefaultMessagePostItem
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
+    self = [[[NSBundle mainBundle] loadNibNamed:@"LVKDefaultMessagePostItem" owner:self options:nil] firstObject];
     if (self) {
-        // Initialization code
+        self.frame = frame;
     }
     return self;
 }
@@ -32,6 +34,17 @@
         self.icon.image = [UIImage imageNamed:@"document"];
     else
         self.icon.image = [UIImage imageNamed:@"wallPost"];
+}
+
+- (void)layoutData:(id<LVKMessagePartProtocol>)data {
+    if ([data isKindOfClass:[LVKWallAttachment class]]) {
+        self.type = Wall;
+        self.title.text = [(LVKWallAttachment *)data text];
+        self.subtitle.text = @"Wall post"; //TODO: localize!
+    }
+    else if ([data isKindOfClass:[LVKDocumentAttachment class]]) {
+        self.type = Document;
+    }
 }
 
 + (CGSize)calculateContentSizeWithData:(id)_data maxWidth:(CGFloat)_maxWidth minWidth:(CGFloat)_minWidth {

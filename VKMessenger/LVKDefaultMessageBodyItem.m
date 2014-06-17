@@ -14,11 +14,15 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
+    self = [[[NSBundle mainBundle] loadNibNamed:@"LVKDefaultMessageBodyItem" owner:self options:nil] firstObject];
     if (self) {
-        // Initialization code
+        self.frame = frame;
     }
     return self;
+}
+
+- (void)layoutData:(LVKMessage *)data {
+    self.body.text = data.body;
 }
 
 + (CGSize)calculateContentSizeWithData:(LVKMessage *)_data maxWidth:(CGFloat)_maxWidth minWidth:(CGFloat)_minWidth {

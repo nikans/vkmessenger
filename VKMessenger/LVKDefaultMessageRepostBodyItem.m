@@ -9,15 +9,15 @@
 #import "LVKDefaultMessageRepostBodyItem.h"
 #import "NSString+StringSize.h"
 #import "LVKRepostedMessage.h"
-
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation LVKDefaultMessageRepostBodyItem
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
+    self = [[[NSBundle mainBundle] loadNibNamed:@"LVKDefaultMessageRepostBodyItem" owner:self options:nil] firstObject];
     if (self) {
-        // Initialization code
+        self.frame = frame;
     }
     return self;
 }
@@ -26,6 +26,15 @@
     CGSize textSize = [(NSString *)[_data body] integralSizeWithFont:[UIFont systemFontOfSize:16] maxWidth:_maxWidth-8 numberOfLines:INFINITY];
     CGSize contentSize = CGSizeMake(_maxWidth, textSize.height + 55 + 10);
     return contentSize;
+}
+
+- (void)layoutData:(LVKRepostedMessage *)data {
+    self.body.text = data.body;
+    self.date.text = [NSDateFormatter localizedStringFromDate:data.date
+                                                    dateStyle:NSDateFormatterNoStyle
+                                                    timeStyle:NSDateFormatterShortStyle];
+    self.userName.text = data.user.fullName;
+    [self.avatar setImageWithURL:[data.user getPhoto:50]];
 }
 
 //-(void)setCollectionViewDelegates:(id<UICollectionViewDataSource, UICollectionViewDelegate>)dataSourceDelegate forMessageWithIndexPath:(NSIndexPath *)indexPath
