@@ -12,6 +12,7 @@
 
 #define LVKDefaultCellBackgroundColorUnread  @"#e1e9f5"
 #define LVKDefaultCellBackgroundColorFailed  @"#fbd3d3"
+#define LVKDefaultCellBackgroundColorDefault @"edf3fa"
 
 @implementation LVKDefaultAbstractMessageTableViewCell
 
@@ -56,7 +57,7 @@
         self.backgroundColor = [AVHexColor colorWithHexString:LVKDefaultCellBackgroundColorUnread];
     }
     else
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [AVHexColor colorWithHexString:LVKDefaultCellBackgroundColorDefault];
     
     
     // Tap action - go to message VC or resend

@@ -842,7 +842,6 @@
                                                 <constraint firstAttribute="bottom" secondItem="1g5-ic-OYO" secondAttribute="bottom" constant="11" id="qTh-4y-WWE"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="avatarImage" destination="p2h-LI-mWF" id="gPu-2V-dZe"/>
@@ -910,7 +909,6 @@
                                                 <constraint firstAttribute="bottom" secondItem="bZ8-ya-BPf" secondAttribute="bottom" constant="11" id="tig-cN-DKt"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="avatarImage" destination="SAp-bS-PHa" id="wVa-fS-R7G"/>
@@ -986,7 +984,6 @@
                                                 <constraint firstItem="udd-d3-ytl" firstAttribute="leading" secondItem="J9H-Wp-lwu" secondAttribute="leading" constant="4" id="Zzi-Io-LbK"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="collectionView" destination="6xG-YZ-UY1" id="W0G-5y-zic"/>
@@ -1042,7 +1039,6 @@
                                                 <constraint firstAttribute="bottom" secondItem="SfY-VW-wT7" secondAttribute="bottom" constant="4" id="t9y-Ff-rep"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="messageContainerBackgroundImage" destination="1RC-Wl-8SR" id="EA8-V4-ZmF"/>
@@ -1133,7 +1129,6 @@
                                                 <constraint firstAttribute="trailing" secondItem="OI6-S6-e0s" secondAttribute="trailing" constant="4" id="pTj-Yg-6jx"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="collectionView" destination="aIT-W1-odb" id="22I-O4-tY3"/>
@@ -1206,7 +1201,6 @@
                                                 <constraint firstAttribute="trailing" secondItem="9Cp-7W-pqb" secondAttribute="trailing" constant="4" id="hIL-cs-9Qg"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <connections>
                                             <outlet property="messageContainerBackgroundImage" destination="yJB-im-q08" id="J7X-Kc-FmN"/>
