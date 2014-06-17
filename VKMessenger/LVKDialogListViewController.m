@@ -60,8 +60,7 @@
 
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
-    // TODO
-    self.isCompactView = NO;
+    [self synchronizeListViewSettings];
     
     hasDataToLoad = YES;
     self.isSearching = NO;
@@ -93,9 +92,18 @@
 
 - (void)appBecomeActive
 {
+    [self synchronizeListViewSettings];
     [self loadData:0 reload:YES];
 }
 
+#pragma mark - Settings
+- (void)synchronizeListViewSettings
+{
+    if([[[NSUserDefaults standardUserDefaults] objectForKey:@"dialog_list_is_compact_preference"] intValue] == 1)
+        self.isCompactView = YES;
+    else
+        self.isCompactView = NO;
+}
 
 
 #pragma mark - Table View Delegate
@@ -379,6 +387,8 @@
 
 - (void)receiveNewMessage:(NSNotification *)notification
 {
+    [self synchronizeListViewSettings];
+    
     LVKLongPollNewMessage *newMessageUpdate = [notification object];
     
     NSArray *result = [_objects filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(LVKDialog *dialog, NSDictionary *bindings) {
@@ -453,6 +463,8 @@
 
 - (void)loadSearchData
 {
+    [self synchronizeListViewSettings];
+    
     NSString *currentSearchString = [NSString stringWithString:searchString];
     
     if(currentSearchString.length > 0)
@@ -524,6 +536,8 @@
 
 - (void)loadData:(NSUInteger)offset reload:(BOOL)reload
 {
+    [self synchronizeListViewSettings];
+    
     if(!hasDataToLoad && !reload)
     {
         [bottomRefreshControl endRefreshing];

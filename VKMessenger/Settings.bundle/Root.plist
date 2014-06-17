@@ -5,6 +5,22 @@
 	<key>PreferenceSpecifiers</key>
 	<array>
 		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Внешний вид</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Компактный вид списка</string>
+			<key>Key</key>
+			<string>dialog_list_is_compact_preference</string>
+			<key>DefaultValue</key>
+			<false/>
+		</dict>
+		<dict>
 			<key>Title</key>
 			<string>Приватность</string>
 			<key>Type</key>
