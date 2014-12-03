@@ -1320,18 +1320,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Сообщение" id="O1s-Xy-ZR1">
                         <barButtonItem key="backBarButtonItem" title="Назад" id="SJc-kk-BOR"/>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="wfE-ig-FqB">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" id="wL8-oD-ScQ">
-                                <rect key="frame" x="282" y="11" width="22" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="sIt-0S-hCK" kind="push" identifier="showUserInfo" id="gPN-Qz-Vpe"/>
-                                </connections>
-                            </button>
-                        </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -1353,8 +1341,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="sf3-kQ-slx"/>
         <segue reference="Vvq-g2-EWH"/>
-        <segue reference="gPN-Qz-Vpe"/>
+        <segue reference="sf3-kQ-slx"/>
     </inferredMetricsTieBreakers>
 </document>
