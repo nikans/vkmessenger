@@ -10,6 +10,7 @@
 
 #import "LVKModelEnums.h"
 #import "LVKDialogListControllerDelegate.h"
+#import "LVKDefaultDialogCellDrawingView.h"
 
 @interface LVKDefaultDialogTableViewCell : UITableViewCell
 
@@ -21,13 +22,15 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *messageInsetConstraint;
 @property (weak, nonatomic) IBOutlet UILabel *date;
 @property (weak, nonatomic) IBOutlet UIView *onlineIndicator;
-@property (weak, nonatomic) IBOutlet UIImageView *roomIndicator;
+//@property (weak, nonatomic) IBOutlet UIImageView *roomIndicator;
+@property (weak, nonatomic) IBOutlet LVKDefaultDialogCellDrawingView *drawingView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleConstraint;
 
 @property (weak, nonatomic) IBOutlet id<LVKDialogListControllerDelegate> controllerDelegate;
 
 @property (nonatomic) BOOL isRoom;
 @property (strong, nonatomic) NSString *identifier;
+@property (nonatomic) readState state;
 
 - (void)ajustLayoutForReadState:(readState)state;
 - (void)ajustLayoutUserIsOnline:(BOOL)isOnline;

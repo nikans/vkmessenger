@@ -57,8 +57,8 @@ typedef enum {
     self.avatarsImageView.layer.cornerRadius = 2.f;
     self.avatarsImageView.clipsToBounds = YES;
     
-    self.messageBackground.layer.cornerRadius = 2.f;
-    self.messageBackground.clipsToBounds = YES;
+//    self.messageBackground.layer.cornerRadius = 2.f;
+//    self.messageBackground.clipsToBounds = YES;
     
     self.messageAvatar.layer.cornerRadius = 2.f;
     self.messageAvatar.clipsToBounds = YES;
@@ -72,14 +72,19 @@ typedef enum {
 //    self.messageInsetConstraint.constant = 0;
 
     if (self.isRoom) {
-        self.roomIndicator.hidden = NO;
+//        self.roomIndicator.hidden = NO;
         self.titleConstraint.constant = self.titleConstraintDefaultConstant;
     }
+    
+    self.drawingView.state  = self.state;
+    self.drawingView.isRoom = self.isRoom;
+    
+    [self.drawingView setNeedsDisplay];
 }
 
 - (void)prepareForReuse {
     self.onlineIndicator.hidden = YES;
-    self.roomIndicator.hidden = YES;
+//    self.roomIndicator.hidden = YES;
     
     self.avatarsImageView.image = nil;
     self.messageAvatar.image = nil;
@@ -90,16 +95,16 @@ typedef enum {
 - (void)ajustLayoutForReadState:(readState)state {
     if (state == Read) {
         self.messageInsetConstraint.constant = 0;
-        self.messageBackground.backgroundColor = [UIColor clearColor];
-        self.backgroundColor = [UIColor clearColor];
+//        self.messageBackground.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor whiteColor];
     }
     else if (state == UnreadIncoming) {
-        self.backgroundColor = [AVHexColor colorWithHexString:@"#edf2f7"];
+//        self.backgroundColor = [AVHexColor colorWithHexString:@"#edf2f7"];
         self.messageInsetConstraint.constant = 0;
     }
     else if (state == UnreadOutgoing) {
         self.messageInsetConstraint.constant = self.defaultMargin;
-        self.messageBackground.backgroundColor = [AVHexColor colorWithHexString:@"#edf2f7"];
+//        self.messageBackground.backgroundColor = [AVHexColor colorWithHexString:@"#edf2f7"];
     }
 }
 

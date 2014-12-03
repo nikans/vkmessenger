@@ -60,6 +60,8 @@
 		D003274F194E5CB60018B70E /* LVKImageLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = D003274E194E5CB60018B70E /* LVKImageLoader.m */; };
 		D003275219502BC80018B70E /* LVKDefaultAbstractMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D003275119502BC80018B70E /* LVKDefaultAbstractMessageTableViewCell.m */; };
 		D003275519502BEA0018B70E /* LVKDefaultSingleItemMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D003275419502BEA0018B70E /* LVKDefaultSingleItemMessageTableViewCell.m */; };
+		D03898751951F147004659F2 /* LVKDefaultDialogCellDrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D03898741951F147004659F2 /* LVKDefaultDialogCellDrawingView.m */; };
+		D03898781951F871004659F2 /* LVKDefaultDialogCellDrawingViewCompact.m in Sources */ = {isa = PBXBuildFile; fileRef = D03898771951F871004659F2 /* LVKDefaultDialogCellDrawingViewCompact.m */; };
 		D038C3041944DE3000E7895D /* LVKDefaultCollectionViewMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D038C3031944DE3000E7895D /* LVKDefaultCollectionViewMessageTableViewCell.m */; };
 		D038C3071944E13F00E7895D /* LVKDefaultMessagesCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D038C3061944E13F00E7895D /* LVKDefaultMessagesCollectionView.m */; };
 		D038C31D1944E25900E7895D /* bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = D038C30A1944E25900E7895D /* bubble.png */; };
@@ -211,6 +213,10 @@
 		D003275119502BC80018B70E /* LVKDefaultAbstractMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDefaultAbstractMessageTableViewCell.m; sourceTree = "<group>"; };
 		D003275319502BEA0018B70E /* LVKDefaultSingleItemMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultSingleItemMessageTableViewCell.h; sourceTree = "<group>"; };
 		D003275419502BEA0018B70E /* LVKDefaultSingleItemMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDefaultSingleItemMessageTableViewCell.m; sourceTree = "<group>"; };
+		D03898731951F147004659F2 /* LVKDefaultDialogCellDrawingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultDialogCellDrawingView.h; sourceTree = "<group>"; };
+		D03898741951F147004659F2 /* LVKDefaultDialogCellDrawingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDefaultDialogCellDrawingView.m; sourceTree = "<group>"; };
+		D03898761951F871004659F2 /* LVKDefaultDialogCellDrawingViewCompact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultDialogCellDrawingViewCompact.h; sourceTree = "<group>"; };
+		D03898771951F871004659F2 /* LVKDefaultDialogCellDrawingViewCompact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDefaultDialogCellDrawingViewCompact.m; sourceTree = "<group>"; };
 		D038C3021944DE3000E7895D /* LVKDefaultCollectionViewMessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultCollectionViewMessageTableViewCell.h; sourceTree = "<group>"; };
 		D038C3031944DE3000E7895D /* LVKDefaultCollectionViewMessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LVKDefaultCollectionViewMessageTableViewCell.m; sourceTree = "<group>"; };
 		D038C3051944E13F00E7895D /* LVKDefaultMessagesCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LVKDefaultMessagesCollectionView.h; sourceTree = "<group>"; };
@@ -596,6 +602,10 @@
 				D0032749194E47EE0018B70E /* LVKDialogListControllerDelegate.h */,
 				D09E64FB194B7F6600B36B86 /* LVKDefaultDialogTableViewCell.h */,
 				D09E64FC194B7F6600B36B86 /* LVKDefaultDialogTableViewCell.m */,
+				D03898731951F147004659F2 /* LVKDefaultDialogCellDrawingView.h */,
+				D03898741951F147004659F2 /* LVKDefaultDialogCellDrawingView.m */,
+				D03898761951F871004659F2 /* LVKDefaultDialogCellDrawingViewCompact.h */,
+				D03898771951F871004659F2 /* LVKDefaultDialogCellDrawingViewCompact.m */,
 				D09E6500194C5A5800B36B86 /* LVKDefaultUserTableViewCell.h */,
 				D09E6501194C5A5800B36B86 /* LVKDefaultUserTableViewCell.m */,
 				D003274D194E5CB60018B70E /* LVKImageLoader.h */,
@@ -655,7 +665,7 @@
 				ORGANIZATIONNAME = Levelab;
 				TargetAttributes = {
 					A4017DAC193DE8EA000EAD87 = {
-						DevelopmentTeam = 88648Q4J25;
+						DevelopmentTeam = 6VXW8XMBDL;
 					};
 					A4017DD3193DE8EA000EAD87 = {
 						TestTargetID = A4017DAC193DE8EA000EAD87;
@@ -778,6 +788,7 @@
 				A4017DFC193E6A8C000EAD87 /* LVKUser.m in Sources */,
 				D09E6502194C5A5800B36B86 /* LVKDefaultUserTableViewCell.m in Sources */,
 				A474AF84193FB73D009EB0D2 /* LVKPhotoAttachment.m in Sources */,
+				D03898751951F147004659F2 /* LVKDefaultDialogCellDrawingView.m in Sources */,
 				D003275219502BC80018B70E /* LVKDefaultAbstractMessageTableViewCell.m in Sources */,
 				D038C3071944E13F00E7895D /* LVKDefaultMessagesCollectionView.m in Sources */,
 				A4017E05193E9239000EAD87 /* LVKLongPollNewMessage.m in Sources */,
@@ -795,6 +806,7 @@
 				A4017E02193E90A9000EAD87 /* LVKLongPollUpdate.m in Sources */,
 				A4017DF6193E317B000EAD87 /* LVKHistoryCollection.m in Sources */,
 				A474AF8A193FD6B8009EB0D2 /* LVKMessageViewController.m in Sources */,
+				D03898781951F871004659F2 /* LVKDefaultDialogCellDrawingViewCompact.m in Sources */,
 				A4140DE81942155E0023DFAA /* LVKLongPollResetMessageFlags.m in Sources */,
 				A45AEA9A193E94D5007F418E /* LVKLongPollUpdatesCollection.m in Sources */,
 				D09E64FE194B7F6600B36B86 /* LVKDefaultDialogTableViewCell.m in Sources */,
@@ -959,12 +971,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ilya Snakin (GJP2EFVESZ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VKMessenger/VKMessenger-Prefix.pch";
 				INFOPLIST_FILE = "VKMessenger/VKMessenger-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "4700E702-619D-45EF-A93D-33F4A5E0B8A2";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
@@ -978,12 +990,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ilya Snakin (GJP2EFVESZ)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VKMessenger/VKMessenger-Prefix.pch";
 				INFOPLIST_FILE = "VKMessenger/VKMessenger-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "4700E702-619D-45EF-A93D-33F4A5E0B8A2";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "\"${PROJECT_DIR}/Pods\"/**";
 				WRAPPER_EXTENSION = app;
